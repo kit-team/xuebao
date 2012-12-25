@@ -6,10 +6,16 @@
     tools:context=".MainActivity" >
 
 
-    <Button 
+    <Button
         android:text="@string/launch_dispatch_orderlist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="onLaunchDispatchOrderList"/>
-    
+
+    <Button
+        android:text="@string/launch_sign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onLaunchSign"/>
+
 </LinearLayout>

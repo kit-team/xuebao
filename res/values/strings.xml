@@ -1,10 +1,29 @@
 <resources>
 
     <string name="app_name">baoxue</string>
-    <string name="dispatch_order_list">派单扫描</string>
-    <string name="launch_dispatch_orderlist">Start Dispatch Order List</string>
+    <string name="title_dispatch_order_list">派单扫描</string>
+    <string name="launch_dispatch_orderlist">派单扫描</string>
+    <string name="launch_sign">签收</string>
     <string name="label_dispatcher">收派员:</string>
     <string name="label_staff_id">工号:</string>
     <string name="label_scanned_count">已扫描件数:</string>
+    <string name="title_sign">签收</string>
+    <string name="label_tracking_number">面单号:</string>
+    <string name="label_sign_result">签收结果:</string>
+    <string name="label_exception_reason">异常原因:</string>
+    <string name="label_satisfaction_degree">满意度:</string>
+    <string name="label_very_satisfactory">很满意:</string>
+    <string name="label_satisfactory">满意:</string>
+    <string name="label_unsatisfactory">不满意:</string>
+    <string name="label_handwritten_signature">手写签字:</string>
+    <string name="label_sign">签收:</string>
+    <string-array name="sign_result">
+        <item>正常签收</item>
+        <item>异常签收</item>
+    </string-array>
+    <string-array name="exception_reason">
+        <item>拒签</item>
+        <item>无人签收</item>
+    </string-array>
 
 </resources>

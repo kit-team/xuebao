@@ -19,5 +19,10 @@ public class MainActivity extends Activity {
 		Intent intent = new Intent(this, DispatchOrderList.class);
 		startActivity(intent);
 	}
+	
+	public void onLaunchSign(View view) {
+		Intent intent = new Intent(this, SignActivity.class);
+		startActivity(intent);
+	}
 
 }
