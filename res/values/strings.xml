@@ -1,0 +1,10 @@
+<resources>
+
+    <string name="app_name">baoxue</string>
+    <string name="dispatch_order_list">派单扫描</string>
+    <string name="launch_dispatch_orderlist">Start Dispatch Order List</string>
+    <string name="label_dispatcher">收派员:</string>
+    <string name="label_staff_id">工号:</string>
+    <string name="label_scanned_count">已扫描件数:</string>
+
+</resources>
