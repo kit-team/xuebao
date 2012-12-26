@@ -1,6 +1,6 @@
-package com.bg.baoxue.app;
+package cn.net.yto.ui;
 
-import com.bg.baoxue.R;
+import cn.net.yto.R;
 
 import android.app.Activity;
 import android.content.Intent;
