@@ -26,4 +26,13 @@
         <item>无人签收</item>
     </string-array>
 
+    <string-array
+        name="dispatch_task_label">
+        <item>1签收扫描</item>
+        <item>2批量签收</item>
+        <item>3未上传数据</item>
+        <item>4补录签收人</item>
+        <item>5删除签收</item>
+        <item>ESC返回</item>
+    </string-array>
 </resources>
