@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="Jacky" />
+        android:text="Jacky Chen D" />
 
     <include layout="@layout/divider_horizontal"/>
     
@@ -38,7 +38,7 @@
         android:textColor="@android:color/black"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="None" />
+        android:text="不确定类型" />
 
     <include layout="@layout/divider_horizontal"/>
     
@@ -50,7 +50,7 @@
         android:textColor="@android:color/black"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="2012/12/12" />
+        android:text="2012/22" />
 
     <include layout="@layout/divider_horizontal"/>
 
