@@ -32,13 +32,15 @@
     <string name="label_date_from">从</string>
     <string name="label_date_to">到</string>
     <string name="label_must">必须输入</string>
-     
+    <string name="label_record_id">运单号:</string>
+
     <!-- Button string text definition -->
     <string name="btn_query">查询</string>
     <string name="btn_modify">修改</string>
+    <string name="btn_back">返回</string>
     <string name="btn_sign_scan">签收扫描</string>
     <string name="btn_choose_date">选择日期</string>
-    <string name="btn_back">ESC返回</string>
+    <string name="btn_esc_back">ESC返回</string>
     <string name="btn_delete">删除</string>
     <string name="btn_save">保存</string>
     
@@ -82,11 +84,25 @@
 
     <string-array
         name="dispatch_task_label">
-        <item>1签收扫描</item>
-        <item>2批量签收</item>
-        <item>3未上传数据</item>
-        <item>4补录签收人</item>
-        <item>5删除签收</item>
-        <item>ESC返回</item>
+        <item>签收扫描</item>
+        <item>批量签收</item>
+        <item>未上传数据</item>
+        <item>补录签收人</item>
+        <item>删除签收</item>
+        <item>@string/btn_esc_back</item>
     </string-array>
+
+    <string-array
+        name="array_upload_state">
+        <item>上传中</item>
+        <item>上传失败</item>
+        <item>重复数据</item>
+    </string-array>
+
+    <string name="title_dispatch_main">派件操作，派遣员：手持终端收派</string>
+    <string name="title_exceptional_record_upload">异常签收数据上传</string>
+    <string name="upload_state">上传状态</string>
+    <string name="delete">删除</string>
+    <string name="upload">上传</string>
+    <string name="title_additional_sign_person_info">补录签收人信息</string>
 </resources>

@@ -14,5 +14,6 @@
         android:numColumns="2"
         android:horizontalSpacing="10dp"
         android:stretchMode="columnWidth"
+        android:descendantFocusability="blocksDescendants"
         android:verticalSpacing="80dp" />
 </LinearLayout>

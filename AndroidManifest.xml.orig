@@ -36,6 +36,7 @@
             android:label="@string/title_emergency_delivery">
         </activity>
         
+<<<<<<< HEAD
         <activity android:name=".ui.SignDeleteActivity"
              android:label="@string/title_dispatch_order_list" >
          </activity>
@@ -43,9 +44,12 @@
          <activity android:name=".ui.SignPatchActivity"
              android:label="@string/title_dispatch_order_list" >
          </activity>
-
-         <activity android:name=".ui.DispatchMain"
+        
+        <activity android:name="DeliveryMain">
+=======
+        <activity android:name=".ui.DispatchMain"
             android:label="@string/title_dispatch_main">
+>>>>>>> Add dispatch screen.
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -58,10 +62,6 @@
         </activity>
 
         <activity android:name=".ui.AdditionalSignPersonInfo"
-            android:label="@string/title_additional_sign_person_info">
-        </activity>
-
-        <activity android:name=".ui.SignBatchActivity"
             android:label="@string/title_additional_sign_person_info">
         </activity>
     </application>
