@@ -15,5 +15,6 @@ public class SignDeleteActivity extends Activity {
         setContentView(R.layout.sign_delete);
 
         mListView = (ListView) findViewById(R.id.list_details);
+        mListView.addHeaderView(getLayoutInflater().inflate(R.layout.list_detail_head, null));
     }
 }
