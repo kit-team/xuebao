@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
@@ -29,7 +30,9 @@ public class DispatchMain extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
         setContentView(R.layout.dispatch_main);
+        getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.dispatch_main_title);
         mInflater = LayoutInflater.from(getApplicationContext());
         mTaskLabel = getResources().getStringArray(R.array.dispatch_task_label);
         mGrid = (GridView) findViewById(R.id.myGrid);
