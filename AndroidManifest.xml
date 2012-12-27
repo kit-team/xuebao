@@ -32,6 +32,10 @@
 
         </activity>
 
+        <activity android:name=".ui.EmergencyDeliveryListActivity"
+            android:label="@string/title_emergency_delivery">
+        </activity>
+        
         <activity android:name="DeliveryMain">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
