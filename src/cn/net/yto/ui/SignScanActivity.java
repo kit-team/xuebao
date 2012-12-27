@@ -13,7 +13,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import cn.net.yto.R;
@@ -100,64 +102,53 @@ public class SignScanActivity extends Activity {
 		}
 	}
 	
-	// 滑动菜单数据适配器
     class SlideMenuAdapter extends PagerAdapter {  
   	  
         @Override  
         public int getCount() {  
-//        	View v = menuViews.get(0).findViewWithTag(SlideMenuUtil.ITEM_MOBILE);
-//        	v.setBackgroundResource(R.drawable.menu_bg);
             return mPageViews.size();  
         }  
   
         @Override  
-        public boolean isViewFromObject(View arg0, Object arg1) {  
-            return arg0 == arg1;  
+        public boolean isViewFromObject(View view, Object object) {  
+            return view == object;  
         }  
   
         @Override  
         public int getItemPosition(Object object) {  
-            // TODO Auto-generated method stub  
             return super.getItemPosition(object);  
         }  
   
         @Override  
-        public void destroyItem(View arg0, int arg1, Object arg2) {  
-            // TODO Auto-generated method stub  
-            ((ViewPager) arg0).removeView(mPageViews.get(arg1));  
+        public void destroyItem(View container, int position, Object object) {  
+            ((ViewPager) container).removeView(mPageViews.get(position));  
         }  
   
         @Override  
-        public Object instantiateItem(View arg0, int arg1) {  
-            // TODO Auto-generated method stub  
-        	((ViewPager) arg0).addView(mPageViews.get(arg1));
-            
-            return mPageViews.get(arg1);  
+        public Object instantiateItem(View container, int position) {  
+        	((ViewPager) container).addView(mPageViews.get(position));
+            return mPageViews.get(position);  
         }  
   
         @Override  
-        public void restoreState(Parcelable arg0, ClassLoader arg1) {  
-            // TODO Auto-generated method stub  
-  
+        public void restoreState(Parcelable state, ClassLoader loader) {  
+            // Nothing need to do
         }  
   
         @Override  
         public Parcelable saveState() {  
-            // TODO Auto-generated method stub  
             return null;  
         }  
   
         @Override  
-        public void startUpdate(View arg0) {  
-            // TODO Auto-generated method stub  
-  
+        public void startUpdate(View container) {  
+            // Nothing need to do
         }  
   
         @Override  
-        public void finishUpdate(View arg0) {  
-            // TODO Auto-generated method stub  
-  
-        }  
+        public void finishUpdate(View container) {  
+            // Nothing need to do
+         }  
     } 
     
     // 滑动菜单更改事件监听器
@@ -211,11 +202,24 @@ public class SignScanActivity extends Activity {
     
     class SignSuccessView {
     	private EditText mEditTrackingNo;
+    	private Spinner  mSignTypeSpinner;
+    	
     	SignSuccessView(View view) {
-    		mEditTrackingNo = (EditText) view.findViewById(R.id.edit_tracking_number);
-    		mEditTrackingNo.setText("12345678");
-    		
+    		initView(view);
     	}
+    	
+		private void initView(View view) {
+			mEditTrackingNo = (EditText) view
+					.findViewById(R.id.edit_tracking_number);
+			mEditTrackingNo.setText("12345678");
+			
+			mSignTypeSpinner = (Spinner) view.findViewById(R.id.spinner_sign_type);
+			ArrayAdapter<String> signTypeAdapter = new ArrayAdapter<String>( SignScanActivity.this,
+																		     android.R.layout.simple_spinner_item, 
+					                                                         getResources().getStringArray(R.array.sign_type));
+			signTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+			mSignTypeSpinner.setAdapter(signTypeAdapter);
+		}
     	
     }
 

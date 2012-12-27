@@ -47,9 +47,17 @@
         <item>正常签收</item>
         <item>异常签收</item>
     </string-array>
+    
     <string-array name="exception_reason">
         <item>拒签</item>
         <item>无人签收</item>
+    </string-array>
+    
+     <string-array name="sign_type">
+        <item>门卫</item>
+        <item>本人签收</item>
+        <item>邮件收发章</item>
+        <item>他人代收</item>
     </string-array>
 
     <string-array

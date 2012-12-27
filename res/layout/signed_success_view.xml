@@ -7,6 +7,9 @@
 
     <!-- Tracking Number -->
     <LinearLayout
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -25,34 +28,54 @@
 
 
     <LinearLayout
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-         <TextView
-            android:text="@string/label_agency_amount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-         
-         <TextView
-            android:text="XXX"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+         <LinearLayout 
+             android:layout_width="0dp"
+             android:layout_height="match_parent"
+             android:layout_weight="1"
+             android:orientation="horizontal">
+	         <TextView
+	            android:text="@string/label_agency_amount"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"/>
+	         
+	         <TextView
+	            android:text="0.0"
+	            android:layout_marginLeft="10dp"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"/>
+         </LinearLayout>
 
-         <TextView
-            android:text="@string/label_freight_collect_amount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-         
-         <TextView
-            android:text="XXX"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+         <LinearLayout 
+             android:layout_width="0dp"
+             android:layout_height="match_parent"
+             android:layout_weight="1"
+             android:orientation="horizontal">
+	         <TextView
+	            android:text="@string/label_freight_collect_amount"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"/>
+	         
+	         <TextView
+	            android:text="0.0"
+	            android:layout_marginLeft="10dp"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"/>
+         </LinearLayout>
 
     </LinearLayout>
 
     <!-- Sign Type -->
     <LinearLayout
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -71,12 +94,15 @@
 
     <!-- Satisfaction Degree -->
     <LinearLayout
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
          <TextView
             android:text="@string/label_satisfaction_degree"
+            android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
@@ -105,7 +131,9 @@
     </LinearLayout>
 
     <LinearLayout 
-        android:layout_width="wrap_content"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 	    <TextView
@@ -114,17 +142,14 @@
 	        android:layout_height="wrap_content"/>
 	
 	    <EditText android:id="@+id/edit_handwritten_signature"
-	        android:layout_width="match_parent"
+	        android:layout_width="0dp"
+	        android:layout_weight="1"
 	        android:layout_height="wrap_content"/>
 	    
 	    <CheckBox 
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"/>
-	    
-	    <TextView
 	        android:text="@string/label_receipient_must_fill"
 	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"/>
+	        android:layout_height="wrap_content" />
 	
     </LinearLayout>
     
