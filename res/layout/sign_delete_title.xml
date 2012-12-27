@@ -23,7 +23,7 @@
         android:layout_marginBottom="2dp"
         android:layout_marginLeft="2dp"
         android:layout_toRightOf="@+id/imageView1"
-        android:text="@string/title_dispatch_main"
+        android:text="@string/title_delete_sign"
         android:textColor="@android:color/white"
         android:gravity="bottom"
         android:textSize="15dp" />
