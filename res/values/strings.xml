@@ -13,9 +13,9 @@
     <string name="label_sign_result">签收结果:</string>
     <string name="label_exception_reason">异常原因:</string>
     <string name="label_satisfaction_degree">满意度:</string>
-    <string name="label_very_satisfactory">很满意:</string>
-    <string name="label_satisfactory">满意:</string>
-    <string name="label_unsatisfactory">不满意:</string>
+    <string name="label_very_satisfactory">很满意</string>
+    <string name="label_satisfactory">满意</string>
+    <string name="label_unsatisfactory">不满意</string>
     <string name="label_handwritten_signature">手写签字:</string>
     <string name="label_sign">签收:</string>
     <string name="label_agency_amount">代收金额:</string>
@@ -23,7 +23,7 @@
     <string name="label_sign_type">签收类型:</string>
     <string name="label_receipient">签收人:</string>
     <string name="label_receipient_must_fill">签收人必填</string>
-    <string name="label_save">保存:</string>
+    <string name="label_save">保存</string>
     <string name="label_reason_description">原因描述:</string>
     <string name="label_is_freight_collect">是否到付:</string>
     <string name="label_is_agency">是否代收:</string>
@@ -63,6 +63,17 @@
         <item>本人签收</item>
         <item>邮件收发章</item>
         <item>他人代收</item>
+    </string-array>
+    
+    <string-array name="fake_date">
+        <item>2012年12月27号</item>
+        <item>2012年12月26号</item>
+        <item>2012年12月25号</item>
+        <item>2012年12月24号</item>
+        <item>2012年12月23号</item>
+        <item>2012年12月22号</item>
+        <item>2012年12月21号</item>
+        <item>2012年12月20号</item>
     </string-array>
 
     <string-array

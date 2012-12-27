@@ -25,20 +25,28 @@
 		        
 		        <TextView 
 		            android:text="@string/label_date_from"
+		            android:textSize="18sp"
 		            android:layout_width="wrap_content"
 		            android:layout_height="wrap_content"/>
+		        
+		        <Spinner android:id="@+id/spinner_date_from"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content" 
+		            android:layout_marginLeft="10dp"/>
 		        
 		        <TextView 
 		            android:id="@+id/text_date_from"
 		            android:layout_width="140dp"
 		            android:layout_marginLeft="5dp"
 		            android:textSize="16sp"
-		            android:layout_height="wrap_content"/>
+		            android:layout_height="wrap_content"
+		            android:visibility="gone"/>
 		        
 		         <Button android:id="@+id/btn_choose_date_from"
 		            android:text="@string/btn_choose_date"
 		            android:layout_width="wrap_content"
-		            android:layout_height="wrap_content"/>
+		            android:layout_height="wrap_content"
+		            android:visibility="gone"/>
 		       
 		    </LinearLayout>
 		    
@@ -49,30 +57,39 @@
 		        
 		        <TextView 
 		            android:text="@string/label_date_to"
+		            android:textSize="18sp"
 		            android:layout_width="wrap_content"
 		            android:layout_height="wrap_content"/>
+		        
+		        <Spinner android:id="@+id/spinner_date_to"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content" 
+		            android:layout_marginLeft="10dp"/>
 		        
 		        <TextView 
 		            android:id="@+id/text_date_to"
 		            android:layout_width="140dp"
 		            android:textSize="16sp"
 		            android:layout_marginLeft="5dp"
-		            android:layout_height="wrap_content"/>
+		            android:layout_height="wrap_content"
+		            android:visibility="gone"/>
 		        
 		         <Button android:id="@+id/btn_choose_date_to"
 		            android:text="@string/btn_choose_date"
 		            android:layout_width="wrap_content"
-		            android:layout_height="wrap_content"/>
+		            android:layout_height="wrap_content"
+		            android:visibility="gone"/>
 	       
 	   	 	 	</LinearLayout>
+	   	 	 	
 	   	 	 </LinearLayout>
     
     <Button 
         android:text="@string/btn_query"
-        android:layout_width="wrap_content"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:layout_marginLeft="30dp"/>
+        android:layout_marginLeft="12dp"/>
     
     </LinearLayout>
        
@@ -86,7 +103,7 @@
     
 	<Button 
         android:text="@string/btn_modify"
-        android:layout_width="wrap_content"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:layout_gravity="right"/>
 

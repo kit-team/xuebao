@@ -254,6 +254,8 @@ public class SignScanActivity extends Activity {
     	private TextView mDateTo;
     	private Button mChooseFromDate;
     	private Button mChooseToDate;
+    	private Spinner mDateFromSpinner;
+    	private Spinner mDateToSpinner;
     	
     	private int mYearFrom;
     	private int mMonthFrom;
@@ -285,6 +287,17 @@ public class SignScanActivity extends Activity {
 					dateDialog.show();
 				}
 			});
+			mDateFromSpinner = (Spinner) view.findViewById(R.id.spinner_date_from);
+			mDateToSpinner = (Spinner) view.findViewById(R.id.spinner_date_to);
+			ArrayAdapter<String> fakeDateAdapter = new ArrayAdapter<String>(
+					SignScanActivity.this,
+					android.R.layout.simple_spinner_item, getResources()
+							.getStringArray(R.array.fake_date));
+			fakeDateAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+			mDateFromSpinner.setAdapter(fakeDateAdapter);
+			mDateToSpinner.setAdapter(fakeDateAdapter);
+			
+			
     		final Calendar c = Calendar.getInstance();
     		mYearFrom = c.get(Calendar.YEAR);
     		mMonthFrom = c.get(Calendar.MONTH);
