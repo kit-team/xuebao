@@ -11,15 +11,16 @@ public class WSDeliveryScanReturnVO {
     // Example, "402882b12e9e464e012e9eb5fe7f000a"
     public String scanId;
 
-    // 0£º²»ÊÇµ½¸¶£»1£ºµ½¸¶ÀàĞÍ
+    // åˆ°ä»˜æ ‡å¿—,0ï¼šä¸æ˜¯åˆ°ä»˜ï¼›1ï¼šåˆ°ä»˜ç±»å‹
     public int invertedPay;
 
-    // 0£º²»ÊÇ´úÊÕ£»1£º´úÊÕÀàĞÍ
+    // ä»£æ”¶æ ‡å¿—,0ï¼šä¸æ˜¯ä»£æ”¶ï¼›1ï¼šä»£æ”¶ç±»å‹
     public int insteadPay;
 
-    // ÔË·Ñ
+    // è¿è´¹
     public float feeAmt;
 
-    // »õÎï½ğ¶î
+    // è´§ç‰©é‡‘é¢
     public float goodsAmount;
+
 }

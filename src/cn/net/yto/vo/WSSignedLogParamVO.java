@@ -8,28 +8,28 @@ public class WSSignedLogParamVO {
     // Staff code
     public int empCode;
 
-    // Ãæµ¥ºÅ
+    // é¢å•å·
     public int waybillNo;
 
-    // Ç©ÊÕÊ±¼ä
+    // ç­¾æ”¶æ—¶é—´
     public String signedTime;
 
-    // Ç©ÊÕÊı¾İ ,<Í¼Æ¬>µÄ¶ş½øÖÆÊı¾İ¾­¹ıbase64±àÂëºóµÄ×Ö·û´®
+    // ç­¾æ”¶æ•°æ®
     public String pictureData;
 
-    // "1"- sign success£¬others - error code for sign fail
+    // "1"- sign success,others - error code for sign fail
     public int signedState;
 
-    // ÂúÒâ¶È <ºÜÂúÒâ£¬ÂúÒâ£¬²»ÂúÒâ>
+    // æ»¡æ„åº¦
     public int satisfaction;
 
-    // Òì³£Ç©ÊÕÃèÊö
+    // å¼‚å¸¸ç­¾æ”¶æè¿°
     public int expSignedDescription;
 
-    // ÏÖ½ğ½ğ¶î
+    // ç°é‡‘é‡‘é¢
     public float cashAmount;
 
-    // Ë¢¿¨½ğ¶î
+    // åˆ·å¡é‡‘é¢
     public float cardAmount;
 
 }

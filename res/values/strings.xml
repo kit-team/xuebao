@@ -31,12 +31,16 @@
     <string name="label_cargo_amount">货物金额:</string>
     <string name="label_date_from">从</string>
     <string name="label_date_to">到</string>
+    <string name="label_must">必须输入</string>
      
     <!-- Button string text definition -->
     <string name="btn_query">查询</string>
     <string name="btn_modify">修改</string>
     <string name="btn_sign_scan">签收扫描</string>
     <string name="btn_choose_date">选择日期</string>
+    <string name="btn_back">ESC返回</string>
+    <string name="btn_delete">删除</string>
+    <string name="btn_save">保存</string>
     
     <!-- Tab string text definition -->
     <string name="tab_sign_success">正常签收</string>
