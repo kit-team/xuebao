@@ -1,8 +1,11 @@
 package cn.net.yto.ui;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.view.PagerAdapter;
@@ -14,6 +17,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -29,6 +34,7 @@ public class SignScanActivity extends Activity {
 	private ArrayList<View> mTabViews = null;
 	
 	private SignSuccessView mSignSuccessView = null;
+	private OrderQueryView  mOrderQueryView = null;
 	
 	private OnClickListener mTabItemClickListener = new OnClickListener() {
 		@Override
@@ -83,6 +89,7 @@ public class SignScanActivity extends Activity {
 		mPageViews.add(orderQueryView);
 		
 		mSignSuccessView = new SignSuccessView(signedSuccessView);
+		mOrderQueryView = new OrderQueryView(orderQueryView);
 		
 		viewPager = (ViewPager) findViewById(R.id.slideMenu);
 		viewPager.setAdapter(new SlideMenuAdapter());  
@@ -220,6 +227,88 @@ public class SignScanActivity extends Activity {
 			signTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 			mSignTypeSpinner.setAdapter(signTypeAdapter);
 		}
+    	
+    }
+    
+    class OrderQueryView {
+    	private TextView mDateFrom;
+    	private TextView mDateTo;
+    	private Button mChooseFromDate;
+    	private Button mChooseToDate;
+    	
+    	private int mYearFrom;
+    	private int mMonthFrom;
+    	private int mDayFrom;
+    	private int mYearTo;
+    	private int mMonthTo;
+    	private int mDayTo;
+    	
+    	OrderQueryView(View view) {
+    		initView(view);
+    	}
+    	
+    	private void initView(View view) {
+    		mDateFrom = (TextView) view.findViewById(R.id.text_date_from);
+    		mDateTo   = (TextView) view.findViewById(R.id.text_date_to);
+    		mChooseFromDate = (Button) view.findViewById(R.id.btn_choose_date_from);
+    		mChooseFromDate.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					Dialog dateDialog = new DatePickerDialog(SignScanActivity.this, mDateFromListener, mYearFrom, mMonthFrom, mDayFrom);
+					dateDialog.show();
+				}
+			});
+    		mChooseToDate = (Button) view.findViewById(R.id.btn_choose_date_to);
+    		mChooseToDate.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					Dialog dateDialog = new DatePickerDialog(SignScanActivity.this, mDateToListener, mYearTo, mMonthTo, mDayTo);
+					dateDialog.show();
+				}
+			});
+    		final Calendar c = Calendar.getInstance();
+    		mYearFrom = c.get(Calendar.YEAR);
+    		mMonthFrom = c.get(Calendar.MONTH);
+    		mDayFrom = c.get(Calendar.DAY_OF_MONTH);
+    		mYearTo = c.get(Calendar.YEAR);
+    		mMonthTo = c.get(Calendar.MONTH);
+    		mDayTo = c.get(Calendar.DAY_OF_MONTH);
+    		updateDate(mYearFrom, mMonthFrom, mDayFrom, mDateFrom);
+    		updateDate(mYearTo, mMonthTo, mDayTo, mDateTo);
+    	}
+    	
+    	private void updateDate(int year, int month, int day, TextView view) {
+    		StringBuilder builder = new StringBuilder();
+    		builder.append(year)
+    		       .append("Äê")
+    		       .append(month)
+    		       .append("ÔÂ")
+    		       .append(day)
+    		       .append("ÈÕ");
+    		view.setText(builder.toString());
+    	}
+    	
+    	private DatePickerDialog.OnDateSetListener mDateFromListener = new DatePickerDialog.OnDateSetListener() {
+			@Override
+			public void onDateSet(DatePicker view, int year, int monthOfYear,
+					int dayOfMonth) {
+				mYearFrom = year;
+				mMonthFrom = monthOfYear;
+				mDayFrom = dayOfMonth;
+				updateDate(mYearFrom, mMonthFrom, mDayFrom, mDateFrom);
+			}
+		};
+		
+		private DatePickerDialog.OnDateSetListener mDateToListener = new DatePickerDialog.OnDateSetListener() {
+			@Override
+			public void onDateSet(DatePicker view, int year, int monthOfYear,
+					int dayOfMonth) {
+				mYearTo = year;
+				mMonthTo = monthOfYear;
+				mDayTo = dayOfMonth;
+				updateDate(mYearTo, mMonthTo, mDayTo, mDateTo);
+			}
+		};
     	
     }
 

@@ -29,11 +29,14 @@
     <string name="label_is_agency">是否代收:</string>
     <string name="label_freight">运费:</string>
     <string name="label_cargo_amount">货物金额:</string>
+    <string name="label_date_from">从</string>
+    <string name="label_date_to">到</string>
      
     <!-- Button string text definition -->
     <string name="btn_query">查询</string>
     <string name="btn_modify">修改</string>
     <string name="btn_sign_scan">签收扫描</string>
+    <string name="btn_choose_date">选择日期</string>
     
     <!-- Tab string text definition -->
     <string name="tab_sign_success">正常签收</string>
