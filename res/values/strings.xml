@@ -54,6 +54,9 @@
     <string name="title_emergency_delivery">催派单</string>
     <string name="launch_emergency_delivery">催派单</string>
     
+    <string name="title_delete_sign">删除签收，删除人:</string>
+    <string name="title_batch_sign">批量签收，取派员:</string>
+    
     <string-array name="sign_result">
         <item>正常签收</item>
         <item>异常签收</item>

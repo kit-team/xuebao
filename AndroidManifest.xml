@@ -37,11 +37,11 @@
         </activity>
         
         <activity android:name=".ui.SignDeleteActivity"
-             android:label="@string/title_dispatch_order_list" >
+             android:label="@string/title_delete_sign" >
          </activity>
          
-         <activity android:name=".ui.SignPatchActivity"
-             android:label="@string/title_dispatch_order_list" >
+         <activity android:name=".ui.SignBatchActivity"
+             android:label="@string/title_batch_sign" >
          </activity>
 
          <activity android:name=".ui.DispatchMain"
@@ -61,9 +61,6 @@
             android:label="@string/title_additional_sign_person_info">
         </activity>
 
-        <activity android:name=".ui.SignBatchActivity"
-            android:label="@string/title_additional_sign_person_info">
-        </activity>
     </application>
 
 </manifest>
