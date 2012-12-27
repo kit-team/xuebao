@@ -23,5 +23,8 @@ public class SignDeleteActivity extends Activity {
         mListView.addHeaderView(headView);
         mListView.setBackgroundColor(128);
         mListView.setAdapter(new SignListAdapter(getApplicationContext()));
+
+        findViewById(R.id.save).setVisibility(View.GONE);
     }
+
 }
