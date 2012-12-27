@@ -25,4 +25,9 @@ public class MainActivity extends Activity {
 		startActivity(intent);
 	}
 
+	public void onLaunchEmergencyDelivery(View view) {
+		Intent intent = new Intent(this, EmergencyDeliveryListActivity.class);
+		startActivity(intent);
+	}
+
 }
