@@ -50,6 +50,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true"
+            android:enabled="false"
             android:text="@string/label_must" />
     </LinearLayout>
 
@@ -63,7 +64,8 @@
             android:id="@+id/textScore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/label_satisfaction_degree" />
+            android:text="@string/label_satisfaction_degree"
+            android:layout_gravity="center" />
 
         <RadioGroup
             android:id="@+id/radioGroup1"
