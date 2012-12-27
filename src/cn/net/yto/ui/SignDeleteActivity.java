@@ -2,6 +2,7 @@ package cn.net.yto.ui;
 
 import cn.net.yto.R;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ListView;
 import android.app.Activity;
 
@@ -14,7 +15,10 @@ public class SignDeleteActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sign_delete);
 
+        View headView = getLayoutInflater().inflate(R.layout.list_detail_head, null);
         mListView = (ListView) findViewById(R.id.list_details);
-        mListView.addHeaderView(getLayoutInflater().inflate(R.layout.list_detail_head, null));
+        mListView.addHeaderView(headView);
+        mListView.setBackgroundColor(128);
+        mListView.setAdapter(new SignListAdapter(getApplicationContext()));
     }
 }

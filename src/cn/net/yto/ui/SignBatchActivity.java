@@ -20,6 +20,7 @@ public class SignBatchActivity extends Activity {
         mListView = (ListView) findViewById(R.id.list_details);
         mListView.addHeaderView(headView);
         mListView.setBackgroundColor(128);
+        mListView.setAdapter(new SignListAdapter(getApplicationContext()));
     }
 
 }

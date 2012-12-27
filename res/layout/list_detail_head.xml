@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#FF0000" >
+    android:background="@android:color/black" >
 
     <TextView
         android:id="@+id/head_tracking_number"
@@ -10,7 +10,9 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="@string/list_head_tracking_number"
+        android:textAppearance="@android:style/TextAppearance.Medium"
         android:gravity="center"
+        android:textColor="@android:color/white"
         android:textStyle="bold"/>
 
     <TextView
@@ -19,6 +21,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="@string/list_head_receipient"
+        android:textAppearance="@android:style/TextAppearance.Medium"
+        android:textColor="@android:color/white"
         android:gravity="center"
         android:textStyle="bold"/>
 
@@ -28,6 +32,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="@string/list_head_sign_type" 
+        android:textAppearance="@android:style/TextAppearance.Medium"
+        android:textColor="@android:color/white"
         android:gravity="center"
         android:textStyle="bold"/>
 
@@ -37,6 +43,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="@string/list_head_sign_time"
+        android:textAppearance="@android:style/TextAppearance.Medium"
+        android:textColor="@android:color/white"
         android:gravity="center"
         android:textStyle="bold"/>
 

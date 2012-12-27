@@ -1,29 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:padding="10dp">
+
+    <include layout="@layout/divider_horizontal"/>
 
     <TextView
         android:id="@+id/list_signNo"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:padding="10dp"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:text="90987" />
+
+    <include layout="@layout/divider_horizontal"/>
 
     <TextView
         android:id="@+id/list_signPerson"
+        android:padding="10dp"
+        android:textColor="@android:color/black"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" 
-        android:text="1" />
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="Jacky" />
 
+    <include layout="@layout/divider_horizontal"/>
+    
     <TextView
         android:id="@+id/list_signType"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" 
-        android:text="1" />
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:textColor="@android:color/black"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="None" />
 
+    <include layout="@layout/divider_horizontal"/>
+    
     <TextView
         android:id="@+id/list_signTime"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" 
-        android:text="1" />
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:textColor="@android:color/black"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="2012/12/12" />
+
+    <include layout="@layout/divider_horizontal"/>
 
 </LinearLayout>

@@ -1,29 +1,42 @@
 package cn.net.yto.ui;
 
+import cn.net.yto.R;
+import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 public class SignListAdapter extends BaseAdapter {
 
-    @Override
-    public int getCount() {
-        return 0;
+    private LayoutInflater mInflater;
+
+    public SignListAdapter(Context context) {
+        mInflater = LayoutInflater.from(context);
     }
 
     @Override
-    public Object getItem(int arg0) {
+    public int getCount() {
+        return 15;
+    }
+
+    @Override
+    public Object getItem(int position) {
         return null;
     }
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return position;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        return null;
+        if (convertView == null) {
+            convertView = mInflater.inflate(R.layout.list_detail_item, parent, false);
+        }
+
+        return convertView;
     }
 
 }

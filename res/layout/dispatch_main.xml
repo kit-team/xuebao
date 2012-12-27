@@ -15,5 +15,5 @@
         android:horizontalSpacing="10dp"
         android:stretchMode="columnWidth"
         android:descendantFocusability="blocksDescendants"
-        android:verticalSpacing="30dp" />
+        android:verticalSpacing="20dp" />
 </LinearLayout>
