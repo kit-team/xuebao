@@ -3,12 +3,13 @@
     <string name="app_name">baoxue</string>
     <string name="title_dispatch_order_list">派单扫描</string>
     <string name="launch_dispatch_orderlist">派单扫描</string>
+    
+   <!-- Label string text definition -->
     <string name="launch_sign">签收</string>
     <string name="label_dispatcher">收派员:</string>
     <string name="label_staff_id">工号:</string>
     <string name="label_scanned_count">已扫描件数:</string>
-    <string name="title_sign">签收</string>
-    <string name="label_tracking_number">面单号:</string>
+    <string name="label_tracking_number">运单号:</string>
     <string name="label_sign_result">签收结果:</string>
     <string name="label_exception_reason">异常原因:</string>
     <string name="label_satisfaction_degree">满意度:</string>
@@ -17,6 +18,31 @@
     <string name="label_unsatisfactory">不满意:</string>
     <string name="label_handwritten_signature">手写签字:</string>
     <string name="label_sign">签收:</string>
+    <string name="label_agency_amount">代收金额:</string>
+    <string name="label_freight_collect_amount">到付金额:</string>
+    <string name="label_sign_type">签收类型:</string>
+    <string name="label_receipient">签收人:</string>
+    <string name="label_receipient_must_fill">签收人必填</string>
+    <string name="label_save">保存:</string>
+    <string name="label_reason_description">原因描述:</string>
+    <string name="label_is_freight_collect">是否到付:</string>
+    <string name="label_is_agency">是否代收:</string>
+    <string name="label_freight">运费:</string>
+    <string name="label_cargo_amount">货物金额:</string>
+     
+    <!-- Button string text definition -->
+    <string name="btn_query">查询</string>
+    <string name="btn_modify">修改</string>
+    <string name="btn_sign_scan">签收扫描</string>
+    
+    <!-- Tab string text definition -->
+    <string name="tab_sign_success">正常签收</string>
+    <string name="tab_sign_failed">异常签收</string>
+    <string name="tab_waybill_detail">运单详情</string>
+    <string name="tab_order_query">列表</string>
+    
+    <string name="input_tracking_no_hint">请填写运单号:</string>
+    
     <string-array name="sign_result">
         <item>正常签收</item>
         <item>异常签收</item>

@@ -21,7 +21,7 @@ public class MainActivity extends Activity {
 	}
 	
 	public void onLaunchSign(View view) {
-		Intent intent = new Intent(this, SignActivity.class);
+		Intent intent = new Intent(this, SignScanActivity.class);
 		startActivity(intent);
 	}
 
