@@ -35,6 +35,7 @@ public class SignScanActivity extends Activity {
 	
 	private SignSuccessView mSignSuccessView = null;
 	private OrderQueryView  mOrderQueryView = null;
+	private SignFailedView  mSignFailedView = null;
 	
 	private OnClickListener mTabItemClickListener = new OnClickListener() {
 		@Override
@@ -90,6 +91,7 @@ public class SignScanActivity extends Activity {
 		
 		mSignSuccessView = new SignSuccessView(signedSuccessView);
 		mOrderQueryView = new OrderQueryView(orderQueryView);
+		mSignFailedView = new SignFailedView(signedFailedView);
 		
 		viewPager = (ViewPager) findViewById(R.id.slideMenu);
 		viewPager.setAdapter(new SlideMenuAdapter());  
@@ -158,7 +160,7 @@ public class SignScanActivity extends Activity {
          }  
     } 
     
-    // »¬¶¯²Ëµ¥¸ü¸ÄÊÂ¼þ¼àÌýÆ÷
+    // ï¿½ï¿½ï¿½ï¿½ï¿½Ëµï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     class SlideMenuChangeListener implements OnPageChangeListener {  
     	  
         @Override  
@@ -190,14 +192,14 @@ public class SignScanActivity extends Activity {
         	int pageCount = mPageViews.size() - 1;
         	pagerIndex = arg0;
         	
-        	// ÏÔÊ¾ÓÒ±ßµ¼º½Í¼Æ¬
+        	// ï¿½ï¿½Ê¾ï¿½Ò±ßµï¿½ï¿½ï¿½Í¼Æ¬
         	if(arg0 >= 0 && arg0 < pageCount){
         		imageNext.setVisibility(View.VISIBLE);
         	}else{
         		imageNext.setVisibility(View.INVISIBLE);
         	}
         	
-        	// ÏÔÊ¾×ó±ßµ¼º½Í¼Æ¬
+        	// ï¿½ï¿½Ê¾ï¿½ï¿½ßµï¿½ï¿½ï¿½Í¼Æ¬
         	if(arg0 > 0 && arg0 <= pageCount){
         		imagePrevious.setVisibility(View.VISIBLE);
         	}else{
@@ -228,6 +230,23 @@ public class SignScanActivity extends Activity {
 			mSignTypeSpinner.setAdapter(signTypeAdapter);
 		}
     	
+    }
+    
+    class SignFailedView {
+    	private Spinner mExceptionReasonSpinner;
+    	
+    	public SignFailedView(View view) {
+    		initView(view);
+		}
+    	
+    	private void initView(View view) {
+    		mExceptionReasonSpinner = (Spinner) view.findViewById(R.id.spinner_exception_reason);
+			ArrayAdapter<String> exceptionReasonAdapter = new ArrayAdapter<String>( SignScanActivity.this,
+																		     android.R.layout.simple_spinner_item, 
+					                                                         getResources().getStringArray(R.array.exception_reason));
+			exceptionReasonAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+			mExceptionReasonSpinner.setAdapter(exceptionReasonAdapter);
+    	}
     }
     
     class OrderQueryView {
@@ -280,11 +299,11 @@ public class SignScanActivity extends Activity {
     	private void updateDate(int year, int month, int day, TextView view) {
     		StringBuilder builder = new StringBuilder();
     		builder.append(year)
-    		       .append("Äê")
+    		       .append("å¹´")
     		       .append(month)
-    		       .append("ÔÂ")
+    		       .append("æœˆ")
     		       .append(day)
-    		       .append("ÈÕ");
+    		       .append("æ—¥");
     		view.setText(builder.toString());
     	}
     	

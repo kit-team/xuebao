@@ -23,7 +23,7 @@ public class DispatchOrderList extends ListActivity {
 	private void initView() {
 		mDispatcher   = (TextView) findViewById(R.id.text_dispatcher);
 		// fake dispatcher
-		mDispatcher.setText("ÕÅÈý");
+		mDispatcher.setText("å¼ ä¸‰");
 		mDispatcher.setVisibility(View.VISIBLE);
 		
 		mStaffId      = (TextView) findViewById(R.id.text_staff_id);

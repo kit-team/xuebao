@@ -7,6 +7,9 @@
 
     <!-- Tracking Number -->
     <LinearLayout
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -25,6 +28,8 @@
     
      <!-- Exception Reason -->
     <LinearLayout
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -34,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
-        <Spinner android:id="@+id/edit_exception_reason"
+        <Spinner android:id="@+id/spinner_exception_reason"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
@@ -43,6 +48,7 @@
 
 
     <LinearLayout
+        android:layout_marginLeft="3dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
