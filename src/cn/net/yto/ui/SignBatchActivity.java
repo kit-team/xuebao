@@ -4,12 +4,11 @@ import cn.net.yto.R;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.view.View;
 import android.widget.ListView;
-import android.widget.Spinner;
 
 public class SignBatchActivity extends Activity {
 
-    private Spinner mSignTypeSp = null;
     private ListView mListView = null;
 
     @Override
@@ -17,10 +16,10 @@ public class SignBatchActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sign_batch);
 
-        mSignTypeSp = (Spinner) findViewById(R.id.signType);
-
+        View headView = getLayoutInflater().inflate(R.layout.list_detail_head, null);
         mListView = (ListView) findViewById(R.id.list_details);
-        mListView.addHeaderView(getLayoutInflater().inflate(R.layout.list_detail_head, null));
+        mListView.addHeaderView(headView);
+        mListView.setBackgroundColor(128);
     }
 
 }

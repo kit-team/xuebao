@@ -1,34 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="wrap_content"
+    android:background="#FF0000" >
 
     <TextView
         android:id="@+id/head_tracking_number"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="@string/list_head_tracking_number" />
+        android:text="@string/list_head_tracking_number"
+        android:gravity="center"
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/head_receipient"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="@string/list_head_receipient" />
+        android:text="@string/list_head_receipient"
+        android:gravity="center"
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/head_sign_type"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="@string/list_head_sign_type" />
+        android:text="@string/list_head_sign_type" 
+        android:gravity="center"
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/head_sign_time"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="@string/list_head_sign_time" />
+        android:text="@string/list_head_sign_time"
+        android:gravity="center"
+        android:textStyle="bold"/>
 
 </LinearLayout>
