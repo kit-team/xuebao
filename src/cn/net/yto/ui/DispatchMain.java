@@ -1,4 +1,5 @@
 package cn.net.yto.ui;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,22 +11,22 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.TextView;
 import cn.net.yto.R;
 
-
 public class DispatchMain extends Activity {
-
-    private GridView mGrid;
-    private String[] mTaskLabel;
-    private LayoutInflater mInflater;
-
     private static final int ITEM_SIGN_SCAN = 0;
     private static final int ITEM_SIGN_BATCH = 1;
     private static final int ITEM_UNUPLOAD_RECORD = 2;
     private static final int ITEM_ADDITIONAL_RECORD = 3;
     private static final int ITEM_DELETE_RECORD = 4;
     private static final int ITEM_ESC = 5;
+
+    private String[] mTaskLabels;
+    private GridView mGrid;
+
+    private LayoutInflater mInflater;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,17 +35,19 @@ public class DispatchMain extends Activity {
         setContentView(R.layout.dispatch_main);
         getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.dispatch_main_title);
         mInflater = LayoutInflater.from(getApplicationContext());
-        mTaskLabel = getResources().getStringArray(R.array.dispatch_task_label);
+
+        mTaskLabels = getResources().getStringArray(R.array.dispatch_task_label);
+
         mGrid = (GridView) findViewById(R.id.myGrid);
-        mGrid.setOnItemClickListener(mOnItemClickListener);
         mGrid.setAdapter(new GridAdapter());
+        mGrid.setOnItemClickListener(mOnItemClickListener);
     }
 
     private final OnItemClickListener mOnItemClickListener = new OnItemClickListener() {
 
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-            switch(position) {
+            switch (position) {
             case ITEM_SIGN_SCAN:
                 launchSignScan();
                 return;
@@ -91,17 +94,20 @@ public class DispatchMain extends Activity {
         final Intent intent = new Intent(this, SignScanActivity.class);
         startActivity(intent);
     }
-    
+
     private final class GridAdapter extends BaseAdapter {
+        private final int[] ICONS = { R.drawable.sign_scan, R.drawable.additional_sign_record,
+                R.drawable.delete_sign_record, R.drawable.sign_batch, R.drawable.unupload_record,
+                R.drawable.back };
 
         @Override
         public int getCount() {
-            return mTaskLabel.length;
+            return ICONS.length;
         }
 
         @Override
         public Object getItem(int position) {
-            return mTaskLabel[position];
+            return mTaskLabels[position];
         }
 
         @Override
@@ -111,34 +117,27 @@ public class DispatchMain extends Activity {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
+            ImgTextWrapper wrapper;
             if (convertView == null) {
-                final TextView text = (TextView) mInflater.inflate(R.layout.dispatch_main_grid_item, parent, false);
-                text.setText(mTaskLabel[position]);
-                switch(position) {
-                case ITEM_SIGN_SCAN:
-                    text.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.sign_scan, 0, 0);
-                    break;
-                case ITEM_ADDITIONAL_RECORD:
-                    text.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.additional_sign_record, 0, 0);
-                    break;
-                case ITEM_DELETE_RECORD:
-                    text.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.delete_sign_record, 0, 0);
-                    break;
-                case ITEM_SIGN_BATCH:
-                    text.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.sign_batch, 0, 0);
-                    break;
-                case ITEM_UNUPLOAD_RECORD:
-                    text.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.unupload_record, 0, 0);
-                    break;
-                case ITEM_ESC:
-                    text.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.back, 0, 0);
-                    break;
-                }
-
-                return text;
+                wrapper = new ImgTextWrapper();
+                convertView = mInflater.inflate(R.layout.dispatch_main_grid_item, null);
+                convertView.setTag(wrapper);
+            } else {
+                wrapper = (ImgTextWrapper) convertView.getTag();
             }
+
+            wrapper.imageIcon = (ImageView) convertView.findViewById(R.id.icon);
+            wrapper.imageIcon.setBackgroundResource(ICONS[position]);
+            wrapper.textView = (TextView) convertView.findViewById(R.id.label);
+            wrapper.textView.setText(mTaskLabels[position]);
 
             return convertView;
         }
+
+        class ImgTextWrapper {
+            ImageView imageIcon;
+            TextView textView;
+        }
     }
+
 }
