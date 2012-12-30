@@ -77,21 +77,7 @@ public class YtoDBHelper extends SQLiteOpenHelper{
 	
 	public void insertSignLog(SignedLog signLog) {
 		synchronized (mutex) {
-			ContentValues value = new ContentValues();
-			value.put(C_PICTURE_DATA, signLog.getPictureData());
-			value.put(C_CARD_AMOUNT, signLog.getCardAmount());
-			value.put(C_CASH_AMOUNT, signLog.getCashAmount());
-			value.put(C_SIGNED_STATE, signLog.getSignedState().getSignedState());
-			value.put(C_EMPCODE, signLog.getEmpCode());
-			value.put(C_WAYBILLNO, signLog.getWaybillNo());
-			value.put(C_EXPSIGNED_DESCRIPTION, signLog.getExpSignedDescription());
-			value.put(C_STATUS, signLog.getStatus().getUploadStatus());
-			value.put(C_STATISFACION, signLog.getSatisfaction().getSatisfaction());			
-			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
-			value.put(C_SIGNED_TIME, dateFormat.format(signLog.getSignedTime()));
-			value.put(C_RECIPIENT, signLog.getRecipient());			
-			
-			insertOrIgnore(value, SIGNEDLOG_TABLE);
+			insertOrIgnore(signLog.toContentValues(), SIGNEDLOG_TABLE);
 		}
 	}
 	

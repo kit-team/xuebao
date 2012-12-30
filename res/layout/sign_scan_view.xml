@@ -7,7 +7,7 @@
    
     <LinearLayout 
         android:layout_width="match_parent"
-        android:layout_height="35dp" 
+        android:layout_height="50dp" 
         android:background="@drawable/top_bg" 
         android:orientation="horizontal" >
         
@@ -16,7 +16,7 @@
             android:tag="@string/tab_sign_success"
             android:textColor="@android:color/white"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:layout_gravity="center_vertical"
@@ -27,7 +27,7 @@
             android:tag="@string/tab_sign_failed"
             android:textColor="@android:color/white"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:layout_gravity="center_vertical"  />
@@ -37,7 +37,7 @@
             android:tag="@string/tab_waybill_detail"
             android:textColor="@android:color/white"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:layout_gravity="center_vertical" />
@@ -47,7 +47,7 @@
             android:tag="@string/tab_order_query"
             android:textColor="@android:color/white"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:layout_gravity="center_vertical" />
