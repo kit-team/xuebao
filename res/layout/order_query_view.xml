@@ -43,7 +43,7 @@
 		            android:visibility="gone"/>
 		        
 		         <Button android:id="@+id/btn_choose_date_from"
-		            android:text="@string/btn_choose_date"
+		            android:text="@string/text_choose_date"
 		            android:layout_width="wrap_content"
 		            android:layout_height="wrap_content"
 		            android:visibility="gone"/>
@@ -75,7 +75,7 @@
 		            android:visibility="gone"/>
 		        
 		         <Button android:id="@+id/btn_choose_date_to"
-		            android:text="@string/btn_choose_date"
+		            android:text="@string/text_choose_date"
 		            android:layout_width="wrap_content"
 		            android:layout_height="wrap_content"
 		            android:visibility="gone"/>
@@ -85,7 +85,8 @@
 	   	 	 </LinearLayout>
     
     <Button 
-        android:text="@string/btn_query"
+        android:id="@+id/btn_query_order"
+        android:text="@string/text_query"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
@@ -102,7 +103,7 @@
     </ListView>
     
 	<Button 
-        android:text="@string/btn_modify"
+        android:text="@string/text_modify"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:layout_gravity="right"/>

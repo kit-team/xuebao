@@ -8,20 +8,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="@string/btn_back" />
+        android:text="@string/text_back" />
 
     <Button
         android:id="@+id/btn_delete"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="@string/btn_delete" />
+        android:text="@string/text_delete" />
 
     <Button
         android:id="@+id/btn_save"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="@string/btn_save" />
+        android:text="@string/text_save" />
 
 </LinearLayout>

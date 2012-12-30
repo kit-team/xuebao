@@ -47,28 +47,32 @@
         android:orientation="horizontal">
 
         <Button
+            android:id="@+id/btn_query_add"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/btn_query"/>
+            android:text="@string/text_query"/>
 
         <Button
+            android:id="@+id/btn_modify"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/btn_modify"/>
+            android:text="@string/text_modify"/>
 
         <Button
+            android:id="@+id/btn_save"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/btn_save"/>
+            android:text="@string/text_save"/>
 
         <Button
+            android:id="@+id/btn_back"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/btn_back"/>
+            android:text="@string/text_back"/>
     </LinearLayout>
 
     <ListView
