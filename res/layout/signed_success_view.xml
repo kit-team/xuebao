@@ -45,14 +45,9 @@
             <EditText
                 android:id="@+id/collection_amount"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-            <!--
-	         <TextView
-	            android:text="0.0"
-	            android:layout_marginLeft="10dp"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"/>
-            -->
+                android:layout_height="wrap_content"
+                android:digits="1234567890.+-*/%\n()"
+                android:inputType="number" />
         </LinearLayout>
 
         <LinearLayout
@@ -68,16 +63,11 @@
                 android:text="@string/label_freight_collect_amount" />
 
             <EditText
-                android:id="@+id/ freight_to_collect"
+                android:id="@+id/freight_to_collect"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-            <!--
-	         <TextView
-	            android:text="0.0"
-	            android:layout_marginLeft="10dp"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"/>
-            -->
+                android:layout_height="wrap_content"
+                android:digits="1234567890.+-*/%\n()"
+                android:inputType="number" />
         </LinearLayout>
     </LinearLayout>
 
@@ -123,20 +113,20 @@
             android:orientation="horizontal" >
 
             <RadioButton
-                android:id="@+id/radio0"
+                android:id="@+id/very_satisfactory"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="true"
                 android:text="@string/label_very_satisfactory" />
 
             <RadioButton
-                android:id="@+id/radio1"
+                android:id="@+id/satisfactory"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/label_satisfactory" />
 
             <RadioButton
-                android:id="@+id/radio2"
+                android:id="@+id/unsatisfactory"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/label_unsatisfactory" />
@@ -155,7 +145,7 @@
             android:text="@string/label_receipient" />
 
         <EditText
-            android:id="@+id/edit_handwritten_signature"
+            android:id="@+id/edit_receipient"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
@@ -169,9 +159,10 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/btn_save"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
+        android:layout_gravity="right"
         android:layout_marginTop="10dp"
         android:text="@string/label_save" />
 

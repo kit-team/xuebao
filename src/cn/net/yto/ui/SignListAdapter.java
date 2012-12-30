@@ -3,6 +3,7 @@ package cn.net.yto.ui;
 import java.util.ArrayList;
 
 import cn.net.yto.R;
+import cn.net.yto.models.SignedLog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,10 +19,18 @@ public class SignListAdapter extends BaseAdapter {
 
     public SignListAdapter(Context context) {
         mInflater = LayoutInflater.from(context);
-
-        for (int i=0;i<20;i++){
-            mData.add(new SignListAdapterItem());
+        
+        // TODO remove
+        for (int i = 0; i < 20; i++) {
+            SignListAdapterItem item = new SignListAdapterItem(SignedLog.getSignedLogForTest());
+            mData.add(item);
         }
+    }
+    
+    public void setData(ArrayList<SignListAdapterItem> datas) {
+        mData.clear();
+        mData.addAll(datas);
+        notifyDataSetChanged();
     }
 
     @Override
@@ -54,11 +63,11 @@ public class SignListAdapter extends BaseAdapter {
             itemHolder = (ItemHolder) convertView.getTag();
         }
         final SignListAdapterItem item = mData.get(position);
-        itemHolder.tranckingNumberView.setText(item.mTrackingNumber);
-        itemHolder.signTypeView.setText(item.mSignType);
-        itemHolder.signTimeView.setText(item.mSignTime);
-        itemHolder.receipientView.setText(item.mReceipient);
-        if (item.mSelected) {
+        itemHolder.tranckingNumberView.setText(item.getWaybillNo());
+        itemHolder.signTypeView.setText(item.getSignType());
+        itemHolder.signTimeView.setText(item.getRecipient());
+        itemHolder.receipientView.setText(item.getSignTime());
+        if (item.isSelected()) {
             convertView.setBackgroundColor(60);
         }  else {
             convertView.setBackgroundColor(256);

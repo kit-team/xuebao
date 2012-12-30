@@ -1,6 +1,9 @@
 package cn.net.yto.models;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import android.content.ContentValues;
 
 public class SignedLog {
 	
@@ -103,17 +106,17 @@ public class SignedLog {
 	private String mWaybillNo;
 	
 	// 签收时间
-	private Date mSignedTime;
+	private Date mSignedTime = new Date();
 	
 	// 签收数据
-	private byte[] mPictureData;
+	private byte[] mPictureData = new byte[]{};
 	
 	// 签收状态标记
-	private SignedState mSignedState;
+	private SignedState mSignedState = SignedState.SIGNED_SUCCESS;
 	
 	// 满意度
-	private Satisfaction mSatisfaction;
-	
+	private Satisfaction mSatisfaction = Satisfaction.SATISFIED;
+
 	// 异常签收描述
 	private String mExpSignedDescription;
 	
@@ -124,7 +127,7 @@ public class SignedLog {
 	private long mCardAmount;
 	
 	// 上传状态
-	private UploadStatus mStatus;
+	private UploadStatus mStatus = UploadStatus.NOT_UPLOAD;
 	
 	// 收件人
 	private String mRecipient;
@@ -235,6 +238,29 @@ public class SignedLog {
 		this.mRecipient = recipient;
 	}
 	
-	
-	
+    public ContentValues toContentValues() {
+        ContentValues value = new ContentValues();
+        value.put(YtoDBHelper.C_PICTURE_DATA, getPictureData());
+        value.put(YtoDBHelper.C_CARD_AMOUNT, getCardAmount());
+        value.put(YtoDBHelper.C_CASH_AMOUNT, getCashAmount());
+        value.put(YtoDBHelper.C_SIGNED_STATE, getSignedState().getSignedState());
+        value.put(YtoDBHelper.C_EMPCODE, getEmpCode());
+        value.put(YtoDBHelper.C_WAYBILLNO, getWaybillNo());
+        value.put(YtoDBHelper.C_EXPSIGNED_DESCRIPTION, getExpSignedDescription());
+        value.put(YtoDBHelper.C_STATUS, getStatus().getUploadStatus());
+        value.put(YtoDBHelper.C_STATISFACION, getSatisfaction().getSatisfaction());
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        value.put(YtoDBHelper.C_SIGNED_TIME, dateFormat.format(getSignedTime()));
+        value.put(YtoDBHelper.C_RECIPIENT, getRecipient());
+        return value;
+    }
+    
+    // TODO remove the code
+    public static SignedLog getSignedLogForTest() {
+        SignedLog log = new SignedLog();
+        log.setWaybillNo("1234567890");
+        log.setRecipient("Jackson Hello大海");
+        return log;
+    }
+
 }
