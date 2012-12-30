@@ -28,20 +28,20 @@ public class SignBatchActivity extends Activity {
         mListView.addHeaderView(headView);
         mListView.setAdapter(new SignListAdapter(getApplicationContext()));
 
-        findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btn_back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SignBatchActivity.this.finish();
             }
         });
-        findViewById(R.id.delete).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btn_delete).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // TODO start a task to delete a item
             }
         });
 
-        findViewById(R.id.save).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btn_save).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // TODO start a task to delete a item

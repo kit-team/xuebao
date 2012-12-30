@@ -19,7 +19,7 @@ public class SignListAdapter extends BaseAdapter {
     public SignListAdapter(Context context) {
         mInflater = LayoutInflater.from(context);
 
-        for (int i=0;i<10;i++){
+        for (int i=0;i<20;i++){
             mData.add(new SignListAdapterItem());
         }
     }

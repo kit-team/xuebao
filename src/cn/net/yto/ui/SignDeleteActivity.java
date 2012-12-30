@@ -27,21 +27,21 @@ public class SignDeleteActivity extends Activity {
         mListView.addHeaderView(headView);
         mListView.setAdapter(new SignListAdapter(getApplicationContext()));
 
-        findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btn_back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SignDeleteActivity.this.finish();
             }
         });
 
-        findViewById(R.id.delete).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btn_delete).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // TODO start a task to delete a item
             }
         });
 
-        findViewById(R.id.save).setVisibility(View.GONE);
+        findViewById(R.id.btn_save).setVisibility(View.GONE);
     }
 
 }

@@ -13,7 +13,7 @@ public class SignListAdapterItem {
     public boolean mSelected = false;
     
     public SignListAdapterItem(){
-        DateFormat formate = new SimpleDateFormat("yyyy/MM/dd");
+        DateFormat formate = new SimpleDateFormat("yyyy-MM-dd");
         mSignTime = formate.format(new Date());
     }
 }
