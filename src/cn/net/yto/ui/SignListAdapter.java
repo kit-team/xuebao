@@ -65,8 +65,8 @@ public class SignListAdapter extends BaseAdapter {
         final SignListAdapterItem item = mData.get(position);
         itemHolder.tranckingNumberView.setText(item.getWaybillNo());
         itemHolder.signTypeView.setText(item.getSignType());
-        itemHolder.signTimeView.setText(item.getRecipient());
-        itemHolder.receipientView.setText(item.getSignTime());
+        itemHolder.receipientView.setText(item.getRecipient());
+        itemHolder.signTimeView.setText(item.getSignTime());
         if (item.isSelected()) {
             convertView.setBackgroundColor(60);
         }  else {
