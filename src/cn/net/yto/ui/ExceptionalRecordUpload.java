@@ -4,11 +4,13 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import cn.net.yto.R;
 import cn.net.yto.models.DbTempUtils;
 
-public class ExceptionalRecordUpload extends Activity {
+public class ExceptionalRecordUpload extends Activity implements OnItemClickListener {
 
     private ListView mListView;
     private SignListAdapter mAdapter = null;
@@ -27,5 +29,11 @@ public class ExceptionalRecordUpload extends Activity {
         mAdapter = new SignListAdapter(getApplicationContext());
         mAdapter.setData(DbTempUtils.query(this));
         mListView.setAdapter(mAdapter);
+        mListView.setOnItemClickListener(this);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        mAdapter.onItemClick(position - 1); // position == 0 is head view.
     }
 }

@@ -58,15 +58,15 @@
             android:text="@string/label_reason_description" />
 
         <EditText
-            android:id="@+id/failed_comment"
+            android:id="@+id/failed_message"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="top|left"
-            android:hint="未知错误"
             android:minLines="5" />
     </LinearLayout>
 
     <Button
+        android:id="@+id/btn_save"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
