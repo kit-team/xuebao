@@ -2,6 +2,9 @@ package cn.net.yto.models;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Random;
+
+import cn.net.yto.vo.WSSignedLogParamVO;
 
 import android.content.ContentValues;
 
@@ -357,4 +360,42 @@ public class SignedLog {
         return log;
     }
 
+    public WSSignedLogParamVO toVO() {
+        WSSignedLogParamVO vo = new WSSignedLogParamVO();
+        vo.id = setRand();
+        // vo.signOffTypeCode
+        // vo.recieverSignOff
+        // vo.amountCollected
+        // vo.amountAgency
+        // vo.uploadStatu
+        // vo.pdaNumber
+        // vo.getStatus
+        // vo.pictureData
+        // vo.expSignedDescription
+        // vo.waybillNo
+        // vo.signedState
+        // vo.signedStateInfo
+        vo.empCode = "88888888";
+        vo.empName = "手持终端收派培训";
+        // vo.signedTime
+        // vo.satisfaction
+        // vo.isReceiverSignOff
+        // vo.isPicture
+        // vo.retVal
+        // vo.failMessage
+
+        return vo;
+    }
+
+    public static String setRand() {
+        String rad = "0123456789";
+        StringBuffer result = new StringBuffer();
+        Random rand = new Random();
+        int length = 32;
+        for (int i = 0; i < length; i++) {
+            int randNum = rand.nextInt(10);
+            result.append(rad.substring(randNum, randNum + 1));
+        }
+        return result.toString();
+    } 
 }

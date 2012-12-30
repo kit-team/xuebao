@@ -67,7 +67,7 @@ public class SignedLogReportTaskManager {
     }
 
     private void addTask() {
-        WSSignedLogTask task = new WSSignedLogTask();
+        WSSignedLogTask task = new WSSignedLogTask(mContext);
         task.setCallback(new TaskCallback() {
             @Override
             public void onCallBack(Object result) {
