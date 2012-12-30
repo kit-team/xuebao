@@ -111,4 +111,101 @@ public class LogUtils {
     public static Boolean isEnabled() {
         return mEnabled;
     }
+    
+	private static boolean sLogEnable = true;
+
+	public static void setLogEnable(boolean enable) {
+		sLogEnable = enable;
+	}
+	
+	public static void v(String tag, String msg) {
+		if (sLogEnable) {
+			Log.v(tag, msg);
+		}
+	}
+	
+	public static void v(String tag, Exception e) {
+		if (sLogEnable) {
+			Log.v(tag, "" + e);
+		}
+	}
+	
+	public static void v(String tag, String msg, Exception e) {
+		if (sLogEnable) {
+			Log.v(tag, msg + " " + e);
+		}
+	}
+	
+	public static void i(String tag, String msg) {
+		if (sLogEnable) {
+			Log.i(tag, msg);
+		}
+	}
+	
+	public static void i(String tag, Exception e) {
+		if (sLogEnable) {
+			Log.i(tag, "" + e);
+		}
+	}
+	
+	public static void i(String tag, String msg, Exception e) {
+		if (sLogEnable) {
+			Log.i(tag, msg + " " + e);
+		}
+	}
+	
+	public static void d(String tag, String msg) {
+		if (sLogEnable) {
+			Log.d(tag, msg);
+		}
+	}
+	
+	public static void d(String tag, Exception e) {
+		if (sLogEnable) {
+			Log.d(tag, "" + e);
+		}
+	}
+	
+	public static void d(String tag, String msg, Exception e) {
+		if (sLogEnable) {
+			Log.d(tag, msg + " " + e);
+		}
+	}
+
+	public static void w(String tag, String msg) {
+		if (sLogEnable) {
+			Log.w(tag, msg);
+		}
+	}
+	
+	public static void w(String tag, Exception e) {
+		if (sLogEnable) {
+			Log.w(tag, "" + e);
+		}
+	}
+	
+	public static void w(String tag, String msg, Exception e) {
+		if (sLogEnable) {
+			Log.w(tag, msg + " " + e);
+		}
+	}
+	
+	public static void e(String tag, String msg) {
+		if (sLogEnable) {
+			Log.e(tag, msg);
+		}
+	}
+	
+	public static void e(String tag, Exception e) {
+		if (sLogEnable) {
+			Log.e(tag, "" + e);
+		}
+	}
+	
+	public static void e(String tag, String msg, Exception e) {
+		if (sLogEnable) {
+			Log.e(tag, msg + " " + e);
+		}
+	}
+
 }
