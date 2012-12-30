@@ -95,7 +95,7 @@ public class SignedLog {
                 return null;
         }
     }
-
+    
 	// 收派员工号
 	private String mEmpCode;
 	
@@ -117,15 +117,18 @@ public class SignedLog {
 	// 异常签收描述
 	private String mExpSignedDescription;
 	
-	// 异常签收描述
+	// 现金金额
 	private long mCashAmount;
 	
-	// 异常签收描述
+	// 刷卡金额
 	private long mCardAmount;
 	
 	// 上传状态
 	private UploadStatus mStatus;
-
+	
+	// 收件人
+	private String mRecipient;
+	
 	public SignedLog(String empCode, String waybillNo, Date signedTime, byte[] pictureData, SignedState signedState, Satisfaction satisfaction, 
 			String expSignedDescription, long cashAmount, long cardAmount) {
 		this.mEmpCode = empCode;
@@ -223,6 +226,15 @@ public class SignedLog {
 	public void setStatus(UploadStatus status) {
 		this.mStatus = status;
 	}
+
+	public String getRecipient() {
+		return mRecipient;
+	}
+
+	public void setRecipient(String recipient) {
+		this.mRecipient = recipient;
+	}
+	
 	
 	
 }

@@ -32,8 +32,8 @@ public class YtoDBHelper extends SQLiteOpenHelper{
     public static final String C_EXPSIGNED_DESCRIPTION        = "expSignedDescription";
     public static final String C_CASH_AMOUNT                  = "cashAmount";
     public static final String C_CARD_AMOUNT                  = "cardAmount";
-    public static final String C_STATUS                  	  = "status";    
-
+    public static final String C_STATUS                  	  = "status";
+    public static final String C_RECIPIENT                	  = "recipient";    
     
 	public YtoDBHelper(Context context, String name, CursorFactory factory,
 			int version) {
@@ -41,7 +41,7 @@ public class YtoDBHelper extends SQLiteOpenHelper{
 	}
 
 	public static final String CREATE_TABLE_SIGNLOG = "create table if not exists SignedLog ( empCode text, waybillNo text, signedTime date, pictureData blob, signedState long, satisfaction long, " +
-	    " expSignedDescription text, cashAmount long, cardAmount long, status long, PRIMARY KEY (empCode, waybillNo))";
+	    " expSignedDescription text, cashAmount long, cardAmount long, status long, recipient text, PRIMARY KEY (empCode, waybillNo))";
 	   ;
 
 	
@@ -89,6 +89,7 @@ public class YtoDBHelper extends SQLiteOpenHelper{
 			value.put(C_STATISFACION, signLog.getSatisfaction().getSatisfaction());			
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
 			value.put(C_SIGNED_TIME, dateFormat.format(signLog.getSignedTime()));
+			value.put(C_RECIPIENT, signLog.getRecipient());			
 			
 			insertOrIgnore(value, SIGNEDLOG_TABLE);
 		}
@@ -115,6 +116,7 @@ public class YtoDBHelper extends SQLiteOpenHelper{
 					signedLog.setCashAmount(c.getLong(7));
 					signedLog.setCardAmount(c.getLong(8));
 					signedLog.setStatus(SignedLog.GetUploadStatus(c.getInt(9)));
+					signedLog.setRecipient(c.getString(10));					
 					ret.add(signedLog);
 				}
 			} catch (Exception e) {
