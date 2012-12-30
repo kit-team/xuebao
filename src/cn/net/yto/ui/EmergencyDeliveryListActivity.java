@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import cn.net.yto.R;
 import android.app.ListActivity;
 import android.content.Context;
 import android.os.Bundle;
@@ -16,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import cn.net.yto.R;
 
 public class EmergencyDeliveryListActivity extends ListActivity{
 

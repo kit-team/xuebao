@@ -11,19 +11,20 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true" >
-        
+
         <TextView
             android:id="@+id/textSignType"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/label_size"
             android:layout_height="wrap_content"
+            android:gravity="right|center_vertical"
             android:text="@string/label_sign_type" />
 
         <Spinner
             android:id="@+id/signType"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
-            android:layout_weight="1" 
-            android:entries="@array/sign_type"/>
+            android:layout_weight="1"
+            android:entries="@array/sign_type" />
     </LinearLayout>
 
     <LinearLayout
@@ -34,8 +35,9 @@
 
         <TextView
             android:id="@+id/textView1"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/label_size"
             android:layout_height="wrap_content"
+            android:gravity="right|center_vertical"
             android:text="@string/label_receipient" />
 
         <EditText
@@ -51,7 +53,7 @@
             android:layout_height="wrap_content"
             android:checked="true"
             android:enabled="false"
-            android:text="@string/label_must" />
+            android:text="@string/label_receipient_must_fill" />
     </LinearLayout>
 
     <LinearLayout
@@ -62,13 +64,14 @@
 
         <TextView
             android:id="@+id/textScore"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/label_size"
             android:layout_height="wrap_content"
-            android:text="@string/label_satisfaction_degree"
-            android:layout_gravity="center" />
+            android:gravity="right|center_vertical"
+            android:layout_gravity="center"
+            android:text="@string/label_satisfaction_degree" />
 
         <RadioGroup
-            android:id="@+id/radioGroup1"
+            android:id="@+id/satisfactory_score"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal" >
@@ -101,20 +104,19 @@
         android:layout_below="@id/layoutScore" >
 
         <TextView
-            android:id="@+id/textSignNo"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/label_size"
             android:layout_height="wrap_content"
+            android:gravity="right|center_vertical"
             android:text="@string/label_tracking_number" />
 
         <EditText
-            android:id="@+id/editSignNo"
+            android:id="@+id/tracking_number"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:inputType="text" />
+            android:layout_weight="1" />
 
         <TextView
-            android:id="@+id/textSignNoIndicator"
+            android:id="@+id/tracking_number_ndicator"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="" />

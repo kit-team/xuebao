@@ -1,12 +1,10 @@
 package cn.net.yto.ui;
 
-import cn.net.yto.R;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
+import cn.net.yto.R;
 
 public class MainActivity extends Activity {
 	

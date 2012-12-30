@@ -22,7 +22,6 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-
 import cn.net.yto.R;
 
 public class SignScanActivity extends Activity {
@@ -33,9 +32,9 @@ public class SignScanActivity extends Activity {
 	private ArrayList<View> mPageViews = null;
 	private ArrayList<View> mTabViews = null;
 	
-	private SignSuccessView mSignSuccessView = null;
-	private OrderQueryView  mOrderQueryView = null;
-	private SignFailedView  mSignFailedView = null;
+//	private SignSuccessView mSignSuccessView = null;
+//	private OrderQueryView  mOrderQueryView = null;
+//	private SignFailedView  mSignFailedView = null;
 	
 	private OnClickListener mTabItemClickListener = new OnClickListener() {
 		@Override
@@ -89,9 +88,9 @@ public class SignScanActivity extends Activity {
 		mPageViews.add(waybillDetailView);
 		mPageViews.add(orderQueryView);
 		
-		mSignSuccessView = new SignSuccessView(signedSuccessView);
-		mOrderQueryView = new OrderQueryView(orderQueryView);
-		mSignFailedView = new SignFailedView(signedFailedView);
+//		mSignSuccessView = new SignSuccessView(signedSuccessView);
+//		mOrderQueryView = new OrderQueryView(orderQueryView);
+//		mSignFailedView = new SignFailedView(signedFailedView);
 		
 		viewPager = (ViewPager) findViewById(R.id.slideMenu);
 		viewPager.setAdapter(new SlideMenuAdapter());  
@@ -188,24 +187,6 @@ public class SignScanActivity extends Activity {
         			tabView.setBackgroundResource(R.drawable.menu_bg);
         		}
         	}
-        	/*
-        	int pageCount = mPageViews.size() - 1;
-        	pagerIndex = arg0;
-        	
-        	// ��ʾ�ұߵ���ͼƬ
-        	if(arg0 >= 0 && arg0 < pageCount){
-        		imageNext.setVisibility(View.VISIBLE);
-        	}else{
-        		imageNext.setVisibility(View.INVISIBLE);
-        	}
-        	
-        	// ��ʾ��ߵ���ͼƬ
-        	if(arg0 > 0 && arg0 <= pageCount){
-        		imagePrevious.setVisibility(View.VISIBLE);
-        	}else{
-        		imagePrevious.setVisibility(View.INVISIBLE);
-        	}
-        	*/
         }  
     }  
     
@@ -220,7 +201,7 @@ public class SignScanActivity extends Activity {
 		private void initView(View view) {
 			mEditTrackingNo = (EditText) view
 					.findViewById(R.id.edit_tracking_number);
-			mEditTrackingNo.setText("12345678");
+			mEditTrackingNo.setText("1234567890");
 			
 			mSignTypeSpinner = (Spinner) view.findViewById(R.id.spinner_sign_type);
 			ArrayAdapter<String> signTypeAdapter = new ArrayAdapter<String>( SignScanActivity.this,

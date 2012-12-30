@@ -31,7 +31,6 @@
     <string name="label_cargo_amount">货物金额:</string>
     <string name="label_date_from">从</string>
     <string name="label_date_to">到</string>
-    <string name="label_must">必须输入</string>
     <string name="label_record_id">运单号:</string>
 
     <!-- Button string text definition -->

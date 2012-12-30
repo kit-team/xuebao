@@ -13,9 +13,10 @@
 
         <TextView
             android:id="@+id/textView1"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/label_size"
             android:layout_height="wrap_content"
-            android:padding="10dp"
+            android:layout_gravity="center"
+            android:gravity="right|center_vertical"
             android:text="@string/label_tracking_number" />
 
         <EditText
@@ -24,6 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:inputType="text" >
+
             <requestFocus />
         </EditText>
     </LinearLayout>
@@ -32,10 +34,10 @@
         android:id="@+id/list_details"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/top"
-        android:layout_above="@+id/buttons">
+        android:layout_above="@+id/buttons"
+        android:layout_below="@+id/top" >
     </ListView>
-    
+
     <include
         android:id="@+id/buttons"
         android:layout_width="match_parent"

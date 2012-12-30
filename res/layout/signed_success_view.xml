@@ -6,165 +6,173 @@
     tools:context=".MainActivity" >
 
     <!-- Tracking Number -->
+
     <LinearLayout
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="3dp"
-        android:layout_marginRight="3dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal" >
 
         <TextView
-            android:text="@string/label_tracking_number"
-            android:textSize="16sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_width="@dimen/label_size"
+            android:layout_height="wrap_content"
+            android:gravity="right|center_vertical"
+            android:text="@string/label_tracking_number" />
 
-        <EditText android:id="@+id/edit_tracking_number"
+        <EditText
+            android:id="@+id/edit_tracking_number"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-
+            android:layout_weight="1" />
     </LinearLayout>
 
-
     <LinearLayout
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="3dp"
-        android:layout_marginRight="3dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal" >
 
-         <LinearLayout 
-             android:layout_width="0dp"
-             android:layout_height="match_parent"
-             android:layout_weight="1"
-             android:orientation="horizontal">
-	         <TextView
-	            android:text="@string/label_agency_amount"
-	            android:textSize="16sp"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"/>
-	         
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="@dimen/label_size"
+                android:layout_height="wrap_content"
+                android:gravity="right|center_vertical"
+                android:text="@string/label_agency_amount" />
+
+            <EditText
+                android:id="@+id/collection_amount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <!--
 	         <TextView
 	            android:text="0.0"
 	            android:layout_marginLeft="10dp"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"/>
-         </LinearLayout>
+            -->
+        </LinearLayout>
 
-         <LinearLayout 
-             android:layout_width="0dp"
-             android:layout_height="match_parent"
-             android:layout_weight="1"
-             android:orientation="horizontal">
-	         <TextView
-	            android:text="@string/label_freight_collect_amount"
-	            android:textSize="16sp"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"/>
-	         
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="@dimen/label_size"
+                android:layout_height="wrap_content"
+                android:gravity="right|center_vertical"
+                android:text="@string/label_freight_collect_amount" />
+
+            <EditText
+                android:id="@+id/ freight_to_collect"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <!--
 	         <TextView
 	            android:text="0.0"
 	            android:layout_marginLeft="10dp"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"/>
-         </LinearLayout>
-
+            -->
+        </LinearLayout>
     </LinearLayout>
 
     <!-- Sign Type -->
+
     <LinearLayout
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="3dp"
-        android:layout_marginRight="3dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal" >
 
-         <TextView
-            android:text="@string/label_sign_type"
-            android:textSize="16sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_width="@dimen/label_size"
+            android:layout_height="wrap_content"
+            android:gravity="right|center_vertical"
+            android:text="@string/label_sign_type" />
 
-         <Spinner android:id="@+id/spinner_sign_type"
-             android:layout_width="0dip"
-             android:layout_height="wrap_content"
-             android:layout_weight="1"/>
-
+        <Spinner
+            android:id="@+id/spinner_sign_type"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:entries="@array/sign_type" />
     </LinearLayout>
 
     <!-- Satisfaction Degree -->
+
     <LinearLayout
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="3dp"
-        android:layout_marginRight="3dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal" >
 
-         <TextView
-            android:text="@string/label_satisfaction_degree"
-            android:textSize="16sp"
-            android:layout_marginTop="10dp"
+        <TextView
+            android:layout_width="@dimen/label_size"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="right|center_vertical"
+            android:text="@string/label_satisfaction_degree" />
+
+        <RadioGroup
+            android:id="@+id/satisfactory_score"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
 
-         <RadioGroup
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:orientation="horizontal">
+            <RadioButton
+                android:id="@+id/radio0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="@string/label_very_satisfactory" />
 
-             <RadioButton
-                 android:text="@string/label_very_satisfactory"
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"/>
+            <RadioButton
+                android:id="@+id/radio1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_satisfactory" />
 
-             <RadioButton
-                 android:text="@string/label_satisfactory"
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"/>
-
-              <RadioButton
-                 android:text="@string/label_unsatisfactory"
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"/>
-
-          </RadioGroup>
-
+            <RadioButton
+                android:id="@+id/radio2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_unsatisfactory" />
+        </RadioGroup>
     </LinearLayout>
 
-    <LinearLayout 
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="3dp"
-        android:layout_marginRight="3dp"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-	    <TextView
-	        android:text="@string/label_receipient"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"/>
-	
-	    <EditText android:id="@+id/edit_handwritten_signature"
-	        android:layout_width="0dp"
-	        android:layout_weight="1"
-	        android:layout_height="wrap_content"/>
-	    
-	    <CheckBox 
-	        android:text="@string/label_receipient_must_fill"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content" />
-	
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="@dimen/label_size"
+            android:layout_height="wrap_content"
+            android:gravity="right|center_vertical"
+            android:text="@string/label_receipient" />
+
+        <EditText
+            android:id="@+id/edit_handwritten_signature"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:enabled="false"
+            android:text="@string/label_receipient_must_fill" />
     </LinearLayout>
-    
-     <Button
-            android:layout_marginTop="10dp"
-	        android:text="@string/label_save"
-	        android:layout_width="80dp"
-	        android:layout_height="wrap_content"
-	        android:layout_gravity="center_horizontal" />
+
+    <Button
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:text="@string/label_save" />
 
 </LinearLayout>

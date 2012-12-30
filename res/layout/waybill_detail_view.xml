@@ -6,114 +6,114 @@
     tools:context=".MainActivity" >
 
     <TextView
-        android:text="@string/input_tracking_no_hint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:layout_marginLeft="3dp"
+        android:text="@string/input_tracking_no_hint"
+        android:textColor="#FF0000"
         android:textSize="20sp"
-        android:textColor="#FF0000"/>
-    
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"  />
+
     <!-- Tracking Number -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginLeft="3dp"
-        android:layout_marginRight="3dp">
+        android:orientation="horizontal" >
 
         <TextView
-            android:text="@string/label_tracking_number"
-            android:layout_width="70dp"
-            android:layout_height="wrap_content"/>
+            android:layout_width="@dimen/label_size"
+            android:layout_height="wrap_content"
+            android:gravity="right|center_vertical"
+            android:text="@string/label_tracking_number" />
 
-        <EditText android:id="@+id/edit_tracking_number"
+        <EditText
+            android:id="@+id/edit_tracking_number"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-
+            android:layout_weight="1" />
     </LinearLayout>
-    
+
     <!-- Is Freight Collect -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-         android:layout_marginLeft="3dp"
-        android:layout_marginRight="3dp">
+        android:orientation="horizontal" >
 
         <TextView
-            android:text="@string/label_is_freight_collect"
-            android:layout_width="70dp"
-            android:layout_height="wrap_content"/>
+            android:layout_width="@dimen/label_size"
+            android:layout_height="wrap_content"
+            android:gravity="right|center_vertical"
+            android:text="@string/label_is_freight_collect" />
 
-        <EditText android:id="@+id/edit_is_freight_collect"
+        <EditText
+            android:id="@+id/edit_is_freight_collect"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-
+            android:layout_weight="1" />
     </LinearLayout>
-    
+
     <!-- Is Agency -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginLeft="3dp"
-        android:layout_marginRight="3dp">
+        android:orientation="horizontal" >
 
         <TextView
-            android:text="@string/label_is_agency"
-            android:layout_width="70dp"
-            android:layout_height="wrap_content"/>
+            android:layout_width="@dimen/label_size"
+            android:layout_height="wrap_content"
+            android:gravity="right|center_vertical"
+            android:text="@string/label_is_agency" />
 
-        <EditText android:id="@+id/edit_is_agency"
+        <EditText
+            android:id="@+id/edit_is_agency"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-
+            android:layout_weight="1" />
     </LinearLayout>
-    
-     <!-- Freight -->
+
+    <!-- Freight -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginLeft="3dp"
-        android:layout_marginRight="3dp">
+        android:orientation="horizontal" >
 
         <TextView
-            android:text="@string/label_freight"
-            android:layout_width="70dp"
-            android:layout_height="wrap_content"/>
+            android:layout_width="@dimen/label_size"
+            android:layout_height="wrap_content"
+            android:gravity="right|center_vertical"
+            android:text="@string/label_freight" />
 
-        <EditText android:id="@+id/edit_freight"
+        <EditText
+            android:id="@+id/edit_freight"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-
+            android:layout_weight="1" />
     </LinearLayout>
-    
-     <!-- Cargo Amount -->
+
+    <!-- Cargo Amount -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_marginLeft="3dp"
-        android:layout_marginRight="3dp">
+        android:layout_marginRight="3dp"
+        android:orientation="horizontal" >
 
         <TextView
-            android:text="@string/label_cargo_amount"
-            android:layout_width="70dp"
-            android:layout_height="wrap_content"/>
+            android:layout_width="@dimen/label_size"
+            android:layout_height="wrap_content"
+            android:gravity="right|center_vertical"
+            android:text="@string/label_cargo_amount" />
 
-        <EditText android:id="@+id/edit_cargo_amount"
+        <EditText
+            android:id="@+id/edit_cargo_amount"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-
+            android:layout_weight="1" />
     </LinearLayout>
-    
 
 </LinearLayout>

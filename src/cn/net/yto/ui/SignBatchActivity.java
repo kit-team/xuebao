@@ -19,11 +19,34 @@ public class SignBatchActivity extends Activity {
         setContentView(R.layout.sign_batch);
         getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.sign_batch_title);
 
+        initViews();
+    }
+
+    public void initViews() {
         View headView = getLayoutInflater().inflate(R.layout.list_detail_head, null);
         mListView = (ListView) findViewById(R.id.list_details);
         mListView.addHeaderView(headView);
-        mListView.setBackgroundColor(128);
         mListView.setAdapter(new SignListAdapter(getApplicationContext()));
+
+        findViewById(R.id.back).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SignBatchActivity.this.finish();
+            }
+        });
+        findViewById(R.id.delete).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO start a task to delete a item
+            }
+        });
+
+        findViewById(R.id.save).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO start a task to delete a item
+            }
+        });
     }
 
 }
