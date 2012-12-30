@@ -8,7 +8,7 @@ import cn.net.yto.ui.ToastUtils;
 import android.content.Context;
 
 public class DbTempUtils {
-    
+
     public static void insert(final Context context, final SignedLog signedLog) {
         new Thread() {
             public void run() {
@@ -17,7 +17,25 @@ public class DbTempUtils {
         }.start();
         ToastUtils.showToast("保存到数据库");
     }
-    
+
+    public static void delete(final Context context, final SignedLog signedLog) {
+        ArrayList<SignedLog> signedLogs = new ArrayList<SignedLog>();
+        signedLogs.add(signedLog);
+        delete(context, signedLogs);
+    }
+
+    public static void delete(final Context context, final ArrayList<SignedLog> signedLogs) {
+        new Thread() {
+            public void run() {
+                for (SignedLog signedLog : signedLogs) {
+                    // TODO delete 
+//                    new YtoDBHelper(context.getApplicationContext()).delete(signedLog);
+                }
+            }
+        }.start();
+        ToastUtils.showToast("TODO ==>正在删除本地数据");
+    }
+
     public static ArrayList<SignListAdapterItem> query(final Context context) {
         Vector<SignedLog> logs = new YtoDBHelper(context.getApplicationContext())
                 .getUploadSignedLog();

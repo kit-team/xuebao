@@ -4,13 +4,10 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import cn.net.yto.R;
-import cn.net.yto.models.DbTempUtils;
 
-public class ExceptionalRecordUpload extends Activity implements OnItemClickListener {
+public class ExceptionalRecordUpload extends Activity {
 
     private ListView mListView;
     private SignListAdapter mAdapter = null;
@@ -22,18 +19,37 @@ public class ExceptionalRecordUpload extends Activity implements OnItemClickList
         setContentView(R.layout.exceptional_record_upload);
         getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE,
                 R.layout.exceptional_record_upload_title);
+
+        initViews();
+    }
+
+    private void initViews() {
         mListView = (ListView) findViewById(android.R.id.list);
         View headView = getLayoutInflater().inflate(R.layout.list_detail_head, null);
         mListView.addHeaderView(headView);
-
         mAdapter = new SignListAdapter(getApplicationContext());
-        mAdapter.setData(DbTempUtils.query(this));
         mListView.setAdapter(mAdapter);
-        mListView.setOnItemClickListener(this);
-    }
+        mListView.setOnItemClickListener(new SignListItemClickListener(mAdapter, true));
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        mAdapter.onItemClick(position - 1); // position == 0 is head view.
+        findViewById(R.id.btn_back).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ExceptionalRecordUpload.this.finish();
+            }
+        });
+
+        findViewById(R.id.btn_delete).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mAdapter.deleteSelectedItem(ExceptionalRecordUpload.this);
+            }
+        });
+
+        findViewById(R.id.btn_upload).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO upload select items
+            }
+        });
     }
 }

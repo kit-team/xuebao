@@ -3,6 +3,7 @@ package cn.net.yto.ui;
 import java.util.ArrayList;
 
 import cn.net.yto.R;
+import cn.net.yto.models.DbTempUtils;
 import cn.net.yto.models.SignedLog;
 import android.content.Context;
 import android.graphics.Color;
@@ -16,16 +17,11 @@ public class SignListAdapter extends BaseAdapter {
 
     private LayoutInflater mInflater;
 
-    private ArrayList<SignListAdapterItem> mData = new ArrayList<SignListAdapterItem>();
+    private ArrayList<SignListAdapterItem> mData = null;
 
     public SignListAdapter(Context context) {
         mInflater = LayoutInflater.from(context);
-
-        // TODO remove
-        for (int i = 0; i < 20; i++) {
-            SignListAdapterItem item = new SignListAdapterItem(SignedLog.getSignedLogForTest());
-            mData.add(item);
-        }
+        mData = DbTempUtils.query(context);
     }
 
     public void setData(ArrayList<SignListAdapterItem> datas) {
@@ -42,6 +38,21 @@ public class SignListAdapter extends BaseAdapter {
     @Override
     public SignListAdapterItem getItem(int position) {
         return mData.get(position);
+    }
+
+    public void deleteSelectedItem(Context context) {
+        ArrayList<SignedLog> selectedSignedLogs = new ArrayList<SignedLog>();
+        for (int i = mData.size() - 1; i >= 0; i--) {
+            SignListAdapterItem item = mData.get(i);
+            if (item.isSelected()) {
+                selectedSignedLogs.add(item.getSignedLog());
+                mData.remove(i);
+            }
+        }
+
+        DbTempUtils.delete(context, selectedSignedLogs);
+
+        notifyDataSetChanged();
     }
 
     @Override

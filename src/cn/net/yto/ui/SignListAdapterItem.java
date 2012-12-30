@@ -15,6 +15,10 @@ public class SignListAdapterItem {
         mSelected = false;
     }
 
+    public SignedLog getSignedLog() {
+        return mSignedLog;
+    }
+
     public String getWaybillNo() {
         return mSignedLog.getWaybillNo();
     }

@@ -10,6 +10,7 @@ import cn.net.yto.R;
 public class SignDeleteActivity extends Activity {
 
     private ListView mListView = null;
+    private SignListAdapter mAdapter = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +26,9 @@ public class SignDeleteActivity extends Activity {
         View headView = getLayoutInflater().inflate(R.layout.list_detail_head, null);
         mListView = (ListView) findViewById(R.id.list_details);
         mListView.addHeaderView(headView);
-        mListView.setAdapter(new SignListAdapter(getApplicationContext()));
+        mAdapter = new SignListAdapter(getApplicationContext());
+        mListView.setAdapter(mAdapter);
+        mListView.setOnItemClickListener(new SignListItemClickListener(mAdapter, true));
 
         findViewById(R.id.btn_back).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,7 +40,7 @@ public class SignDeleteActivity extends Activity {
         findViewById(R.id.btn_delete).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO start a task to delete a item
+                mAdapter.deleteSelectedItem(SignDeleteActivity.this);
             }
         });
 

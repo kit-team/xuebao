@@ -6,11 +6,36 @@
     tools:context=".SignBatchActivity" >
 
     <LinearLayout
-        android:id="@+id/layoutSignType"
+        android:id="@+id/layout_tracking_number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true" >
+
+        <TextView
+            android:layout_width="@dimen/label_size"
+            android:layout_height="wrap_content"
+            android:gravity="right|center_vertical"
+            android:text="@string/label_tracking_number" />
+
+        <EditText
+            android:id="@+id/edit_tracking_number"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/tracking_number_ndicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_sign_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layout_tracking_number" >
 
         <TextView
             android:id="@+id/textSignType"
@@ -20,7 +45,7 @@
             android:text="@string/label_sign_type" />
 
         <Spinner
-            android:id="@+id/signType"
+            android:id="@+id/sign_type"
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -28,20 +53,59 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/layoutSignPerson"
+        android:id="@+id/layout_satisfactory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/layoutSignType" >
+        android:layout_below="@id/layout_sign_type" >
 
         <TextView
-            android:id="@+id/textView1"
+            android:layout_width="@dimen/label_size"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="right|center_vertical"
+            android:text="@string/label_satisfaction_degree" />
+
+        <RadioGroup
+            android:id="@+id/group_satisfactory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/very_satisfactory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="@string/label_very_satisfactory" />
+
+            <RadioButton
+                android:id="@+id/satisfactory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_satisfactory" />
+
+            <RadioButton
+                android:id="@+id/unsatisfactory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_unsatisfactory" />
+        </RadioGroup>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_receipient"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layout_satisfactory" >
+
+        <TextView
             android:layout_width="@dimen/label_size"
             android:layout_height="wrap_content"
             android:gravity="right|center_vertical"
             android:text="@string/label_receipient" />
 
         <EditText
-            android:id="@+id/editPerson"
+            android:id="@+id/edit_receipient"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -56,77 +120,11 @@
             android:text="@string/label_receipient_must_fill" />
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/layoutScore"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/layoutSignPerson" >
-
-        <TextView
-            android:id="@+id/textScore"
-            android:layout_width="@dimen/label_size"
-            android:layout_height="wrap_content"
-            android:gravity="right|center_vertical"
-            android:layout_gravity="center"
-            android:text="@string/label_satisfaction_degree" />
-
-        <RadioGroup
-            android:id="@+id/satisfactory_score"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal" >
-
-            <RadioButton
-                android:id="@+id/radio0"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="@string/label_very_satisfactory" />
-
-            <RadioButton
-                android:id="@+id/radio1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/label_satisfactory" />
-
-            <RadioButton
-                android:id="@+id/radio2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/label_unsatisfactory" />
-        </RadioGroup>
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/layoutSignNo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/layoutScore" >
-
-        <TextView
-            android:layout_width="@dimen/label_size"
-            android:layout_height="wrap_content"
-            android:gravity="right|center_vertical"
-            android:text="@string/label_tracking_number" />
-
-        <EditText
-            android:id="@+id/tracking_number"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
-        <TextView
-            android:id="@+id/tracking_number_ndicator"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="" />
-    </LinearLayout>
-
     <include
         android:id="@+id/buttons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/layoutSignNo"
+        android:layout_below="@id/layout_receipient"
         layout="@layout/buttons" />
 
     <ListView

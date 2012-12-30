@@ -241,7 +241,7 @@ public class SignScanActivity extends Activity {
 
         }
 
-        public boolean checkInputVaules() {
+        private boolean checkInputVaules() {
             if (TextUtils.isEmpty(mWaybillNo.getText().toString())) {
                 ToastUtils.showToast("运单号不能为空");
                 return false;
@@ -254,7 +254,7 @@ public class SignScanActivity extends Activity {
             return true;
         }
 
-        public SignedLog getSignedLogForSave() {
+        private SignedLog getSignedLogForSave() {
             SignedLog signedLog = new SignedLog();
 
             signedLog.setWaybillNo(mWaybillNo.getText().toString());
