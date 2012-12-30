@@ -206,8 +206,12 @@ public class SignScanActivity extends Activity {
         private RadioGroup mSatisfactory; // 满意度
         private EditText mReceipient; // 签收人
 
+        private String[] mSignTypeString = null;
+
         SignSuccessView(View view) {
             initView(view);
+
+            mSignTypeString = getResources().getStringArray(R.array.sign_type);
         }
 
         private void initView(View view) {
@@ -217,13 +221,6 @@ public class SignScanActivity extends Activity {
             mSignTypeSpinner = (Spinner) view.findViewById(R.id.spinner_sign_type);
             mSatisfactory = (RadioGroup) view.findViewById(R.id.satisfactory_score);
             mReceipient = (EditText) view.findViewById(R.id.edit_receipient);
-            // ArrayAdapter<String> signTypeAdapter = new
-            // ArrayAdapter<String>(SignScanActivity.this,
-            // android.R.layout.simple_spinner_item,
-            // getResources().getStringArray(
-            // R.array.sign_type));
-            // signTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            // mSignTypeSpinner.setAdapter(signTypeAdapter);
 
             view.findViewById(R.id.btn_save).setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -238,7 +235,6 @@ public class SignScanActivity extends Activity {
                     }
                 }
             });
-
         }
 
         private boolean checkInputVaules() {
@@ -258,17 +254,16 @@ public class SignScanActivity extends Activity {
             SignedLog signedLog = new SignedLog();
 
             signedLog.setWaybillNo(mWaybillNo.getText().toString());
-            // TODO
-            if (TextUtils.isEmpty(mCollectionAmount.getText())) {
-                signedLog.setAmountCollected(0);
-            } else {
+            if (!TextUtils.isEmpty(mCollectionAmount.getText())) {
                 signedLog.setAmountCollected(Long.valueOf(mCollectionAmount.getText().toString()));
             }
-            if (TextUtils.isEmpty(mFreightToCollect.getText())) {
-                signedLog.setAmountAgency(0);
-            } else {
+            if (!TextUtils.isEmpty(mFreightToCollect.getText())) {
                 signedLog.setAmountAgency(Long.valueOf(mFreightToCollect.getText().toString()));
             }
+
+            final int typeIdx = mSignTypeSpinner.getSelectedItemPosition();
+            signedLog.setSignOffTypeCode(mSignTypeString[typeIdx]);
+
             switch (mSatisfactory.getCheckedRadioButtonId()) {
             case R.id.very_satisfactory:
                 signedLog.setSatisfaction(Satisfaction.VERY_SATISFIED);
@@ -280,6 +275,7 @@ public class SignScanActivity extends Activity {
                 signedLog.setSatisfaction(Satisfaction.SATISFIED);
                 break;
             }
+
             signedLog.setRecipient(mReceipient.getText().toString());
 
             return signedLog;
@@ -289,16 +285,19 @@ public class SignScanActivity extends Activity {
     class SignFailedView {
         private EditText mWaybillNo = null;
         private Spinner mExceptionReasonSpinner = null;
-        private EditText mFailedMessage = null;
+        private EditText mExceptionDescription = null;
+
+        private String[] mExceptionReasons;
 
         public SignFailedView(View view) {
             initView(view);
+            mExceptionReasons = getResources().getStringArray(R.array.exception_reason);
         }
 
         private void initView(View view) {
             mWaybillNo = (EditText) view.findViewById(R.id.edit_tracking_number);
             mExceptionReasonSpinner = (Spinner) view.findViewById(R.id.spinner_exception_reason);
-            mFailedMessage = (EditText) view.findViewById(R.id.failed_message);
+            mExceptionDescription = (EditText) view.findViewById(R.id.failed_description);
             view.findViewById(R.id.btn_save).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -306,18 +305,10 @@ public class SignScanActivity extends Activity {
                         DbTempUtils.insert(SignScanActivity.this, getSignedLogForSave());
 
                         mWaybillNo.setText("");
-                        mFailedMessage.setText("");
+                        mExceptionDescription.setText("");
                     }
                 }
             });
-            // ArrayAdapter<String> exceptionReasonAdapter = new
-            // ArrayAdapter<String>(
-            // SignScanActivity.this, android.R.layout.simple_spinner_item,
-            // getResources()
-            // .getStringArray(R.array.exception_reason));
-            // exceptionReasonAdapter
-            // .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            // mExceptionReasonSpinner.setAdapter(exceptionReasonAdapter);
         }
 
         public boolean checkInputVaules() {
@@ -332,13 +323,9 @@ public class SignScanActivity extends Activity {
             SignedLog signedLog = new SignedLog();
 
             signedLog.setWaybillNo(mWaybillNo.getText().toString());
-
-            signedLog.setExpSignedDescription(mFailedMessage.getText().toString());
-
-            signedLog.setSignedTime(new Date());
-            signedLog.setSignedState(SignedState.SIGNED_SUCCESS);
-            signedLog.setStatus(UploadStatus.NOT_UPLOAD);
-
+            final int exceptIdx = mExceptionReasonSpinner.getSelectedItemPosition();
+            signedLog.setSignedStateInfo(mExceptionReasons[exceptIdx]);
+            signedLog.setExpSignedDescription(mExceptionDescription.getText().toString());
             return signedLog;
         }
     }
