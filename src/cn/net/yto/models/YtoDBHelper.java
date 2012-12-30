@@ -30,10 +30,20 @@ public class YtoDBHelper extends SQLiteOpenHelper{
     public static final String C_SIGNED_STATE                 = "signedState";
     public static final String C_STATISFACION                 = "satisfaction";
     public static final String C_EXPSIGNED_DESCRIPTION        = "expSignedDescription";
-    public static final String C_CASH_AMOUNT                  = "cashAmount";
-    public static final String C_CARD_AMOUNT                  = "cardAmount";
+    public static final String C_AMOUNT_COLLECTED             = "amountCollected";
+    public static final String C_AMOUNT_AGENCY                = "amountAgency";
     public static final String C_STATUS                  	  = "status";
     public static final String C_RECIPIENT                	  = "recipient";    
+    public static final String C_IS_SCAN                	  = "is_scan";    
+    public static final String C_SIGNOFF_TYPE_CODE            = "signOffTypeCode";    
+    public static final String C_RECEIVER_SIGNOFF             = "receiverSignOff";    
+    public static final String C_PAD_NUMBER                	  = "pdaNumber";    
+    public static final String C_SIGNEDSTATE_INFO             = "signedStateInfo";    
+    public static final String C_EMP_NAME			          = "empName";    
+    public static final String C_IS_RECEIVER_SIGNOFF          = "isReceiverSignOff";    
+    public static final String C_IS_PICTURE             	  = "isPicture";    
+    public static final String C_SINGEDLOG_ID             	  = "signedlog_id";    
+    
     
 	public YtoDBHelper(Context context, String name, CursorFactory factory,
 			int version) {
@@ -41,7 +51,8 @@ public class YtoDBHelper extends SQLiteOpenHelper{
 	}
 
 	public static final String CREATE_TABLE_SIGNLOG = "create table if not exists SignedLog ( empCode text, waybillNo text, signedTime date, pictureData blob, signedState long, satisfaction long, " +
-	    " expSignedDescription text, cashAmount long, cardAmount long, status long, recipient text, PRIMARY KEY (empCode, waybillNo))";
+	    " expSignedDescription text, amountCollected long, amountAgency long, status long, recipient text, is_scan long, signOffTypeCode text, receiverSignOff text, " +
+	    " pdaNumber text, signedStateInfo text, empName text, isReceiverSignOff long, isPicture long, signedlog_id text, PRIMARY KEY (empCode, waybillNo))";
 	   ;
 
 	
@@ -99,10 +110,20 @@ public class YtoDBHelper extends SQLiteOpenHelper{
 					signedLog.setSignedState(SignedLog.GetSignedState(c.getInt(4)));
 					signedLog.setSatisfaction(SignedLog.GetSatisfaction(c.getInt(5)));
 					signedLog.setExpSignedDescription(c.getString(6));
-					signedLog.setCashAmount(c.getLong(7));
-					signedLog.setCardAmount(c.getLong(8));
+					signedLog.setAmountCollected(c.getLong(7));
+					signedLog.setAmountAgency(c.getLong(8));
 					signedLog.setStatus(SignedLog.GetUploadStatus(c.getInt(9)));
-					signedLog.setRecipient(c.getString(10));					
+					signedLog.setRecipient(c.getString(10));
+					signedLog.setIsScan(c.getLong(11));
+					signedLog.setSignOffTypeCode(c.getString(12));
+					signedLog.setRecieverSignOff(c.getString(13));
+					signedLog.setPdaNumber(c.getString(14));
+					signedLog.setSignedStateInfo(c.getString(15));
+					signedLog.setEmpName(c.getString(16));
+					signedLog.setIsReceiverSignOff(c.getLong(17));
+					signedLog.setIsPicture(c.getLong(18));
+					signedLog.setSignedLogId(c.getString(19));
+
 					ret.add(signedLog);
 				}
 			} catch (Exception e) {

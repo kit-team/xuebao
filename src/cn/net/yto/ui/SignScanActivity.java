@@ -253,8 +253,8 @@ public class SignScanActivity extends Activity {
             SignedLog signedLog = new SignedLog();
 
             signedLog.setWaybillNo(mWaybillNo.getText().toString());
-            signedLog.setCashAmount(Long.valueOf(mCollectionAmount.getText().toString()));
-            signedLog.setCashAmount(Long.valueOf(mFreightToCollect.getText().toString()));
+            signedLog.setAmountCollected(Long.valueOf(mCollectionAmount.getText().toString()));
+            signedLog.setAmountAgency(Long.valueOf(mFreightToCollect.getText().toString()));
             switch (mSatisfactory.getCheckedRadioButtonId()) {
             case R.id.very_satisfactory:
                 signedLog.setSatisfaction(Satisfaction.VERY_SATISFIED);

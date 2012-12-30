@@ -99,11 +99,26 @@ public class SignedLog {
         }
     }
     
+    // id
+    private String mSignedLogId;
+    
+    // 是否查看
+    private long mIsScan = 0;
+    
+    // 签收类型
+    private String mSignOffTypeCode;
+    
+    // 是否签收
+    private String mRecieverSignOff;
+
+    // 是否签收
+    private String mPdaNumber;
+    
 	// 收派员工号
 	private String mEmpCode;
 	
 	// 面单号
-	private String mWaybillNo;
+	private String mWaybillNo;	
 	
 	// 签收时间
 	private Date mSignedTime = new Date();
@@ -120,32 +135,29 @@ public class SignedLog {
 	// 异常签收描述
 	private String mExpSignedDescription;
 	
-	// 现金金额
-	private long mCashAmount;
+	// 到付金额
+	private long mAmountCollected;
 	
-	// 刷卡金额
-	private long mCardAmount;
+	// 代收金额
+	private long mAmountAgency;
 	
 	// 上传状态
-	private UploadStatus mStatus = UploadStatus.NOT_UPLOAD;
+	private UploadStatus mUploadStatus = UploadStatus.NOT_UPLOAD;
 	
 	// 收件人
 	private String mRecipient;
 	
-	public SignedLog(String empCode, String waybillNo, Date signedTime, byte[] pictureData, SignedState signedState, Satisfaction satisfaction, 
-			String expSignedDescription, long cashAmount, long cardAmount) {
-		this.mEmpCode = empCode;
-		this.mWaybillNo = waybillNo;
-		this.mPictureData = pictureData;
-		this.mSignedState = signedState;
-		this.mSatisfaction = satisfaction;
-		this.mExpSignedDescription = expSignedDescription;
-		this.mCashAmount = cashAmount;
-		this.mCardAmount = cardAmount;
-		this.mSignedTime = signedTime;
-		this.mStatus = UploadStatus.NOT_UPLOAD;
-	}
+	// 签收状态信息
+	private String mSignedStateInfo;
 	
+	// 收派员姓名
+	private String mEmpName;
+	
+	// 是否签收 
+	private long mIsReceiverSignOff = 0;
+	
+	// 是否有图片 
+	private long mIsPicture = 0;
 	
 	public SignedLog() {
 	}
@@ -206,28 +218,12 @@ public class SignedLog {
 		this.mExpSignedDescription = expSignedDescription;
 	}
 
-	public long getCashAmount() {
-		return mCashAmount;
-	}
-
-	public void setCashAmount(long cashAmount) {
-		this.mCashAmount = cashAmount;
-	}
-
-	public long getCardAmount() {
-		return mCardAmount;
-	}
-
-	public void setCardAmount(long cardAmount) {
-		this.mCardAmount = cardAmount;
-	}
-
 	public UploadStatus getStatus() {
-		return mStatus;
+		return mUploadStatus;
 	}
 
 	public void setStatus(UploadStatus status) {
-		this.mStatus = status;
+		this.mUploadStatus = status;
 	}
 
 	public String getRecipient() {
@@ -238,11 +234,99 @@ public class SignedLog {
 		this.mRecipient = recipient;
 	}
 	
-    public ContentValues toContentValues() {
+    public String getSignedLogId() {
+		return mSignedLogId;
+	}
+
+	public void setSignedLogId(String signedLogId) {
+		this.mSignedLogId = signedLogId;
+	}
+
+	public long isScan() {
+		return mIsScan;
+	}
+
+	public void setIsScan(long isScan) {
+		this.mIsScan = isScan;
+	}
+
+	public String getSignOffTypeCode() {
+		return mSignOffTypeCode;
+	}
+
+	public void setSignOffTypeCode(String signOffTypeCode) {
+		this.mSignOffTypeCode = signOffTypeCode;
+	}
+
+	public String getRecieverSignOff() {
+		return mRecieverSignOff;
+	}
+
+	public void setRecieverSignOff(String recieverSignOff) {
+		this.mRecieverSignOff = recieverSignOff;
+	}
+
+	public String getPdaNumber() {
+		return mPdaNumber;
+	}
+
+	public void setPdaNumber(String pdaNumber) {
+		this.mPdaNumber = pdaNumber;
+	}
+
+	public long getAmountCollected() {
+		return mAmountCollected;
+	}
+
+	public void setAmountCollected(long amountCollected) {
+		this.mAmountCollected = amountCollected;
+	}
+
+	public long getAmountAgency() {
+		return mAmountAgency;
+	}
+
+	public void setAmountAgency(long amountAgency) {
+		this.mAmountAgency = amountAgency;
+	}
+
+	public String getSignedStateInfo() {
+		return mSignedStateInfo;
+	}
+
+	public void setSignedStateInfo(String signedStateInfo) {
+		this.mSignedStateInfo = signedStateInfo;
+	}
+
+	public String getEmpName() {
+		return mEmpName;
+	}
+
+	public void setEmpName(String empName) {
+		this.mEmpName = empName;
+	}
+
+	public long isReceiverSignOff() {
+		return mIsReceiverSignOff;
+	}
+
+	public void setIsReceiverSignOff(long isReceiverSignOff) {
+		this.mIsReceiverSignOff = isReceiverSignOff;
+	}
+
+	public long isPicture() {
+		return mIsPicture;
+	}
+
+	public void setIsPicture(long isPicture) {
+		this.mIsPicture = isPicture;
+	}
+
+	public ContentValues toContentValues() {
         ContentValues value = new ContentValues();
         value.put(YtoDBHelper.C_PICTURE_DATA, getPictureData());
-        value.put(YtoDBHelper.C_CARD_AMOUNT, getCardAmount());
-        value.put(YtoDBHelper.C_CASH_AMOUNT, getCashAmount());
+        value.put(YtoDBHelper.C_AMOUNT_AGENCY, getAmountAgency());
+        value.put(YtoDBHelper.C_AMOUNT_COLLECTED, getAmountCollected());
         value.put(YtoDBHelper.C_SIGNED_STATE, getSignedState().getSignedState());
         value.put(YtoDBHelper.C_EMPCODE, getEmpCode());
         value.put(YtoDBHelper.C_WAYBILLNO, getWaybillNo());
@@ -252,6 +336,16 @@ public class SignedLog {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         value.put(YtoDBHelper.C_SIGNED_TIME, dateFormat.format(getSignedTime()));
         value.put(YtoDBHelper.C_RECIPIENT, getRecipient());
+        value.put(YtoDBHelper.C_EMP_NAME, getEmpName());
+        value.put(YtoDBHelper.C_IS_PICTURE, isPicture());
+        value.put(YtoDBHelper.C_IS_RECEIVER_SIGNOFF, isReceiverSignOff());
+        value.put(YtoDBHelper.C_IS_SCAN, isScan());
+        value.put(YtoDBHelper.C_PAD_NUMBER, getPdaNumber());
+        value.put(YtoDBHelper.C_SIGNEDSTATE_INFO, getSignedStateInfo());
+        value.put(YtoDBHelper.C_SIGNOFF_TYPE_CODE, getSignOffTypeCode());
+        value.put(YtoDBHelper.C_SINGEDLOG_ID, getSignedLogId());
+        value.put(YtoDBHelper.C_RECEIVER_SIGNOFF, getRecieverSignOff());
+        
         return value;
     }
     

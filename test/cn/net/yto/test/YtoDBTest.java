@@ -20,37 +20,47 @@ public class YtoDBTest extends AndroidTestCase{
         super.setUp();
     }
     
-    public void test_get_uploadsignlog() {
-    	SignedLog signLog1 = new SignedLog("id123", "123", new Date(), null, SignedState.SIGNED_SUCCESS, Satisfaction.SATISFIED, "", 50, 50);
-    	signLog1.setStatus(UploadStatus.NOT_UPLOAD); 
-    	signLog1.setRecipient("abc");
-    	SignedLog signLog2 = new SignedLog("id124", "124", new Date(), null, SignedState.SIGNED_SUCCESS, Satisfaction.SATISFIED, "", 50, 50);
-    	signLog2.setStatus(UploadStatus.UPLOAD_SUCCESS);
-    	signLog2.setRecipient("abc");
-    	SignedLog signLog3 = new SignedLog("id125", "125", new Date(), null, SignedState.SIGNED_SUCCESS, Satisfaction.SATISFIED, "", 50, 50);
-    	signLog3.setStatus(UploadStatus.UPLOAD_FAILURE);
-    	signLog3.setRecipient("abc");
-    	SignedLog signLog4 = new SignedLog("id126", "126", new Date(), null, SignedState.SIGNED_SUCCESS, Satisfaction.SATISFIED, "", 50, 50);
-    	signLog4.setStatus(UploadStatus.NOT_UPLOAD);
-    	signLog4.setRecipient("abc");
-    	SignedLog signLog5 = new SignedLog("id127", "127", new Date(), null, SignedState.SIGNED_SUCCESS, Satisfaction.SATISFIED, "", 50, 50);
-    	signLog5.setStatus(UploadStatus.NOT_UPLOAD);
-    	signLog5.setRecipient("abc");
+    public void test_insert_signedlog() {
+    	SignedLog signLog = new SignedLog();
+    	signLog.setAmountAgency(60);
+    	signLog.setAmountCollected(70);
+    	signLog.setEmpCode("id123");
+    	signLog.setWaybillNo("123");
+    	signLog.setExpSignedDescription("");
+    	signLog.setRecipient("张三");
+    	signLog.setEmpName("王五");
+    	signLog.setPdaNumber("pda123");
+    	signLog.setSignedStateInfo("正常接受");
+    	signLog.setSignOffTypeCode("SELF");
+    	signLog.setSignedLogId("id12345");
+    	signLog.setStatus(UploadStatus.NOT_UPLOAD);
+    	signLog.setRecieverSignOff("已签收");
     	
-    	ytoDBHelper.insertSignLog(signLog1);
-    	ytoDBHelper.insertSignLog(signLog2);
-    	ytoDBHelper.insertSignLog(signLog3);
-    	ytoDBHelper.insertSignLog(signLog4);
-    	ytoDBHelper.insertSignLog(signLog5);
-    	
+    	ytoDBHelper.insertSignLog(signLog);
     	Vector<SignedLog> notUploadSignedLogs = ytoDBHelper.getUploadSignedLog();
-    	assertEquals(3, notUploadSignedLogs.size());
+    	assertEquals(1, notUploadSignedLogs.size());
     	
-    	signLog1.setStatus(UploadStatus.UPLOAD_SUCCESS);
-    	assertTrue(ytoDBHelper.updateStatusOfSignedLog(signLog1));
+    	SignedLog signlog1 = notUploadSignedLogs.get(0);
     	
-    	notUploadSignedLogs = ytoDBHelper.getUploadSignedLog();
-    	assertEquals(2, notUploadSignedLogs.size());
-    }
+    	assertEquals(signlog1.getAmountAgency(), 60);
+    	assertEquals(signlog1.getEmpCode(), "id123");    	
+    	assertEquals(signlog1.getWaybillNo(), "123");    	
+    	assertEquals(signlog1.getSignedState(), SignedState.SIGNED_SUCCESS);    	
+    	assertEquals(signlog1.getSatisfaction(), Satisfaction.SATISFIED);    	
+    	assertEquals(signlog1.getExpSignedDescription(), "");    	
+    	assertEquals(signlog1.getStatus(), UploadStatus.NOT_UPLOAD);    	
+    	assertEquals(signlog1.getRecipient(), "张三");    	
+    	assertEquals(signlog1.getSignedLogId(), "id12345");    	
+    	assertEquals(signlog1.isScan(), 0);    	
+    	assertEquals(signlog1.getSignOffTypeCode(), "SELF");    	
+    	assertEquals(signlog1.getRecieverSignOff(), "已签收");    	
+    	assertEquals(signlog1.getPdaNumber(), "pda123");    	
+    	assertEquals(signlog1.getAmountCollected(), 70);    	
+    	assertEquals(signlog1.getSignedStateInfo(), "正常接受");    	
+    	assertEquals(signlog1.getEmpName(), "王五");    	
+    	assertEquals(signlog1.isReceiverSignOff(), 0);    	
+    	assertEquals(signlog1.isPicture(), 0);    	
 
+    }
+    
 }
