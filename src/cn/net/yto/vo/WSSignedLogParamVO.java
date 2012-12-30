@@ -39,7 +39,7 @@ public class WSSignedLogParamVO extends BaseRequestMsgVO{
     public String amountCollected = "";
     public String amountAgency = "";
     public String uploadStatu = "";
-    public String pdaNumber = "";
+    public String pdaNumber = "63101128211487";
     public String getStatus = "";
     public String pictureData = "";
     public String expSignedDescription = "";
