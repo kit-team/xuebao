@@ -15,7 +15,7 @@ public class DbTempUtils {
                 new YtoDBHelper(context.getApplicationContext()).insertSignLog(signedLog);
             }
         }.start();
-        ToastUtils.getInstance(context).showToast("保存到数据库");
+        ToastUtils.showToast("保存到数据库");
     }
     
     public static ArrayList<SignListAdapterItem> query(final Context context) {

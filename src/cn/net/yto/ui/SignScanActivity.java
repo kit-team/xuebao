@@ -238,11 +238,11 @@ public class SignScanActivity extends Activity {
 
         public boolean checkInputVaules() {
             if (TextUtils.isEmpty(mWaybillNo.getText().toString())) {
-                ToastUtils.getInstance(SignScanActivity.this).showToast("运单号不能为空");
+                ToastUtils.showToast("运单号不能为空");
                 return false;
             }
             if (TextUtils.isEmpty(mReceipient.getText().toString())) {
-                ToastUtils.getInstance(SignScanActivity.this).showToast("签收人不能为空");
+                ToastUtils.showToast("签收人不能为空");
                 return false;
             }
 
