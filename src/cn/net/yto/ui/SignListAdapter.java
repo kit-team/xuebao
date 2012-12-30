@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import cn.net.yto.R;
 import cn.net.yto.models.SignedLog;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,14 +20,14 @@ public class SignListAdapter extends BaseAdapter {
 
     public SignListAdapter(Context context) {
         mInflater = LayoutInflater.from(context);
-        
+
         // TODO remove
         for (int i = 0; i < 20; i++) {
             SignListAdapterItem item = new SignListAdapterItem(SignedLog.getSignedLogForTest());
             mData.add(item);
         }
     }
-    
+
     public void setData(ArrayList<SignListAdapterItem> datas) {
         mData.clear();
         mData.addAll(datas);
@@ -39,7 +40,7 @@ public class SignListAdapter extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int position) {
+    public SignListAdapterItem getItem(int position) {
         return mData.get(position);
     }
 
@@ -48,16 +49,24 @@ public class SignListAdapter extends BaseAdapter {
         return position;
     }
 
+    public void onItemClick(int position) {
+        SignListAdapterItem item = getItem(position);
+        boolean checked = item.isSelected();
+        item.setSelected(!checked);
+        notifyDataSetChanged();
+    }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ItemHolder itemHolder = null;
         if (convertView == null) {
             convertView = mInflater.inflate(R.layout.list_detail_item, parent, false);
             itemHolder = new ItemHolder();
-            itemHolder.tranckingNumberView = (TextView)convertView.findViewById(R.id.item_tracking_number);
-            itemHolder.signTypeView = (TextView)convertView.findViewById(R.id.item_sign_type);
-            itemHolder.receipientView = (TextView)convertView.findViewById(R.id.item_receipient);
-            itemHolder.signTimeView = (TextView)convertView.findViewById(R.id.item_sign_time);
+            itemHolder.tranckingNumberView = (TextView) convertView
+                    .findViewById(R.id.item_tracking_number);
+            itemHolder.signTypeView = (TextView) convertView.findViewById(R.id.item_sign_type);
+            itemHolder.receipientView = (TextView) convertView.findViewById(R.id.item_receipient);
+            itemHolder.signTimeView = (TextView) convertView.findViewById(R.id.item_sign_time);
             convertView.setTag(itemHolder);
         } else {
             itemHolder = (ItemHolder) convertView.getTag();
@@ -68,9 +77,9 @@ public class SignListAdapter extends BaseAdapter {
         itemHolder.receipientView.setText(item.getRecipient());
         itemHolder.signTimeView.setText(item.getSignTime());
         if (item.isSelected()) {
-            convertView.setBackgroundColor(60);
-        }  else {
-            convertView.setBackgroundColor(256);
+            convertView.setBackgroundColor(Color.GREEN);
+        } else {
+            convertView.setBackgroundColor(Color.WHITE);
         }
 
         return convertView;

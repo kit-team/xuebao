@@ -9,7 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true" >
+        android:layout_alignParentTop="true" 
+        android:gravity="center">
 
         <TextView
             android:id="@+id/textView1"
@@ -21,13 +22,20 @@
 
         <EditText
             android:id="@+id/editSignNo"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_weight="1"
             android:inputType="text" >
 
             <requestFocus />
         </EditText>
+
+        <Button
+            android:id="@+id/btn_query "
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="@string/btn_query" />
     </LinearLayout>
 
     <ListView

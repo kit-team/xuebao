@@ -41,8 +41,8 @@ public class SignScanActivity extends Activity {
     private ArrayList<View> mTabViews = null;
 
     private SignSuccessView mSignSuccessView = null;
-    private OrderQueryView mOrderQueryView = null;
     private SignFailedView mSignFailedView = null;
+    private OrderQueryView mOrderQueryView = null;
 
     private OnClickListener mTabItemClickListener = new OnClickListener() {
         @Override
@@ -230,6 +230,11 @@ public class SignScanActivity extends Activity {
                 public void onClick(View v) {
                     if (checkInputVaules()) {
                         DbTempUtils.insert(SignScanActivity.this, getSignedLogForSave());
+
+                        mWaybillNo.setText("");
+                        mCollectionAmount.setText("");
+                        mFreightToCollect.setText("");
+                        mReceipient.setText("");
                     }
                 }
             });
@@ -253,8 +258,18 @@ public class SignScanActivity extends Activity {
             SignedLog signedLog = new SignedLog();
 
             signedLog.setWaybillNo(mWaybillNo.getText().toString());
-            signedLog.setCashAmount(Long.valueOf(mCollectionAmount.getText().toString()));
-            signedLog.setCashAmount(Long.valueOf(mFreightToCollect.getText().toString()));
+            // TODO
+            if (TextUtils.isEmpty(mCollectionAmount.getText())) {
+                signedLog.setCashAmount(0);
+            } else {
+                signedLog.setCashAmount(Long.valueOf(mCollectionAmount.getText().toString()));
+            }
+            if (TextUtils.isEmpty(mCollectionAmount.getText())) {
+                signedLog.setCardAmount(0);
+            } else {
+                signedLog.setCardAmount(Long.valueOf(mFreightToCollect.getText().toString()));
+            }
+
             switch (mSatisfactory.getCheckedRadioButtonId()) {
             case R.id.very_satisfactory:
                 signedLog.setSatisfaction(Satisfaction.VERY_SATISFIED);
@@ -267,30 +282,65 @@ public class SignScanActivity extends Activity {
                 break;
             }
             signedLog.setRecipient(mReceipient.getText().toString());
-            signedLog.setSignedTime(new Date());
-
-            signedLog.setSignedState(SignedState.SIGNED_SUCCESS);
-            signedLog.setStatus(UploadStatus.NOT_UPLOAD);
 
             return signedLog;
         }
     }
 
     class SignFailedView {
-        private Spinner mExceptionReasonSpinner;
+        private EditText mWaybillNo = null;
+        private Spinner mExceptionReasonSpinner = null;
+        private EditText mFailedMessage = null;
 
         public SignFailedView(View view) {
             initView(view);
         }
 
         private void initView(View view) {
+            mWaybillNo = (EditText) view.findViewById(R.id.edit_tracking_number);
             mExceptionReasonSpinner = (Spinner) view.findViewById(R.id.spinner_exception_reason);
-            ArrayAdapter<String> exceptionReasonAdapter = new ArrayAdapter<String>(
-                    SignScanActivity.this, android.R.layout.simple_spinner_item, getResources()
-                            .getStringArray(R.array.exception_reason));
-            exceptionReasonAdapter
-                    .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            mExceptionReasonSpinner.setAdapter(exceptionReasonAdapter);
+            mFailedMessage = (EditText) view.findViewById(R.id.failed_message);
+            view.findViewById(R.id.btn_save).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (checkInputVaules()) {
+                        DbTempUtils.insert(SignScanActivity.this, getSignedLogForSave());
+
+                        mWaybillNo.setText("");
+                        mFailedMessage.setText("");
+                    }
+                }
+            });
+            // ArrayAdapter<String> exceptionReasonAdapter = new
+            // ArrayAdapter<String>(
+            // SignScanActivity.this, android.R.layout.simple_spinner_item,
+            // getResources()
+            // .getStringArray(R.array.exception_reason));
+            // exceptionReasonAdapter
+            // .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            // mExceptionReasonSpinner.setAdapter(exceptionReasonAdapter);
+        }
+
+        public boolean checkInputVaules() {
+            if (TextUtils.isEmpty(mWaybillNo.getText().toString())) {
+                ToastUtils.showToast("运单号不能为空");
+                return false;
+            }
+            return true;
+        }
+
+        public SignedLog getSignedLogForSave() {
+            SignedLog signedLog = new SignedLog();
+
+            signedLog.setWaybillNo(mWaybillNo.getText().toString());
+
+            signedLog.setExpSignedDescription(mFailedMessage.getText().toString());
+
+            signedLog.setSignedTime(new Date());
+            signedLog.setSignedState(SignedState.SIGNED_SUCCESS);
+            signedLog.setStatus(UploadStatus.NOT_UPLOAD);
+
+            return signedLog;
         }
     }
 
