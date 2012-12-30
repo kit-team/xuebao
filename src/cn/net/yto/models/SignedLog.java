@@ -363,26 +363,20 @@ public class SignedLog {
     public WSSignedLogParamVO toVO() {
         WSSignedLogParamVO vo = new WSSignedLogParamVO();
         vo.id = setRand();
-        // vo.signOffTypeCode
-        // vo.recieverSignOff
-        // vo.amountCollected
-        // vo.amountAgency
-        // vo.uploadStatu
-        // vo.pdaNumber
-        // vo.getStatus
-        // vo.pictureData
-        // vo.expSignedDescription
-        // vo.waybillNo
-        // vo.signedState
-        // vo.signedStateInfo
+        vo.signOffTypeCode = mSignOffTypeCode;
+        vo.recieverSignOff = mRecieverSignOff;
+        vo.amountCollected = String.valueOf(mAmountCollected);
+        vo.amountAgency = String.valueOf(mAmountAgency);
+        vo.waybillNo = mWaybillNo;
+        vo.signedState = String.valueOf(mSignedState);
+        vo.signedStateInfo = mSignedStateInfo;
+        // FIXME
         vo.empCode = "88888888";
         vo.empName = "手持终端收派培训";
-        // vo.signedTime
-        // vo.satisfaction
-        // vo.isReceiverSignOff
-        // vo.isPicture
-        // vo.retVal
-        // vo.failMessage
+        vo.signedTime = String.valueOf(mSignedTime);
+        vo.satisfaction = String.valueOf(mSatisfaction);
+        vo.isReceiverSignOff = String.valueOf(mIsReceiverSignOff);
+        vo.isPicture = String.valueOf(mIsPicture);
 
         return vo;
     }
