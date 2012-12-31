@@ -13,6 +13,7 @@ import cn.net.yto.R;
 import cn.net.yto.models.DbTempUtils;
 import cn.net.yto.models.SignedLog;
 import cn.net.yto.models.SignedLog.Satisfaction;
+import cn.net.yto.utils.ToastUtils;
 
 public class SignBatchActivity extends Activity {
 

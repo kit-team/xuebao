@@ -11,43 +11,67 @@ import org.apache.http.util.EntityUtils;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import cn.net.yto.net.ZltdHttpClient.Listener;
+import cn.net.yto.utils.CommonUtils;
 import cn.net.yto.utils.LogUtils;
-import cn.net.yto.vo.BaseResponseMsgVO;
+import cn.net.yto.vo.message.BaseResponseMsgVO;
+import cn.net.yto.vo.message.SubmitSignedLogRequestMsgVO;
+import cn.net.yto.vo.message.SubmitSignedLogResponseMsgVO;
 
 public class ZltdHttpClient {
 	public static final String TAG = "HttpClient";
 	/**
-	 * TYPE_ERROR_404 HTTP����δ�ҵ�ҳ��
+	 * TYPE_ERROR_404 HTTP请求未找到页面
 	 */
 	public static final int TYPE_ERROR_404 = 404;
 	/**
-	 * TYPE_ERROR_NETWORK_DEACTIVE ��ǰ�豸���粻����
+	 * TYPE_ERROR_NETWORK_DEACTIVE 当前设备网络不可用
 	 */
 	public static final int TYPE_ERROR_NETWORK_DEACTIVE = 2000;
 
 	/**
-	 * TYPE_ERROR_NETWORK_DEACTIVE ��ǰ�豸���粻����
+	 * TYPE_ERROR_NETWORK_DEACTIVE 当前设备网络不可用
 	 */
 	public static final int TYPE_ERROR_EXCEPTION = 3000;
 
 	/**
-	 * TYPE_ERROR_OHTER �������
+	 * TYPE_ERROR_OHTER 其他错误
 	 */
 	public static final int TYPE_ERROR_OHTER = 4000;
 	/**
-	 * TYPE_SUCCESS HTTP����ɹ�
+	 * TYPE_SUCCESS HTTP请求成功
 	 */
 	public static final int TYPE_SUCCESS = 200;
+	/**
+	 * 排队等待状态
+	 */
+	public static final int STATE_WAIT_UPLOAD = 0;
+	/**
+	 * 正在上传
+	 */
+	public static final int STATE_UPLOADING = 1;
+	/**
+	 * 成功上传
+	 */
+	public static final int STATE_UPLOADED = 2;
+
+	public static final int PRIORITY_LOW = -10;
+	public static final int PRIORITY_MID = 0;
+	public static final int PRIORITY_HIGH = 10;
 
 	private HttpAsyncTask asyncTask;
 	private UrlType mUrlType;
 	private Object mParam;
 	private Listener mListener;
 	private Class<? extends BaseResponseMsgVO> mResponseCls;
+	private static Object mMutex = new Object();
+	private int mState;
+	private int mPriority;
 	/**
-	 * Ĭ�ϵ�DefaultHttpClient��ÿ��ʹ����ͬclient�����㱣��cookie
+	 * 默认的DefaultHttpClient，每次使用相同client，方便保持cookie
 	 */
 	private static DefaultHttpClient sHttpClient;
+	private long mId;
 
 	static {
 		BasicHttpParams httpParameters = new BasicHttpParams();
@@ -60,22 +84,40 @@ public class ZltdHttpClient {
 	}
 
 	public ZltdHttpClient() {
+		mState = STATE_WAIT_UPLOAD;
+		mPriority = PRIORITY_MID;
+		mId = System.currentTimeMillis();
+	}
 
+	public int getPriority() {
+		return mPriority;
+	}
+
+	public void setPriority(int mPriority) {
+		this.mPriority = mPriority;
+	}
+
+	public int getState() {
+		return mState;
+	}
+	
+	public long getId(){
+		return mId;
 	}
 
 	public ZltdHttpClient(UrlType urlType, Object param) {
+		this();
 		this.mUrlType = urlType;
 		this.mParam = param;
 	}
 
 	public ZltdHttpClient(UrlType urlType, Object param, Listener listener,
 			Class<? extends BaseResponseMsgVO> responseClzz) {
-		this.mUrlType = urlType;
-		this.mParam = param;
+		this(urlType, param);
 		setListener(listener, responseClzz);
 	}
 
-	public void setUrlType(UrlType mUrlType) {
+    public void setUrlType(UrlType mUrlType) {
 		this.mUrlType = mUrlType;
 	}
 
@@ -116,57 +158,68 @@ public class ZltdHttpClient {
 			String strResult = "";
 			int statusCode = 0;
 
-			do {
-				try {
-					LogUtils.i(TAG, "url = " + UrlManager.getUrl(mUrlType));
-					mHttpPost = new HttpPost(UrlManager.getUrl(mUrlType));
-					mHttpPost.setHeader("Content-type", "application/json");
+			synchronized (mMutex) {
+				do {
+					try {
+						LogUtils.i(TAG, "url = " + UrlManager.getUrl(mUrlType));
+						mHttpPost = new HttpPost(UrlManager.getUrl(mUrlType));
+						mHttpPost.setHeader("Content-type", "application/json");
 
-					if (mParam != null) {
-						String json = null;
-						json = CommonUtils.toJson(mParam);
-						LogUtils.i(TAG, "json = " + json);
-						if (!CommonUtils.isEmpty(json)) {
-							 StringEntity se = new StringEntity(json);
-							 mHttpPost.setEntity(se);
-//							List<NameValuePair> list = new ArrayList<NameValuePair>(); 
-//							list.add(new BasicNameValuePair("json", CommonUtils
-//									.toJson(mParam)));//UrlManager.getUrl(mUrlType)
-//							mHttpPost.setEntity(new UrlEncodedFormEntity(list));
-//							LogUtils.d(TAG, new UrlEncodedFormEntity(list).toString());
-						}
-					}
-
-					mHttpResponse = sHttpClient.execute(mHttpPost);
-
-					if (mHttpResponse != null) {
-						statusCode = mHttpResponse.getStatusLine()
-								.getStatusCode();
-						// ��״̬��Ϊ200 ok
-						if (statusCode == 200) {
-							HttpEntity entity = mHttpResponse.getEntity();
-							strResult = EntityUtils.toString(entity);
-							mNetworkResultType = TYPE_SUCCESS;
-						} else {
-							strResult = "";
-							if (statusCode == 404) {
-								mNetworkResultType = TYPE_ERROR_404;
+						if (mParam != null) {
+							String json = null;
+							if (mUrlType != UrlType.LOGIN) {
+								json = CommonUtils.toJson(mParam);
 							} else {
-								mNetworkResultType = TYPE_ERROR_OHTER;
+								json = "{\"force\":\"1\",\"isUpload\":\"N\",\"password\":\"4mfPzRhGHOk4Bn7KZ8WfQQ==\",\"pdaLocalTime\":\"2012-12-29 16:59:30\",\"pdaNumber\":\"63101127209335\",\"versionNo\":\"1.0.1.22\",\"userName\":\"00003518\",\"uploadStatu\":0}";
+							}
+							LogUtils.i(TAG, "json = " + json);
+							if (!CommonUtils.isEmpty(json)) {
+								StringEntity se = new StringEntity(json);
+								mHttpPost.setEntity(se);
+								// List<NameValuePair> list = new
+								// ArrayList<NameValuePair>();
+								// list.add(new BasicNameValuePair("json",
+								// CommonUtils
+								// .toJson(mParam)));//UrlManager.getUrl(mUrlType)
+								// mHttpPost.setEntity(new
+								// UrlEncodedFormEntity(list));
+								// LogUtils.d(TAG, new
+								// UrlEncodedFormEntity(list).toString());
 							}
 						}
-					} else {
-						strResult = "";
-						mNetworkResultType = TYPE_ERROR_OHTER;
+
+						mHttpResponse = sHttpClient.execute(mHttpPost);
+
+						if (mHttpResponse != null) {
+							statusCode = mHttpResponse.getStatusLine()
+									.getStatusCode();
+							// 若状态码为200 ok
+							if (statusCode == 200) {
+								HttpEntity entity = mHttpResponse.getEntity();
+								strResult = EntityUtils.toString(entity);
+								mNetworkResultType = TYPE_SUCCESS;
+							} else {
+								strResult = "";
+								if (statusCode == 404) {
+									mNetworkResultType = TYPE_ERROR_404;
+								} else {
+									mNetworkResultType = TYPE_ERROR_OHTER;
+								}
+							}
+						} else {
+							strResult = "";
+							mNetworkResultType = TYPE_ERROR_OHTER;
+						}
+						return strResult;
+					} catch (Exception e) {
+						mNetworkResultType = TYPE_ERROR_EXCEPTION;
+						LogUtils.e(TAG, e);
+					} finally {
+						LogUtils.i(TAG, "response = " + strResult
+								+ " statusCode = " + statusCode);
 					}
-					return strResult;
-				} catch (Exception e) {
-					mNetworkResultType = TYPE_ERROR_EXCEPTION;
-					LogUtils.e(TAG, e);
-				} finally {
-					LogUtils.i(TAG, "response = " + strResult + " statusCode = " + statusCode);
-				}
-			} while (false);
+				} while (false);
+			}
 
 			return strResult;
 		}
@@ -178,6 +231,7 @@ public class ZltdHttpClient {
 
 		@Override
 		protected void onPostExecute(String result) {
+			mState = STATE_UPLOADING;
 			if (mListener != null) {
 				if (!CommonUtils.isEmpty(result)
 						&& mNetworkResultType == TYPE_SUCCESS) {
@@ -201,6 +255,7 @@ public class ZltdHttpClient {
 			if (mListener != null) {
 				mListener.onPreSubmit();
 			}
+			mState = STATE_UPLOADED;
 		}
 	}
 }

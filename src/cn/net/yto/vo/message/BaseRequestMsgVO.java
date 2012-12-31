@@ -1,4 +1,4 @@
-package cn.net.yto.vo;
+package cn.net.yto.vo.message;
 
 import java.io.Serializable;
 
@@ -6,6 +6,6 @@ public class BaseRequestMsgVO implements Serializable {
     /**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	protected static final long serialVersionUID = 1L;
 }
 

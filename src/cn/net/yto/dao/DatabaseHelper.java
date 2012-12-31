@@ -1,0 +1,258 @@
+package cn.net.yto.dao;
+
+import java.sql.SQLException;
+
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import cn.net.yto.utils.LogUtils;
+import cn.net.yto.vo.BlackListVO;
+import cn.net.yto.vo.CityVO;
+import cn.net.yto.vo.DictionaryVO;
+import cn.net.yto.vo.EffectiveTypeVO;
+import cn.net.yto.vo.FreqVO;
+import cn.net.yto.vo.InsteadPayCustomerVO;
+import cn.net.yto.vo.NoticeVO;
+import cn.net.yto.vo.OrderChannelVO;
+import cn.net.yto.vo.OrderVO;
+import cn.net.yto.vo.ReceiveVO;
+import cn.net.yto.vo.RecvexpVO;
+import cn.net.yto.vo.ScanruleVO;
+import cn.net.yto.vo.ScopeVO;
+import cn.net.yto.vo.UserVO;
+
+import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
+import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.support.ConnectionSource;
+import com.j256.ormlite.table.TableUtils;
+
+/**
+ * Database helper class used to manage the creation and upgrading of your database. This class also usually provides
+ * the DAOs used by the other classes.
+ * 
+ * @author UPPower Studio
+ * @since 1.0
+ * 
+ */
+public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
+    private static final String TAG = "DatabaseHelper";
+	private Dao<UserVO, Integer> mUserDao = null;
+	private Dao<CityVO, Integer> mCityDao = null;
+	private Dao<ScanruleVO, Integer> mScanruleDao = null;
+	private Dao<EffectiveTypeVO, Integer> mEffectiveTypeDao = null;
+	private Dao<OrderChannelVO, Integer> mOrderChannelDao = null;
+	private Dao<BlackListVO, Integer> mBlackListDao = null;
+	private Dao<DictionaryVO, Integer> mDictionaryDao = null;
+	private Dao<FreqVO, Integer> mFreqDao = null;
+	private Dao<InsteadPayCustomerVO, Integer> mInsteadPayCustomerDao = null;
+	private Dao<NoticeVO, Integer> mNoticeDao = null;
+	private Dao<RecvexpVO, Integer> mRecvexpDao = null;
+	private Dao<ScopeVO, Integer> mScopeDao = null;
+	/**
+	 * 收件
+	 */
+	private Dao<ReceiveVO, String> mReceiveDao = null;
+	
+	
+	private Dao<OrderVO, String> mOrderDao = null;
+
+
+    public DatabaseHelper(Context context) {
+        super(context, DbConst.DB_NAME, null, DbConst.DB_VERSION);
+    }
+
+    /**
+     * This is called when the database is first created. Usually you should call createTable statements here to create
+     * the tables that will store your data.
+     */
+    @Override
+    public void onCreate(SQLiteDatabase db, ConnectionSource connectionSource) {
+        try {
+            LogUtils.i(TAG, "onCreate");
+            TableUtils.createTable(connectionSource, UserVO.class);
+            TableUtils.createTable(connectionSource, CityVO.class);
+            TableUtils.createTable(connectionSource, ScanruleVO.class);
+            TableUtils.createTable(connectionSource, EffectiveTypeVO.class);
+            TableUtils.createTable(connectionSource, OrderChannelVO.class);
+            TableUtils.createTable(connectionSource, BlackListVO.class);
+            TableUtils.createTable(connectionSource, DictionaryVO.class);
+            TableUtils.createTable(connectionSource, FreqVO.class);
+            TableUtils.createTable(connectionSource, InsteadPayCustomerVO.class);
+            TableUtils.createTable(connectionSource, NoticeVO.class);
+            TableUtils.createTable(connectionSource, RecvexpVO.class);
+            TableUtils.createTable(connectionSource, ScopeVO.class);
+            TableUtils.createTable(connectionSource, OrderVO.class);
+            TableUtils.createTable(connectionSource, ReceiveVO.class);
+        } catch (SQLException e) {
+        	LogUtils.e(TAG, "Can't create database e = " + e);
+            throw new RuntimeException(e);
+        }
+    }
+    
+    /**
+     * This is called when your application is upgraded and it has a higher version number. This allows you to adjust
+     * the various data to match the new version number.
+     */
+    @Override
+    public void onUpgrade(SQLiteDatabase db, ConnectionSource connectionSource, int oldVersion, int newVersion) {
+    	try { 
+    		LogUtils.i(TAG, "onCreate  oldVersion = " + oldVersion + "  newVersion = " + newVersion);
+            TableUtils.dropTable(connectionSource, UserVO.class, true); 
+            TableUtils.dropTable(connectionSource, CityVO.class, true); 
+            TableUtils.dropTable(connectionSource, ScanruleVO.class, true); 
+            TableUtils.dropTable(connectionSource, EffectiveTypeVO.class, true);
+            TableUtils.dropTable(connectionSource, OrderChannelVO.class, true);
+            TableUtils.dropTable(connectionSource, BlackListVO.class, true);
+            TableUtils.dropTable(connectionSource, DictionaryVO.class, true);
+            TableUtils.dropTable(connectionSource, FreqVO.class, true);
+            TableUtils.dropTable(connectionSource, InsteadPayCustomerVO.class, true);
+            TableUtils.dropTable(connectionSource, NoticeVO.class, true);
+            TableUtils.dropTable(connectionSource, RecvexpVO.class, true);
+            TableUtils.dropTable(connectionSource, ScopeVO.class, true);
+            TableUtils.dropTable(connectionSource, OrderVO.class, true);
+            
+            TableUtils.dropTable(connectionSource, ReceiveVO.class, true);
+            
+            onCreate(db, connectionSource); 
+        } catch (SQLException e) { 
+            LogUtils.e(TAG, "onUpgrade e = " + e); 
+            e.printStackTrace(); 
+        } 
+    }
+
+    /**
+     * Returns the Database Access Object (DAO) for our ProcessModel class.
+     * 
+     * @return
+     * @throws SQLException
+     */
+    public Dao<UserVO, Integer> getUserDao() throws SQLException {
+        if (mUserDao == null) {
+        	mUserDao = getDao(UserVO.class);
+        }
+        return mUserDao;
+    }
+    
+    /**
+     * Returns the Database Access Object (DAO) for our ProcessModel class.
+     * 
+     * @return
+     * @throws SQLException
+     */
+    public Dao<OrderVO, String> getOrderDao() throws SQLException {
+    	if (mOrderDao == null) {
+    		mOrderDao = getDao(OrderVO.class);
+    	}
+    	return mOrderDao;
+    }
+
+	/**
+     * Returns the Database Access Object (DAO) for our ProcessModel class.
+     * 
+     * @return
+     * @throws SQLException
+     */
+    public Dao<CityVO, Integer> getCityDao() throws SQLException {
+        if (mCityDao == null) {
+        	mCityDao = getDao(CityVO.class);
+        }
+        return mCityDao;
+    }
+    
+    public Dao<ScanruleVO, Integer> getScanruleDao() throws SQLException {
+        if (mScanruleDao == null) {
+        	mScanruleDao = getDao(ScanruleVO.class);
+        }
+        return mScanruleDao;
+    }
+    
+    public Dao<EffectiveTypeVO, Integer> getEffectiveTypeDao() throws SQLException {
+        if (mEffectiveTypeDao == null) {
+        	mEffectiveTypeDao = getDao(EffectiveTypeVO.class);
+        }
+        return mEffectiveTypeDao;
+    }
+    
+    public Dao<OrderChannelVO, Integer> getOrderChannelDao() throws SQLException {
+        if (mOrderChannelDao == null) {
+        	mOrderChannelDao = getDao(OrderChannelVO.class);
+        }
+        return mOrderChannelDao;
+    }
+    
+    public Dao<BlackListVO, Integer> getBlackListDao() throws SQLException {
+        if (mBlackListDao == null) {
+        	mBlackListDao = getDao(BlackListVO.class);
+        }
+        return mBlackListDao;
+    }
+    
+    public Dao<DictionaryVO, Integer> getDictionaryDao() throws SQLException {
+        if (mDictionaryDao == null) {
+        	mDictionaryDao = getDao(DictionaryVO.class);
+        }
+        return mDictionaryDao;
+    }
+    
+    public Dao<FreqVO, Integer> getFreqDao() throws SQLException {
+        if (mFreqDao == null) {
+        	mFreqDao = getDao(FreqVO.class);
+        }
+        return mFreqDao;
+    }
+    
+    public Dao<InsteadPayCustomerVO, Integer> getInsteadPayCustomerDao() throws SQLException {
+        if (mInsteadPayCustomerDao == null) {
+        	mInsteadPayCustomerDao = getDao(InsteadPayCustomerVO.class);
+        }
+        return mInsteadPayCustomerDao;
+    }
+    
+    public Dao<NoticeVO, Integer> getNoticeDao() throws SQLException {
+        if (mNoticeDao == null) {
+        	mNoticeDao = getDao(NoticeVO.class);
+        }
+        return mNoticeDao;
+    }
+    
+    public Dao<RecvexpVO, Integer> getRecvexpDao() throws SQLException {
+        if (mRecvexpDao == null) {
+        	mRecvexpDao = getDao(RecvexpVO.class);
+        }
+        return mRecvexpDao;
+    }
+    
+    public Dao<ScopeVO, Integer> getScopeDao() throws SQLException {
+        if (mScopeDao == null) {
+        	mScopeDao = getDao(ScopeVO.class);
+        }
+        return mScopeDao;
+    }
+    
+    public Dao<ReceiveVO, String> getReceiveDao() throws SQLException {
+        if (mReceiveDao == null) {
+        	mReceiveDao = getDao(ReceiveVO.class);
+        }
+        return mReceiveDao;
+    }
+    /**
+     * Close the database connections and clear any cached DAOs.
+     */
+    @Override
+    public void close() {
+        super.close();
+        mUserDao = null;
+        mCityDao = null;
+        mScanruleDao = null;
+        mEffectiveTypeDao = null;
+        mOrderChannelDao = null;
+        mBlackListDao = null;
+        mDictionaryDao = null;
+        mFreqDao = null;
+        mInsteadPayCustomerDao = null;
+        mNoticeDao = null;
+        mRecvexpDao = null;
+        mScopeDao = null;
+        mOrderDao = null;
+        mReceiveDao = null;
+    }
+}
