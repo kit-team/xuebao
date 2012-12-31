@@ -15,9 +15,11 @@ import com.j256.ormlite.field.DatabaseField;
  * 
  */
 public class SignedLogVO {
-    // id
-    @DatabaseField
-    private String id;
+    public static final String WAYBILLNO_FIELD_NAME = "waybillNo"; 
+    
+    // 派件 id
+	@DatabaseField(id = true)
+    private String signedLogId;
     // 是否查看
     @DatabaseField
     private long isScan = 0;
@@ -39,7 +41,7 @@ public class SignedLogVO {
     private String empCode = "";
 
     // 面单号
-    @DatabaseField
+    @DatabaseField(columnName = WAYBILLNO_FIELD_NAME)
     private String waybillNo = "";
 
     // 签收时间
@@ -47,7 +49,7 @@ public class SignedLogVO {
     private Date signedTime = new Date();
 
     // 签收数据
-    @DatabaseField
+    @DatabaseField(dataType = DataType.BYTE_ARRAY)
     private byte[] pictureData = new byte[]{};
 
     // 签收状态标记
@@ -170,11 +172,11 @@ public class SignedLogVO {
     }
 
     public String getSignedLogId() {
-        return id;
+        return signedLogId;
     }
 
     public void setSignedLogId(String signedLogId) {
-        this.id = signedLogId;
+        this.signedLogId = signedLogId;
     }
 
     public long isScan() {

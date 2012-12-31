@@ -25,7 +25,7 @@ public class WSSignedLogTask extends BaseTask {
     public Object run() {
         LogUtils.logD("WSSignedLogTask ...");
         final Object object = new Object();
-        List<SignedLogVO> logs = mSignedLogMgr.querySubWayBillSignedLog("*");
+        List<SignedLogVO> logs = mSignedLogMgr.queryAllSignedLog();
         for (SignedLogVO log : logs) {
             final SignedLogVO log2 = log;
             UserService.submitSignedLog(log2, new Listener() {

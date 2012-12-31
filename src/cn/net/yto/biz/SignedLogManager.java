@@ -100,10 +100,18 @@ public class SignedLogManager {
 
     public List<SignedLogVO> querySubWayBillSignedLog(String wayBillNo) {
         List<SignedLogVO> list = null;
-        SignedLogVO vo = new SignedLogVO();
-        vo.setWaybillNo(wayBillNo);
         try {
-            list = mSignedLogDao.queryForMatchingArgs(vo);
+            list = mSignedLogDao.queryBuilder().where().eq(SignedLogVO.WAYBILLNO_FIELD_NAME, wayBillNo).query();
+        } catch (SQLException e) {
+            LogUtils.e(TAG, e);
+        }
+        return list;
+    }
+    
+    public List<SignedLogVO> queryAllSignedLog() {
+        List<SignedLogVO> list = null;
+        try {
+            list = mSignedLogDao.queryBuilder().query();
         } catch (SQLException e) {
             LogUtils.e(TAG, e);
         }

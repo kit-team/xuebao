@@ -24,7 +24,8 @@ public class SignListAdapter extends BaseAdapter {
     public SignListAdapter(Context context) {
         mInflater = LayoutInflater.from(context);
         mSignedLogManager = new SignedLogManager(context);
-        List<SignedLogVO> signedlogs = mSignedLogManager.querySubWayBillSignedLog("*");
+        mData = new ArrayList<SignListAdapterItem>();
+        List<SignedLogVO> signedlogs = mSignedLogManager.queryAllSignedLog();
         for (SignedLogVO vo : signedlogs) {
             SignListAdapterItem item = new SignListAdapterItem(vo);
             mData.add(item);
