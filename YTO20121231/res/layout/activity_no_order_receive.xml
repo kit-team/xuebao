@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="2dp"
+    android:paddingRight="2dp" >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" >
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="1" >
+
+            <TableRow
+                android:id="@+id/order_no_layout"
+                android:visibility="gone" >
+
+                <TextView
+                    android:paddingRight="10dp"
+                    android:text="@string/order_number"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/order_no_edit"
+                    android:inputType="number"
+                    android:maxLength="25"
+                    android:scrollHorizontally="true"
+                    android:textSize="16sp" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:paddingRight="10dp"
+                    android:text="@string/way_bill_no"
+                    android:textColor="@color/red"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/way_bill_no_edit"
+                    android:inputType="text"
+                    android:maxLength="30"
+                    android:scrollHorizontally="true"
+                    android:textSize="16sp" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:layout_gravity="center_vertical"
+                    android:paddingRight="10dp"
+                    android:text="@string/des_city_text"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <EditText
+                        android:id="@+id/des_city_edit"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="3"
+                        android:inputType="text"
+                        android:maxLength="5"
+                        android:scrollHorizontally="true"
+                        android:textSize="16sp" />
+
+                    <Spinner
+                        android:id="@+id/des_city_spinner"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="5"
+                        android:drawSelectorOnTop="true"
+                        android:prompt="@string/des_city_text"
+                        android:textSize="13sp" />
+                </LinearLayout>
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:layout_gravity="center_vertical"
+                    android:paddingRight="10dp"
+                    android:text="@string/rec_addr_text"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/receive_address_edit"
+                    android:inputType="text"
+                    android:scrollHorizontally="true"
+                    android:singleLine="false"
+                    android:textSize="16sp" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:layout_gravity="center_vertical"
+                    android:paddingRight="10dp"
+                    android:text="@string/rec_client_text"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/receive_client_edit"
+                    android:inputType="text"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    android:textSize="16sp" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:layout_gravity="center_vertical"
+                    android:paddingRight="10dp"
+                    android:text="@string/rec_call_text"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/receive_call_edit"
+                    android:inputType="phone"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    android:textSize="16sp" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:layout_gravity="center_vertical"
+                    android:paddingRight="10dp"
+                    android:text="@string/tran_pri_text"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/price_edit"
+                    android:inputType="numberDecimal"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    android:textSize="16sp" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:layout_gravity="center_vertical"
+                    android:paddingRight="10dp"
+                    android:text="@string/volume_text"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/volume_edit"
+                    android:inputType="numberDecimal"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    android:textSize="16sp" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:layout_gravity="center_vertical"
+                    android:paddingRight="10dp"
+                    android:text="@string/weight_text"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/weight_edit"
+                    android:inputType="numberDecimal"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    android:textSize="16sp" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:layout_gravity="center_vertical"
+                    android:paddingRight="10dp"
+                    android:text="@string/time_effe_text"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <Spinner
+                    android:id="@+id/effective_spinner"
+                    android:drawSelectorOnTop="false"
+                    android:prompt="@string/time_effe_text"
+                    android:textSize="13sp" />
+            </TableRow>
+        </TableLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/back_btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="30dp"
+            android:layout_weight="1"
+            android:text="@string/back"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/save_btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/save_text"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+</LinearLayout>

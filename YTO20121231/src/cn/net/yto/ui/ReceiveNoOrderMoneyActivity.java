@@ -1,0 +1,79 @@
+package cn.net.yto.ui;
+
+import cn.net.yto.R;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.EditText;
+
+public class ReceiveNoOrderMoneyActivity extends BaseActivity implements OnClickListener {
+	private CheckBox mToPayCbox ;
+	private CheckBox mColPayCbox ;
+	private EditText mCusNameEdit ;
+	private EditText mGoodsValEdit ;
+	
+	private Button   mSelectBtn ;
+	private Button   mRecSaveBtn ;
+	private Button   mRecBackBtn ;
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		
+		
+		setContentView(R.layout.activity_receive_no_order_money);
+		
+		mToPayCbox = (CheckBox)findViewById(R.id.to_pay_cbox);
+		mColPayCbox = (CheckBox)findViewById(R.id.col_payment_cbox);
+		mCusNameEdit = (EditText)findViewById(R.id.cus_name_edt);
+		mGoodsValEdit = (EditText)findViewById(R.id.goods_val_edt);
+		mSelectBtn = (Button)findViewById(R.id.select_btn);
+		mRecSaveBtn = (Button)findViewById(R.id.rec_save_btn);
+		mRecBackBtn = (Button)findViewById(R.id.rec_back_btn);
+		mToPayCbox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				// TODO Auto-generated method stub
+				if (isChecked) {
+					
+				}
+				
+			}
+		});
+		mColPayCbox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				// TODO Auto-generated method stub
+				if (isChecked) {
+					
+				}
+			}
+			
+		});
+	}
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		switch (v.getId()) {
+		case  R.id.select_btn:
+			
+			break;
+	     case   R.id.rec_save_btn:
+			
+			break;	
+		case  R.id.rec_back_btn:
+				
+				break;
+		default:
+			break;
+		}
+		
+		
+	}
+	
+}

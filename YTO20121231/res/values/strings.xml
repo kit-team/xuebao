@@ -1,0 +1,298 @@
+<resources>
+
+    <string name="default_server_url">112.193.133.13:8080/pda</string>
+    <string name="app_name">圆通速递</string>
+    <string name="settings">设置</string>
+    <string name="network_error">暂时没有可用的网络，请稍后再试</string>
+    <string name="http_404_tips">您访问的服务不存在，请联系服务器管理员来处理</string>
+    <string name="http_no_active_network_tips">当前网络不可用，请稍后再试</string>
+    <string name="alert_title">提示</string>
+    <string name="exit">退出</string>
+    <string name="ok">是</string>
+    <string name="key_f3_ok">F3  是</string>
+    <string name="key_f4_cancel">F4  否</string>
+    <string name="back">返回</string>
+    <string name="from">从</string>
+    <string name="to">到</string>
+    <string name="detail">详情</string>
+    <string name="query">查询</string>
+    <string name="empty">空</string>
+
+    <!-- 登陆 start -->
+    <string name="log_in">登录</string>
+    <string name="maintain">维护</string>
+    <string name="username">用户名</string>
+    <string name="password">密码</string>
+    <string name="gprs">GPRS</string>
+    <string name="wlan">WLAN</string>
+    <string name="app_full_name">圆通速递手持终端收派件程序</string>
+    <string name="version">版本</string>
+    <string name="login_success">登录成功</string>
+    <string name="login_fail">登录失败</string>
+    <string name="login_out_of_service">设备号不可用，已作废或设置为停用</string>
+    <string name="login_device_not_exist">设备号不存在</string>
+    <string name="input_password_tips">请输入密码！</string>
+    <string name="input_username_tips">请输入用户名！</string>
+    <string name="login_waiting">正在登陆中，请稍后</string>
+    <!-- 登陆 end -->
+
+
+    <!-- 设置 start -->
+    <string name="systemlogin">系统登陆</string>
+    <string name="message_setting">信息设置</string>
+    <string name="device_number">设备号</string>
+    <string name="server_address">服务器地址</string>
+    <string name="value_server_address">http://yuantong.com</string>
+    <string name="site_number">网点编号</string>
+    <string name="value_site_number">10086</string>
+    <string name="other_function">其它功能</string>
+    <string name="site_modify">地址维护</string>
+    <string name="package_download">更新包下载</string>
+    <string name="package_download_intr">下载需要更新的软件包</string>
+    <string name="return_function">返回</string>
+    <string name="return_fuction_intr">返回到登陆界面</string>
+    <string name="quit_function">退出</string>
+    <string name="quit_function_intr">退出程序</string>
+    <!-- 设置 end -->
+
+
+    <!-- mainmenu start -->
+    <string name="main_menu">手持终端收派件程序</string>
+    <string name="order_manage">订单管理</string>
+    <string name="receive">收件</string>
+    <string name="deliver">派件签收</string>
+    <string name="msg_query">信息查询</string>
+    <string name="data_download">数据下载</string>
+    <string name="my_assitant">我的助手</string>
+    <string name="logout">注销</string>
+    <!-- mainmenu end -->
+
+
+    <!-- Order start -->
+    <string name="order_list">订单列表</string>
+    <string name="order_detail">订单详情</string>
+    <string name="order_state">订单状态</string>
+    <string name="order_state_unreceived_unread">未取件未阅读</string>
+    <string name="order_state_unreceived_readed">未取件已阅读</string>
+    <string name="order_state_received">已正常取件</string>
+    <string name="order_state_received_unusual">已异常取件</string>
+    <string name="order_state_canceled">订单已作废</string>
+    <string name="order_push">催办订单</string>
+    <string name="order_number">订单号</string>
+    <string name="order_read_state">阅读状态</string>
+    <string name="order_upload_state">取件上传状态</string>
+    <string name="order_tips_select_data">请选择一条数据</string>
+    <string name="order_usual_receive">正常取件</string>
+    <string name="order_unusual_receive">异常取件</string>
+    <string name="employ_code">收派员编号</string>
+    <string name="remark">备注</string>
+    <string name="goods_content">货物内容</string>
+    <string name="order_channel_code">订单类型</string>
+    <string name="order_type_tode">时效要求</string>
+    <string name="order_create_time">下单时间</string>
+    <string name="sender_id">寄件人编号</string>
+    <string name="sender_name">寄件人姓名</string>
+    <string name="sender_address">寄件人地址</string>
+    <string name="sender_mobile">寄件人手机</string>
+    <string name="sender_phone">寄件人电话</string>
+    <string name="recipient_name">收件人</string>
+    <string name="recipient_address">收件地址</string>
+    <string name="weight">重量</string>
+
+    <string-array name="order_state_array">
+        <item>@string/order_state_unreceived_unread</item>
+        <item>@string/order_state_unreceived_readed</item>
+        <item>@string/order_state_received</item>
+        <item>@string/order_state_received_unusual</item>
+        <item>@string/order_state_canceled</item>
+        <item>@string/order_push</item>
+    </string-array>
+    <!-- Order end -->
+
+
+    <!-- receive start -->
+    <string name="receive_order">有订单收件</string>
+    <string name="receive_no_order">无单正常收件</string>
+    <string name="receive_batch">批量收件</string>
+    <string name="receive_no_order_unusaul">无单异常收件</string>
+    <string name="receive_cancel_replace">作废和换单</string>
+    <string name="receive_view">收件查看</string>
+    <string name="way_bill_no">运单号</string>
+    <string name="des_city_text">目的城市</string>
+    <string name="rec_addr_text">收件地址</string>
+    <string name="rec_client_text">收件客户</string>
+    <string name="rec_call_text">收件电话</string>
+    <string name="volume_text">体积</string>
+    <string name="tran_pri_text">运价</string>
+    <string name="weight_text">重量</string>
+    <string name="time_effe_text">时效</string>
+    <string name="to_pay_text">到付</string>
+    <string name="col_pay_text">代收货款</string>
+    <string name="cus_name_text">客户名称</string>
+    <string name="select_text">选择</string>
+    <string name="goods_val_text">货物金额</string>
+    <string name="back_text">返回</string>
+    <string name="save_text">保存</string>
+    <string name="mainform_num_text">主运单号</string>
+    <string name="delform_num_text">删除</string>
+    <string name="backform_num_text">回单号</string>
+    <string name="otform_num_text">其它单号</string>
+    <string name="total_text">共计</string>
+    <string name="piece_text">件</string>
+    <string name="zero_text">0</string>
+    <string name="receive_usual">正常取件</string>
+    <string name="receive_collection_freight_at_des">代收到付</string>
+    <string name="receive_return_receipt">签回单</string>
+    <string name="piece_of_ticket">一票多件</string>
+    <string name="unusual_reason">异常原因</string>
+    <string name="way_bill_list">取件列表</string>
+    <string name="detail_info">详细信息</string>
+    <string name="type_region_intraday">区域当天件</string>
+    <string name="type_morrow_arrive">隔日达</string>
+    <string name="type_private_plane">专机件</string>
+    <string name="type_city_wide_intraday">同城当天达</string>
+    <string name="type_country_wide_morrow">国内次日达</string>
+    <string name="type_country_wide_morrow_morning">国内次城达</string>
+    <string name="source_org_code">收件组织机构编码</string>
+    <string name="city_id">目的城市编码</string>
+    <string name="dest_address">目的地址</string>
+    <string name="pkg_qty">数量</string>
+    <string name="current_state">当前状态</string>
+    <string name="no">不是</string>
+    <string name="state_read">已读</string>
+    <string name="state_not_read">未读</string>
+    <string name="state_upload">已上传</string>
+    <string name="state_not_upload">未上传</string>
+    <string name="time_effe_type_text">时效类型</string>
+    <string name="receive_create_time">操作时间</string>
+    <string name="receive_list">取件列表</string>
+    <string name="receive_detail">详细信息</string>
+    <string name="receive_detail_cancel">作废</string>
+    <string name="receive_detail_exchange">换单</string>
+    <string name="modify_text">修改</string>
+    <string name="preview_text">上一条</string>
+    <string name="next_text">下一条</string>
+    <string name="way_bill_no_empty_tips">请输入运单号</string>
+    <!-- receive  end -->
+
+
+    <!-- 张永东 start -->
+
+    <string name="title_dispatch_order_list">派单扫描</string>
+    <string name="launch_dispatch_orderlist">派单扫描</string>
+
+    <!-- Label string text definition -->
+    <string name="launch_sign">签收</string>
+    <string name="label_dispatcher">收派员:</string>
+    <string name="label_staff_id">工号:</string>
+    <string name="label_scanned_count">已扫描件数:</string>
+    <string name="label_tracking_number">运单号:</string>
+    <string name="label_sign_result">签收结果:</string>
+    <string name="label_exception_reason">异常原因:</string>
+    <string name="label_satisfaction_degree">满意度:</string>
+    <string name="label_very_satisfactory">很满意</string>
+    <string name="label_satisfactory">满意</string>
+    <string name="label_unsatisfactory">不满意</string>
+    <string name="label_handwritten_signature">手写签字:</string>
+    <string name="label_sign">签收:</string>
+    <string name="label_agency_amount">代收金额:</string>
+    <string name="label_freight_collect_amount">到付金额:</string>
+    <string name="label_sign_type">签收类型:</string>
+    <string name="label_receipient">签收人:</string>
+    <string name="label_receipient_must_fill">签收人必填</string>
+    <string name="label_save">保存</string>
+    <string name="label_reason_description">原因描述:</string>
+    <string name="label_is_freight_collect">是否到付:</string>
+    <string name="label_is_agency">是否代收:</string>
+    <string name="label_freight">运费:</string>
+    <string name="label_cargo_amount">货物金额:</string>
+    <string name="label_date_from">从</string>
+    <string name="label_date_to">到</string>
+    <string name="label_must">必须输入</string>
+    <string name="label_record_id">运单号:</string>
+
+    <!-- Button string text definition -->
+    <string name="btn_query">查询</string>
+    <string name="btn_modify">修改</string>
+    <string name="btn_back">返回</string>
+    <string name="btn_sign_scan">签收扫描</string>
+    <string name="btn_choose_date">选择日期</string>
+    <string name="btn_esc_back">ESC返回</string>
+    <string name="btn_delete">删除</string>
+    <string name="btn_save">保存</string>
+
+    <!-- Tab string text definition -->
+    <string name="tab_sign_success">正常签收</string>
+    <string name="tab_sign_failed">异常签收</string>
+    <string name="tab_waybill_detail">运单详情</string>
+    <string name="tab_order_query">列表</string>
+    <string name="tab_order_list">订单列表</string>
+    <string name="tab_order_detail">订单详情</string>
+    <string name="input_tracking_no_hint">请填写运单号:</string>
+    <string name="title_emergency_delivery">催派单</string>
+    <string name="launch_emergency_delivery">催派单</string>
+    <string name="title_delete_sign">删除签收，删除人:</string>
+    <string name="title_batch_sign">批量签收，取派员:</string>
+
+    <!-- Button string text definition -->
+    <string name="text_query">查询</string>
+    <string name="text_modify">修改</string>
+    <string name="text_back">返回</string>
+    <string name="text_sign_scan">签收扫描</string>
+    <string name="text_choose_date">选择日期</string>
+    <string name="text_esc_back">ESC返回</string>
+    <string name="text_delete">删除</string>
+    <string name="text_save">保存</string>
+    <string name="text_upload">上传</string>
+
+    <string-array name="sign_result">
+        <item>正常签收</item>
+        <item>异常签收</item>
+    </string-array>
+    <string-array name="exception_reason">
+        <item>拒签</item>
+        <item>无人签收</item>
+    </string-array>
+    <string-array name="sign_type">
+        <item>门卫</item>
+        <item>本人签收</item>
+        <item>邮件收发章</item>
+        <item>他人代收</item>
+    </string-array>
+    <string-array name="fake_date">
+        <item>2012年12月27号</item>
+        <item>2012年12月26号</item>
+        <item>2012年12月25号</item>
+        <item>2012年12月24号</item>
+        <item>2012年12月23号</item>
+        <item>2012年12月22号</item>
+        <item>2012年12月21号</item>
+        <item>2012年12月20号</item>
+    </string-array>
+    <string-array name="dispatch_task_label">
+        <item>签收扫描</item>
+        <item>批量签收</item>
+        <item>未上传数据</item>
+        <item>补录签收人</item>
+        <item>删除签收</item>
+        <item>@string/btn_esc_back</item>
+    </string-array>
+    <string-array name="array_upload_state">
+        <item>上传中</item>
+        <item>上传失败</item>
+        <item>重复数据</item>
+    </string-array>
+
+    <string name="title_dispatch_main">派件操作，派遣员：手持终端收派</string>
+    <string name="title_exceptional_record_upload">异常签收数据上传</string>
+    <string name="upload_state">上传状态</string>
+    <string name="delete">删除</string>
+    <string name="upload">上传</string>
+    <string name="title_additional_sign_person_info">补录签收人信息</string>
+    <string name="list_head_tracking_number">运单号</string>
+    <string name="list_head_receipient">签收人</string>
+    <string name="list_head_sign_type">签收类型</string>
+    <string name="list_head_sign_time">签收时间</string>
+    <string name="title_scan_sign">签收扫描</string>
+
+</resources>
