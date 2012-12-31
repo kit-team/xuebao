@@ -4,7 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
 
-import cn.net.yto.vo.WSSignedLogParamVO;
+import cn.net.yto.vo.DeliverySignedLogRequestMsgVO;
+import cn.net.yto.vo.SubmitSignedLogRequestMsgVO;
 
 import android.content.ContentValues;
 
@@ -360,25 +361,26 @@ public class SignedLog {
         return log;
     }
 
-    public WSSignedLogParamVO toVO() {
-        WSSignedLogParamVO vo = new WSSignedLogParamVO();
-        vo.id = setRand();
-        vo.signOffTypeCode = mSignOffTypeCode;
-        vo.recieverSignOff = mRecieverSignOff;
-        vo.amountCollected = String.valueOf(mAmountCollected);
-        vo.amountAgency = String.valueOf(mAmountAgency);
-        vo.waybillNo = mWaybillNo;
-        vo.signedState = String.valueOf(mSignedState);
-        vo.signedStateInfo = mSignedStateInfo;
+    public SubmitSignedLogRequestMsgVO toVO() {
+        SubmitSignedLogRequestMsgVO submitSignedLogRequest = new SubmitSignedLogRequestMsgVO();
+        submitSignedLogRequest.setId(setRand());
+        submitSignedLogRequest.setSignOffTypeCode(mSignOffTypeCode);
+        submitSignedLogRequest.setRecieverSignOff(mRecieverSignOff);
+        submitSignedLogRequest.setAmountCollected(String.valueOf(mAmountCollected));
+        submitSignedLogRequest.setAmountAgency(String.valueOf(mAmountAgency));
+        submitSignedLogRequest.setWaybillNo(mWaybillNo);
+        submitSignedLogRequest.setSignedState(String.valueOf(mSignedState));
+        submitSignedLogRequest.setSignedStateInfo(mSignedStateInfo);
         // FIXME
-        vo.empCode = "88888888";
-        vo.empName = "手持终端收派培训";
-        vo.signedTime = String.valueOf(mSignedTime);
-        vo.satisfaction = String.valueOf(mSatisfaction);
-        vo.isReceiverSignOff = String.valueOf(mIsReceiverSignOff);
-        vo.isPicture = String.valueOf(mIsPicture);
+        submitSignedLogRequest.setEmpCode("88888888");
+        submitSignedLogRequest.setEmpName("手持终端收派培训");
+        
+        submitSignedLogRequest.setSignedTime(String.valueOf(mSignedTime));
+        submitSignedLogRequest.setSatisfaction(String.valueOf(mSatisfaction));
+        submitSignedLogRequest.setIsReceiverSignOff(String.valueOf(mIsReceiverSignOff));
+        submitSignedLogRequest.setIsPicture(String.valueOf(mIsPicture));
 
-        return vo;
+        return submitSignedLogRequest;
     }
 
     public static String setRand() {
