@@ -1,5 +1,6 @@
 package cn.net.yto.ui;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -227,7 +228,6 @@ public class SignScanActivity extends Activity {
                 public void onClick(View v) {
                     if (checkInputVaules()) {
                         DbTempUtils.insert(SignScanActivity.this, getSignedLogForSave());
-
                         mWaybillNo.setText("");
                         mCollectionAmount.setText("");
                         mFreightToCollect.setText("");
@@ -253,6 +253,7 @@ public class SignScanActivity extends Activity {
         private SignedLog getSignedLogForSave() {
             SignedLog signedLog = new SignedLog();
 
+            signedLog.setEmpCode("");
             signedLog.setWaybillNo(mWaybillNo.getText().toString());
             if (!TextUtils.isEmpty(mCollectionAmount.getText())) {
                 signedLog.setAmountCollected(Long.valueOf(mCollectionAmount.getText().toString()));

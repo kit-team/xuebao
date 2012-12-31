@@ -1,7 +1,6 @@
 
 package cn.net.yto.engine;
 
-import java.util.List;
 import android.content.Context;
 import cn.net.yto.engine.BaseTask.TaskCallback;
 import cn.net.yto.utils.LogUtils;
@@ -18,7 +17,7 @@ public class SignedLogReportTaskManager {
 
     private static Thread sWorkThread;
 
-    private final static int SLEEP_TIME_MS = 10000; // 10s
+    private final static int SLEEP_TIME_MS = 1000 * 60; // 10s
 
     private boolean mIsTaskCompleted = true;
 
