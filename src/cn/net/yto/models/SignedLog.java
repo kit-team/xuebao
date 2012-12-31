@@ -140,10 +140,10 @@ public class SignedLog {
 	private String mExpSignedDescription;
 	
 	// 到付金额
-	private long mAmountCollected;
+	private long mAmountCollected = 0;
 	
 	// 代收金额
-	private long mAmountAgency;
+	private long mAmountAgency = 0;
 	
 	// 上传状态
 	private UploadStatus mUploadStatus = UploadStatus.NOT_UPLOAD;

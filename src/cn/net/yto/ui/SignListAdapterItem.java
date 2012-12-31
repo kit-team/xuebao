@@ -2,6 +2,8 @@ package cn.net.yto.ui;
 
 import java.text.SimpleDateFormat;
 
+import android.text.TextUtils;
+
 import cn.net.yto.models.SignedLog;
 
 public class SignListAdapterItem {
@@ -24,7 +26,10 @@ public class SignListAdapterItem {
     }
 
     public String getSignType() {
-        return "不确定类型";
+        if (TextUtils.isEmpty(mSignedLog.getSignOffTypeCode())) {
+            return "(异常)"+mSignedLog.getSignedStateInfo();
+        }
+        return mSignedLog.getSignOffTypeCode();
     }
 
     public String getRecipient() {

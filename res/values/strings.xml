@@ -4,8 +4,8 @@
     <string name="default_server_url">192.168.0.193:8080/yto</string>
     <string name="title_dispatch_order_list">派单扫描</string>
     <string name="launch_dispatch_orderlist">派单扫描</string>
-    
-   <!-- Label string text definition -->
+
+    <!-- Label string text definition -->
     <string name="launch_sign">签收</string>
     <string name="label_dispatcher">收派员:</string>
     <string name="label_staff_id">工号:</string>
@@ -35,45 +35,41 @@
     <string name="label_record_id">运单号:</string>
 
     <!-- Button string text definition -->
-    <string name="btn_query">查询</string>
-    <string name="btn_modify">修改</string>
-    <string name="btn_back">返回</string>
-    <string name="btn_sign_scan">签收扫描</string>
-    <string name="btn_choose_date">选择日期</string>
-    <string name="btn_esc_back">ESC返回</string>
-    <string name="btn_delete">删除</string>
-    <string name="btn_save">保存</string>
-    
+    <string name="text_query">查询</string>
+    <string name="text_modify">修改</string>
+    <string name="text_back">返回</string>
+    <string name="text_sign_scan">签收扫描</string>
+    <string name="text_choose_date">选择日期</string>
+    <string name="text_esc_back">ESC返回</string>
+    <string name="text_delete">删除</string>
+    <string name="text_save">保存</string>
+    <string name="text_upload">上传</string>
+
     <!-- Tab string text definition -->
     <string name="tab_sign_success">正常签收</string>
     <string name="tab_sign_failed">异常签收</string>
     <string name="tab_waybill_detail">运单详情</string>
     <string name="tab_order_query">列表</string>
-    
     <string name="input_tracking_no_hint">请填写运单号:</string>
     <string name="title_emergency_delivery">催派单</string>
     <string name="launch_emergency_delivery">催派单</string>
-    
     <string name="title_delete_sign">删除签收，删除人:</string>
     <string name="title_batch_sign">批量签收，取派员:</string>
-    
+
     <string-array name="sign_result">
         <item>正常签收</item>
         <item>异常签收</item>
     </string-array>
-    
     <string-array name="exception_reason">
         <item>拒签</item>
         <item>无人签收</item>
     </string-array>
-    
-     <string-array name="sign_type">
+    <string-array name="sign_type">
         <item>门卫</item>
         <item>本人签收</item>
         <item>邮件收发章</item>
         <item>他人代收</item>
     </string-array>
-    
     <string-array name="fake_date">
         <item>2012年12月27号</item>
         <item>2012年12月26号</item>
@@ -84,19 +80,15 @@
         <item>2012年12月21号</item>
         <item>2012年12月20号</item>
     </string-array>
-
-    <string-array
-        name="dispatch_task_label">
+    <string-array name="dispatch_task_label">
         <item>签收扫描</item>
         <item>批量签收</item>
         <item>未上传数据</item>
         <item>补录签收人</item>
         <item>删除签收</item>
-        <item>@string/btn_esc_back</item>
+        <item>@string/text_esc_back</item>
     </string-array>
-
-    <string-array
-        name="array_upload_state">
+    <string-array name="array_upload_state">
         <item>上传中</item>
         <item>上传失败</item>
         <item>重复数据</item>
@@ -105,13 +97,11 @@
     <string name="title_dispatch_main">派件操作，派遣员：手持终端收派</string>
     <string name="title_exceptional_record_upload">异常签收数据上传</string>
     <string name="upload_state">上传状态</string>
-    <string name="delete">删除</string>
-    <string name="upload">上传</string>
     <string name="title_additional_sign_person_info">补录签收人信息</string>
-    
     <string name="list_head_tracking_number">运单号</string>
     <string name="list_head_receipient">签收人</string>
     <string name="list_head_sign_type">签收类型</string>
     <string name="list_head_sign_time">签收时间</string>
     <string name="title_scan_sign">签收扫描</string>
+
 </resources>

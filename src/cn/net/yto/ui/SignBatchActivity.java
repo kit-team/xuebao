@@ -24,6 +24,8 @@ public class SignBatchActivity extends Activity {
     private RadioGroup mSatisfactory; // 满意度
     private EditText mReceipient; // 签收人
 
+    private String[] mSignTypeString;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +34,8 @@ public class SignBatchActivity extends Activity {
         getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.sign_batch_title);
 
         initViews();
+
+        mSignTypeString = getResources().getStringArray(R.array.sign_type);
     }
 
     public void initViews() {
@@ -65,7 +69,7 @@ public class SignBatchActivity extends Activity {
             public void onClick(View v) {
                 if (checkInputVaules()) {
                     DbTempUtils.insert(SignBatchActivity.this, getSignedLogForSave());
-                    
+
                     mWaybillNo.setText("");
                 }
             }
@@ -89,7 +93,8 @@ public class SignBatchActivity extends Activity {
         SignedLog signedLog = new SignedLog();
 
         signedLog.setWaybillNo(mWaybillNo.getText().toString());
-
+        final int typeIdx = mSignTypeSpinner.getSelectedItemPosition();
+        signedLog.setSignOffTypeCode(mSignTypeString[typeIdx]);
         switch (mSatisfactory.getCheckedRadioButtonId()) {
         case R.id.very_satisfactory:
             signedLog.setSatisfaction(Satisfaction.VERY_SATISFIED);
