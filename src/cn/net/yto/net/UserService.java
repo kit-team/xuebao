@@ -10,9 +10,7 @@ import cn.net.yto.net.UrlType;
 import cn.net.yto.net.ZltdHttpClient;
 import cn.net.yto.net.ZltdHttpClient.Listener;
 import cn.net.yto.utils.LogUtils;
-import cn.net.yto.vo.DeliverySignedLogRequestMsgVO;
-import cn.net.yto.vo.DeliverySignedLogResponseMsgVO;
-import cn.net.yto.vo.WSSignedLogReturnVO;
+import cn.net.yto.vo.SubmitSignedLogResponseMsgVO;
 import cn.net.yto.models.SignedLog;
 
 public class UserService {
@@ -61,7 +59,7 @@ public class UserService {
 		
 	public static boolean submitSignedLog(SignedLog signedLog, Listener listener) {
 		ZltdHttpClient client = new ZltdHttpClient(UrlType.SUBMIT_SIGNEDLOG, signedLog.toVO(),
-				listener, WSSignedLogReturnVO.class);
+				listener, SubmitSignedLogResponseMsgVO.class);
 		return client.submit(MainApp.getAppContext());
 	}
 	

@@ -1,7 +1,7 @@
 <resources>
 
     <string name="app_name">baoxue</string>
-    <string name="default_server_url">192.168.1.100:8080/yto</string>
+    <string name="default_server_url">192.168.0.193:8080/yto</string>
     <string name="title_dispatch_order_list">派单扫描</string>
     <string name="launch_dispatch_orderlist">派单扫描</string>
 

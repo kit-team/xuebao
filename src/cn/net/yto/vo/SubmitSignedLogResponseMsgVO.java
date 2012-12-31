@@ -1,6 +1,6 @@
 package cn.net.yto.vo;
 
-public class DeliverySignedLogModifyResponseMsgVO extends BaseResponseMsgVO {
+public class SubmitSignedLogResponseMsgVO extends BaseResponseMsgVO {
 	/**
 	 * 返回值；  1  成功；-1 失败；
 	 */
