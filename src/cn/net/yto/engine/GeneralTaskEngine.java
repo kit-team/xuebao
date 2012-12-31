@@ -14,7 +14,7 @@ import cn.net.yto.utils.LogUtils;
  *
  */
 public class GeneralTaskEngine {
-    private static final int SLEEP_TIME_MS = 10000;
+    private static final int SLEEP_TIME_MS = 1000 * 60;
 
     private ConcurrentLinkedQueue<BaseTask> mTaskQueue = new ConcurrentLinkedQueue<BaseTask>();
 

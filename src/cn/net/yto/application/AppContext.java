@@ -3,11 +3,8 @@ package cn.net.yto.application;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Build;
-import android.os.UserManager;
 import android.preference.PreferenceManager;
-import android.telephony.TelephonyManager;
 import cn.net.yto.R;
 import cn.net.yto.common.Constants;
 import cn.net.yto.dao.DatabaseHelper;
@@ -51,8 +48,8 @@ public class AppContext extends Application {
 
 		SignedLogReportTaskManager.getInstance(this).run();
 		ToastUtils.getInstance().init(this);
-//		UrlManager.setServerUrl(getAppContext().getString(
-//				R.string.default_server_url));
+		UrlManager.setServerUrl(getAppContext().getString(
+				R.string.default_server_url));
 	}
 
 	public void initGlobalVariable() {

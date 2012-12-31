@@ -254,6 +254,7 @@ public class SignScanActivity extends Activity {
         private SignedLogVO getSignedLogForSave() {
             SignedLogVO signedLog = new SignedLogVO();
 
+            signedLog.setEmpCode("");
             signedLog.setWaybillNo(mWaybillNo.getText().toString());
             if (!TextUtils.isEmpty(mCollectionAmount.getText())) {
                 signedLog.setAmountCollected(Long.valueOf(mCollectionAmount.getText().toString()));
