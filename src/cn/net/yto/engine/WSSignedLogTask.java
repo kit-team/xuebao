@@ -13,7 +13,7 @@ import cn.net.yto.net.UserService;
 import cn.net.yto.net.ZltdHttpClient;
 import cn.net.yto.net.ZltdHttpClient.Listener;
 import cn.net.yto.utils.LogUtils;
-import cn.net.yto.vo.DeliverySignedLogResponseMsgVO;
+import cn.net.yto.vo.SubmitSignedLogResponseMsgVO;
 
 public class WSSignedLogTask extends BaseTask {
     private Context mContext;
@@ -40,8 +40,8 @@ public class WSSignedLogTask extends BaseTask {
                 @Override
                 public void onPostSubmit(Object response, Integer responseType) {
                     LogUtils.logD("response " + response + " responseType " + responseType);
-                    if (response != null && response instanceof DeliverySignedLogResponseMsgVO) {
-                        int status = ((DeliverySignedLogResponseMsgVO)response).getRetVal();
+                    if (response != null && response instanceof SubmitSignedLogResponseMsgVO) {
+                        int status = ((SubmitSignedLogResponseMsgVO)response).getRetVal();
                         log2.setStatus(SignedLog.GetUploadStatus(status));
                         LogUtils.logD("Signed log status " + status);
                     }

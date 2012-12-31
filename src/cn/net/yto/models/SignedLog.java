@@ -4,7 +4,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
 
-import cn.net.yto.vo.DeliverySignedLogRequestMsgVO;
 import cn.net.yto.vo.SubmitSignedLogRequestMsgVO;
 
 import android.content.ContentValues;
