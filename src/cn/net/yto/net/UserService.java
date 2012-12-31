@@ -3,8 +3,8 @@ package cn.net.yto.net;
 import java.util.ArrayList;
 
 import cn.net.yto.application.AppContext;
-import cn.net.yto.models.SignedLog;
 import cn.net.yto.net.ZltdHttpClient.Listener;
+import cn.net.yto.vo.SignedLogVO;
 import cn.net.yto.vo.message.SubmitSignedLogResponseMsgVO;
 
 public class UserService {
@@ -51,7 +51,7 @@ public class UserService {
     public UserService() {
     }
 
-    public static boolean submitSignedLog(SignedLog signedLog, Listener listener) {
+    public static boolean submitSignedLog(SignedLogVO signedLog, Listener listener) {
         ZltdHttpClient client = new ZltdHttpClient(UrlType.SUBMIT_SIGNEDLOG, signedLog.toVO(),
                 listener, SubmitSignedLogResponseMsgVO.class);
 

@@ -6,11 +6,11 @@ import java.util.List;
 
 import android.content.Context;
 import cn.net.yto.application.AppContext;
-import cn.net.yto.models.SignedLog;
 import cn.net.yto.net.UrlType;
 import cn.net.yto.net.ZltdHttpClient;
 import cn.net.yto.net.ZltdHttpClient.Listener;
 import cn.net.yto.utils.LogUtils;
+import cn.net.yto.vo.SignedLogVO;
 import cn.net.yto.vo.UserVO;
 import cn.net.yto.vo.message.AppUpgradeRequestMsgVO;
 import cn.net.yto.vo.message.AppUpgradeResponseMsgVO;
@@ -266,11 +266,11 @@ public class UserManager {
 		return right;
 	}
 	
-	public static boolean submitSignedLog(SignedLog signedLog, Listener listener) {
+	public static boolean submitSignedLog(SignedLogVO signedLogVo, Listener listener) {
 //		ZltdHttpClient client = new ZltdHttpClient(UrlType.SUBMIT_SIGNEDLOG, signedLog.toVO(),
 //				listener, WSSignedLogReturnVO.class);
 		
-		ZltdHttpClient client = new ZltdHttpClient(UrlType.SUBMIT_SIGNEDLOG, signedLog.toVO(), listener, WSSignedLogReturnVO.class);
+		ZltdHttpClient client = new ZltdHttpClient(UrlType.SUBMIT_SIGNEDLOG, signedLogVo.toVO(), listener, WSSignedLogReturnVO.class);
 		return client.submit(null);
 	}
 }

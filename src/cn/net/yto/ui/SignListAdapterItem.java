@@ -3,21 +3,20 @@ package cn.net.yto.ui;
 import java.text.SimpleDateFormat;
 
 import android.text.TextUtils;
-
-import cn.net.yto.models.SignedLog;
+import cn.net.yto.vo.SignedLogVO;
 
 public class SignListAdapterItem {
-    private SignedLog mSignedLog = null;
+    private SignedLogVO mSignedLog = null;
     private String mSignTime = null;
 
     public boolean mSelected = false;
 
-    public SignListAdapterItem(SignedLog signedLog) {
+    public SignListAdapterItem(SignedLogVO signedLog) {
         mSignedLog = signedLog;
         mSelected = false;
     }
 
-    public SignedLog getSignedLog() {
+    public SignedLogVO getSignedLog() {
         return mSignedLog;
     }
 

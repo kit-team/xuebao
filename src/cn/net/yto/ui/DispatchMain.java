@@ -17,6 +17,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import cn.net.yto.R;
+import cn.net.yto.application.AppContext;
 import cn.net.yto.ui.menu.GridMenuItemAdapter;
 import cn.net.yto.ui.menu.MenuAction;
 import cn.net.yto.ui.menu.MenuItem;
@@ -41,10 +42,17 @@ public class DispatchMain extends Activity {
 
     private LayoutInflater mInflater;
 
+    protected AppContext mAppContext = AppContext.getAppContext();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
+
+        // TODO
+        mAppContext.setDefaultContext(this);
+        mAppContext.startReportTask();
+
         setContentView(R.layout.dispatch_main);
         getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.dispatch_main_title);
         mInflater = LayoutInflater.from(getApplicationContext());

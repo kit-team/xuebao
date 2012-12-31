@@ -18,7 +18,10 @@ import cn.net.yto.vo.ReceiveVO;
 import cn.net.yto.vo.RecvexpVO;
 import cn.net.yto.vo.ScanruleVO;
 import cn.net.yto.vo.ScopeVO;
+import cn.net.yto.vo.SignedLogVO;
 import cn.net.yto.vo.UserVO;
+import cn.net.yto.vo.message.SubmitSignedLogRequestMsgVO;
+import cn.net.yto.vo.message.SubmitSignedLogResponseMsgVO;
 
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
@@ -52,9 +55,12 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 	 */
 	private Dao<ReceiveVO, String> mReceiveDao = null;
 	
-	
 	private Dao<OrderVO, String> mOrderDao = null;
-
+	
+	/**
+	 * 派件 
+	 */
+	private Dao<SignedLogVO, String> mSignedLogDao = null;
 
     public DatabaseHelper(Context context) {
         super(context, DbConst.DB_NAME, null, DbConst.DB_VERSION);
@@ -82,6 +88,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             TableUtils.createTable(connectionSource, ScopeVO.class);
             TableUtils.createTable(connectionSource, OrderVO.class);
             TableUtils.createTable(connectionSource, ReceiveVO.class);
+            TableUtils.createTable(connectionSource, SignedLogVO.class);
         } catch (SQLException e) {
         	LogUtils.e(TAG, "Can't create database e = " + e);
             throw new RuntimeException(e);
@@ -111,6 +118,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             TableUtils.dropTable(connectionSource, OrderVO.class, true);
             
             TableUtils.dropTable(connectionSource, ReceiveVO.class, true);
+            TableUtils.dropTable(connectionSource, SignedLogVO.class, true);
             
             onCreate(db, connectionSource); 
         } catch (SQLException e) { 
@@ -234,6 +242,13 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         }
         return mReceiveDao;
     }
+
+    public Dao<SignedLogVO, String> getSignedLogDao() throws SQLException {
+        if (mSignedLogDao == null) {
+            mSignedLogDao = getDao(SignedLogVO.class);
+        }
+        return mSignedLogDao;
+    }
     /**
      * Close the database connections and clear any cached DAOs.
      */
@@ -254,5 +269,6 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         mScopeDao = null;
         mOrderDao = null;
         mReceiveDao = null;
+        mSignedLogDao = null;
     }
 }

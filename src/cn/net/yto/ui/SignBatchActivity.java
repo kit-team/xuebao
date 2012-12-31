@@ -10,10 +10,10 @@ import android.widget.ListView;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import cn.net.yto.R;
-import cn.net.yto.models.DbTempUtils;
-import cn.net.yto.models.SignedLog;
-import cn.net.yto.models.SignedLog.Satisfaction;
+import cn.net.yto.biz.SignedLogManager;
 import cn.net.yto.utils.ToastUtils;
+import cn.net.yto.vo.SignedLogVO;
+import cn.net.yto.vo.SignedLogVO.Satisfaction;
 
 public class SignBatchActivity extends Activity {
 
@@ -26,6 +26,8 @@ public class SignBatchActivity extends Activity {
     private EditText mReceipient; // 签收人
 
     private String[] mSignTypeString;
+    
+    private SignedLogManager mSignedLogMgr = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +35,11 @@ public class SignBatchActivity extends Activity {
         requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
         setContentView(R.layout.sign_batch);
         getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.sign_batch_title);
-
-        initViews();
-
+        
+        mSignedLogMgr = new SignedLogManager(this);
         mSignTypeString = getResources().getStringArray(R.array.sign_type);
+        
+        initViews();
     }
 
     public void initViews() {
@@ -69,7 +72,8 @@ public class SignBatchActivity extends Activity {
             @Override
             public void onClick(View v) {
                 if (checkInputVaules()) {
-                    DbTempUtils.insert(SignBatchActivity.this, getSignedLogForSave());
+//                    DbTempUtils.insert(SignBatchActivity.this, getSignedLogForSave());
+                    mSignedLogMgr.saveSignedLog(getSignedLogForSave());
 
                     mWaybillNo.setText("");
                 }
@@ -90,8 +94,8 @@ public class SignBatchActivity extends Activity {
         return true;
     }
 
-    private SignedLog getSignedLogForSave() {
-        SignedLog signedLog = new SignedLog();
+    private SignedLogVO getSignedLogForSave() {
+        SignedLogVO signedLog = new SignedLogVO();
 
         signedLog.setWaybillNo(mWaybillNo.getText().toString());
         final int typeIdx = mSignTypeSpinner.getSelectedItemPosition();

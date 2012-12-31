@@ -2,7 +2,6 @@ package cn.net.yto.ui;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -26,12 +25,10 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import cn.net.yto.R;
-import cn.net.yto.models.DbTempUtils;
-import cn.net.yto.models.SignedLog;
-import cn.net.yto.models.SignedLog.Satisfaction;
-import cn.net.yto.models.SignedLog.SignedState;
-import cn.net.yto.models.SignedLog.UploadStatus;
+import cn.net.yto.biz.SignedLogManager;
 import cn.net.yto.utils.ToastUtils;
+import cn.net.yto.vo.SignedLogVO;
+import cn.net.yto.vo.SignedLogVO.Satisfaction;
 
 public class SignScanActivity extends Activity {
     private static final String TAG = "ViewPagerTest";
@@ -44,6 +41,8 @@ public class SignScanActivity extends Activity {
     private SignSuccessView mSignSuccessView = null;
     private SignFailedView mSignFailedView = null;
     private OrderQueryView mOrderQueryView = null;
+
+    private SignedLogManager mSignedLogMgr = null;
 
     private OnClickListener mTabItemClickListener = new OnClickListener() {
         @Override
@@ -71,6 +70,7 @@ public class SignScanActivity extends Activity {
         getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.sign_scan_title);
 
         mInflater = getLayoutInflater();
+        mSignedLogMgr = new SignedLogManager(this);
 
         mPageViews = new ArrayList<View>();
         mTabViews = new ArrayList<View>();
@@ -227,7 +227,7 @@ public class SignScanActivity extends Activity {
                 @Override
                 public void onClick(View v) {
                     if (checkInputVaules()) {
-                        DbTempUtils.insert(SignScanActivity.this, getSignedLogForSave());
+                        mSignedLogMgr.saveSignedLog(getSignedLogForSave());
 
                         mWaybillNo.setText("");
                         mCollectionAmount.setText("");
@@ -251,8 +251,8 @@ public class SignScanActivity extends Activity {
             return true;
         }
 
-        private SignedLog getSignedLogForSave() {
-            SignedLog signedLog = new SignedLog();
+        private SignedLogVO getSignedLogForSave() {
+            SignedLogVO signedLog = new SignedLogVO();
 
             signedLog.setWaybillNo(mWaybillNo.getText().toString());
             if (!TextUtils.isEmpty(mCollectionAmount.getText())) {
@@ -303,7 +303,9 @@ public class SignScanActivity extends Activity {
                 @Override
                 public void onClick(View v) {
                     if (checkInputVaules()) {
-                        DbTempUtils.insert(SignScanActivity.this, getSignedLogForSave());
+                        // DbTempUtils.insert(SignScanActivity.this,
+                        // getSignedLogForSave());
+                        mSignedLogMgr.saveSignedLog(getSignedLogForSave());
 
                         mWaybillNo.setText("");
                         mExceptionDescription.setText("");
@@ -320,8 +322,8 @@ public class SignScanActivity extends Activity {
             return true;
         }
 
-        public SignedLog getSignedLogForSave() {
-            SignedLog signedLog = new SignedLog();
+        private SignedLogVO getSignedLogForSave() {
+            SignedLogVO signedLog = new SignedLogVO();
 
             signedLog.setWaybillNo(mWaybillNo.getText().toString());
             final int exceptIdx = mExceptionReasonSpinner.getSelectedItemPosition();

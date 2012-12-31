@@ -1,10 +1,8 @@
 package cn.net.yto.ui;
 
 import java.util.ArrayList;
+import java.util.List;
 
-import cn.net.yto.R;
-import cn.net.yto.models.DbTempUtils;
-import cn.net.yto.models.SignedLog;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -12,16 +10,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import cn.net.yto.R;
+import cn.net.yto.biz.SignedLogManager;
+import cn.net.yto.vo.SignedLogVO;
 
 public class SignListAdapter extends BaseAdapter {
 
     private LayoutInflater mInflater;
 
     private ArrayList<SignListAdapterItem> mData = null;
+    private SignedLogManager mSignedLogManager = null;
 
     public SignListAdapter(Context context) {
         mInflater = LayoutInflater.from(context);
-        mData = DbTempUtils.query(context);
+        mSignedLogManager = new SignedLogManager(context);
+        List<SignedLogVO> signedlogs = mSignedLogManager.querySubWayBillSignedLog("*");
+        for (SignedLogVO vo : signedlogs) {
+            SignListAdapterItem item = new SignListAdapterItem(vo);
+            mData.add(item);
+        }
     }
 
     public void setData(ArrayList<SignListAdapterItem> datas) {
@@ -41,7 +48,7 @@ public class SignListAdapter extends BaseAdapter {
     }
 
     public void deleteSelectedItem(Context context) {
-        ArrayList<SignedLog> selectedSignedLogs = new ArrayList<SignedLog>();
+        ArrayList<SignedLogVO> selectedSignedLogs = new ArrayList<SignedLogVO>();
         for (int i = mData.size() - 1; i >= 0; i--) {
             SignListAdapterItem item = mData.get(i);
             if (item.isSelected()) {
@@ -50,7 +57,8 @@ public class SignListAdapter extends BaseAdapter {
             }
         }
 
-        DbTempUtils.delete(context, selectedSignedLogs);
+        // DbTempUtils.delete(context, selectedSignedLogs);
+        // TODO delete item
 
         notifyDataSetChanged();
     }

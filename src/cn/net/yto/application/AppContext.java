@@ -36,7 +36,7 @@ public class AppContext extends Application {
 		super.onCreate();
 
 		sAppContext = this;
-//		mDatabaseHelper = new DatabaseHelper(getApplicationContext());
+		mDatabaseHelper = new DatabaseHelper(getApplicationContext());
 //
 //		try {
 //			mVersionName = getPackageManager().getPackageInfo(getPackageName(),
@@ -149,4 +149,8 @@ public class AppContext extends Application {
 		editor.putInt(key, value);
 		editor.commit();
 	}
+
+    public void startReportTask() {
+//        SignedLogReportTaskManager.getInstance(getDefaultContext()).run();
+    }
 }
