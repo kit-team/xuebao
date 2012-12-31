@@ -1,4 +1,4 @@
-package cn.net.yto.vo;
+package cn.net.yto.vo.message;
 
 public class SubmitSignedLogRequestMsgVO extends BaseRequestMsgVO {
       /**

@@ -1,5 +1,8 @@
 package cn.net.yto.ui;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +17,9 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import cn.net.yto.R;
+import cn.net.yto.ui.menu.GridMenuItemAdapter;
+import cn.net.yto.ui.menu.MenuAction;
+import cn.net.yto.ui.menu.MenuItem;
 
 public class DispatchMain extends Activity {
     private static final int ITEM_SIGN_SCAN = 0;
@@ -22,9 +28,16 @@ public class DispatchMain extends Activity {
     private static final int ITEM_ADDITIONAL_RECORD = 3;
     private static final int ITEM_DELETE_RECORD = 4;
     private static final int ITEM_ESC = 5;
+    private static final int[] MENU_IDS = { ITEM_SIGN_SCAN, ITEM_SIGN_BATCH, ITEM_UNUPLOAD_RECORD,
+            ITEM_ADDITIONAL_RECORD, ITEM_DELETE_RECORD, ITEM_ESC, };
 
+    private final static int[] ICONS = { R.drawable.sign_scan, R.drawable.additional_sign_record,
+            R.drawable.delete_sign_record, R.drawable.sign_batch, R.drawable.unupload_record,
+            R.drawable.back };
     private String[] mTaskLabels;
+
     private GridView mGrid;
+    private GridMenuItemAdapter mAdapter = null;
 
     private LayoutInflater mInflater;
 
@@ -37,38 +50,21 @@ public class DispatchMain extends Activity {
         mInflater = LayoutInflater.from(getApplicationContext());
 
         mTaskLabels = getResources().getStringArray(R.array.dispatch_task_label);
-
-        mGrid = (GridView) findViewById(R.id.myGrid);
-        mGrid.setAdapter(new GridAdapter());
-        mGrid.setOnItemClickListener(mOnItemClickListener);
+        initViews();
     }
 
-    private final OnItemClickListener mOnItemClickListener = new OnItemClickListener() {
-
-        @Override
-        public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-            switch (position) {
-            case ITEM_SIGN_SCAN:
-                launchSignScan();
-                return;
-            case ITEM_ADDITIONAL_RECORD:
-                launchAdditionalSignPersonInfo();
-                return;
-            case ITEM_DELETE_RECORD:
-                launchSignDelete();
-                return;
-            case ITEM_SIGN_BATCH:
-                launchSignBatch();
-                return;
-            case ITEM_UNUPLOAD_RECORD:
-                launchExceptionalRecordUpload();
-                return;
-            case ITEM_ESC:
-                finish();
-                return;
-            }
+    private void initViews() {
+        ArrayList<MenuItem> menuItemList = new ArrayList<MenuItem>();
+        for (int i = 0; i < ICONS.length; i++) {
+            MenuItem menuItem = new MenuItem(ICONS[i], mTaskLabels[i], new MenuActionListener(
+                    MENU_IDS[i]));
+            menuItemList.add(menuItem);
         }
-    };
+        mGrid = (GridView) findViewById(R.id.myGrid);
+        mAdapter = new GridMenuItemAdapter(this, menuItemList);
+        mGrid.setAdapter(mAdapter);
+        mGrid.setOnItemClickListener(mOnItemClickListener);
+    }
 
     private void launchExceptionalRecordUpload() {
         final Intent intent = new Intent(this, ExceptionalRecordUpload.class);
@@ -95,49 +91,44 @@ public class DispatchMain extends Activity {
         startActivity(intent);
     }
 
-    private final class GridAdapter extends BaseAdapter {
-        private final int[] ICONS = { R.drawable.sign_scan, R.drawable.additional_sign_record,
-                R.drawable.delete_sign_record, R.drawable.sign_batch, R.drawable.unupload_record,
-                R.drawable.back };
+    private final OnItemClickListener mOnItemClickListener = new OnItemClickListener() {
 
         @Override
-        public int getCount() {
-            return ICONS.length;
+        public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+            mAdapter.getItem(position).doAction();
+        }
+    };
+
+    private class MenuActionListener implements MenuAction {
+        private int mMenuId = -1;
+
+        public MenuActionListener(int id) {
+            mMenuId = id;
         }
 
         @Override
-        public Object getItem(int position) {
-            return mTaskLabels[position];
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return position;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            ImgTextWrapper wrapper;
-            if (convertView == null) {
-                wrapper = new ImgTextWrapper();
-                convertView = mInflater.inflate(R.layout.dispatch_main_grid_item, null);
-                convertView.setTag(wrapper);
-            } else {
-                wrapper = (ImgTextWrapper) convertView.getTag();
+        public void action() {
+            switch (mMenuId) {
+            case ITEM_SIGN_SCAN:
+                launchSignScan();
+                return;
+            case ITEM_ADDITIONAL_RECORD:
+                launchAdditionalSignPersonInfo();
+                return;
+            case ITEM_DELETE_RECORD:
+                launchSignDelete();
+                return;
+            case ITEM_SIGN_BATCH:
+                launchSignBatch();
+                return;
+            case ITEM_UNUPLOAD_RECORD:
+                launchExceptionalRecordUpload();
+                return;
+            case ITEM_ESC:
+                finish();
+                return;
             }
-
-            wrapper.imageIcon = (ImageView) convertView.findViewById(R.id.icon);
-            wrapper.imageIcon.setBackgroundResource(ICONS[position]);
-            wrapper.textView = (TextView) convertView.findViewById(R.id.label);
-            wrapper.textView.setText(mTaskLabels[position]);
-
-            return convertView;
         }
 
-        class ImgTextWrapper {
-            ImageView imageIcon;
-            TextView textView;
-        }
     }
-
 }

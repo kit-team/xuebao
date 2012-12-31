@@ -1,4 +1,4 @@
-package cn.net.yto.ui;
+package cn.net.yto.utils;
 
 import android.content.Context;
 import android.util.Log;

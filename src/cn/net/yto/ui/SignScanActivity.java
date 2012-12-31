@@ -32,6 +32,7 @@ import cn.net.yto.models.SignedLog;
 import cn.net.yto.models.SignedLog.Satisfaction;
 import cn.net.yto.models.SignedLog.SignedState;
 import cn.net.yto.models.SignedLog.UploadStatus;
+import cn.net.yto.utils.ToastUtils;
 
 public class SignScanActivity extends Activity {
     private static final String TAG = "ViewPagerTest";

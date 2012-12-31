@@ -20,15 +20,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="4"
             android:entries="@array/array_upload_state" />
-        <!--
-        <Button
+        <Button
             android:id="@+id/btn_query_exp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="40dp"
             android:paddingRight="40dp"
             android:text="@string/text_query" />
-        -->
     </LinearLayout>
 
     <ListView
