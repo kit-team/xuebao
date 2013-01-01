@@ -101,7 +101,7 @@ public class SignedLogManager {
     public List<SignedLogVO> querySubWayBillSignedLog(String wayBillNo) {
         List<SignedLogVO> list = null;
         try {
-            list = mSignedLogDao.queryBuilder().where().eq(SignedLogVO.WAYBILLNO_FIELD_NAME, wayBillNo).query();
+            list = mSignedLogDao.queryBuilder().where().like(SignedLogVO.WAYBILLNO_FIELD_NAME, wayBillNo).query();
         } catch (SQLException e) {
             LogUtils.e(TAG, e);
         }
