@@ -10,6 +10,7 @@ import android.widget.ListView;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import cn.net.yto.R;
+import cn.net.yto.application.AppContext;
 import cn.net.yto.biz.SignedLogManager;
 import cn.net.yto.ui.menu.SignListAdapter;
 import cn.net.yto.ui.menu.SignListItemClickListener;
@@ -39,7 +40,7 @@ public class SignBatchActivity extends Activity {
         setContentView(R.layout.sign_batch);
         getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.sign_batch_title);
         
-        mSignedLogMgr = new SignedLogManager(this);
+        mSignedLogMgr = ((AppContext)getApplication()).getSignedLogManager();
         mSignTypeString = getResources().getStringArray(R.array.sign_type);
         
         initViews();
@@ -75,11 +76,18 @@ public class SignBatchActivity extends Activity {
             @Override
             public void onClick(View v) {
                 if (checkInputVaules()) {
+<<<<<<< HEAD
                     boolean result = mSignedLogMgr.saveSignedLog(getSignedLogForSave());
                     if (result) {
                         mWaybillNo.setText("");
                     }
                     ToastUtils.showOperationToast(Operation.SAVE, result);
+=======
+//                    DbTempUtils.insert(SignBatchActivity.this, getSignedLogForSave());
+                    mSignedLogMgr.saveSignedLog(getSignedLogForSave());
+                    mSignedLogMgr.upload(getSignedLogForSave(), ((AppContext)getApplication()).getDefaultContext());
+                    mWaybillNo.setText("");
+>>>>>>> 9bb7afd9c375cb25e1344cd06f6e3fde1afa941d
                 }
             }
         });

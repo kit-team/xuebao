@@ -25,6 +25,7 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import cn.net.yto.R;
+import cn.net.yto.application.AppContext;
 import cn.net.yto.biz.SignedLogManager;
 import cn.net.yto.utils.ToastUtils;
 import cn.net.yto.utils.ToastUtils.Operation;
@@ -71,7 +72,7 @@ public class SignScanActivity extends Activity {
         getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.sign_scan_title);
 
         mInflater = getLayoutInflater();
-        mSignedLogMgr = new SignedLogManager(this);
+        mSignedLogMgr = ((AppContext)getApplication()).getSignedLogManager();
 
         mPageViews = new ArrayList<View>();
         mTabViews = new ArrayList<View>();
@@ -228,6 +229,7 @@ public class SignScanActivity extends Activity {
                 @Override
                 public void onClick(View v) {
                     if (checkInputVaules()) {
+                        //save to DB
                         boolean result = mSignedLogMgr.saveSignedLog(getSignedLogForSave());
                         if (result) {
                             mWaybillNo.setText("");
@@ -236,6 +238,9 @@ public class SignScanActivity extends Activity {
                             mReceipient.setText("");
                         }
                         ToastUtils.showOperationToast(Operation.SAVE, result);
+                        // Upload to server
+                        result = mSignedLogMgr.upload(getSignedLogForSave(), ((AppContext)getApplication()).getDefaultContext());
+                        ToastUtils.showOperationToast(Operation.UPLOAD, result);
                     }
                 }
             });
@@ -307,15 +312,17 @@ public class SignScanActivity extends Activity {
                 @Override
                 public void onClick(View v) {
                     if (checkInputVaules()) {
+                        // save to DB
                         boolean result = mSignedLogMgr.saveSignedLog(getSignedLogForSave());
                         if (result) {
                             mWaybillNo.setText("");
                             mExceptionDescription.setText("");
-                            ToastUtils.showToast("已保存");
-                        } else {
-                            ToastUtils.showToast("保存失败");
                         }
                         ToastUtils.showOperationToast(Operation.SAVE, result);
+                        
+                        // upload to server
+                        result = mSignedLogMgr.upload(getSignedLogForSave(), ((AppContext)getApplication()).getDefaultContext());
+                        ToastUtils.showOperationToast(Operation.UPLOAD, result);
                     }
                 }
             });
