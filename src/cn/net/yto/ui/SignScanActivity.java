@@ -25,6 +25,7 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import cn.net.yto.R;
+import cn.net.yto.application.AppContext;
 import cn.net.yto.biz.SignedLogManager;
 import cn.net.yto.utils.ToastUtils;
 import cn.net.yto.vo.SignedLogVO;
@@ -70,7 +71,7 @@ public class SignScanActivity extends Activity {
         getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.sign_scan_title);
 
         mInflater = getLayoutInflater();
-        mSignedLogMgr = new SignedLogManager(this);
+        mSignedLogMgr = ((AppContext)getApplication()).getSignedLogManager();
 
         mPageViews = new ArrayList<View>();
         mTabViews = new ArrayList<View>();
@@ -228,6 +229,7 @@ public class SignScanActivity extends Activity {
                 public void onClick(View v) {
                     if (checkInputVaules()) {
                         mSignedLogMgr.saveSignedLog(getSignedLogForSave());
+                        mSignedLogMgr.upload(getSignedLogForSave(), ((AppContext)getApplication()).getDefaultContext());
 
                         mWaybillNo.setText("");
                         mCollectionAmount.setText("");
@@ -307,7 +309,7 @@ public class SignScanActivity extends Activity {
                         // DbTempUtils.insert(SignScanActivity.this,
                         // getSignedLogForSave());
                         mSignedLogMgr.saveSignedLog(getSignedLogForSave());
-
+                        mSignedLogMgr.upload(getSignedLogForSave(), ((AppContext)getApplication()).getDefaultContext());
                         mWaybillNo.setText("");
                         mExceptionDescription.setText("");
                     }

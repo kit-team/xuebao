@@ -10,6 +10,7 @@ import android.widget.ListView;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import cn.net.yto.R;
+import cn.net.yto.application.AppContext;
 import cn.net.yto.biz.SignedLogManager;
 import cn.net.yto.utils.ToastUtils;
 import cn.net.yto.vo.SignedLogVO;
@@ -36,7 +37,7 @@ public class SignBatchActivity extends Activity {
         setContentView(R.layout.sign_batch);
         getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.sign_batch_title);
         
-        mSignedLogMgr = new SignedLogManager(this);
+        mSignedLogMgr = ((AppContext)getApplication()).getSignedLogManager();
         mSignTypeString = getResources().getStringArray(R.array.sign_type);
         
         initViews();
@@ -74,7 +75,7 @@ public class SignBatchActivity extends Activity {
                 if (checkInputVaules()) {
 //                    DbTempUtils.insert(SignBatchActivity.this, getSignedLogForSave());
                     mSignedLogMgr.saveSignedLog(getSignedLogForSave());
-
+                    mSignedLogMgr.upload(getSignedLogForSave(), ((AppContext)getApplication()).getDefaultContext());
                     mWaybillNo.setText("");
                 }
             }

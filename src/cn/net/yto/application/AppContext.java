@@ -6,9 +6,10 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.preference.PreferenceManager;
 import cn.net.yto.R;
+import cn.net.yto.biz.SignedLogManager;
 import cn.net.yto.common.Constants;
 import cn.net.yto.dao.DatabaseHelper;
-import cn.net.yto.engine.SignedLogReportTaskManager;
+//import cn.net.yto.engine.SignedLogReportTaskManager;
 import cn.net.yto.net.UrlManager;
 import cn.net.yto.utils.LogUtils;
 import cn.net.yto.utils.ToastUtils;
@@ -27,7 +28,8 @@ public class AppContext extends Application {
 	private int mVersionCode;
 	private String mVersionName;
 	private String mImei;
-
+	private SignedLogManager mSignedLogManager;
+	
 	@Override
 	public void onCreate() {
 		super.onCreate();
@@ -46,7 +48,7 @@ public class AppContext extends Application {
 //			e.printStackTrace();
 //		}
 
-		SignedLogReportTaskManager.getInstance(this).run();
+//		SignedLogReportTaskManager.getInstance(this).run();
 		ToastUtils.getInstance().init(this);
 		UrlManager.setServerUrl(getAppContext().getString(
 				R.string.default_server_url));
@@ -147,6 +149,13 @@ public class AppContext extends Application {
 		editor.commit();
 	}
 
+	public SignedLogManager getSignedLogManager() {
+		if (mSignedLogManager == null) {
+			mSignedLogManager = new SignedLogManager(mContext);
+		}
+		return mSignedLogManager;
+	}
+	
     public void startReportTask() {
 //        SignedLogReportTaskManager.getInstance(getDefaultContext()).run();
     }
