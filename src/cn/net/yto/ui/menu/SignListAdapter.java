@@ -11,6 +11,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 import cn.net.yto.R;
+import cn.net.yto.biz.SignedLogManager;
+import cn.net.yto.utils.ToastUtils;
+import cn.net.yto.utils.ToastUtils.Operation;
 import cn.net.yto.vo.SignedLogVO;
 
 public class SignListAdapter extends BaseAdapter {
@@ -18,9 +21,20 @@ public class SignListAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
 
     private ArrayList<SignListAdapterItem> mData = new ArrayList<SignListAdapterItem>();
+    
+    // if true, only one item could be selected; else support multi-selection
+    private boolean mIsSingleSelection = false;
+    private int mSelectPosition = -1;
 
     public SignListAdapter(Context context) {
         mInflater = LayoutInflater.from(context);
+    }
+    
+    public void setSingleSelection(boolean singleSelection) {
+        if (mIsSingleSelection != singleSelection) {
+            mIsSingleSelection = singleSelection;
+            notifyDataSetChanged();
+        }
     }
     
     public void setData(List<SignedLogVO> signedLogs) {
@@ -39,20 +53,36 @@ public class SignListAdapter extends BaseAdapter {
         return mData.get(position);
     }
 
-    public void deleteSelectedItem(Context context) {
-        ArrayList<SignedLogVO> selectedSignedLogs = new ArrayList<SignedLogVO>();
-        for (int i = mData.size() - 1; i >= 0; i--) {
-            SignListAdapterItem item = mData.get(i);
-            if (item.isSelected()) {
-                selectedSignedLogs.add(item.getSignedLogVO());
-                mData.remove(i);
+    public void deleteSelectedItem(Context context, SignedLogManager signedLogMgr) {
+        int result = 0;
+        if (mIsSingleSelection) {
+            SignedLogVO selectVO = mData.get(mSelectPosition).getSignedLogVO();
+            result = signedLogMgr.removeSignedLog(selectVO);
+            if (result >0) {
+                mData.remove(mSelectPosition);
+                mSelectPosition = -1;
+            }
+        } else {
+            ArrayList<SignListAdapterItem> selectedItem = new ArrayList<SignListAdapterItem>();
+            ArrayList<SignedLogVO> selectedVOs = new ArrayList<SignedLogVO>();
+            for (int i = mData.size() - 1; i >= 0; i--) {
+                SignListAdapterItem item = mData.get(i);
+                if (item.isSelected()) {
+                    selectedItem.add(item);
+                    selectedVOs.add(item.getSignedLogVO());
+                }
+            }
+            result = signedLogMgr.removeSignedLog(selectedVOs);
+            if (result >0) {
+                mData.removeAll(selectedItem);
             }
         }
 
-        // DbTempUtils.delete(context, selectedSignedLogs);
-        // TODO delete item
-
-        notifyDataSetChanged();
+        
+        ToastUtils.showOperationToast(Operation.DELETE, result >0);
+        if (result >0) {
+            notifyDataSetChanged();
+        }
     }
 
     @Override
@@ -60,11 +90,15 @@ public class SignListAdapter extends BaseAdapter {
         return position;
     }
 
-    public void onItemClick(int position) {
+    public SignListAdapterItem onItemClick(int position) {
         SignListAdapterItem item = getItem(position);
-        boolean checked = item.isSelected();
-        item.setSelected(!checked);
+        if (mIsSingleSelection) {
+            mSelectPosition = position;
+        } else {
+            item.setSelected(!item.isSelected());
+        }
         notifyDataSetChanged();
+        return item;
     }
 
     @Override
@@ -87,10 +121,18 @@ public class SignListAdapter extends BaseAdapter {
         itemHolder.signTypeView.setText(item.getSignType());
         itemHolder.receipientView.setText(item.getRecipient());
         itemHolder.signTimeView.setText(item.getSignTime());
-        if (item.isSelected()) {
-            convertView.setBackgroundColor(Color.GREEN);
+        if (mIsSingleSelection) {
+            if (mSelectPosition == position) {
+                convertView.setBackgroundColor(Color.GREEN);
+            } else {
+                convertView.setBackgroundColor(Color.WHITE);
+            }
         } else {
-            convertView.setBackgroundColor(Color.WHITE);
+            if (item.isSelected()) {
+                convertView.setBackgroundColor(Color.GREEN);
+            } else {
+                convertView.setBackgroundColor(Color.WHITE);
+            }
         }
 
         return convertView;
@@ -110,22 +152,4 @@ public class SignListAdapter extends BaseAdapter {
         }
         return items;
     }
-
-//    public static List<SignedLogVO> getSignedLogs(List<SignListAdapterItem> items) {
-//        List<SignedLogVO> signedLogs = new ArrayList<SignedLogVO>();
-//        for (SignListAdapterItem item : items) {
-//            signedLogs.add(item.getSignedLogVO());
-//        }
-//        return signedLogs;
-//    }
-//    
-//    public static List<SignedLogVO> getSignedLogs(List<SignListAdapterItem> items, boolean selected) {
-//        List<SignedLogVO> signedLogs = new ArrayList<SignedLogVO>();
-//        for (SignListAdapterItem item : items) {
-//            if (item.isSelected() == selected) {
-//                signedLogs.add(item.getSignedLogVO());
-//            }
-//        }
-//        return signedLogs;
-//    }
 }

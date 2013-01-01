@@ -31,7 +31,7 @@ public class WSSignedLogTask extends BaseTask {
             UserService.submitSignedLog(log2, new Listener() {
                 @Override
                 public void onPreSubmit() {
-                    log2.setStatus(UploadStatus.UPLOADING);
+                    log2.setUploadStatus(UploadStatus.UPLOADING);
 //                    dbHelper.updateStatusOfSignedLog(log2);
                 }
 
@@ -41,9 +41,9 @@ public class WSSignedLogTask extends BaseTask {
                     if (response != null && response instanceof SubmitSignedLogResponseMsgVO) {
                         int errorCode = ((SubmitSignedLogResponseMsgVO) response).getRetVal();
                         if (errorCode == 1) {
-                            log2.setStatus(UploadStatus.UPLOAD_SUCCESS);
+                            log2.setUploadStatus(UploadStatus.UPLOAD_SUCCESS);
                         } else {
-                            log2.setStatus(UploadStatus.UPLOAD_FAILURE);
+                            log2.setUploadStatus(UploadStatus.UPLOAD_FAILURE);
                         }
 //                        dbHelper.updateStatusOfSignedLog(log2);
                     }

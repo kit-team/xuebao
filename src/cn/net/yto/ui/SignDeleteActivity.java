@@ -52,7 +52,7 @@ public class SignDeleteActivity extends Activity {
                 if (TextUtils.isEmpty(wayBillNo)) {
                     return;
                 }
-                mAdapter.setData(mSignedLogMgr.querySubWayBillSignedLog(wayBillNo));
+                mAdapter.setData(mSignedLogMgr.queryByWaybillno(wayBillNo));
             }
         });
 
@@ -66,7 +66,7 @@ public class SignDeleteActivity extends Activity {
         findViewById(R.id.btn_delete).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mAdapter.deleteSelectedItem(SignDeleteActivity.this);
+                mAdapter.deleteSelectedItem(SignDeleteActivity.this, mSignedLogMgr);
             }
         });
 

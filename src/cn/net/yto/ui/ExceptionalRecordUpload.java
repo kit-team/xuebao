@@ -10,6 +10,7 @@ import cn.net.yto.R;
 import cn.net.yto.biz.SignedLogManager;
 import cn.net.yto.ui.menu.SignListAdapter;
 import cn.net.yto.ui.menu.SignListItemClickListener;
+import cn.net.yto.vo.SignedLogVO.UploadStatus;
 
 public class ExceptionalRecordUpload extends Activity {
 
@@ -17,7 +18,7 @@ public class ExceptionalRecordUpload extends Activity {
     private SignListAdapter mAdapter = null;
 
     private Spinner mUploadStateSpinner = null;
-    private String[] mUplaodState = null;
+    private String[] mUploadState = null;
 
     private SignedLogManager mSignedLogMgr = null;
 
@@ -39,21 +40,25 @@ public class ExceptionalRecordUpload extends Activity {
         View headView = getLayoutInflater().inflate(R.layout.list_detail_head, null);
         mListView.addHeaderView(headView);
         mAdapter = new SignListAdapter(getApplicationContext());
-        mAdapter.setData(mSignedLogMgr.queryAllSignedLog());
+        mAdapter.setData(mSignedLogMgr.queryByUploadSataus(UploadStatus.NOT_UPLOAD));
         mListView.setAdapter(mAdapter);
         mListView.setOnItemClickListener(new SignListItemClickListener(mAdapter, true));
 
-        mUplaodState = getResources().getStringArray(R.array.array_upload_state);
+        mUploadState = getResources().getStringArray(R.array.array_upload_state);
         mUploadStateSpinner = (Spinner) findViewById(R.id.spinner_upload_state);
 
         findViewById(R.id.btn_query_sate).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final int index = mUploadStateSpinner.getSelectedItemPosition();
-                String state = mUplaodState[index];
-                
-                // TODO query
-//                mSignedLogMgr.querySubWayBillSignedLog(wayBillNo)
+                String state = mUploadState[index];
+                if (index == 0) {
+                    mAdapter.setData(mSignedLogMgr.queryByUploadSataus(UploadStatus.UPLOADING));
+                } else if (index == 1) {
+                    mAdapter.setData(mSignedLogMgr.queryByUploadSataus(UploadStatus.UPLOAD_FAILURE));
+                } else if (index == 2) {
+                    mAdapter.setData(mSignedLogMgr.queryByUploadSataus(UploadStatus.UPLOAD_SUCCESS));
+                }
             }
         });
 
@@ -67,7 +72,7 @@ public class ExceptionalRecordUpload extends Activity {
         findViewById(R.id.btn_delete).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mAdapter.deleteSelectedItem(ExceptionalRecordUpload.this);
+                mAdapter.deleteSelectedItem(ExceptionalRecordUpload.this, mSignedLogMgr);
             }
         });
 

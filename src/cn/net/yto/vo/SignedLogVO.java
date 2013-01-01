@@ -16,6 +16,7 @@ import com.j256.ormlite.field.DatabaseField;
  */
 public class SignedLogVO {
     public static final String WAYBILLNO_FIELD_NAME = "waybillNo"; 
+    public static final String UPLOADSTATUS_FIELD_NAME = "uploadStatus"; 
     
     // 派件 id
 	@DatabaseField(id = true)
@@ -73,7 +74,7 @@ public class SignedLogVO {
     private long amountAgency = 0;
 
     // 上传状态
-    @DatabaseField
+    @DatabaseField(columnName = UPLOADSTATUS_FIELD_NAME)
     private UploadStatus uploadStatus = UploadStatus.NOT_UPLOAD;
 
     // 收件人
@@ -155,11 +156,11 @@ public class SignedLogVO {
         this.expSignedDescription = expSignedDescription;
     }
 
-    public UploadStatus getStatus() {
+    public UploadStatus getUploadStatus() {
         return uploadStatus;
     }
 
-    public void setStatus(UploadStatus status) {
+    public void setUploadStatus(UploadStatus status) {
         this.uploadStatus = status;
     }
 

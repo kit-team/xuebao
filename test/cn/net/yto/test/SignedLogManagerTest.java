@@ -56,7 +56,7 @@ public class SignedLogManagerTest extends ApplicationTestCase<AppContext>{
     	assertEquals(signlog1.getSignedState(), SignedState.SIGNED_SUCCESS);    	
     	assertEquals(signlog1.getSatisfaction(), Satisfaction.SATISFIED);    	
     	assertEquals(signlog1.getExpSignedDescription(), "");    	
-    	assertEquals(signlog1.getStatus(), UploadStatus.NOT_UPLOAD);    	
+    	assertEquals(signlog1.getUploadStatus(), UploadStatus.NOT_UPLOAD);    	
     	assertEquals(signlog1.getRecipient(), "张三");    	
     	assertEquals(signlog1.getSignedLogId(), "id12345");    	
     	assertEquals(signlog1.isScan(), 0);    	
@@ -87,7 +87,7 @@ public class SignedLogManagerTest extends ApplicationTestCase<AppContext>{
 		signedLogVO4.setWaybillNo("d666");
     	app.getSignedLogManager().saveSignedLog(signedLogVO4);
 		
-    	List<SignedLogVO> notUploadSignedLogs = app.getSignedLogManager().querySubWayBillSignedLog("a%"); 
+    	List<SignedLogVO> notUploadSignedLogs = app.getSignedLogManager().queryByWaybillno("a%"); 
     	assertEquals(1, notUploadSignedLogs.size());
     	assertEquals(notUploadSignedLogs.get(0).getWaybillNo(), "a123");    	
 

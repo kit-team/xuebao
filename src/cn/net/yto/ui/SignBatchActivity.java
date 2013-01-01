@@ -51,6 +51,7 @@ public class SignBatchActivity extends Activity {
         mListView = (ListView) findViewById(R.id.list_details);
         mListView.addHeaderView(headView);
         mAdapter = new SignListAdapter(getApplicationContext());
+        mAdapter.setSingleSelection(true);
         mAdapter.setData(mSignedLogMgr.queryAllSignedLog());
         mListView.setAdapter(mAdapter);
         mListView.setOnItemClickListener(new SignListItemClickListener(mAdapter, true));
@@ -69,7 +70,7 @@ public class SignBatchActivity extends Activity {
         findViewById(R.id.btn_delete).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mAdapter.deleteSelectedItem(SignBatchActivity.this);
+                mAdapter.deleteSelectedItem(SignBatchActivity.this, mSignedLogMgr);
             }
         });
 
@@ -91,11 +92,11 @@ public class SignBatchActivity extends Activity {
 
     private boolean checkInputVaules() {
         if (TextUtils.isEmpty(mWaybillNo.getText().toString())) {
-            ToastUtils.showToast("运单号不能为空");
+            ToastUtils.showToast(R.string.toast_waybillno_notify);
             return false;
         }
         if (TextUtils.isEmpty(mReceipient.getText().toString())) {
-            ToastUtils.showToast("签收人不能为空");
+            ToastUtils.showToast(R.string.toast_receipient_notify);
             return false;
         }
 

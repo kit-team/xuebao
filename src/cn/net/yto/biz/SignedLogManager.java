@@ -1,6 +1,7 @@
 package cn.net.yto.biz;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
@@ -64,6 +65,26 @@ public class SignedLogManager {
         }
         return false;
     }
+    
+    public int removeSignedLog(SignedLogVO signedLogVO) {
+        int result = 0; 
+        try {
+            result = mSignedLogDao.delete(signedLogVO);
+        } catch (SQLException e) {
+            LogUtils.e(TAG, e);
+        }
+        return result;
+    }
+    
+    public int removeSignedLog(List<SignedLogVO> signedLogs) {
+        int result = 0;
+        try {
+            result = mSignedLogDao.delete(signedLogs);
+        } catch (SQLException e) {
+            LogUtils.e(TAG, e);
+        }
+        return result;
+    }
 
     public boolean upload(final SignedLogVO signedLogVO, Context context) {
 
@@ -81,12 +102,16 @@ public class SignedLogManager {
                 if (response != null) {
                     SubmitSignedLogRequestMsgVO responseVo = (SubmitSignedLogRequestMsgVO) response;
                     if (vo != null) {
-                        vo.setStatus(UploadStatus.UPLOAD_SUCCESS);
+                        vo.setUploadStatus(UploadStatus.UPLOAD_SUCCESS);
                         saveSignedLog(vo);
                     }
                     ToastUtils.showOperationToast(Operation.UPLOAD, true);
                 } else {
                     Log.w(TAG, "upload failed! mWayBillNo = " + wayBillNo);
+                    if (vo != null) {
+                        vo.setUploadStatus(UploadStatus.UPLOAD_FAILURE);
+                        saveSignedLog(vo);
+                    }
                     ToastUtils.showOperationToast(Operation.UPLOAD, false);
                 }
             }
@@ -106,13 +131,25 @@ public class SignedLogManager {
         return signed;
     }
 
-    public List<SignedLogVO> querySubWayBillSignedLog(String wayBillNo) {
+    public List<SignedLogVO> queryByWaybillno(String wayBillNo) {
         List<SignedLogVO> list = null;
-        SignedLogVO vo = new SignedLogVO();
-        vo.setWaybillNo(wayBillNo);
         try {
-            list = mSignedLogDao.queryBuilder().where().like(SignedLogVO.WAYBILLNO_FIELD_NAME, wayBillNo).query();
+            list = mSignedLogDao.queryBuilder().where()
+                    .like(SignedLogVO.WAYBILLNO_FIELD_NAME, "%"+wayBillNo+"%").query();
         } catch (SQLException e) {
+            list = new ArrayList<SignedLogVO>();
+            LogUtils.e(TAG, e);
+        }
+        return list;
+    }
+    
+    public List<SignedLogVO> queryByUploadSataus(UploadStatus status) {
+        List<SignedLogVO> list = null;
+        try {
+            list = mSignedLogDao.queryBuilder().where()
+                    .eq(SignedLogVO.UPLOADSTATUS_FIELD_NAME, status).query();
+        } catch (SQLException e) {
+            list = new ArrayList<SignedLogVO>();
             LogUtils.e(TAG, e);
         }
         return list;
@@ -123,6 +160,7 @@ public class SignedLogManager {
         try {
             list = mSignedLogDao.queryBuilder().query();
         } catch (SQLException e) {
+            list = new ArrayList<SignedLogVO>();
             LogUtils.e(TAG, e);
         }
         return list;

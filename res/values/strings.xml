@@ -65,6 +65,8 @@
     <string name="toast_upload_failed">上传失败</string>
     <string name="toast_delete_failed">删除失败</string>
     <string name="toast_modify_failed">编辑失败</string>
+    <string name="toast_waybillno_notify">请输入运单号</string>
+    <string name="toast_receipient_notify">请输入签收人</string>
 
     <string-array name="sign_result">
         <item>正常签收</item>

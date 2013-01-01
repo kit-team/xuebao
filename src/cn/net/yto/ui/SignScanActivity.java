@@ -249,11 +249,11 @@ public class SignScanActivity extends Activity {
 
         private boolean checkInputVaules() {
             if (TextUtils.isEmpty(mWaybillNo.getText().toString())) {
-                ToastUtils.showToast("运单号不能为空");
+                ToastUtils.showToast(R.string.toast_waybillno_notify);
                 return false;
             }
             if (TextUtils.isEmpty(mReceipient.getText().toString())) {
-                ToastUtils.showToast("签收人不能为空");
+                ToastUtils.showToast(R.string.toast_receipient_notify);
                 return false;
             }
 
@@ -329,9 +329,9 @@ public class SignScanActivity extends Activity {
             });
         }
 
-        public boolean checkInputVaules() {
+        private boolean checkInputVaules() {
             if (TextUtils.isEmpty(mWaybillNo.getText().toString())) {
-                ToastUtils.showToast("运单号不能为空");
+                ToastUtils.showToast(R.string.toast_waybillno_notify);
                 return false;
             }
             return true;
