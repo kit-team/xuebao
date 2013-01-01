@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.ListView;
+import android.widget.Spinner;
 import cn.net.yto.R;
+import cn.net.yto.biz.SignedLogManager;
 import cn.net.yto.ui.menu.SignListAdapter;
 import cn.net.yto.ui.menu.SignListItemClickListener;
 
@@ -13,6 +15,11 @@ public class ExceptionalRecordUpload extends Activity {
 
     private ListView mListView;
     private SignListAdapter mAdapter = null;
+
+    private Spinner mUploadStateSpinner = null;
+    private String[] mUplaodState = null;
+
+    private SignedLogManager mSignedLogMgr = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +29,8 @@ public class ExceptionalRecordUpload extends Activity {
         getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE,
                 R.layout.exceptional_record_upload_title);
 
+        mSignedLogMgr = new SignedLogManager(this);
+
         initViews();
     }
 
@@ -30,8 +39,23 @@ public class ExceptionalRecordUpload extends Activity {
         View headView = getLayoutInflater().inflate(R.layout.list_detail_head, null);
         mListView.addHeaderView(headView);
         mAdapter = new SignListAdapter(getApplicationContext());
+        mAdapter.setData(mSignedLogMgr.queryAllSignedLog());
         mListView.setAdapter(mAdapter);
         mListView.setOnItemClickListener(new SignListItemClickListener(mAdapter, true));
+
+        mUplaodState = getResources().getStringArray(R.array.array_upload_state);
+        mUploadStateSpinner = (Spinner) findViewById(R.id.spinner_upload_state);
+
+        findViewById(R.id.btn_query_sate).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final int index = mUploadStateSpinner.getSelectedItemPosition();
+                String state = mUplaodState[index];
+                
+                // TODO query
+//                mSignedLogMgr.querySubWayBillSignedLog(wayBillNo)
+            }
+        });
 
         findViewById(R.id.btn_back).setOnClickListener(new View.OnClickListener() {
             @Override

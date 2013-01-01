@@ -229,7 +229,7 @@ public class SignScanActivity extends Activity {
                 @Override
                 public void onClick(View v) {
                     if (checkInputVaules()) {
-                        //save to DB
+                        // save to DB
                         boolean result = mSignedLogMgr.saveSignedLog(getSignedLogForSave());
                         if (result) {
                             mWaybillNo.setText("");
@@ -238,9 +238,10 @@ public class SignScanActivity extends Activity {
                             mReceipient.setText("");
                         }
                         ToastUtils.showOperationToast(Operation.SAVE, result);
+
                         // Upload to server
-                        result = mSignedLogMgr.upload(getSignedLogForSave(), ((AppContext)getApplication()).getDefaultContext());
-                        ToastUtils.showOperationToast(Operation.UPLOAD, result);
+                        result = mSignedLogMgr.upload(getSignedLogForSave(),
+                                ((AppContext) getApplication()).getDefaultContext());
                     }
                 }
             });
@@ -321,8 +322,8 @@ public class SignScanActivity extends Activity {
                         ToastUtils.showOperationToast(Operation.SAVE, result);
                         
                         // upload to server
-                        result = mSignedLogMgr.upload(getSignedLogForSave(), ((AppContext)getApplication()).getDefaultContext());
-                        ToastUtils.showOperationToast(Operation.UPLOAD, result);
+                        mSignedLogMgr.upload(getSignedLogForSave(),
+                                ((AppContext) getApplication()).getDefaultContext());
                     }
                 }
             });

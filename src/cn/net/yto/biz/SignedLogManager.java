@@ -13,6 +13,7 @@ import cn.net.yto.net.ZltdHttpClient;
 import cn.net.yto.net.ZltdHttpClient.Listener;
 import cn.net.yto.utils.LogUtils;
 import cn.net.yto.utils.ToastUtils;
+import cn.net.yto.utils.ToastUtils.Operation;
 import cn.net.yto.vo.ReceiveVO;
 import cn.net.yto.vo.SignedLogVO;
 import cn.net.yto.vo.SignedLogVO.UploadStatus;
@@ -83,8 +84,10 @@ public class SignedLogManager {
                         vo.setStatus(UploadStatus.UPLOAD_SUCCESS);
                         saveSignedLog(vo);
                     }
+                    ToastUtils.showOperationToast(Operation.UPLOAD, true);
                 } else {
                     Log.w(TAG, "upload failed! mWayBillNo = " + wayBillNo);
+                    ToastUtils.showOperationToast(Operation.UPLOAD, false);
                 }
             }
         };
