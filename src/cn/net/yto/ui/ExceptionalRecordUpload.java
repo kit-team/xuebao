@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.Window;
 import android.widget.ListView;
 import cn.net.yto.R;
+import cn.net.yto.ui.menu.SignListAdapter;
+import cn.net.yto.ui.menu.SignListItemClickListener;
 
 public class ExceptionalRecordUpload extends Activity {
 

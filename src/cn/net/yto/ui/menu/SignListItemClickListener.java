@@ -1,4 +1,4 @@
-package cn.net.yto.ui;
+package cn.net.yto.ui.menu;
 
 import android.view.View;
 import android.widget.AdapterView;

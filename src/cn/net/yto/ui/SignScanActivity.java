@@ -27,6 +27,7 @@ import android.widget.TextView;
 import cn.net.yto.R;
 import cn.net.yto.biz.SignedLogManager;
 import cn.net.yto.utils.ToastUtils;
+import cn.net.yto.utils.ToastUtils.Operation;
 import cn.net.yto.vo.SignedLogVO;
 import cn.net.yto.vo.SignedLogVO.Satisfaction;
 
@@ -227,12 +228,14 @@ public class SignScanActivity extends Activity {
                 @Override
                 public void onClick(View v) {
                     if (checkInputVaules()) {
-                        mSignedLogMgr.saveSignedLog(getSignedLogForSave());
-
-                        mWaybillNo.setText("");
-                        mCollectionAmount.setText("");
-                        mFreightToCollect.setText("");
-                        mReceipient.setText("");
+                        boolean result = mSignedLogMgr.saveSignedLog(getSignedLogForSave());
+                        if (result) {
+                            mWaybillNo.setText("");
+                            mCollectionAmount.setText("");
+                            mFreightToCollect.setText("");
+                            mReceipient.setText("");
+                        }
+                        ToastUtils.showOperationToast(Operation.SAVE, result);
                     }
                 }
             });
@@ -304,12 +307,15 @@ public class SignScanActivity extends Activity {
                 @Override
                 public void onClick(View v) {
                     if (checkInputVaules()) {
-                        // DbTempUtils.insert(SignScanActivity.this,
-                        // getSignedLogForSave());
-                        mSignedLogMgr.saveSignedLog(getSignedLogForSave());
-
-                        mWaybillNo.setText("");
-                        mExceptionDescription.setText("");
+                        boolean result = mSignedLogMgr.saveSignedLog(getSignedLogForSave());
+                        if (result) {
+                            mWaybillNo.setText("");
+                            mExceptionDescription.setText("");
+                            ToastUtils.showToast("已保存");
+                        } else {
+                            ToastUtils.showToast("保存失败");
+                        }
+                        ToastUtils.showOperationToast(Operation.SAVE, result);
                     }
                 }
             });

@@ -11,7 +11,10 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import cn.net.yto.R;
 import cn.net.yto.biz.SignedLogManager;
+import cn.net.yto.ui.menu.SignListAdapter;
+import cn.net.yto.ui.menu.SignListItemClickListener;
 import cn.net.yto.utils.ToastUtils;
+import cn.net.yto.utils.ToastUtils.Operation;
 import cn.net.yto.vo.SignedLogVO;
 import cn.net.yto.vo.SignedLogVO.Satisfaction;
 
@@ -72,10 +75,11 @@ public class SignBatchActivity extends Activity {
             @Override
             public void onClick(View v) {
                 if (checkInputVaules()) {
-//                    DbTempUtils.insert(SignBatchActivity.this, getSignedLogForSave());
-                    mSignedLogMgr.saveSignedLog(getSignedLogForSave());
-
-                    mWaybillNo.setText("");
+                    boolean result = mSignedLogMgr.saveSignedLog(getSignedLogForSave());
+                    if (result) {
+                        mWaybillNo.setText("");
+                    }
+                    ToastUtils.showOperationToast(Operation.SAVE, result);
                 }
             }
         });
