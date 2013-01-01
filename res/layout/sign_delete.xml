@@ -13,7 +13,6 @@
         android:gravity="center">
 
         <TextView
-            android:id="@+id/textView1"
             android:layout_width="@dimen/label_size"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -21,11 +20,10 @@
             android:text="@string/label_tracking_number" />
 
         <EditText
-            android:id="@+id/editSignNo"
+            android:id="@+id/edit_tracking_number"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:inputType="text" >
+            android:layout_weight="1" >
 
             <requestFocus />
         </EditText>

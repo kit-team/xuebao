@@ -1,4 +1,4 @@
-package cn.net.yto.ui;
+package cn.net.yto.ui.menu;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,30 +11,21 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 import cn.net.yto.R;
-import cn.net.yto.biz.SignedLogManager;
 import cn.net.yto.vo.SignedLogVO;
 
 public class SignListAdapter extends BaseAdapter {
 
     private LayoutInflater mInflater;
 
-    private ArrayList<SignListAdapterItem> mData = null;
-    private SignedLogManager mSignedLogManager = null;
+    private ArrayList<SignListAdapterItem> mData = new ArrayList<SignListAdapterItem>();
 
     public SignListAdapter(Context context) {
         mInflater = LayoutInflater.from(context);
-        mSignedLogManager = new SignedLogManager(context);
-        mData = new ArrayList<SignListAdapterItem>();
-        List<SignedLogVO> signedlogs = mSignedLogManager.queryAllSignedLog();
-        for (SignedLogVO vo : signedlogs) {
-            SignListAdapterItem item = new SignListAdapterItem(vo);
-            mData.add(item);
-        }
     }
-
-    public void setData(ArrayList<SignListAdapterItem> datas) {
+    
+    public void setData(List<SignedLogVO> signedLogs) {
         mData.clear();
-        mData.addAll(datas);
+        mData.addAll(buildSignListAdapterItem(signedLogs));
         notifyDataSetChanged();
     }
 
@@ -53,7 +44,7 @@ public class SignListAdapter extends BaseAdapter {
         for (int i = mData.size() - 1; i >= 0; i--) {
             SignListAdapterItem item = mData.get(i);
             if (item.isSelected()) {
-                selectedSignedLogs.add(item.getSignedLog());
+                selectedSignedLogs.add(item.getSignedLogVO());
                 mData.remove(i);
             }
         }
@@ -111,4 +102,30 @@ public class SignListAdapter extends BaseAdapter {
         TextView receipientView = null;
         TextView signTimeView = null;
     }
+
+    public static List<SignListAdapterItem> buildSignListAdapterItem(List<SignedLogVO> signedLogs) {
+        List<SignListAdapterItem> items = new ArrayList<SignListAdapterItem>();
+        for (SignedLogVO vo : signedLogs) {
+            items.add(new SignListAdapterItem(vo));
+        }
+        return items;
+    }
+
+//    public static List<SignedLogVO> getSignedLogs(List<SignListAdapterItem> items) {
+//        List<SignedLogVO> signedLogs = new ArrayList<SignedLogVO>();
+//        for (SignListAdapterItem item : items) {
+//            signedLogs.add(item.getSignedLogVO());
+//        }
+//        return signedLogs;
+//    }
+//    
+//    public static List<SignedLogVO> getSignedLogs(List<SignListAdapterItem> items, boolean selected) {
+//        List<SignedLogVO> signedLogs = new ArrayList<SignedLogVO>();
+//        for (SignListAdapterItem item : items) {
+//            if (item.isSelected() == selected) {
+//                signedLogs.add(item.getSignedLogVO());
+//            }
+//        }
+//        return signedLogs;
+//    }
 }

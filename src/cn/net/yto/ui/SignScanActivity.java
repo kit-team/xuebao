@@ -28,6 +28,7 @@ import cn.net.yto.R;
 import cn.net.yto.application.AppContext;
 import cn.net.yto.biz.SignedLogManager;
 import cn.net.yto.utils.ToastUtils;
+import cn.net.yto.utils.ToastUtils.Operation;
 import cn.net.yto.vo.SignedLogVO;
 import cn.net.yto.vo.SignedLogVO.Satisfaction;
 
@@ -228,13 +229,18 @@ public class SignScanActivity extends Activity {
                 @Override
                 public void onClick(View v) {
                     if (checkInputVaules()) {
-                        mSignedLogMgr.saveSignedLog(getSignedLogForSave());
-                        mSignedLogMgr.upload(getSignedLogForSave(), ((AppContext)getApplication()).getDefaultContext());
-
-                        mWaybillNo.setText("");
-                        mCollectionAmount.setText("");
-                        mFreightToCollect.setText("");
-                        mReceipient.setText("");
+                        //save to DB
+                        boolean result = mSignedLogMgr.saveSignedLog(getSignedLogForSave());
+                        if (result) {
+                            mWaybillNo.setText("");
+                            mCollectionAmount.setText("");
+                            mFreightToCollect.setText("");
+                            mReceipient.setText("");
+                        }
+                        ToastUtils.showOperationToast(Operation.SAVE, result);
+                        // Upload to server
+                        result = mSignedLogMgr.upload(getSignedLogForSave(), ((AppContext)getApplication()).getDefaultContext());
+                        ToastUtils.showOperationToast(Operation.UPLOAD, result);
                     }
                 }
             });
@@ -306,12 +312,17 @@ public class SignScanActivity extends Activity {
                 @Override
                 public void onClick(View v) {
                     if (checkInputVaules()) {
-                        // DbTempUtils.insert(SignScanActivity.this,
-                        // getSignedLogForSave());
-                        mSignedLogMgr.saveSignedLog(getSignedLogForSave());
-                        mSignedLogMgr.upload(getSignedLogForSave(), ((AppContext)getApplication()).getDefaultContext());
-                        mWaybillNo.setText("");
-                        mExceptionDescription.setText("");
+                        // save to DB
+                        boolean result = mSignedLogMgr.saveSignedLog(getSignedLogForSave());
+                        if (result) {
+                            mWaybillNo.setText("");
+                            mExceptionDescription.setText("");
+                        }
+                        ToastUtils.showOperationToast(Operation.SAVE, result);
+                        
+                        // upload to server
+                        result = mSignedLogMgr.upload(getSignedLogForSave(), ((AppContext)getApplication()).getDefaultContext());
+                        ToastUtils.showOperationToast(Operation.UPLOAD, result);
                     }
                 }
             });

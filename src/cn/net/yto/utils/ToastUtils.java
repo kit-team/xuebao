@@ -3,6 +3,7 @@ package cn.net.yto.utils;
 import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
+import cn.net.yto.R;
 
 public class ToastUtils {
     private final static String TAG = "ToastUtils";
@@ -39,7 +40,7 @@ public class ToastUtils {
         sInstance.mToast.show();
     }
 
-    public void showToast(int resId) {
+    public static void showToast(int resId) {
         if (sInstance.mContext == null) {
             Log.e(TAG, "context is null, not init ToastUtils");
             return;
@@ -50,6 +51,45 @@ public class ToastUtils {
             sInstance.mToast.setText(resId);
         }
         sInstance.mToast.show();
+    }
+
+    public enum Operation {
+        SAVE, MODIFY, DELETE, UPLOAD,
+    };
+
+    public static void showOperationToast(Operation opt, boolean result) {
+        switch (opt) {
+        case SAVE:
+            if (result) {
+                ToastUtils.showToast(R.string.toast_save_success);
+            } else {
+                ToastUtils.showToast(R.string.toast_save_failed);
+            }
+            break;
+        case MODIFY:
+            if (result) {
+                ToastUtils.showToast(R.string.toast_modify_success);
+            } else {
+                ToastUtils.showToast(R.string.toast_modify_failed);
+            }
+            break;
+        case DELETE:
+            if (result) {
+                ToastUtils.showToast(R.string.toast_delete_success);
+            } else {
+                ToastUtils.showToast(R.string.toast_delete_failed);
+            }
+            break;
+        case UPLOAD:
+            if (result) {
+                ToastUtils.showToast(R.string.toast_upload_success);
+            } else {
+                ToastUtils.showToast(R.string.toast_upload_failed);
+            }
+            break;
+        default:
+            break;
+        }
     }
 
 }

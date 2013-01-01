@@ -12,12 +12,15 @@ import cn.net.yto.net.UrlType;
 import cn.net.yto.net.ZltdHttpClient;
 import cn.net.yto.net.ZltdHttpClient.Listener;
 import cn.net.yto.utils.LogUtils;
+import cn.net.yto.utils.ToastUtils;
+import cn.net.yto.vo.ReceiveVO;
 import cn.net.yto.vo.SignedLogVO;
 import cn.net.yto.vo.SignedLogVO.UploadStatus;
 import cn.net.yto.vo.message.SubmitSignedLogRequestMsgVO;
 import cn.net.yto.vo.message.SubmitSignedLogResponseMsgVO;
 
 import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.dao.Dao.CreateOrUpdateStatus;
 
 /**
  * 
@@ -51,12 +54,14 @@ public class SignedLogManager {
         }
     }
     
-    public void saveSignedLog(SignedLogVO signedLogVO) {
+    public boolean saveSignedLog(SignedLogVO signedLogVO) {
         try {
-            mSignedLogDao.createOrUpdate(signedLogVO);
+            CreateOrUpdateStatus status = mSignedLogDao.createOrUpdate(signedLogVO);
+            return status.isCreated() || status.isUpdated();
         } catch (SQLException e) {
             LogUtils.e(TAG, e);
         }
+        return false;
     }
 
     public boolean upload(final SignedLogVO signedLogVO, Context context) {
@@ -100,6 +105,8 @@ public class SignedLogManager {
 
     public List<SignedLogVO> querySubWayBillSignedLog(String wayBillNo) {
         List<SignedLogVO> list = null;
+        SignedLogVO vo = new SignedLogVO();
+        vo.setWaybillNo(wayBillNo);
         try {
             list = mSignedLogDao.queryBuilder().where().like(SignedLogVO.WAYBILLNO_FIELD_NAME, wayBillNo).query();
         } catch (SQLException e) {

@@ -1,6 +1,8 @@
-package cn.net.yto.ui;
+package cn.net.yto.ui.menu;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 import android.text.TextUtils;
 import cn.net.yto.vo.SignedLogVO;
@@ -16,7 +18,7 @@ public class SignListAdapterItem {
         mSelected = false;
     }
 
-    public SignedLogVO getSignedLog() {
+    public SignedLogVO getSignedLogVO() {
         return mSignedLog;
     }
 
@@ -26,7 +28,7 @@ public class SignListAdapterItem {
 
     public String getSignType() {
         if (TextUtils.isEmpty(mSignedLog.getSignOffTypeCode())) {
-            return "(异常)"+mSignedLog.getSignedStateInfo();
+            return mSignedLog.getSignedStateInfo();
         }
         return mSignedLog.getSignOffTypeCode();
     }
@@ -50,4 +52,5 @@ public class SignListAdapterItem {
     public void setSelected(boolean selected) {
         mSelected = selected;
     }
+
 }
