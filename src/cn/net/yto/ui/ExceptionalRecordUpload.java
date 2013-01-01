@@ -1,5 +1,7 @@
 package cn.net.yto.ui;
 
+import java.util.List;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
@@ -7,9 +9,12 @@ import android.view.Window;
 import android.widget.ListView;
 import android.widget.Spinner;
 import cn.net.yto.R;
+import cn.net.yto.application.AppContext;
 import cn.net.yto.biz.SignedLogManager;
 import cn.net.yto.ui.menu.SignListAdapter;
 import cn.net.yto.ui.menu.SignListItemClickListener;
+import cn.net.yto.utils.ToastUtils;
+import cn.net.yto.vo.SignedLogVO;
 import cn.net.yto.vo.SignedLogVO.UploadStatus;
 
 public class ExceptionalRecordUpload extends Activity {
@@ -40,6 +45,7 @@ public class ExceptionalRecordUpload extends Activity {
         View headView = getLayoutInflater().inflate(R.layout.list_detail_head, null);
         mListView.addHeaderView(headView);
         mAdapter = new SignListAdapter(getApplicationContext());
+        mAdapter.setSingleSelection(true);
         mAdapter.setData(mSignedLogMgr.queryByUploadSataus(UploadStatus.NOT_UPLOAD));
         mListView.setAdapter(mAdapter);
         mListView.setOnItemClickListener(new SignListItemClickListener(mAdapter, true));
@@ -79,7 +85,14 @@ public class ExceptionalRecordUpload extends Activity {
         findViewById(R.id.btn_upload).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO upload select items
+                List<SignedLogVO> signedLogs = mAdapter.getSelectedSignedLog();
+                if (signedLogs.isEmpty()) {
+                    ToastUtils.showToast("请选择要上传的运单");
+                    return;
+                }
+                SignedLogVO signedLog = signedLogs.get(0);
+
+                mSignedLogMgr.upload(signedLog, AppContext.getAppContext().getDefaultContext());
             }
         });
     }

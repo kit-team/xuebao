@@ -59,13 +59,15 @@ public class SignedLogManager {
     public boolean saveSignedLog(SignedLogVO signedLogVO) {
         try {
             CreateOrUpdateStatus status = mSignedLogDao.createOrUpdate(signedLogVO);
+            LogUtils.e(TAG, "status.isCreated() = "+status.isCreated());
+            LogUtils.e(TAG, "status.isUpdated() = "+status.isUpdated());
             return status.isCreated() || status.isUpdated();
         } catch (SQLException e) {
             LogUtils.e(TAG, e);
         }
         return false;
     }
-    
+
     public int removeSignedLog(SignedLogVO signedLogVO) {
         int result = 0; 
         try {
@@ -111,7 +113,7 @@ public class SignedLogManager {
                     if (vo != null) {
                         vo.setUploadStatus(UploadStatus.UPLOAD_FAILURE);
                         saveSignedLog(vo);
-                    }
+                    } 
                     ToastUtils.showOperationToast(Operation.UPLOAD, false);
                 }
             }

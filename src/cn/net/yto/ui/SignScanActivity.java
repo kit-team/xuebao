@@ -240,8 +240,8 @@ public class SignScanActivity extends Activity {
                         ToastUtils.showOperationToast(Operation.SAVE, result);
 
                         // Upload to server
-                        result = mSignedLogMgr.upload(getSignedLogForSave(),
-                                ((AppContext) getApplication()).getDefaultContext());
+                        mSignedLogMgr.upload(getSignedLogForSave(), AppContext.getAppContext()
+                                .getDefaultContext());
                     }
                 }
             });
@@ -322,8 +322,8 @@ public class SignScanActivity extends Activity {
                         ToastUtils.showOperationToast(Operation.SAVE, result);
                         
                         // upload to server
-                        mSignedLogMgr.upload(getSignedLogForSave(),
-                                ((AppContext) getApplication()).getDefaultContext());
+                        mSignedLogMgr.upload(getSignedLogForSave(), AppContext.getAppContext()
+                                .getDefaultContext());
                     }
                 }
             });

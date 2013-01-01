@@ -1,14 +1,19 @@
 package cn.net.yto.ui;
 
+import java.util.List;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.AdapterView.OnItemClickListener;
 import cn.net.yto.R;
 import cn.net.yto.application.AppContext;
 import cn.net.yto.biz.SignedLogManager;
@@ -19,7 +24,7 @@ import cn.net.yto.utils.ToastUtils.Operation;
 import cn.net.yto.vo.SignedLogVO;
 import cn.net.yto.vo.SignedLogVO.Satisfaction;
 
-public class SignBatchActivity extends Activity {
+public class SignBatchActivity extends Activity implements OnItemClickListener {
 
     private ListView mListView = null;
     private SignListAdapter mAdapter = null;
@@ -30,8 +35,10 @@ public class SignBatchActivity extends Activity {
     private EditText mReceipient; // 签收人
 
     private String[] mSignTypeString;
-    
+
     private SignedLogManager mSignedLogMgr = null;
+
+    private SignedLogVO mSelectedSignedLog = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,10 +46,10 @@ public class SignBatchActivity extends Activity {
         requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
         setContentView(R.layout.sign_batch);
         getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.sign_batch_title);
-        
-        mSignedLogMgr = ((AppContext)getApplication()).getSignedLogManager();
+
+        mSignedLogMgr = ((AppContext) getApplication()).getSignedLogManager();
         mSignTypeString = getResources().getStringArray(R.array.sign_type);
-        
+
         initViews();
     }
 
@@ -54,7 +61,7 @@ public class SignBatchActivity extends Activity {
         mAdapter.setSingleSelection(true);
         mAdapter.setData(mSignedLogMgr.queryAllSignedLog());
         mListView.setAdapter(mAdapter);
-        mListView.setOnItemClickListener(new SignListItemClickListener(mAdapter, true));
+        mListView.setOnItemClickListener(this);
 
         mWaybillNo = (EditText) findViewById(R.id.edit_tracking_number);
         mSignTypeSpinner = (Spinner) findViewById(R.id.sign_type);
@@ -81,13 +88,53 @@ public class SignBatchActivity extends Activity {
                     boolean result = mSignedLogMgr.saveSignedLog(getSignedLogForSave());
                     if (result) {
                         mWaybillNo.setText("");
+                        mSelectedSignedLog = null;
+                        mAdapter.setData(mSignedLogMgr.queryAllSignedLog());
                     }
                     ToastUtils.showOperationToast(Operation.SAVE, result);
 
-                    mSignedLogMgr.upload(getSignedLogForSave(), ((AppContext)getApplication()).getDefaultContext());
+                    mSignedLogMgr.upload(getSignedLogForSave(),
+                            ((AppContext) getApplication()).getDefaultContext());
                 }
             }
         });
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parten, View v, int position, long id) {
+        if (position == 0) { // position is head view
+            return;
+        }
+        mAdapter.onItemClick(position - 1);
+
+        List<SignedLogVO> signedLogs = mAdapter.getSelectedSignedLog();
+        if (signedLogs.isEmpty()) {
+            mSelectedSignedLog = null;
+        } else {
+            mSelectedSignedLog = signedLogs.get(0);
+        }
+
+        if (mSelectedSignedLog != null) {
+            mWaybillNo.setText(mSelectedSignedLog.getWaybillNo());
+
+            String signOffType = mSelectedSignedLog.getSignOffTypeCode();
+            for (int i = 0; i < mSignTypeString.length; i++) {
+                if (mSignTypeString[i].endsWith(signOffType)) {
+                    mSignTypeSpinner.setSelection(i);
+                }
+            }
+
+            Satisfaction satisfaction = mSelectedSignedLog.getSatisfaction();
+            if (satisfaction == Satisfaction.VERY_SATISFIED) {
+                ((RadioButton) findViewById(R.id.very_satisfactory)).setChecked(true);
+            } else if (satisfaction == Satisfaction.DISSATISFIED) {
+                ((RadioButton) findViewById(R.id.unsatisfactory)).setChecked(true);
+            } else {
+                ((RadioButton) findViewById(R.id.satisfactory)).setChecked(true);
+            }
+
+            mReceipient.setText(mSelectedSignedLog.getRecipient());
+        }
     }
 
     private boolean checkInputVaules() {
@@ -104,9 +151,15 @@ public class SignBatchActivity extends Activity {
     }
 
     private SignedLogVO getSignedLogForSave() {
-        SignedLogVO signedLog = new SignedLogVO();
+        SignedLogVO signedLog = null;
+        String waybillno = mWaybillNo.getText().toString();
+        if (mSelectedSignedLog != null && waybillno.equals(mSelectedSignedLog.getWaybillNo())) {
+            signedLog = mSelectedSignedLog;
+        } else {
+            signedLog = new SignedLogVO();
+        }
 
-        signedLog.setWaybillNo(mWaybillNo.getText().toString());
+        signedLog.setWaybillNo(waybillno);
         final int typeIdx = mSignTypeSpinner.getSelectedItemPosition();
         signedLog.setSignOffTypeCode(mSignTypeString[typeIdx]);
         switch (mSatisfactory.getCheckedRadioButtonId()) {

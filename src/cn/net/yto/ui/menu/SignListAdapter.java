@@ -24,7 +24,7 @@ public class SignListAdapter extends BaseAdapter {
     
     // if true, only one item could be selected; else support multi-selection
     private boolean mIsSingleSelection = false;
-    private int mSelectPosition = -1;
+    private int mSelectedPosition = -1;
 
     public SignListAdapter(Context context) {
         mInflater = LayoutInflater.from(context);
@@ -38,6 +38,7 @@ public class SignListAdapter extends BaseAdapter {
     }
     
     public void setData(List<SignedLogVO> signedLogs) {
+        mSelectedPosition = -1;
         mData.clear();
         mData.addAll(buildSignListAdapterItem(signedLogs));
         notifyDataSetChanged();
@@ -53,14 +54,30 @@ public class SignListAdapter extends BaseAdapter {
         return mData.get(position);
     }
 
+    public ArrayList<SignedLogVO> getSelectedSignedLog() {
+        ArrayList<SignedLogVO> selectedVOs = new ArrayList<SignedLogVO>();
+        if (mIsSingleSelection && mSelectedPosition >= 0) {
+            selectedVOs.add(mData.get(mSelectedPosition).getSignedLogVO());
+        } else {
+            for (int i = mData.size() - 1; i >= 0; i--) {
+                SignListAdapterItem item = mData.get(i);
+                if (item.isSelected()) {
+                    selectedVOs.add(item.getSignedLogVO());
+                }
+            }
+        }
+
+        return selectedVOs;
+    }
+
     public void deleteSelectedItem(Context context, SignedLogManager signedLogMgr) {
         int result = 0;
         if (mIsSingleSelection) {
-            SignedLogVO selectVO = mData.get(mSelectPosition).getSignedLogVO();
+            SignedLogVO selectVO = mData.get(mSelectedPosition).getSignedLogVO();
             result = signedLogMgr.removeSignedLog(selectVO);
             if (result >0) {
-                mData.remove(mSelectPosition);
-                mSelectPosition = -1;
+                mData.remove(mSelectedPosition);
+                mSelectedPosition = -1;
             }
         } else {
             ArrayList<SignListAdapterItem> selectedItem = new ArrayList<SignListAdapterItem>();
@@ -90,15 +107,18 @@ public class SignListAdapter extends BaseAdapter {
         return position;
     }
 
-    public SignListAdapterItem onItemClick(int position) {
+    public void onItemClick(int position) {
         SignListAdapterItem item = getItem(position);
         if (mIsSingleSelection) {
-            mSelectPosition = position;
+            if (mSelectedPosition == position) {
+                mSelectedPosition = -1;
+            } else {
+                mSelectedPosition = position;
+            }
         } else {
             item.setSelected(!item.isSelected());
         }
         notifyDataSetChanged();
-        return item;
     }
 
     @Override
@@ -122,7 +142,7 @@ public class SignListAdapter extends BaseAdapter {
         itemHolder.receipientView.setText(item.getRecipient());
         itemHolder.signTimeView.setText(item.getSignTime());
         if (mIsSingleSelection) {
-            if (mSelectPosition == position) {
+            if (mSelectedPosition == position) {
                 convertView.setBackgroundColor(Color.GREEN);
             } else {
                 convertView.setBackgroundColor(Color.WHITE);
