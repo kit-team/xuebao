@@ -76,18 +76,15 @@ public class SignBatchActivity extends Activity {
             @Override
             public void onClick(View v) {
                 if (checkInputVaules()) {
-<<<<<<< HEAD
                     boolean result = mSignedLogMgr.saveSignedLog(getSignedLogForSave());
                     if (result) {
                         mWaybillNo.setText("");
                     }
                     ToastUtils.showOperationToast(Operation.SAVE, result);
-=======
 //                    DbTempUtils.insert(SignBatchActivity.this, getSignedLogForSave());
                     mSignedLogMgr.saveSignedLog(getSignedLogForSave());
                     mSignedLogMgr.upload(getSignedLogForSave(), ((AppContext)getApplication()).getDefaultContext());
                     mWaybillNo.setText("");
->>>>>>> 9bb7afd9c375cb25e1344cd06f6e3fde1afa941d
                 }
             }
         });
