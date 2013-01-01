@@ -19,7 +19,7 @@ public class SignedLogVO {
     public static final String UPLOADSTATUS_FIELD_NAME = "uploadStatus"; 
     
     // 派件 id
-	@DatabaseField(id = true)
+	@DatabaseField
     private String signedLogId;
     // 是否查看
     @DatabaseField
@@ -42,7 +42,7 @@ public class SignedLogVO {
     private String empCode = "";
 
     // 面单号
-    @DatabaseField(columnName = WAYBILLNO_FIELD_NAME, unique = true)
+    @DatabaseField(columnName = WAYBILLNO_FIELD_NAME, id = true)
     private String waybillNo = "";
 
     // 签收时间

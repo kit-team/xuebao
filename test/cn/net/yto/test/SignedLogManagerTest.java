@@ -90,6 +90,26 @@ public class SignedLogManagerTest extends ApplicationTestCase<AppContext>{
     	List<SignedLogVO> notUploadSignedLogs = app.getSignedLogManager().queryByWaybillno("a%"); 
     	assertEquals(1, notUploadSignedLogs.size());
     	assertEquals(notUploadSignedLogs.get(0).getWaybillNo(), "a123");    	
-
 	}
+	
+	public void test_delete_signedlog() {
+		SignedLogVO signedLogVO1 = new SignedLogVO();
+		signedLogVO1.setWaybillNo("a123");
+    	app.getSignedLogManager().saveSignedLog(signedLogVO1);
+
+		assertEquals(1, app.getSignedLogManager().removeSignedLog(signedLogVO1));
+	}
+	
+	public void test_update_signedlog() {
+		SignedLogVO signedLogVO1 = new SignedLogVO();
+		signedLogVO1.setWaybillNo("x123");
+		signedLogVO1.setSignedLogId("123");
+    	app.getSignedLogManager().saveSignedLog(signedLogVO1);
+		signedLogVO1.setSignedLogId("124");
+		app.getSignedLogManager().saveSignedLog(signedLogVO1);
+		
+    	List<SignedLogVO> notUploadSignedLogs = app.getSignedLogManager().queryByWaybillno("x%"); 
+    	assertEquals(notUploadSignedLogs.get(0).getSignedLogId(), "124");    	
+	}
+
 }
