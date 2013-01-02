@@ -234,5 +234,34 @@ public class SignedLogManager {
         }
         return list;    	
     }
-   
+
+    public List<SignedLogVO> queryNeedUploadSignedLog() {
+        List<SignedLogVO> list = null;
+        try {
+            list = mSignedLogDao.queryBuilder().
+            		where().
+            		eq(SignedLogVO.UPLOADSTATUS_FIELD_NAME, UploadStatus.NOT_UPLOAD).
+            		or().
+            		eq(SignedLogVO.UPLOADSTATUS_FIELD_NAME, UploadStatus.UPLOAD_FAILURE).
+            		query();
+        } catch (SQLException e) {
+            list = new ArrayList<SignedLogVO>();
+            LogUtils.e(TAG, e);
+        }
+        return list;    	
+    }
+    
+    public List<SignedLogVO> queryNeedUpdateSignedLog() {
+        List<SignedLogVO> list = null;
+        try {
+            list = mSignedLogDao.queryBuilder().
+            		where().
+            		eq(SignedLogVO.UPLOADSTATUS_FIELD_NAME, UploadStatus.NEED_UPDATE).
+            		query();
+        } catch (SQLException e) {
+            list = new ArrayList<SignedLogVO>();
+            LogUtils.e(TAG, e);
+        }
+        return list;    	
+    }    
 }
