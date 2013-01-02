@@ -9,6 +9,7 @@ import cn.net.yto.R;
 import cn.net.yto.biz.SignedLogManager;
 import cn.net.yto.common.Constants;
 import cn.net.yto.dao.DatabaseHelper;
+import cn.net.yto.engine.SignedLogReportTaskManager;
 //import cn.net.yto.engine.SignedLogReportTaskManager;
 import cn.net.yto.net.UrlManager;
 import cn.net.yto.utils.LogUtils;
@@ -48,7 +49,7 @@ public class AppContext extends Application {
 //			e.printStackTrace();
 //		}
 
-//		SignedLogReportTaskManager.getInstance(this).run();
+		SignedLogReportTaskManager.getInstance(this).run();
 		ToastUtils.getInstance().init(this);
 		UrlManager.setServerUrl(getAppContext().getString(
 				R.string.default_server_url));

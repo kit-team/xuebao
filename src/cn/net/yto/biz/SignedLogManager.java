@@ -16,10 +16,8 @@ import cn.net.yto.net.ZltdHttpClient.Listener;
 import cn.net.yto.utils.LogUtils;
 import cn.net.yto.utils.ToastUtils;
 import cn.net.yto.utils.ToastUtils.Operation;
-import cn.net.yto.vo.ReceiveVO;
 import cn.net.yto.vo.SignedLogVO;
 import cn.net.yto.vo.SignedLogVO.UploadStatus;
-import cn.net.yto.vo.message.SubmitSignedLogRequestMsgVO;
 import cn.net.yto.vo.message.SubmitSignedLogResponseMsgVO;
 
 import com.j256.ormlite.dao.Dao;
@@ -59,9 +57,18 @@ public class SignedLogManager {
     
     public boolean saveSignedLog(SignedLogVO signedLogVO) {
         try {
+        	SignedLogVO existedLogVO = querySignedLog(signedLogVO.getWaybillNo());
+        	boolean needUpdate = false;
+        	if (existedLogVO != null && existedLogVO.getUploadStatus() == UploadStatus.UPLOAD_SUCCESS) {
+        		needUpdate = true;
+			}
             CreateOrUpdateStatus status = mSignedLogDao.createOrUpdate(signedLogVO);
             LogUtils.e(TAG, "status.isCreated() = "+status.isCreated());
             LogUtils.e(TAG, "status.isUpdated() = "+status.isUpdated());
+            if (status.isUpdated() && needUpdate) {
+            	signedLogVO.setUploadStatus(UploadStatus.NEED_UPDATE);
+            	status = mSignedLogDao.createOrUpdate(signedLogVO);
+			}
             return status.isCreated() || status.isUpdated();
         } catch (SQLException e) {
             LogUtils.e(TAG, e);
@@ -146,14 +153,19 @@ public class SignedLogManager {
                 if (response != null) {
                 	SubmitSignedLogResponseMsgVO responseVo = (SubmitSignedLogResponseMsgVO) response;
                     if (signedLogVO != null && responseVo.getRetVal() == SubmitSignedLogResponseMsgVO.RESPONSE_SUCCESS) {
+                    	signedLogVO.setUploadStatus(UploadStatus.UPLOAD_SUCCESS);
                         saveSignedLog(signedLogVO);
                         ToastUtils.showOperationToast(Operation.MODIFY, true);
                     } else {
                         Log.w(TAG, "update failed! mWayBillNo = " + wayBillNo);
+                    	signedLogVO.setUploadStatus(UploadStatus.UPDATE_FAILURE);
+                        saveSignedLog(signedLogVO);
                         ToastUtils.showOperationToast(Operation.MODIFY, false);                    	
                     }
                 } else {
                     Log.w(TAG, "update failed! mWayBillNo = " + wayBillNo);
+                	signedLogVO.setUploadStatus(UploadStatus.UPDATE_FAILURE);
+                    saveSignedLog(signedLogVO);
                     ToastUtils.showOperationToast(Operation.MODIFY, false);
                 }
             }
@@ -234,5 +246,34 @@ public class SignedLogManager {
         }
         return list;    	
     }
-   
+
+    public List<SignedLogVO> queryNeedUploadSignedLog() {
+        List<SignedLogVO> list = null;
+        try {
+            list = mSignedLogDao.queryBuilder().
+            		where().
+            		eq(SignedLogVO.UPLOADSTATUS_FIELD_NAME, UploadStatus.NOT_UPLOAD).
+            		or().
+            		eq(SignedLogVO.UPLOADSTATUS_FIELD_NAME, UploadStatus.UPLOAD_FAILURE).
+            		query();
+        } catch (SQLException e) {
+            list = new ArrayList<SignedLogVO>();
+            LogUtils.e(TAG, e);
+        }
+        return list;    	
+    }
+    
+    public List<SignedLogVO> queryNeedUpdateSignedLog() {
+        List<SignedLogVO> list = null;
+        try {
+            list = mSignedLogDao.queryBuilder().
+            		where().
+            		eq(SignedLogVO.UPLOADSTATUS_FIELD_NAME, UploadStatus.NEED_UPDATE).
+            		query();
+        } catch (SQLException e) {
+            list = new ArrayList<SignedLogVO>();
+            LogUtils.e(TAG, e);
+        }
+        return list;    	
+    }    
 }

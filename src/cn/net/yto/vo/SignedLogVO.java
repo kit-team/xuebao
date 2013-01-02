@@ -310,7 +310,7 @@ public class SignedLogVO {
     };
 
     public enum UploadStatus {
-        NOT_UPLOAD(0), UPLOAD_SUCCESS(1), UPLOAD_FAILURE(2), UPLOADING(3);
+        NOT_UPLOAD(0), UPLOAD_SUCCESS(1), UPLOAD_FAILURE(2), UPLOADING(3), NEED_UPDATE(4), UPDATE_FAILURE(5);
 
         private int uploadStatus;
 
@@ -349,6 +349,10 @@ public class SignedLogVO {
             return UploadStatus.UPLOAD_FAILURE;
         case 3:
             return UploadStatus.UPLOADING;
+        case 4:
+            return UploadStatus.NEED_UPDATE;
+        case 5:
+            return UploadStatus.UPDATE_FAILURE;    
         default:
             return null;
         }

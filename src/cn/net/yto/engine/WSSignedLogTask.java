@@ -25,40 +25,15 @@ public class WSSignedLogTask extends BaseTask {
     public Object run() {
         LogUtils.logD("WSSignedLogTask ...");
         final Object object = new Object();
-        List<SignedLogVO> logs = mSignedLogMgr.queryAllSignedLog();
+        List<SignedLogVO> logs = mSignedLogMgr.queryNeedUploadSignedLog();
+        LogUtils.logD("queryNeedUploadSignedLog : " + logs.size());
         for (SignedLogVO log : logs) {
-            final SignedLogVO log2 = log;
-            UserService.submitSignedLog(log2, new Listener() {
-                @Override
-                public void onPreSubmit() {
-                    log2.setUploadStatus(UploadStatus.UPLOADING);
-//                    dbHelper.updateStatusOfSignedLog(log2);
-                }
-
-                @Override
-                public void onPostSubmit(Object response, Integer responseType) {
-                    LogUtils.logD("response " + response + " responseType " + responseType);
-                    if (response != null && response instanceof SubmitSignedLogResponseMsgVO) {
-                        int errorCode = ((SubmitSignedLogResponseMsgVO) response).getRetVal();
-                        if (errorCode == 1) {
-                            log2.setUploadStatus(UploadStatus.UPLOAD_SUCCESS);
-                        } else {
-                            log2.setUploadStatus(UploadStatus.UPLOAD_FAILURE);
-                        }
-//                        dbHelper.updateStatusOfSignedLog(log2);
-                    }
-                    synchronized (object) {
-                        object.notifyAll();
-                    }
-                };
-            });
-            synchronized (object) {
-                try {
-                    object.wait();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
+        	mSignedLogMgr.submitSignedLog(log, mContext);
+        }
+        logs = mSignedLogMgr.queryNeedUpdateSignedLog();
+        LogUtils.logD("queryNeedUpdateSignedLog : " + logs.size());
+        for (SignedLogVO log : logs) {
+        	mSignedLogMgr.updateSignedLog(log, mContext);
         }
         return null;
     }
