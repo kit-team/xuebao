@@ -17,6 +17,7 @@ import com.j256.ormlite.field.DatabaseField;
 public class SignedLogVO {
     public static final String WAYBILLNO_FIELD_NAME = "waybillNo"; 
     public static final String UPLOADSTATUS_FIELD_NAME = "uploadStatus"; 
+    public static final String SIGNED_TIME_FIELD_NAME = "signedTime";     
     
     // 派件 id
 	@DatabaseField
@@ -46,7 +47,7 @@ public class SignedLogVO {
     private String waybillNo = "";
 
     // 签收时间
-    @DatabaseField
+    @DatabaseField(columnName = SIGNED_TIME_FIELD_NAME)
     private Date signedTime = new Date();
 
     // 签收数据

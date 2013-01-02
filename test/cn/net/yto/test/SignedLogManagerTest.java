@@ -1,6 +1,8 @@
 package cn.net.yto.test;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import cn.net.yto.application.AppContext;
@@ -110,6 +112,40 @@ public class SignedLogManagerTest extends ApplicationTestCase<AppContext>{
 		
     	List<SignedLogVO> notUploadSignedLogs = app.getSignedLogManager().queryByWaybillno("x%"); 
     	assertEquals(notUploadSignedLogs.get(0).getSignedLogId(), "124");    	
+	}
+
+	public void test_query_signedlog_bytime() {
+		Calendar cal=Calendar.getInstance();
+		cal.set(Calendar.YEAR, 2006);
+		cal.set(Calendar.MONTH, 8);
+		cal.set(Calendar.DAY_OF_MONTH, 3);
+		Date date1=cal.getTime();
+		SignedLogVO signedLogVO1 = new SignedLogVO();
+		signedLogVO1.setWaybillNo("xx123");
+		signedLogVO1.setSignedTime(date1);
+    	app.getSignedLogManager().saveSignedLog(signedLogVO1);
+    	
+		cal.set(Calendar.YEAR, 2006);
+		cal.set(Calendar.MONTH, 9);
+		cal.set(Calendar.DAY_OF_MONTH, 3);
+		Date date2=cal.getTime();
+		SignedLogVO signedLogVO2 = new SignedLogVO();
+		signedLogVO2.setWaybillNo("yy123");
+		signedLogVO2.setSignedTime(date2);    	
+		app.getSignedLogManager().saveSignedLog(signedLogVO2);
+		
+		cal.set(Calendar.YEAR, 2006);
+		cal.set(Calendar.MONTH, 4);
+		cal.set(Calendar.DAY_OF_MONTH, 3);
+		Date fromDate=cal.getTime();
+		
+		cal.set(Calendar.YEAR, 2006);
+		cal.set(Calendar.MONTH, 8);
+		cal.set(Calendar.DAY_OF_MONTH, 30);
+		Date toDate=cal.getTime();
+		List<SignedLogVO> signedLogs = app.getSignedLogManager().querySignedLogByTime(fromDate, toDate);
+    	assertEquals(signedLogs.get(0).getWaybillNo(), "xx123");    	
+	
 	}
 
 }
