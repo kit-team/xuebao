@@ -43,7 +43,7 @@ public class SignedLogVO {
     private String empCode = "";
 
     // 面单号
-    @DatabaseField(columnName = WAYBILLNO_FIELD_NAME, id = true)
+    @DatabaseField(columnName = WAYBILLNO_FIELD_NAME, id = true, unique = true)
     private String waybillNo = "";
 
     // 签收时间
