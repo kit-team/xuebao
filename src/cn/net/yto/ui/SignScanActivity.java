@@ -14,9 +14,11 @@ import android.os.Parcelable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -383,8 +385,8 @@ public class SignScanActivity extends Activity {
     }
 
     class OrderQueryView {
-        private TextView mDateFrom;
-        private TextView mDateTo;
+        private EditText mDateFrom;
+        private EditText mDateTo;
         private Button mSignedLogQuery;
         private Button mSignedLogModify;
         private ListView mSignedLogList;
@@ -404,26 +406,35 @@ public class SignScanActivity extends Activity {
         }
 
         private void initView(View view) {
-            mDateFrom = (TextView) view.findViewById(R.id.text_date_from);
-            mDateFrom.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					  Dialog dateDialog = new DatePickerDialog(SignScanActivity.this,
+            mDateFrom = (EditText) view.findViewById(R.id.text_date_from);
+            mDateFrom.setInputType(InputType.TYPE_DATETIME_VARIATION_DATE);
+            mDateFrom.clearFocus();
+            mDateFrom.setOnTouchListener(new View.OnTouchListener() {
+    			@Override
+    			public boolean onTouch(View v, MotionEvent event) {
+    				if (event.getAction() == MotionEvent.ACTION_UP) {
+    					Dialog dateDialog = new DatePickerDialog(SignScanActivity.this,
 	                            mDateFromListener, mYearFrom, mMonthFrom, mDayFrom);
 	                    dateDialog.show();
-				}
-			});
-            
-            mDateTo = (TextView) view.findViewById(R.id.text_date_to);
-            mDateTo.setOnClickListener(new OnClickListener() {
-				
-				@Override
-				public void onClick(View v) {
-					 Dialog dateDialog = new DatePickerDialog(SignScanActivity.this,
+    				}
+    				return true;
+    			}
+    		});
+
+            mDateTo = (EditText) view.findViewById(R.id.text_date_to);
+            mDateTo.setInputType(InputType.TYPE_DATETIME_VARIATION_DATE);
+            mDateTo.clearFocus();
+            mDateTo.setOnTouchListener(new View.OnTouchListener() {
+    			@Override
+    			public boolean onTouch(View v, MotionEvent event) {
+    				if (event.getAction() == MotionEvent.ACTION_UP) {
+    					Dialog dateDialog = new DatePickerDialog(SignScanActivity.this,
 	                            mDateToListener, mYearTo, mMonthTo, mDayTo);
 	                    dateDialog.show();
-				}
-			});
+    				}
+    				return true;
+    			}
+    		});
             
             mSignedLogQuery = (Button) view.findViewById(R.id.btn_query_signed_log);
             mSignedLogQuery.setOnClickListener(new OnClickListener() {
@@ -459,15 +470,6 @@ public class SignScanActivity extends Activity {
             mAdapter.setData(mSignedLogMgr.queryAllSignedLog());
             mSignedLogList.setAdapter(mAdapter);
             mSignedLogList.setOnItemClickListener(new SignListItemClickListener(mAdapter, true));
-//            mDateFromSpinner = (Spinner) view.findViewById(R.id.spinner_date_from);
-//            mDateToSpinner = (Spinner) view.findViewById(R.id.spinner_date_to);
-//            ArrayAdapter<String> fakeDateAdapter = new ArrayAdapter<String>(SignScanActivity.this,
-//                    android.R.layout.simple_spinner_item, getResources().getStringArray(
-//                            R.array.fake_date));
-//            fakeDateAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//            mDateFromSpinner.setAdapter(fakeDateAdapter);
-//            mDateToSpinner.setAdapter(fakeDateAdapter);
-
             final Calendar c = Calendar.getInstance();
             mYearFrom = c.get(Calendar.YEAR);
             mMonthFrom = c.get(Calendar.MONTH);
@@ -481,7 +483,7 @@ public class SignScanActivity extends Activity {
 
         private void updateDate(int year, int month, int day, TextView view) {
             StringBuilder builder = new StringBuilder();
-            builder.append(year).append("年").append(month + 1).append("月").append(day).append("日");
+            builder.append(year).append("-").append(month + 1).append("-").append(day);
             view.setText(builder.toString());
         }
         
