@@ -8,15 +8,12 @@ import cn.net.yto.R;
 public class ToastUtils {
     private final static String TAG = "ToastUtils";
 
-    private static ToastUtils sInstance = null;
+    private static ToastUtils sInstance = new ToastUtils();
 
     private Context mContext = null;
     private Toast mToast = null;
 
     public static ToastUtils getInstance() {
-        if (sInstance == null) {
-            sInstance = new ToastUtils();
-        }
         return sInstance;
     }
 
@@ -40,7 +37,7 @@ public class ToastUtils {
         sInstance.mToast.show();
     }
 
-    public static void showToast(int resId) {
+    public  static void showToast(int resId) {
         if (sInstance.mContext == null) {
             Log.e(TAG, "context is null, not init ToastUtils");
             return;

@@ -104,7 +104,7 @@
         android:layout_width="match_parent">
     </ListView>
     
-	<Button 
+	<Button android:id="@+id/btn_signed_log_modify"
         android:text="@string/text_modify"
         android:layout_width="80dp"
         android:layout_height="wrap_content"

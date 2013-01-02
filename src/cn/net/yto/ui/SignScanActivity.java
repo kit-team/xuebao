@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-import android.R.integer;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -40,7 +39,6 @@ import cn.net.yto.vo.SignedLogVO.Satisfaction;
 
 public class SignScanActivity extends Activity {
     private static final String TAG = "ViewPagerTest";
-    
     private static final SimpleDateFormat mDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     
     private ViewPager viewPager = null;
@@ -57,18 +55,8 @@ public class SignScanActivity extends Activity {
     private OnClickListener mTabItemClickListener = new OnClickListener() {
         @Override
         public void onClick(View v) {
-            String tabTag = v.getTag().toString();
-            View tabView = null;
-            for (int idx = 0; idx < mTabViews.size(); idx++) {
-                tabView = mTabViews.get(idx);
-                if (tabView.getTag().equals(tabTag)) {
-                    tabView.setBackgroundResource(R.drawable.menu_bg);
-                    viewPager.setCurrentItem(idx);
-                } else {
-                    tabView.setBackgroundDrawable(null);
-                }
-            }
-
+            final String pageTag = v.getTag().toString();
+            switchPage(pageTag);
         }
     };
 
@@ -111,13 +99,20 @@ public class SignScanActivity extends Activity {
         viewPager.setOnPageChangeListener(new SlideMenuChangeListener());
     }
 
-    public void onTabClicked(View view) {
-        String tabTag = view.getTag().toString();
+    private void updateSignedLog(SignedLogVO data) {
+    	if (mSignSuccessView != null) {
+    		switchPage(getResources().getString(R.string.tab_sign_success));
+    		mSignSuccessView.updateViews(data);
+    	}
+    }
+    
+    public void switchPage(String pageTag) {
         View tabView = null;
         for (int idx = 0; idx < mTabViews.size(); idx++) {
             tabView = mTabViews.get(idx);
-            if (tabView.equals(tabTag)) {
+            if (tabView.getTag().equals(pageTag)) {
                 tabView.setBackgroundResource(R.drawable.menu_bg);
+                viewPager.setCurrentItem(idx);
             } else {
                 tabView.setBackgroundDrawable(null);
             }
@@ -219,6 +214,36 @@ public class SignScanActivity extends Activity {
             mSignTypeString = getResources().getStringArray(R.array.sign_type);
         }
 
+        public void updateViews(SignedLogVO data) {
+        	mWaybillNo.setText(data.getWaybillNo());
+        	mWaybillNo.setEnabled(false);
+        	mAmountCollected.setText(String.valueOf(data.getAmountCollected()));
+        	mAmountAgency.setText(String.valueOf(data.getAmountAgency()));
+        	int signOffTypePos = 0;
+        	for(int i = 0; i < mSignTypeString.length; i++) {
+        		if (mSignTypeString[i].equals(data.getSignOffTypeCode())) {
+        			signOffTypePos = i;
+        			break;
+        		}
+        	}
+        	mSignTypeSpinner.setSelection(signOffTypePos);
+        	
+			switch (data.getSatisfaction()) {
+			case VERY_SATISFIED:
+				mSatisfactory.check(R.id.very_satisfactory);
+				break;
+			case SATISFIED:
+				mSatisfactory.check(R.id.satisfactory);
+				break;
+			case DISSATISFIED:
+				mSatisfactory.check(R.id.unsatisfactory);
+				break;
+			default:
+				break;
+			}
+        	mReceipient.setText(data.getRecipient());
+        }
+        
         private void initView(View view) {
             mWaybillNo = (EditText) view.findViewById(R.id.edit_tracking_number);
             mAmountCollected = (EditText) view.findViewById(R.id.edit_amount_collected);
@@ -361,6 +386,7 @@ public class SignScanActivity extends Activity {
         private TextView mDateFrom;
         private TextView mDateTo;
         private Button mSignedLogQuery;
+        private Button mSignedLogModify;
         private ListView mSignedLogList;
         private SignListAdapter mAdapter = null;
        // private Spinner mDateFromSpinner;
@@ -411,6 +437,14 @@ public class SignScanActivity extends Activity {
 					final String dateFrom = getFromDate();
 					final String dateTo = getToDate();
 					mAdapter.setData(mSignedLogMgr.queryByDate(dateFrom, dateTo));
+				}
+			});
+            
+            mSignedLogModify = (Button)view.findViewById(R.id.btn_signed_log_modify);
+            mSignedLogModify.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					updateSignedLog(mAdapter.getSelectedSignedLog().get(0));
 				}
 			});
             

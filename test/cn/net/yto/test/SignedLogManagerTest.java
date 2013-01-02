@@ -122,7 +122,7 @@ public class SignedLogManagerTest extends ApplicationTestCase<AppContext>{
 		Date date1=cal.getTime();
 		SignedLogVO signedLogVO1 = new SignedLogVO();
 		signedLogVO1.setWaybillNo("xx123");
-		signedLogVO1.setSignedTime(date1);
+		signedLogVO1.setSignedTime("");
     	app.getSignedLogManager().saveSignedLog(signedLogVO1);
     	
 		cal.set(Calendar.YEAR, 2006);
@@ -131,7 +131,7 @@ public class SignedLogManagerTest extends ApplicationTestCase<AppContext>{
 		Date date2=cal.getTime();
 		SignedLogVO signedLogVO2 = new SignedLogVO();
 		signedLogVO2.setWaybillNo("yy123");
-		signedLogVO2.setSignedTime(date2);    	
+		signedLogVO2.setSignedTime("");    	
 		app.getSignedLogManager().saveSignedLog(signedLogVO2);
 		
 		cal.set(Calendar.YEAR, 2006);

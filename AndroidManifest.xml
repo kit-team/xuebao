@@ -40,7 +40,8 @@
             android:name=".ui.DispatchOrderList"
             android:label="@string/title_dispatch_order_list" >
         </activity>
-        <activity android:name=".ui.SignScanActivity" >
+        <activity android:name=".ui.SignScanActivity"
+                  android:label="singleInstance" >
         </activity>
         <activity
             android:name=".ui.EmergencyDeliveryListActivity"
