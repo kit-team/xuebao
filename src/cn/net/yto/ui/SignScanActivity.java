@@ -444,7 +444,10 @@ public class SignScanActivity extends Activity {
             mSignedLogModify.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					updateSignedLog(mAdapter.getSelectedSignedLog().get(0));
+					ArrayList<SignedLogVO> signedLogs = mAdapter.getSelectedSignedLog();
+					if (signedLogs.size() > 0) {
+						updateSignedLog(mAdapter.getSelectedSignedLog().get(0));
+					}
 				}
 			});
             
