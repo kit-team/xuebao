@@ -12,11 +12,13 @@ public class TimUtils {
 	/**
 	* Dump the database file to external storage
 	*/
-	    static void dumpDatabase(String packageName, String fileName) throws IOException {
-	        File dbFile = new File("/data/data/" + packageName + "/databases/" + fileName);
-	        if (dbFile.exists()) {
-	            FileInputStream fis = new FileInputStream(dbFile);
-	            String outFileName = Environment.getExternalStorageDirectory() + "/" + fileName;
+    static void dumpDatabase(String packageName) throws IOException {
+        File dbDirectory = new File("/data/data/" + packageName + "/databases/");
+        if (dbDirectory.exists()) {
+        	File[] dbFiles = dbDirectory.listFiles();
+	        for(int i = 0; i < dbFiles.length; i++) {
+	            FileInputStream fis = new FileInputStream(dbFiles[i]);
+	            String outFileName = Environment.getExternalStorageDirectory() + "/" + dbFiles[i].getName();
 	            OutputStream output = new FileOutputStream(outFileName);
 	            byte[] buffer = new byte[1024];
 	            int length;
@@ -26,6 +28,7 @@ public class TimUtils {
 	            output.flush();
 	            output.close();
 	            fis.close();
-	        }
-	    }
+        	}
+        }
+    }
 }

@@ -1,8 +1,12 @@
 package cn.net.yto.ui;
 
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
+import android.R.integer;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -17,16 +21,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import cn.net.yto.R;
 import cn.net.yto.application.AppContext;
 import cn.net.yto.biz.SignedLogManager;
+import cn.net.yto.ui.menu.SignListAdapter;
+import cn.net.yto.ui.menu.SignListItemClickListener;
 import cn.net.yto.utils.ToastUtils;
 import cn.net.yto.utils.ToastUtils.Operation;
 import cn.net.yto.vo.SignedLogVO;
@@ -34,7 +40,9 @@ import cn.net.yto.vo.SignedLogVO.Satisfaction;
 
 public class SignScanActivity extends Activity {
     private static final String TAG = "ViewPagerTest";
-
+    
+    private static final SimpleDateFormat mDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    
     private ViewPager viewPager = null;
     private LayoutInflater mInflater = null;
     private ArrayList<View> mPageViews = null;
@@ -165,7 +173,6 @@ public class SignScanActivity extends Activity {
         }
     }
 
-    // �����˵�����¼�������
     class SlideMenuChangeListener implements OnPageChangeListener {
 
         @Override
@@ -264,8 +271,8 @@ public class SignScanActivity extends Activity {
 
         private SignedLogVO getSignedLogForSave() {
             SignedLogVO signedLog = new SignedLogVO();
-
             signedLog.setEmpCode("");
+            signedLog.setSignedTime(mDateFormat.format(new Date()));
             signedLog.setWaybillNo(mWaybillNo.getText().toString());
             if (!TextUtils.isEmpty(mAmountCollected.getText())) {
                 signedLog.setAmountCollected(Long.valueOf(mAmountCollected.getText().toString()));
@@ -353,10 +360,11 @@ public class SignScanActivity extends Activity {
     class OrderQueryView {
         private TextView mDateFrom;
         private TextView mDateTo;
-        private Button mChooseFromDate;
-        private Button mChooseToDate;
-        private Spinner mDateFromSpinner;
-        private Spinner mDateToSpinner;
+        private Button mSignedLogQuery;
+        private ListView mSignedLogList;
+        private SignListAdapter mAdapter = null;
+       // private Spinner mDateFromSpinner;
+       // private Spinner mDateToSpinner;
 
         private int mYearFrom;
         private int mMonthFrom;
@@ -371,33 +379,57 @@ public class SignScanActivity extends Activity {
 
         private void initView(View view) {
             mDateFrom = (TextView) view.findViewById(R.id.text_date_from);
+            mDateFrom.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					  Dialog dateDialog = new DatePickerDialog(SignScanActivity.this,
+	                            mDateFromListener, mYearFrom, mMonthFrom, mDayFrom);
+	                    dateDialog.show();
+				}
+			});
+            
             mDateTo = (TextView) view.findViewById(R.id.text_date_to);
-            mChooseFromDate = (Button) view.findViewById(R.id.btn_choose_date_from);
-            mChooseFromDate.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Dialog dateDialog = new DatePickerDialog(SignScanActivity.this,
-                            mDateFromListener, mYearFrom, mMonthFrom, mDayFrom);
-                    dateDialog.show();
-                }
-            });
-            mChooseToDate = (Button) view.findViewById(R.id.btn_choose_date_to);
-            mChooseToDate.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Dialog dateDialog = new DatePickerDialog(SignScanActivity.this,
-                            mDateToListener, mYearTo, mMonthTo, mDayTo);
-                    dateDialog.show();
-                }
-            });
-            mDateFromSpinner = (Spinner) view.findViewById(R.id.spinner_date_from);
-            mDateToSpinner = (Spinner) view.findViewById(R.id.spinner_date_to);
-            ArrayAdapter<String> fakeDateAdapter = new ArrayAdapter<String>(SignScanActivity.this,
-                    android.R.layout.simple_spinner_item, getResources().getStringArray(
-                            R.array.fake_date));
-            fakeDateAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            mDateFromSpinner.setAdapter(fakeDateAdapter);
-            mDateToSpinner.setAdapter(fakeDateAdapter);
+            mDateTo.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					 Dialog dateDialog = new DatePickerDialog(SignScanActivity.this,
+	                            mDateToListener, mYearTo, mMonthTo, mDayTo);
+	                    dateDialog.show();
+				}
+			});
+            
+            mSignedLogQuery = (Button) view.findViewById(R.id.btn_query_signed_log);
+            mSignedLogQuery.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					try {
+						TimUtils.dumpDatabase(getPackageName());
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					final String dateFrom = getFromDate();
+					final String dateTo = getToDate();
+					mAdapter.setData(mSignedLogMgr.queryByDate(dateFrom, dateTo));
+				}
+			});
+            
+            View headView = getLayoutInflater().inflate(R.layout.list_detail_head, null);
+            mSignedLogList = (ListView) view.findViewById(R.id.list_signed_log);
+            mSignedLogList.addHeaderView(headView);
+            mAdapter = new SignListAdapter(getApplicationContext());
+            mAdapter.setSingleSelection(true);
+            mAdapter.setData(mSignedLogMgr.queryAllSignedLog());
+            mSignedLogList.setAdapter(mAdapter);
+            mSignedLogList.setOnItemClickListener(new SignListItemClickListener(mAdapter, true));
+//            mDateFromSpinner = (Spinner) view.findViewById(R.id.spinner_date_from);
+//            mDateToSpinner = (Spinner) view.findViewById(R.id.spinner_date_to);
+//            ArrayAdapter<String> fakeDateAdapter = new ArrayAdapter<String>(SignScanActivity.this,
+//                    android.R.layout.simple_spinner_item, getResources().getStringArray(
+//                            R.array.fake_date));
+//            fakeDateAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//            mDateFromSpinner.setAdapter(fakeDateAdapter);
+//            mDateToSpinner.setAdapter(fakeDateAdapter);
 
             final Calendar c = Calendar.getInstance();
             mYearFrom = c.get(Calendar.YEAR);
@@ -412,8 +444,16 @@ public class SignScanActivity extends Activity {
 
         private void updateDate(int year, int month, int day, TextView view) {
             StringBuilder builder = new StringBuilder();
-            builder.append(year).append("年").append(month).append("月").append(day).append("日");
+            builder.append(year).append("年").append(month + 1).append("月").append(day).append("日");
             view.setText(builder.toString());
+        }
+        
+        private String getFromDate() {
+        	return mDateFormat.format(new Date(mYearFrom - 1900, mMonthFrom, mDayFrom, 0, 0, 0));
+        }
+        
+        private String getToDate() {
+        	return mDateFormat.format(new Date(mYearTo - 1900, mMonthTo, mDayTo, 23, 59, 59));
         }
 
         private DatePickerDialog.OnDateSetListener mDateFromListener = new DatePickerDialog.OnDateSetListener() {

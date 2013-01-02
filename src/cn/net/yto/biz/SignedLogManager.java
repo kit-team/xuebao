@@ -2,6 +2,7 @@ package cn.net.yto.biz;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import android.content.Context;
@@ -150,6 +151,20 @@ public class SignedLogManager {
         try {
             list = mSignedLogDao.queryBuilder().where()
                     .eq(SignedLogVO.UPLOADSTATUS_FIELD_NAME, status).query();
+        } catch (SQLException e) {
+            list = new ArrayList<SignedLogVO>();
+            LogUtils.e(TAG, e);
+        }
+        return list;
+    }
+    
+    public List<SignedLogVO> queryByDate(String dateFrom, String dateTo) {
+        List<SignedLogVO> list = null;
+        try {
+			list = mSignedLogDao
+					.queryBuilder()
+					.where()
+					.between(SignedLogVO.SIGNED_TIME_FIELD_NAME, dateFrom, dateTo).query();
         } catch (SQLException e) {
             list = new ArrayList<SignedLogVO>();
             LogUtils.e(TAG, e);

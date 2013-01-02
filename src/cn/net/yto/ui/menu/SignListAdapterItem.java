@@ -39,8 +39,7 @@ public class SignListAdapterItem {
 
     public String getSignTime() {
         if (mSignTime == null) {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            mSignTime = dateFormat.format(mSignedLog.getSignedTime());
+            mSignTime = mSignedLog.getSignedTime();
         }
         return mSignTime;
     }
