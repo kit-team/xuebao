@@ -15,17 +15,20 @@ public class UrlManager {
 		sUrlTailMap.put(UrlType.LOGOUT, "m_login!PDAlogout.action");
 		sUrlTailMap.put(UrlType.MODIFY_PSW, "m_login!+.action");
 		sUrlTailMap.put(UrlType.SUBMIT_SIGNEDLOG, "m_delivery!SubmitSignedLog.action");		
+		sUrlTailMap.put(UrlType.UPDATE_SIGNEDLOG, "m_delivery!UpdateSignedLog.action");		
 		
 		sRequestParamNameMap = new HashMap<UrlType, String>();
 		sRequestParamNameMap.put(UrlType.LOGIN, "WSLoginParam");
 		sRequestParamNameMap.put(UrlType.LOGOUT, "WSParam");
 		sRequestParamNameMap.put(UrlType.MODIFY_PSW, "WSModifyUserPasswordParam");
 		sRequestParamNameMap.put(UrlType.SUBMIT_SIGNEDLOG, "WSSignedLogParam");		
+		sRequestParamNameMap.put(UrlType.UPDATE_SIGNEDLOG, "WSSignedLogParam");		
 		
 		sResponseParamNameMap = new HashMap<UrlType, String>();
 		sResponseParamNameMap.put(UrlType.LOGIN, "WSLoginReturn");
 		sResponseParamNameMap.put(UrlType.LOGOUT, "WSLogoutReturn");
 		sResponseParamNameMap.put(UrlType.MODIFY_PSW, "WSModifyUserPasswordReturn");
+		sResponseParamNameMap.put(UrlType.SUBMIT_SIGNEDLOG, "WSSignedLogReturn");
 		sResponseParamNameMap.put(UrlType.SUBMIT_SIGNEDLOG, "WSSignedLogReturn");
 		
 	}

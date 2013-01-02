@@ -93,7 +93,7 @@ public class SignBatchActivity extends Activity implements OnItemClickListener {
                     }
                     ToastUtils.showOperationToast(Operation.SAVE, result);
 
-                    mSignedLogMgr.upload(getSignedLogForSave(),
+                    mSignedLogMgr.submitSignedLog(getSignedLogForSave(),
                             ((AppContext) getApplication()).getDefaultContext());
                 }
             }

@@ -89,7 +89,7 @@ public class SignedLogManager {
         return result;
     }
 
-    public boolean upload(final SignedLogVO signedLogVO, Context context) {
+    public boolean submitSignedLog(final SignedLogVO signedLogVO, Context context) {
 
         Listener listener = new Listener() {
             String wayBillNo = signedLogVO.getWaybillNo();
@@ -103,7 +103,7 @@ public class SignedLogManager {
             public void onPostSubmit(Object response, Integer responseType) {
                 SignedLogVO vo = querySignedLog(wayBillNo);
                 if (response != null) {
-                    SubmitSignedLogRequestMsgVO responseVo = (SubmitSignedLogRequestMsgVO) response;
+                	SubmitSignedLogResponseMsgVO responseVo = (SubmitSignedLogResponseMsgVO) response;
                     if (vo != null) {
                         vo.setUploadStatus(UploadStatus.UPLOAD_SUCCESS);
                         saveSignedLog(vo);
@@ -124,6 +124,39 @@ public class SignedLogManager {
         return client.submit(context);
     }
 
+    public boolean updateSignedLog(final SignedLogVO signedLogVO, Context context) {
+
+        Listener listener = new Listener() {
+            String wayBillNo = signedLogVO.getWaybillNo();
+
+            @Override
+            public void onPreSubmit() {
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void onPostSubmit(Object response, Integer responseType) {
+                if (response != null) {
+                	SubmitSignedLogResponseMsgVO responseVo = (SubmitSignedLogResponseMsgVO) response;
+                    if (signedLogVO != null) {
+                        saveSignedLog(signedLogVO);
+                    }
+                    ToastUtils.showOperationToast(Operation.MODIFY, true);
+                } else {
+                    Log.w(TAG, "update failed! mWayBillNo = " + wayBillNo);
+                    if (signedLogVO != null) {
+                        saveSignedLog(signedLogVO);
+                    } 
+                    ToastUtils.showOperationToast(Operation.MODIFY, false);
+                }
+            }
+        };
+        ZltdHttpClient client = new ZltdHttpClient(UrlType.UPDATE_SIGNEDLOG,
+                signedLogVO, listener, SubmitSignedLogResponseMsgVO.class);
+        return client.submit(context);
+    }
+
+    
     public SignedLogVO querySignedLog(String wayBillNo) {
         SignedLogVO signed = null;
         try {

@@ -92,7 +92,7 @@ public class ExceptionalRecordUpload extends Activity {
                 }
                 SignedLogVO signedLog = signedLogs.get(0);
 
-                mSignedLogMgr.upload(signedLog, AppContext.getAppContext().getDefaultContext());
+                mSignedLogMgr.submitSignedLog(signedLog, AppContext.getAppContext().getDefaultContext());
             }
         });
     }
