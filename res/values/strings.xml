@@ -40,7 +40,7 @@
     <string name="label_date_to">到</string>
     <string name="label_record_id">运单号:</string>
 
-    <!-- Button string text definition -->
+    <!-- text string definition -->
     <string name="text_query">查询</string>
     <string name="text_modify">修改</string>
     <string name="text_back">返回</string>
@@ -50,6 +50,7 @@
     <string name="text_delete">删除</string>
     <string name="text_save">保存</string>
     <string name="text_upload">上传</string>
+    <string name="text_sign_off">已签收</string>
 
     <!-- Tab string text definition -->
     <string name="tab_sign_success">正常签收</string>

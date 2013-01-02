@@ -288,10 +288,6 @@ public class SignScanActivity extends Activity {
             	ToastUtils.showToast(R.string.toast_amount_agency_notify);
                 return false;
             }
-            if (TextUtils.isEmpty(mReceipient.getText().toString())) {
-                ToastUtils.showToast(R.string.toast_receipient_notify);
-                return false;
-            }
             return true;
         }
 
@@ -308,7 +304,21 @@ public class SignScanActivity extends Activity {
 
             final int typeIdx = mSignTypeSpinner.getSelectedItemPosition();
             signedLog.setSignOffTypeCode(mSignTypeString[typeIdx]);
-
+            
+            if (TextUtils.isEmpty(mReceipient.getText().toString())) {
+            	final String signOffDoorkeeper = mSignTypeString[0];
+            	final String signOffOneself = mSignTypeString[1];
+            	if (signOffOneself.equals(mSignTypeSpinner.getSelectedItem().toString())) {
+            		signedLog.setRecieverSignOff(getResources().getString(R.string.text_sign_off));
+            	} else {
+            		signedLog.setRecieverSignOff(signOffDoorkeeper);
+            	}
+            	signedLog.setRecipient("");
+            } else {
+            	signedLog.setRecieverSignOff(mReceipient.getText().toString());
+            	signedLog.setRecipient(mReceipient.getText().toString());
+            }
+           
             switch (mSatisfactory.getCheckedRadioButtonId()) {
             case R.id.very_satisfactory:
                 signedLog.setSatisfaction(Satisfaction.VERY_SATISFIED);
@@ -320,8 +330,6 @@ public class SignScanActivity extends Activity {
                 signedLog.setSatisfaction(Satisfaction.SATISFIED);
                 break;
             }
-
-            signedLog.setRecipient(mReceipient.getText().toString());
 
             return signedLog;
         }
