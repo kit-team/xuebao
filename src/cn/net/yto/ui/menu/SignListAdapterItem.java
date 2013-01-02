@@ -2,6 +2,7 @@ package cn.net.yto.ui.menu;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import android.text.TextUtils;
@@ -39,7 +40,8 @@ public class SignListAdapterItem {
 
     public String getSignTime() {
         if (mSignTime == null) {
-            mSignTime = mSignedLog.getSignedTime();
+        	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        	mSignTime = dateFormat.format(mSignedLog.getSignedTime());
         }
         return mSignTime;
     }

@@ -158,19 +158,19 @@ public class SignedLogManager {
         return list;
     }
     
-    public List<SignedLogVO> queryByDate(String dateFrom, String dateTo) {
-        List<SignedLogVO> list = null;
-        try {
-			list = mSignedLogDao
-					.queryBuilder()
-					.where()
-					.between(SignedLogVO.SIGNED_TIME_FIELD_NAME, dateFrom, dateTo).query();
-        } catch (SQLException e) {
-            list = new ArrayList<SignedLogVO>();
-            LogUtils.e(TAG, e);
-        }
-        return list;
-    }
+//    public List<SignedLogVO> queryByDate(String dateFrom, String dateTo) {
+//        List<SignedLogVO> list = null;
+//        try {
+//			list = mSignedLogDao
+//					.queryBuilder()
+//					.where()
+//					.between(SignedLogVO.SIGNED_TIME_FIELD_NAME, dateFrom, dateTo).query();
+//        } catch (SQLException e) {
+//            list = new ArrayList<SignedLogVO>();
+//            LogUtils.e(TAG, e);
+//        }
+//        return list;
+//    }
     
     public List<SignedLogVO> queryAllSignedLog() {
         List<SignedLogVO> list = null;

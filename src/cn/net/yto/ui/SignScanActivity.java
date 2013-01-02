@@ -41,7 +41,6 @@ import cn.net.yto.vo.SignedLogVO.Satisfaction;
 
 public class SignScanActivity extends Activity {
     private static final String TAG = "ViewPagerTest";
-    private static final SimpleDateFormat mDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     
     private ViewPager viewPager = null;
     private LayoutInflater mInflater = null;
@@ -299,7 +298,6 @@ public class SignScanActivity extends Activity {
         private SignedLogVO getSignedLogForSave() {
             SignedLogVO signedLog = new SignedLogVO();
             signedLog.setEmpCode("");
-            signedLog.setSignedTime(mDateFormat.format(new Date()));
             signedLog.setWaybillNo(mWaybillNo.getText().toString());
             if (!TextUtils.isEmpty(mAmountCollected.getText())) {
                 signedLog.setAmountCollected(Long.valueOf(mAmountCollected.getText().toString()));
@@ -445,9 +443,9 @@ public class SignScanActivity extends Activity {
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
-					final String dateFrom = getFromDate();
-					final String dateTo = getToDate();
-					mAdapter.setData(mSignedLogMgr.queryByDate(dateFrom, dateTo));
+					final Date dateFrom = getFromDate();
+					final Date dateTo = getToDate();
+					mAdapter.setData(mSignedLogMgr.querySignedLogByTime(dateFrom, dateTo));
 				}
 			});
             
@@ -487,12 +485,12 @@ public class SignScanActivity extends Activity {
             view.setText(builder.toString());
         }
         
-        private String getFromDate() {
-        	return mDateFormat.format(new Date(mYearFrom - 1900, mMonthFrom, mDayFrom, 0, 0, 0));
+        private Date getFromDate() {
+        	return new Date(mYearFrom - 1900, mMonthFrom, mDayFrom, 0, 0, 0);
         }
         
-        private String getToDate() {
-        	return mDateFormat.format(new Date(mYearTo - 1900, mMonthTo, mDayTo, 23, 59, 59));
+        private Date getToDate() {
+        	return new Date(mYearTo - 1900, mMonthTo, mDayTo, 23, 59, 59);
         }
 
         private DatePickerDialog.OnDateSetListener mDateFromListener = new DatePickerDialog.OnDateSetListener() {

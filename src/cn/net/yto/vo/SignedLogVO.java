@@ -1,5 +1,6 @@
 package cn.net.yto.vo;
 
+import java.util.Date;
 import java.util.Random;
 
 import cn.net.yto.vo.message.SubmitSignedLogRequestMsgVO;
@@ -46,8 +47,8 @@ public class SignedLogVO {
     private String waybillNo = "";
 
     // 签收时间
-    @DatabaseField
-    private String signedTime = "";
+    @DatabaseField(columnName = SIGNED_TIME_FIELD_NAME)
+    private Date signedTime = new Date();
 
     // 签收数据
     @DatabaseField(dataType = DataType.BYTE_ARRAY)
@@ -116,11 +117,11 @@ public class SignedLogVO {
         this.waybillNo = waybillNo;
     }
 
-    public String getSignedTime() {
+    public Date getSignedTime() {
         return signedTime;
     }
 
-    public void setSignedTime(String signedTime) {
+    public void setSignedTime(Date signedTime) {
         this.signedTime = signedTime;
     }
 
