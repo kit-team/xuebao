@@ -3,6 +3,9 @@ package cn.net.yto.engine;
 
 import java.util.concurrent.ConcurrentLinkedQueue;
 
+import android.os.Handler;
+import android.os.HandlerThread;
+
 import cn.net.yto.utils.LogUtils;
 
 
@@ -42,7 +45,9 @@ public class GeneralTaskEngine {
         }
         sRun = true;
         LogUtils.logD("GeneralTaskEngine.run, ID" + sID);
-        new Thread(new Runnable() {
+        HandlerThread handlerThread = new HandlerThread("GeneralTaskEngine" + sID++);
+        handlerThread.start();
+        new Handler(handlerThread.getLooper()).post(new Runnable() {
 
             @Override
             public void run() {
@@ -83,7 +88,7 @@ public class GeneralTaskEngine {
 
                 }
             }
-        }, "GeneralTaskEngine" + sID++).start();
+        });
 
     }
 
