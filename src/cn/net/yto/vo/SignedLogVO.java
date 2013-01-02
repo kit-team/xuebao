@@ -1,6 +1,5 @@
 package cn.net.yto.vo;
 
-import java.util.Date;
 import java.util.Random;
 
 import cn.net.yto.vo.message.SubmitSignedLogRequestMsgVO;
