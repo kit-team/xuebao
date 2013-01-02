@@ -198,8 +198,8 @@ public class SignScanActivity extends Activity {
 
     class SignSuccessView {
         private EditText mWaybillNo; // 运单号
-        private EditText mCollectionAmount; // 代收金额
-        private EditText mFreightToCollect; // 到付金额
+        private EditText mAmountCollected; // 到付金额
+        private EditText mAmountAgency; // 代收金额
         private Spinner mSignTypeSpinner; // 签收类型
         private RadioGroup mSatisfactory; // 满意度
         private EditText mReceipient; // 签收人
@@ -214,8 +214,8 @@ public class SignScanActivity extends Activity {
 
         private void initView(View view) {
             mWaybillNo = (EditText) view.findViewById(R.id.edit_tracking_number);
-            mCollectionAmount = (EditText) view.findViewById(R.id.collection_amount);
-            mFreightToCollect = (EditText) view.findViewById(R.id.freight_to_collect);
+            mAmountCollected = (EditText) view.findViewById(R.id.edit_amount_collected);
+            mAmountAgency = (EditText) view.findViewById(R.id.edit_amount_agency);
             mSignTypeSpinner = (Spinner) view.findViewById(R.id.spinner_sign_type);
             mSatisfactory = (RadioGroup) view.findViewById(R.id.satisfactory_score);
             mReceipient = (EditText) view.findViewById(R.id.edit_receipient);
@@ -228,8 +228,8 @@ public class SignScanActivity extends Activity {
                         boolean result = mSignedLogMgr.saveSignedLog(getSignedLogForSave());
                         if (result) {
                             mWaybillNo.setText("");
-                            mCollectionAmount.setText("");
-                            mFreightToCollect.setText("");
+                            mAmountCollected.setText("");
+                            mAmountAgency.setText("");
                             mReceipient.setText("");
                         }
                         ToastUtils.showOperationToast(Operation.SAVE, result);
@@ -247,11 +247,18 @@ public class SignScanActivity extends Activity {
                 ToastUtils.showToast(R.string.toast_waybillno_notify);
                 return false;
             }
+            if (TextUtils.isEmpty(mAmountCollected.getText().toString())) {
+            	ToastUtils.showToast(R.string.toast_amount_collected_notify);
+                return false;
+            }
+            if(TextUtils.isEmpty(mAmountAgency.getText().toString())) {
+            	ToastUtils.showToast(R.string.toast_amount_agency_notify);
+                return false;
+            }
             if (TextUtils.isEmpty(mReceipient.getText().toString())) {
                 ToastUtils.showToast(R.string.toast_receipient_notify);
                 return false;
             }
-
             return true;
         }
 
@@ -260,11 +267,11 @@ public class SignScanActivity extends Activity {
 
             signedLog.setEmpCode("");
             signedLog.setWaybillNo(mWaybillNo.getText().toString());
-            if (!TextUtils.isEmpty(mCollectionAmount.getText())) {
-                signedLog.setAmountCollected(Long.valueOf(mCollectionAmount.getText().toString()));
+            if (!TextUtils.isEmpty(mAmountCollected.getText())) {
+                signedLog.setAmountCollected(Long.valueOf(mAmountCollected.getText().toString()));
             }
-            if (!TextUtils.isEmpty(mFreightToCollect.getText())) {
-                signedLog.setAmountAgency(Long.valueOf(mFreightToCollect.getText().toString()));
+            if (!TextUtils.isEmpty(mAmountAgency.getText())) {
+                signedLog.setAmountAgency(Long.valueOf(mAmountAgency.getText().toString()));
             }
 
             final int typeIdx = mSignTypeSpinner.getSelectedItemPosition();

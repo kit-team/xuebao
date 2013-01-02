@@ -40,10 +40,10 @@
                 android:layout_width="@dimen/label_size"
                 android:layout_height="wrap_content"
                 android:gravity="right|center_vertical"
-                android:text="@string/label_agency_amount" />
+                android:text="@string/label_amount_collected" />
 
             <EditText
-                android:id="@+id/collection_amount"
+                android:id="@+id/edit_amount_collected"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:digits="1234567890.+-*/%\n()"
@@ -60,10 +60,10 @@
                 android:layout_width="@dimen/label_size"
                 android:layout_height="wrap_content"
                 android:gravity="right|center_vertical"
-                android:text="@string/label_freight_collect_amount" />
+                android:text="@string/label_amount_agency" />
 
             <EditText
-                android:id="@+id/freight_to_collect"
+                android:id="@+id/edit_amount_agency"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:digits="1234567890.+-*/%\n()"

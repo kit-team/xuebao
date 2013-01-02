@@ -25,8 +25,8 @@
     <string name="label_unsatisfactory">不满意</string>
     <string name="label_handwritten_signature">手写签字:</string>
     <string name="label_sign">签收:</string>
-    <string name="label_agency_amount">代收金额:</string>
-    <string name="label_freight_collect_amount">到付金额:</string>
+    <string name="label_amount_collected">到付金额:</string>
+    <string name="label_amount_agency">代收金额:</string>
     <string name="label_sign_type">签收类型:</string>
     <string name="label_receipient">签收人:</string>
     <string name="label_receipient_must_fill">签收人必填</string>
@@ -73,6 +73,8 @@
     <string name="toast_modify_failed">编辑失败</string>
     <string name="toast_waybillno_notify">请输入运单号</string>
     <string name="toast_receipient_notify">请输入签收人</string>
+    <string name="toast_amount_collected_notify">请输入到付金额</string>
+    <string name="toast_amount_agency_notify">请输入代收金额</string>
 
     <string-array name="sign_result">
         <item>正常签收</item>
