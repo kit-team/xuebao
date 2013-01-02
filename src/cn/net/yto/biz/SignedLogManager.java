@@ -102,13 +102,20 @@ public class SignedLogManager {
             @Override
             public void onPostSubmit(Object response, Integer responseType) {
                 SignedLogVO vo = querySignedLog(wayBillNo);
+            	SubmitSignedLogResponseMsgVO responseVo = (SubmitSignedLogResponseMsgVO) response;
                 if (response != null) {
-                	SubmitSignedLogResponseMsgVO responseVo = (SubmitSignedLogResponseMsgVO) response;
-                    if (vo != null) {
+                    if (vo != null && responseVo.getRetVal() == SubmitSignedLogResponseMsgVO.RESPONSE_SUCCESS) {
                         vo.setUploadStatus(UploadStatus.UPLOAD_SUCCESS);
                         saveSignedLog(vo);
+                        ToastUtils.showOperationToast(Operation.UPLOAD, true);
+                    } else {
+                        Log.w(TAG, "upload failed! mWayBillNo = " + wayBillNo);
+                        if (vo != null) {
+                            vo.setUploadStatus(UploadStatus.UPLOAD_FAILURE);
+                            saveSignedLog(vo);
+                        } 
+                        ToastUtils.showOperationToast(Operation.UPLOAD, false);                    	
                     }
-                    ToastUtils.showOperationToast(Operation.UPLOAD, true);
                 } else {
                     Log.w(TAG, "upload failed! mWayBillNo = " + wayBillNo);
                     if (vo != null) {
@@ -138,15 +145,15 @@ public class SignedLogManager {
             public void onPostSubmit(Object response, Integer responseType) {
                 if (response != null) {
                 	SubmitSignedLogResponseMsgVO responseVo = (SubmitSignedLogResponseMsgVO) response;
-                    if (signedLogVO != null) {
+                    if (signedLogVO != null && responseVo.getRetVal() == SubmitSignedLogResponseMsgVO.RESPONSE_SUCCESS) {
                         saveSignedLog(signedLogVO);
+                        ToastUtils.showOperationToast(Operation.MODIFY, true);
+                    } else {
+                        Log.w(TAG, "update failed! mWayBillNo = " + wayBillNo);
+                        ToastUtils.showOperationToast(Operation.MODIFY, false);                    	
                     }
-                    ToastUtils.showOperationToast(Operation.MODIFY, true);
                 } else {
                     Log.w(TAG, "update failed! mWayBillNo = " + wayBillNo);
-                    if (signedLogVO != null) {
-                        saveSignedLog(signedLogVO);
-                    } 
                     ToastUtils.showOperationToast(Operation.MODIFY, false);
                 }
             }
