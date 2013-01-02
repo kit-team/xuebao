@@ -15,10 +15,12 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import cn.net.yto.R;
 import cn.net.yto.application.AppContext;
 import cn.net.yto.ui.menu.GridMenuItemAdapter;
+import cn.net.yto.ui.menu.ListMenuItemAdapter;
 import cn.net.yto.ui.menu.MenuAction;
 import cn.net.yto.ui.menu.MenuItem;
 
@@ -37,9 +39,11 @@ public class DispatchMain extends Activity {
             R.drawable.back };
     private String[] mTaskLabels;
 
-    private GridView mGrid;
-    private GridMenuItemAdapter mAdapter = null;
+    // private GridView mGrid;
+    // private GridMenuItemAdapter mAdapter = null;
+    private ListView mListView = null;
 
+    private ListMenuItemAdapter mAdapter = null;
     private LayoutInflater mInflater;
 
     protected AppContext mAppContext = AppContext.getAppContext();
@@ -68,10 +72,14 @@ public class DispatchMain extends Activity {
                     MENU_IDS[i]));
             menuItemList.add(menuItem);
         }
-        mGrid = (GridView) findViewById(R.id.myGrid);
-        mAdapter = new GridMenuItemAdapter(this, menuItemList);
-        mGrid.setAdapter(mAdapter);
-        mGrid.setOnItemClickListener(mOnItemClickListener);
+        // mGrid = (GridView) findViewById(R.id.myGrid);
+        // mAdapter = new GridMenuItemAdapter(this, menuItemList);
+        // mGrid.setAdapter(mAdapter);
+        // mGrid.setOnItemClickListener(mOnItemClickListener);
+        mListView = (ListView) findViewById(R.id.layout_menu_item);
+        mAdapter = new ListMenuItemAdapter(this, menuItemList);
+        mListView.setAdapter(mAdapter);
+        mListView.setOnItemClickListener(mOnItemClickListener);
     }
 
     private void launchExceptionalRecordUpload() {

@@ -18,10 +18,13 @@ import cn.net.yto.vo.SignedLogVO;
 
 public class SignListAdapter extends BaseAdapter {
 
+    private final static int COLOR_DEFAULT = Color.WHITE;
+    private final static int COLOR_SELECTED = Color.YELLOW;
+
     private LayoutInflater mInflater;
 
     private ArrayList<SignListAdapterItem> mData = new ArrayList<SignListAdapterItem>();
-    
+
     // if true, only one item could be selected; else support multi-selection
     private boolean mIsSingleSelection = false;
     private int mSelectedPosition = -1;
@@ -29,14 +32,14 @@ public class SignListAdapter extends BaseAdapter {
     public SignListAdapter(Context context) {
         mInflater = LayoutInflater.from(context);
     }
-    
+
     public void setSingleSelection(boolean singleSelection) {
         if (mIsSingleSelection != singleSelection) {
             mIsSingleSelection = singleSelection;
             notifyDataSetChanged();
         }
     }
-    
+
     public void setData(List<SignedLogVO> signedLogs) {
         mSelectedPosition = -1;
         mData.clear();
@@ -75,7 +78,7 @@ public class SignListAdapter extends BaseAdapter {
         if (mIsSingleSelection) {
             SignedLogVO selectVO = mData.get(mSelectedPosition).getSignedLogVO();
             result = signedLogMgr.removeSignedLog(selectVO);
-            if (result >0) {
+            if (result > 0) {
                 mData.remove(mSelectedPosition);
                 mSelectedPosition = -1;
             }
@@ -90,14 +93,13 @@ public class SignListAdapter extends BaseAdapter {
                 }
             }
             result = signedLogMgr.removeSignedLog(selectedVOs);
-            if (result >0) {
+            if (result > 0) {
                 mData.removeAll(selectedItem);
             }
         }
 
-        
-        ToastUtils.showOperationToast(Operation.DELETE, result >0);
-        if (result >0) {
+        ToastUtils.showOperationToast(Operation.DELETE, result > 0);
+        if (result > 0) {
             notifyDataSetChanged();
         }
     }
@@ -143,15 +145,15 @@ public class SignListAdapter extends BaseAdapter {
         itemHolder.signTimeView.setText(item.getSignTime());
         if (mIsSingleSelection) {
             if (mSelectedPosition == position) {
-                convertView.setBackgroundColor(Color.GREEN);
+                convertView.setBackgroundColor(COLOR_SELECTED);
             } else {
-                convertView.setBackgroundColor(Color.WHITE);
+                convertView.setBackgroundColor(COLOR_DEFAULT);
             }
         } else {
             if (item.isSelected()) {
-                convertView.setBackgroundColor(Color.GREEN);
+                convertView.setBackgroundColor(COLOR_SELECTED);
             } else {
-                convertView.setBackgroundColor(Color.WHITE);
+                convertView.setBackgroundColor(COLOR_DEFAULT);
             }
         }
 

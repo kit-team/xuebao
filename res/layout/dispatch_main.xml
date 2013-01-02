@@ -4,7 +4,14 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical" >
-
+    <ListView
+        android:id="@+id/layout_menu_item"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp" >
+    </ListView>
+<!-- 
     <GridView
         android:id="@+id/myGrid"
         android:layout_width="wrap_content"
@@ -22,6 +29,6 @@
         android:paddingRight="10dp"
         android:paddingTop="5dp"
         android:stretchMode="columnWidth"
-        android:verticalSpacing="20dip" />
+        android:verticalSpacing="20dip" /> -->
 
 </LinearLayout>
