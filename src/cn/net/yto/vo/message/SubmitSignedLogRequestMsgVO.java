@@ -8,7 +8,7 @@ public class SubmitSignedLogRequestMsgVO extends BaseRequestMsgVO {
 	  /**
 	   * 无意义，填0
 	   */
-	  private int isScan;
+	  private String isScan;
 	  /**
 	   * 签收类型
 	   */
@@ -89,11 +89,11 @@ public class SubmitSignedLogRequestMsgVO extends BaseRequestMsgVO {
 		  this.id = id;
 	  }
 	  
-	  public int getScan() {
+	  public String getScan() {
 		  return isScan;
 	  }
 	  
-	  public void setScan(int isScan) {
+	  public void setScan(String isScan) {
 		  this.isScan = isScan;
 	  }
 	  

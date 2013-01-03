@@ -270,16 +270,23 @@ public class SignedLogVO {
         submitSignedLogRequest.setAmountAgency(String.valueOf(amountAgency));
         submitSignedLogRequest.setWaybillNo(waybillNo);
         submitSignedLogRequest.setSignedState(String.valueOf(signedState));
-        submitSignedLogRequest.setSignedStateInfo(signedStateInfo);
-        // FIXME
-        submitSignedLogRequest.setEmpCode("88888888");
-        submitSignedLogRequest.setEmpName("手持终端收派培训");
-
+        submitSignedLogRequest.setSignedStateInfo(signedStateInfo);        
+        submitSignedLogRequest.setEmpCode(empCode);
+        submitSignedLogRequest.setEmpName(empName);
         submitSignedLogRequest.setSignedTime(String.valueOf(signedTime));
         submitSignedLogRequest.setSatisfaction(String.valueOf(satisfaction));
         submitSignedLogRequest.setIsReceiverSignOff(String.valueOf(isReceiverSignOff));
         submitSignedLogRequest.setIsPicture(String.valueOf(mIsPicture));
-
+        submitSignedLogRequest.setScan(String.valueOf(isScan));
+        submitSignedLogRequest.setExpSignedDescription(expSignedDescription);
+        submitSignedLogRequest.setPdaNumber(pdaNumber);
+        // FIXME, from the server, now we just use ""
+        submitSignedLogRequest.setUploadStatu("");
+        submitSignedLogRequest.setStatus("");
+        // FIXME, must use the base64 encoding the picture 
+        // now we just use ""
+        submitSignedLogRequest.setPictureData("");
+        
         return submitSignedLogRequest;
     }
 

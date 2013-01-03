@@ -134,7 +134,7 @@ public class SignedLogManager {
             }
         };
         ZltdHttpClient client = new ZltdHttpClient(UrlType.SUBMIT_SIGNEDLOG,
-                signedLogVO, listener, SubmitSignedLogResponseMsgVO.class);
+                signedLogVO.toVO(), listener, SubmitSignedLogResponseMsgVO.class);
         return client.submit(context);
     }
 
@@ -171,7 +171,7 @@ public class SignedLogManager {
             }
         };
         ZltdHttpClient client = new ZltdHttpClient(UrlType.UPDATE_SIGNEDLOG,
-                signedLogVO, listener, SubmitSignedLogResponseMsgVO.class);
+                signedLogVO.toVO(), listener, SubmitSignedLogResponseMsgVO.class);
         return client.submit(context);
     }
 
