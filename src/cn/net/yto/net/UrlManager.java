@@ -15,7 +15,7 @@ public class UrlManager {
 		sUrlTailMap.put(UrlType.LOGOUT, "m_login!PDAlogout.action");
 		sUrlTailMap.put(UrlType.MODIFY_PSW, "m_login!+.action");
 		sUrlTailMap.put(UrlType.SUBMIT_SIGNEDLOG, "m_delivery!SubmitSignedLog.action");		
-		sUrlTailMap.put(UrlType.UPDATE_SIGNEDLOG, "m_delivery!UpdateSignedLog.action");		
+		sUrlTailMap.put(UrlType.UPDATE_SIGNEDLOG, "m_delivery!updateSignedLog.action");		
 		
 		sRequestParamNameMap = new HashMap<UrlType, String>();
 		sRequestParamNameMap.put(UrlType.LOGIN, "WSLoginParam");

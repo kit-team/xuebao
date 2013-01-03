@@ -36,7 +36,7 @@ public class SubmitSignedLogRequestMsgVO extends BaseRequestMsgVO {
 	  /**
 	   * 
 	   */
-	  private String getStatus;
+	  //private String getStatus;
 	  /**
 	   * 用户签名图片
 	   */
@@ -147,13 +147,13 @@ public class SubmitSignedLogRequestMsgVO extends BaseRequestMsgVO {
 	  
 	  
 	  
-	  public String getStatus() {
-		  return getStatus;
-	  }
-	  
-	  public void setStatus(String status) {
-		  this.getStatus = status;
-	  }
+//	  public String getStatus() {
+//		  return getStatus;
+//	  }
+//	  
+//	  public void setStatus(String status) {
+//		  this.getStatus = status;
+//	  }
 	  
 	  public String getPictureData() {
 		  return pictureData;

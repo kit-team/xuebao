@@ -283,7 +283,7 @@ public class SignedLogVO {
         submitSignedLogRequest.setPdaNumber(pdaNumber);
         // FIXME, from the server, now we just use ""
         submitSignedLogRequest.setUploadStatus("");
-        submitSignedLogRequest.setStatus("");
+       // submitSignedLogRequest.setStatus("");
         // FIXME, must use the base64 encoding the picture 
         // now we just use ""
         submitSignedLogRequest.setPictureData("");
