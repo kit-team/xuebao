@@ -29,6 +29,8 @@ public class WSSignedLogTask extends BaseTask {
         LogUtils.logD("queryNeedUploadSignedLog : " + logs.size());
         for (SignedLogVO log : logs) {
         	mSignedLogMgr.submitSignedLog(log, mContext);
+        	log.setUploadStatus(UploadStatus.UPLOADING);
+        	mSignedLogMgr.saveSignedLog(log);
         }
         logs = mSignedLogMgr.queryNeedUpdateSignedLog();
         LogUtils.logD("queryNeedUpdateSignedLog : " + logs.size());
