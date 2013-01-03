@@ -139,10 +139,10 @@ public class SignBatchActivity extends Activity implements OnItemClickListener {
             ToastUtils.showToast(R.string.toast_waybillno_notify);
             return false;
         }
-        if (TextUtils.isEmpty(mReceipient.getText().toString())) {
-            ToastUtils.showToast(R.string.toast_receipient_notify);
-            return false;
-        }
+//        if (TextUtils.isEmpty(mReceipient.getText().toString())) {
+//            ToastUtils.showToast(R.string.toast_receipient_notify);
+//            return false;
+//        }
 
         return true;
     }

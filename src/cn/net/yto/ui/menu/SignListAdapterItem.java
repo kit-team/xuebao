@@ -71,7 +71,11 @@ public class SignListAdapterItem {
     }
 
     public String getComment() {
-        return "无备注";
+        String comment = mSignedLog.getExpSignedDescription();
+        if (TextUtils.isEmpty(comment)){
+            return "无备注"; 
+        }
+        return comment;
     }
 
 }
