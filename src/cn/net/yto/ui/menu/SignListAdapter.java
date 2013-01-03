@@ -131,7 +131,6 @@ public class SignListAdapter extends BaseAdapter {
             itemHolder = new ItemHolder();
             itemHolder.tranckingNumberView = (TextView) convertView
                     .findViewById(R.id.item_tracking_number);
-            itemHolder.signTypeView = (TextView) convertView.findViewById(R.id.item_sign_type);
             itemHolder.receipientView = (TextView) convertView.findViewById(R.id.item_receipient);
             itemHolder.signTimeView = (TextView) convertView.findViewById(R.id.item_sign_time);
             convertView.setTag(itemHolder);
@@ -140,7 +139,6 @@ public class SignListAdapter extends BaseAdapter {
         }
         final SignListAdapterItem item = mData.get(position);
         itemHolder.tranckingNumberView.setText(item.getWaybillNo());
-        itemHolder.signTypeView.setText(item.getSignType());
         itemHolder.receipientView.setText(item.getRecipient());
         itemHolder.signTimeView.setText(item.getSignTime());
         if (mIsSingleSelection) {
