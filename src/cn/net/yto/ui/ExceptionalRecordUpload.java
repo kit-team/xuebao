@@ -13,6 +13,7 @@ import cn.net.yto.application.AppContext;
 import cn.net.yto.biz.SignedLogManager;
 import cn.net.yto.ui.menu.SignListAdapter;
 import cn.net.yto.ui.menu.SignListItemClickListener;
+import cn.net.yto.ui.menu.SignListNotUploadAdapter;
 import cn.net.yto.utils.ToastUtils;
 import cn.net.yto.vo.SignedLogVO;
 import cn.net.yto.vo.SignedLogVO.UploadStatus;
@@ -42,9 +43,11 @@ public class ExceptionalRecordUpload extends Activity {
 
     private void initViews() {
         mListView = (ListView) findViewById(android.R.id.list);
-        View headView = getLayoutInflater().inflate(R.layout.list_detail_head, null);
+        // View headView = getLayoutInflater().inflate(R.layout.list_detail_head, null);
+        View headView = getLayoutInflater().inflate(R.layout.list_notupload_head, null);
         mListView.addHeaderView(headView);
-        mAdapter = new SignListAdapter(getApplicationContext());
+        // mAdapter = new SignListAdapter(getApplicationContext());
+        mAdapter = new SignListNotUploadAdapter(getApplicationContext());
         mAdapter.setSingleSelection(true);
         mAdapter.setData(mSignedLogMgr.queryByUploadSataus(UploadStatus.NOT_UPLOAD));
         mListView.setAdapter(mAdapter);
@@ -64,6 +67,8 @@ public class ExceptionalRecordUpload extends Activity {
                     mAdapter.setData(mSignedLogMgr.queryByUploadSataus(UploadStatus.UPLOAD_FAILURE));
                 } else if (index == 2) {
                     mAdapter.setData(mSignedLogMgr.queryByUploadSataus(UploadStatus.UPLOAD_SUCCESS));
+                }  else {
+                    mAdapter.setData(mSignedLogMgr.queryByUploadSataus(UploadStatus.NOT_UPLOAD));
                 }
             }
         });

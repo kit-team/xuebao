@@ -1,12 +1,10 @@
 package cn.net.yto.ui.menu;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 import android.text.TextUtils;
 import cn.net.yto.vo.SignedLogVO;
+import cn.net.yto.vo.SignedLogVO.UploadStatus;
 
 public class SignListAdapterItem {
     private SignedLogVO mSignedLog = null;
@@ -52,6 +50,28 @@ public class SignListAdapterItem {
 
     public void setSelected(boolean selected) {
         mSelected = selected;
+    }
+    
+    public String getUploadStatus(){
+        String status = "";
+        if (mSignedLog.getUploadStatus() == UploadStatus.NOT_UPLOAD) {
+            status = "未上传";
+        } else if (mSignedLog.getUploadStatus() == UploadStatus.UPLOAD_SUCCESS) {
+            status = "上传成功";
+        } else if (mSignedLog.getUploadStatus() == UploadStatus.UPLOAD_FAILURE) {
+            status = "上传失败";
+        } else if (mSignedLog.getUploadStatus() == UploadStatus.NEED_UPDATE) {
+            status = "数据过期";
+        } else if (mSignedLog.getUploadStatus() == UploadStatus.UPDATE_FAILURE) {
+            status = "更新失败";
+        } else {
+            status = "状态错误";
+        }
+        return status;
+    }
+
+    public String getComment() {
+        return "无备注";
     }
 
 }

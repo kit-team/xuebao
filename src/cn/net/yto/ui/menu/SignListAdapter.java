@@ -18,16 +18,16 @@ import cn.net.yto.vo.SignedLogVO;
 
 public class SignListAdapter extends BaseAdapter {
 
-    private final static int COLOR_DEFAULT = Color.WHITE;
-    private final static int COLOR_SELECTED = Color.YELLOW;
+    protected final static int COLOR_DEFAULT = Color.WHITE;
+    protected final static int COLOR_SELECTED = Color.YELLOW;
 
-    private LayoutInflater mInflater;
+    protected LayoutInflater mInflater;
 
-    private ArrayList<SignListAdapterItem> mData = new ArrayList<SignListAdapterItem>();
+    protected ArrayList<SignListAdapterItem> mData = new ArrayList<SignListAdapterItem>();
 
     // if true, only one item could be selected; else support multi-selection
-    private boolean mIsSingleSelection = false;
-    private int mSelectedPosition = -1;
+    protected boolean mIsSingleSelection = false;
+    protected int mSelectedPosition = -1;
 
     public SignListAdapter(Context context) {
         mInflater = LayoutInflater.from(context);

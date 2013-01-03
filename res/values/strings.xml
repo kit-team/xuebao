@@ -113,6 +113,7 @@
         <item>上传中</item>
         <item>上传失败</item>
         <item>重复数据</item>
+        <item>未上传数据</item>
     </string-array>
 
     <string name="title_dispatch_main">派件操作，派遣员：手持终端收派</string>
@@ -123,6 +124,9 @@
     <string name="list_head_receipient">签收人</string>
     <string name="list_head_sign_type">签收类型</string>
     <string name="list_head_sign_time">签收时间</string>
+    <string name="list_head_upload_status">上传状态</string>
+    <string name="list_head_comment">备注</string>
+
     <string name="title_scan_sign">签收扫描</string>
 
 </resources>

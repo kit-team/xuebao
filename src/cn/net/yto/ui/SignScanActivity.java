@@ -99,7 +99,7 @@ public class SignScanActivity extends Activity {
         viewPager.setAdapter(new SlideMenuAdapter());
         viewPager.setOnPageChangeListener(new SlideMenuChangeListener());
     }
-
+    
     private void updateSignedLog(SignedLogVO data) {
     	if (mSignSuccessView != null) {
     		switchPage(getResources().getString(R.string.tab_sign_success));
@@ -220,6 +220,8 @@ public class SignScanActivity extends Activity {
         	mWaybillNo.setEnabled(false);
         	mAmountCollected.setText(String.valueOf(data.getAmountCollected()));
         	mAmountAgency.setText(String.valueOf(data.getAmountAgency()));
+        	updateAmountViews();
+        	
         	int signOffTypePos = 0;
         	for(int i = 0; i < mSignTypeString.length; i++) {
         		if (mSignTypeString[i].equals(data.getSignOffTypeCode())) {
@@ -245,6 +247,17 @@ public class SignScanActivity extends Activity {
         	mReceipient.setText(data.getRecipient());
         }
         
+        private void updateAmountViews() {
+            boolean flag = false; // TODO 根据运单类型判断是否可以输入
+            if (flag) {
+                mAmountCollected.setEnabled(true);
+                mAmountAgency.setEnabled(true);
+            } else {
+                mAmountCollected.setEnabled(false);
+                mAmountAgency.setEnabled(false);
+            }
+        }
+        
         private void initView(View view) {
             mWaybillNo = (EditText) view.findViewById(R.id.edit_tracking_number);
             mAmountCollected = (EditText) view.findViewById(R.id.edit_amount_collected);
@@ -252,7 +265,8 @@ public class SignScanActivity extends Activity {
             mSignTypeSpinner = (Spinner) view.findViewById(R.id.spinner_sign_type);
             mSatisfactory = (RadioGroup) view.findViewById(R.id.satisfactory_score);
             mReceipient = (EditText) view.findViewById(R.id.edit_receipient);
-
+            updateAmountViews();
+           
             view.findViewById(R.id.btn_save).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
