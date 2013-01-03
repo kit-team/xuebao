@@ -258,7 +258,8 @@ public class SignScanActivity extends Activity {
                 public void onClick(View v) {
                     if (checkInputVaules()) {
                         // save to DB
-                        boolean result = mSignedLogMgr.saveSignedLog(getSignedLogForSave());
+                    	final SignedLogVO signedLogInfo = getSignedLogForSave();
+                        boolean result = mSignedLogMgr.saveSignedLog(signedLogInfo);
                         if (result) {
                             mWaybillNo.setText("");
                             mAmountCollected.setText("");
