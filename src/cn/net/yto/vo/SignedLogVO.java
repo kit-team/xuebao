@@ -277,11 +277,11 @@ public class SignedLogVO {
         submitSignedLogRequest.setSatisfaction(String.valueOf(satisfaction));
         submitSignedLogRequest.setIsReceiverSignOff(String.valueOf(isReceiverSignOff));
         submitSignedLogRequest.setIsPicture(String.valueOf(mIsPicture));
-        submitSignedLogRequest.setScan(String.valueOf(isScan));
+        submitSignedLogRequest.setScan(1);
         submitSignedLogRequest.setExpSignedDescription(expSignedDescription);
         submitSignedLogRequest.setPdaNumber(pdaNumber);
         // FIXME, from the server, now we just use ""
-        submitSignedLogRequest.setUploadStatu("");
+        submitSignedLogRequest.setUploadStatus("");
         submitSignedLogRequest.setStatus("");
         // FIXME, must use the base64 encoding the picture 
         // now we just use ""
