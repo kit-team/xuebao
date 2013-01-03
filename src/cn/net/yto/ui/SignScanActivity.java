@@ -266,10 +266,6 @@ public class SignScanActivity extends Activity {
                             mReceipient.setText("");
                         }
                         ToastUtils.showOperationToast(Operation.SAVE, result);
-
-                        // Upload to server
-                        mSignedLogMgr.submitSignedLog(getSignedLogForSave(), AppContext.getAppContext()
-                                .getDefaultContext());
                     }
                 }
             });
@@ -361,11 +357,7 @@ public class SignScanActivity extends Activity {
                             mWaybillNo.setText("");
                             mExceptionDescription.setText("");
                         }
-                        ToastUtils.showOperationToast(Operation.SAVE, result);
-                        
-                        // upload to server
-                        mSignedLogMgr.submitSignedLog(getSignedLogForSave(), AppContext.getAppContext()
-                                .getDefaultContext());
+                        ToastUtils.showOperationToast(Operation.SAVE, result);                        
                     }
                 }
             });
