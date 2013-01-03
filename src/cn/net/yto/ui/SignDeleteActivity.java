@@ -10,6 +10,7 @@ import android.widget.ListView;
 import cn.net.yto.R;
 import cn.net.yto.biz.SignedLogManager;
 import cn.net.yto.ui.menu.SignListAdapter;
+import cn.net.yto.ui.menu.SignListDeleteAdapter;
 import cn.net.yto.ui.menu.SignListItemClickListener;
 
 public class SignDeleteActivity extends Activity {
@@ -37,9 +38,12 @@ public class SignDeleteActivity extends Activity {
         mTrackingNumber = (EditText) findViewById(R.id.edit_tracking_number);
 
         View headView = getLayoutInflater().inflate(R.layout.list_detail_head, null);
+        headView.findViewById(R.id.head_sign_typ).setVisibility(View.VISIBLE);
+        headView.findViewById(R.id.head_receipient).setVisibility(View.GONE);
         mListView = (ListView) findViewById(R.id.list_details);
         mListView.addHeaderView(headView);
-        mAdapter = new SignListAdapter(getApplicationContext());
+//        mAdapter = new SignListAdapter(getApplicationContext());
+        mAdapter = new SignListDeleteAdapter(getApplicationContext());
         mListView.setAdapter(mAdapter);
         mListView.setOnItemClickListener(new SignListItemClickListener(mAdapter, true));
 

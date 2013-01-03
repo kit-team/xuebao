@@ -25,6 +25,17 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/head_sign_typ"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/list_head_sign_type"
+            android:textAppearance="@android:style/TextAppearance.Medium"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+        <TextView
             android:id="@+id/head_receipient"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

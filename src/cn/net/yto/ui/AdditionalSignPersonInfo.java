@@ -14,6 +14,7 @@ import android.widget.ListView;
 import cn.net.yto.R;
 import cn.net.yto.biz.SignedLogManager;
 import cn.net.yto.ui.menu.SignListAdapter;
+import cn.net.yto.ui.menu.SignListAdditionalAdapter;
 import cn.net.yto.utils.ToastUtils;
 import cn.net.yto.utils.ToastUtils.Operation;
 import cn.net.yto.vo.SignedLogVO;
@@ -45,8 +46,11 @@ public class AdditionalSignPersonInfo extends Activity implements OnItemClickLis
     private void initViews() {
         mListView = (ListView) findViewById(android.R.id.list);
         View headView = getLayoutInflater().inflate(R.layout.list_detail_head, null);
+        headView.findViewById(R.id.head_sign_time).setVisibility(View.GONE);
+        
         mListView.addHeaderView(headView);
-        mAdapter = new SignListAdapter(getApplicationContext());
+//        mAdapter = new SignListAdapter(getApplicationContext());
+        mAdapter = new SignListAdditionalAdapter(getApplicationContext());
         mAdapter.setSingleSelection(true);
         mAdapter.setData(mSignedLogMgr.queryAllSignedLog());
         mListView.setAdapter(mAdapter);
