@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.Random;
 
 import cn.net.yto.vo.message.SubmitSignedLogRequestMsgVO;
+import cn.net.yto.vo.message.UpdateSignedLogRequestMsgVO;
 
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
@@ -290,6 +291,22 @@ public class SignedLogVO {
         return submitSignedLogRequest;
     }
 
+    public UpdateSignedLogRequestMsgVO toUpdateVO() {
+    	UpdateSignedLogRequestMsgVO updateSignedLogRequest = new UpdateSignedLogRequestMsgVO();
+    	updateSignedLogRequest.setSignOffTypeCode(signOffTypeCode);
+    	updateSignedLogRequest.setWaybillNo(waybillNo);
+    	updateSignedLogRequest.setSatisfaction(String.valueOf(satisfaction));
+    	updateSignedLogRequest.setSignedTime(String.valueOf(signedTime));
+    	updateSignedLogRequest.setRecieverSignOff(recieverSignOff);
+    	updateSignedLogRequest.setIsReceiverSignOff(String.valueOf(isReceiverSignOff));
+    	updateSignedLogRequest.setIsPicture(String.valueOf(mIsPicture));
+        // FIXME, must use the base64 encoding the picture 
+        // now we just use ""
+        updateSignedLogRequest.setPictureData("");
+        
+        return updateSignedLogRequest;
+    }
+    
     public static String setRand() {
         String rad = "0123456789";
         StringBuffer result = new StringBuffer();

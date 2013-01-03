@@ -19,6 +19,7 @@ import cn.net.yto.utils.ToastUtils.Operation;
 import cn.net.yto.vo.SignedLogVO;
 import cn.net.yto.vo.SignedLogVO.UploadStatus;
 import cn.net.yto.vo.message.SubmitSignedLogResponseMsgVO;
+import cn.net.yto.vo.message.UpdateSignedLogResponseMsgVO;
 
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.Dao.CreateOrUpdateStatus;
@@ -151,7 +152,7 @@ public class SignedLogManager {
             @Override
             public void onPostSubmit(Object response, Integer responseType) {
                 if (response != null) {
-                	SubmitSignedLogResponseMsgVO responseVo = (SubmitSignedLogResponseMsgVO) response;
+                	UpdateSignedLogResponseMsgVO responseVo = (UpdateSignedLogResponseMsgVO) response;
                     if (signedLogVO != null && responseVo.getRetVal() == SubmitSignedLogResponseMsgVO.RESPONSE_SUCCESS) {
                     	signedLogVO.setUploadStatus(UploadStatus.UPLOAD_SUCCESS);
                         saveSignedLog(signedLogVO);
@@ -171,7 +172,7 @@ public class SignedLogManager {
             }
         };
         ZltdHttpClient client = new ZltdHttpClient(UrlType.UPDATE_SIGNEDLOG,
-                signedLogVO.toVO(), listener, SubmitSignedLogResponseMsgVO.class);
+                signedLogVO.toUpdateVO(), listener, UpdateSignedLogResponseMsgVO.class);
         return client.submit(context);
     }
 
