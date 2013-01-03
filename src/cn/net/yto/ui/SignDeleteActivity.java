@@ -40,8 +40,6 @@ public class SignDeleteActivity extends Activity {
         mListView = (ListView) findViewById(R.id.list_details);
         mListView.addHeaderView(headView);
         mAdapter = new SignListAdapter(getApplicationContext());
-        mAdapter.setData(mSignedLogMgr.queryAllSignedLog());
-
         mListView.setAdapter(mAdapter);
         mListView.setOnItemClickListener(new SignListItemClickListener(mAdapter, true));
 
