@@ -73,14 +73,17 @@ public class GeneralTaskEngine {
                         return;
                     }
 
-                    Object result = null;
                     if (!task.isCanceled()) {
                     	Handler mainHandler = new Handler(Looper.getMainLooper());
                     	mainHandler.post(new Runnable(){
 							@Override
 							public void run() {
-	                            task.run();
+								Object result = null;
+								result = task.run();
 	                            LogUtils.logD("task.run()" + task.toString());
+	                            if (!task.isCanceled()) {
+	                            	task.onCallback(result);
+	                           }
 							}
                     		
                     	});
