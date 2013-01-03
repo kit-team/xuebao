@@ -1,0 +1,99 @@
+package cn.net.yto.net;
+
+import java.util.LinkedList;
+import java.util.List;
+
+import cn.net.yto.utils.LogUtils;
+
+public class HttpTaskManager {
+	private static LinkedList<ZltdHttpClient> mLowPriorityTasks;
+	private static LinkedList<ZltdHttpClient> mHighPriorityTasks;
+	private static LinkedList<ZltdHttpClient> mMidPriorityTasks;
+	private static HttpTaskManager sInstance;
+	public static final int REMOVE_SUCCESS = 1;
+	public static final int REMOVE_FAILED_NOT_EXIST = -1;
+	public static final int REMOVE_FAILED_UPLOADING = -2;
+	private static final String TAG = "HttpTaskManager";
+	private Object mMutex = new Object();
+
+	private HttpTaskManager() {
+		mLowPriorityTasks = new LinkedList<ZltdHttpClient>();
+		mHighPriorityTasks = new LinkedList<ZltdHttpClient>();
+		mMidPriorityTasks = new LinkedList<ZltdHttpClient>();
+	}
+
+	public static HttpTaskManager getInstance() {
+		if (sInstance == null) {
+			sInstance = new HttpTaskManager();
+		}
+		return sInstance;
+	}
+
+	public void addTask(ZltdHttpClient client) {
+		if (client != null) {
+			synchronized (mMutex) {
+				if (client.getPriority() == ZltdHttpClient.PRIORITY_HIGH) {
+					mHighPriorityTasks.add(client);
+				} else if (client.getPriority() == ZltdHttpClient.PRIORITY_MID) {
+					mMidPriorityTasks.add(client);
+				} else {
+					mLowPriorityTasks.add(client);
+				}
+			}
+		}
+	}
+
+	public ZltdHttpClient getUploadTask() {
+		synchronized (mMutex) {
+			if (mHighPriorityTasks.size() > 0) {
+				return mHighPriorityTasks.get(0);
+			} else if (mMidPriorityTasks.size() > 0) {
+				return mMidPriorityTasks.get(0);
+			} else if (mLowPriorityTasks.size() > 0) {
+				return mLowPriorityTasks.get(0);
+			}
+		}
+		return null;
+	}
+
+	private int removeTask(List<ZltdHttpClient> list, ZltdHttpClient client) {
+		synchronized (mMutex) {
+			if (list.size() > 0) {
+				try {
+					ZltdHttpClient client1 = list.get(0);
+					if (client1.equals(client)) {
+						if (client1.getState() == ZltdHttpClient.STATE_UPLOADING) {
+							return REMOVE_FAILED_UPLOADING;
+						} else {
+							list.remove(0);
+						}
+					} else {
+						if (list.remove(client)) {
+							return REMOVE_SUCCESS;
+						}
+					}
+				} catch (Exception e) {
+					LogUtils.e(TAG, e);
+				}
+			}
+		}
+		return REMOVE_FAILED_NOT_EXIST;
+	}
+
+	public int removeTask(ZltdHttpClient client) {
+		if (client != null) {
+			int result = removeTask(mHighPriorityTasks, client);
+			if (result != REMOVE_FAILED_NOT_EXIST) {
+				return result;
+			}
+
+			result = removeTask(mMidPriorityTasks, client);
+			if (result != REMOVE_FAILED_NOT_EXIST) {
+				return result;
+			}
+
+			return removeTask(mLowPriorityTasks, client);
+		}
+		return REMOVE_FAILED_NOT_EXIST;
+	}
+}

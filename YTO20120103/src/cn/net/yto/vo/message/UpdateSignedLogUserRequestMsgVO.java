@@ -1,0 +1,49 @@
+package cn.net.yto.vo.message;
+
+public class UpdateSignedLogUserRequestMsgVO extends BaseRequestMsgVO {
+	private String waybillNo;
+	private String signedTime="2011-03-26 06:06:06";
+	private String pictureData;
+	//签收人信息
+	private String RecieverSignOff;
+	private String IsPicture;
+	//签收人标记
+	private String IsReceiverSignOff;
+	public String getWaybillNo() {
+		return waybillNo;
+	}
+	public void setWaybillNo(String waybillNo) {
+		this.waybillNo = waybillNo;
+	}
+	public String getSignedTime() {
+		return signedTime;
+	}
+	public void setSignedTime(String signedTime) {
+		this.signedTime = signedTime;
+	}
+	public String getPictureData() {
+		return pictureData;
+	}
+	public void setPictureData(String pictureData) {
+		this.pictureData = pictureData;
+	}
+	public String getRecieverSignOff() {
+		return RecieverSignOff;
+	}
+	public void setRecieverSignOff(String recieverSignOff) {
+		RecieverSignOff = recieverSignOff;
+	}
+	public String getIsPicture() {
+		return IsPicture;
+	}
+	public void setIsPicture(String isPicture) {
+		IsPicture = isPicture;
+	}
+	public String getIsReceiverSignOff() {
+		return IsReceiverSignOff;
+	}
+	public void setIsReceiverSignOff(String isReceiverSignOff) {
+		IsReceiverSignOff = isReceiverSignOff;
+	}
+
+}

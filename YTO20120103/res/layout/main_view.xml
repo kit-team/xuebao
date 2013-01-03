@@ -1,0 +1,27 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity" >
+
+
+    <Button
+        android:text="@string/launch_dispatch_orderlist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onLaunchDispatchOrderList"/>
+
+    <Button
+        android:text="@string/text_sign_scan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onLaunchSign"/>
+
+    <Button
+        android:text="@string/launch_emergency_delivery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onLaunchEmergencyDelivery"/>
+    
+</LinearLayout>
