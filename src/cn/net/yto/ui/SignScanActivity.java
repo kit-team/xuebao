@@ -291,14 +291,14 @@ public class SignScanActivity extends Activity {
                 ToastUtils.showToast(R.string.toast_waybillno_notify);
                 return false;
             }
-            if (TextUtils.isEmpty(mAmountCollected.getText().toString())) {
-            	ToastUtils.showToast(R.string.toast_amount_collected_notify);
-                return false;
-            }
-            if(TextUtils.isEmpty(mAmountAgency.getText().toString())) {
-            	ToastUtils.showToast(R.string.toast_amount_agency_notify);
-                return false;
-            }
+            // if (TextUtils.isEmpty(mAmountCollected.getText().toString())) {
+            // ToastUtils.showToast(R.string.toast_amount_collected_notify);
+            // return false;
+            // }
+            // if(TextUtils.isEmpty(mAmountAgency.getText().toString())) {
+            // ToastUtils.showToast(R.string.toast_amount_agency_notify);
+            // return false;
+            // }
             return true;
         }
 
