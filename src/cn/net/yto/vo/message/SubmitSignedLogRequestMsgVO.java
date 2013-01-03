@@ -28,7 +28,7 @@ public class SubmitSignedLogRequestMsgVO extends BaseRequestMsgVO {
 	  /**
 	   * 
 	   */
-	  private String uploadStatu;
+	  private String uploadStatus;
 	  /**
 	   * 
 	   */
@@ -130,11 +130,11 @@ public class SubmitSignedLogRequestMsgVO extends BaseRequestMsgVO {
 	  }
 	  
 	  public String getUploadStatu() {
-		  return uploadStatu;
+		  return uploadStatus;
 	  }
 	  
-	  public void setUploadStatu(String uploadStatu) {
-		  this.uploadStatu = uploadStatu;
+	  public void setUploadStatu(String uploadStatus) {
+		  this.uploadStatus = uploadStatus;
 	  }
 	  
 	  public String getPdaNumber() {
