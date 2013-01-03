@@ -5,6 +5,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.os.Looper;
 
 import cn.net.yto.utils.LogUtils;
 
@@ -55,7 +56,7 @@ public class GeneralTaskEngine {
                     if (canceled) {
                         return;
                     }
-                    BaseTask task = mTaskQueue.poll();
+                    final BaseTask task = mTaskQueue.poll();
                     if (task == null) {
                         try {
                             Thread.sleep(SLEEP_TIME_MS);
@@ -74,18 +75,20 @@ public class GeneralTaskEngine {
 
                     Object result = null;
                     if (!task.isCanceled()) {
-                        result = task.run();
-                        LogUtils.logD("task.run()" + task.toString());
+                    	Handler mainHandler = new Handler(Looper.getMainLooper());
+                    	mainHandler.post(new Runnable(){
+							@Override
+							public void run() {
+	                            task.run();
+	                            LogUtils.logD("task.run()" + task.toString());
+							}
+                    		
+                    	});
                     }
 
                     if (canceled) {
                         return;
                     }
-
-                    if (!task.isCanceled()) {
-                        task.onCallback(result);
-                    }
-
                 }
             }
         });
