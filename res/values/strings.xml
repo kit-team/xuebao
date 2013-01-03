@@ -6,7 +6,7 @@
     <string name="default_server_url">192.168.4.18/pda</string>
     -->
     <!-- default server -->
-     <string name="default_server_url">110.215.6.114:8080/pda</string>
+     <string name="default_server_url">202.106.63.229:8080/pda</string>
 
     <string name="title_dispatch_order_list">派单扫描</string>
     <string name="launch_dispatch_orderlist">派单扫描</string>
