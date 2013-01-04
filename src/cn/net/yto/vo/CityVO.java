@@ -18,7 +18,7 @@ public class CityVO {
 	@DatabaseField
 	private String parentCityCode;
 	/**
-	 * ÊÇ·ñÓĞĞ§×´Ì¬	VALID:ÓĞĞ§£»INVALID:ÎŞĞ§
+	 * æ˜¯å¦æœ‰æ•ˆçŠ¶æ€	VALID:æœ‰æ•ˆï¼›INVALID:æ— æ•ˆ
 	 */
 	@DatabaseField
 	private String status;

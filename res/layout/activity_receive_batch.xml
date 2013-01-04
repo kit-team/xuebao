@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:stretchColumns="1" >
+
+        <TableRow>
+            <TextView
+                style="@style/CommonText"
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="@string/way_bill_no" />
+
+            <EditText
+                style="@style/CommonText"
+                android:id="@+id/way_bill_no_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:ems="10"
+                android:inputType="textCapCharacters" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                style="@style/CommonText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="@string/des_city_text" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <EditText
+                    style="@style/CommonText"
+                    android:id="@+id/city_search_edit"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:inputType="numberDecimal" />
+
+                <Spinner
+                    android:id="@+id/city_spinner"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:prompt="@string/des_city_text" >
+                </Spinner>
+            </LinearLayout>
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                style="@style/CommonText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="@string/tran_pri_text" />
+
+            <EditText
+                style="@style/CommonText"
+                android:id="@+id/price_edit"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:inputType="numberDecimal" >
+            </EditText>
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                style="@style/CommonText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="@string/time_effe_text" />
+
+            <Spinner
+                android:id="@+id/effective_type_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:prompt="@string/time_effe_type_text" >
+            </Spinner>
+        </TableRow>
+    </TableLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5dp" >
+
+        <Button
+            android:id="@+id/btn_back"
+            style="@style/BottomBarButton"
+            android:text="@string/back_text" />
+
+        <Button
+            android:id="@+id/btn_delete"
+            style="@style/BottomBarButton"
+            android:text="@string/delform_num_text" />
+
+        <Button
+            android:id="@+id/btn_save"
+            style="@style/BottomBarButton"
+            android:text="@string/save_text" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@android:id/list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp" >
+    </ListView>
+
+</LinearLayout>

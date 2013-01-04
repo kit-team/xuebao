@@ -22,61 +22,156 @@
 
     <application
         android:name=".application.AppContext"
-        android:allowBackup="true"
-        android:icon="@drawable/title"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:screenOrientation="portrait"
+        android:icon="@drawable/title"
+        android:theme="@style/AppTheme">
+        
         <activity
-            android:name=".ui.MainActivity"
+            android:name=".ui.LoginActivity"
+            android:theme="@style/NoTitleTheme"
+            android:windowSoftInputMode="stateHidden|adjustResize" 
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar" >
-
-            <!--
-            intent-filter>
+            android:label="@string/app_name" >
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter
+            </intent-filter>
+        </activity>
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".ui.MainMenuActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".ui.MainSettingActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".ui.ReceiveMenuActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".ui.OrderTabActivity"
+            android:launchMode="singleInstance" 
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".ui.ReceiveNoOrderTabActivity"
+            android:launchMode="singleInstance" 
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+       <!-- ViewPager -->
+         <activity
+             android:screenOrientation="portrait"
+            android:name=".ui.ReceiveExpressPageActivity"
+            android:launchMode="singleInstance" 
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        
+        <activity android:name=".ui.ReceiveNoOrderUnusualActivity" />
+        
+        
+        <activity
+            android:name=".ui.ReceiveWayBillTabActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.ReceiveWayBillListActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ui.ReceiveWayBillOperationActivity" 
+            android:theme="@style/NoTitleTheme"
+            android:screenOrientation="portrait"/>
+        
+        <activity
+            android:name=".ui.ReceiveViewTabActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize"  />
+        <activity android:name=".ui.ReceiveViewListActivity" 
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.ReceiveViewDetailActivity" 
+            android:screenOrientation="portrait"/>
+        
+        
+        <activity android:name=".ui.ReceiveBatchActivity" 
+            android:windowSoftInputMode="stateHidden|adjustResize" 
+            android:screenOrientation="portrait"/>
+        
+         <receiver android:name=".receiver.DownloadOrderReceiver">
+            <intent-filter>
+                <action android:name="cn.net.yto.ACTION_RECEIVER_DOWNLOAD_ORDER"/>
+            </intent-filter>
+        </receiver>
+        
+         <receiver android:name=".receiver.BackgroudNetAlarmReceiver">
+            <intent-filter>
+                <action android:name="cn.net.yto.ACTION_RECEIVER_BACKGROUND_NET"/>
+            </intent-filter>
+        </receiver>
+        
+        <service android:name=".service.DownloadOrderIntentService" />
+        <service android:name=".service.BackgroundNetIntentService" />
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <activity  android:name=".ui.MainActivity"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:screenOrientation="portrait" >
+            <!--intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            -->
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter-->
         </activity>
-        <activity
-            android:name=".ui.DispatchOrderList"
-            android:label="@string/title_dispatch_order_list" >
+
+        <activity android:name=".ui.DispatchOrderList"
+            android:label="@string/title_dispatch_order_list">
+
         </activity>
-        <activity android:name=".ui.SignScanActivity"
-                  android:label="singleInstance" >
+
+        <activity android:name=".ui.SignScanActivity">
+
         </activity>
-        <activity
-            android:name=".ui.EmergencyDeliveryListActivity"
-            android:label="@string/title_emergency_delivery" >
+
+        <activity android:name=".ui.EmergencyDeliveryListActivity"
+            android:label="@string/title_emergency_delivery">
         </activity>
-        <activity
-            android:name=".ui.SignDeleteActivity"
+        
+        <activity android:name=".ui.SignDeleteActivity"
             android:label="@string/title_delete_sign" >
         </activity>
-        <activity
-            android:name=".ui.SignBatchActivity"
+         
+         <activity android:name=".ui.SignBatchActivity"
             android:label="@string/title_batch_sign" >
         </activity>
-        <activity
-            android:name=".ui.DispatchMain"
-            android:label="@string/title_dispatch_main" >
+
+         <activity android:name=".ui.DispatchMain"
+            android:label="@string/title_dispatch_main">
+           <!--
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+              -->
         </activity>
-        <activity
-            android:name=".ui.ExceptionalRecordUpload"
-            android:label="@string/title_exceptional_record_upload" >
+
+        <activity android:name=".ui.ExceptionalRecordUpload"
+            android:label="@string/title_exceptional_record_upload">
         </activity>
-        <activity
-            android:name=".ui.AdditionalSignPersonInfo"
-            android:label="@string/title_additional_sign_person_info" >
+
+        <activity android:name=".ui.AdditionalSignPersonInfo"
+            android:label="@string/title_additional_sign_person_info">
         </activity>
+        <activity android:name=".ui.ReceiveReplaceActivity"
+            android:theme="@android:style/Theme.Dialog" />"
     </application>
 
 </manifest>

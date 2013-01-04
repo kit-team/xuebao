@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <ListView
+        android:id="@android:id/list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/item_bg_mid" >
+    </ListView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/btn_bar_bg"
+        android:paddingTop="4dp" >
+        <Button
+            style="@style/BottomBarButton"
+            android:id="@+id/preview_btn"
+            android:layout_weight="0.5"
+            android:background="@drawable/left"  />
+        <Button
+            style="@style/BottomBarButton"
+            android:id="@+id/usual_receive_btn"
+             android:textSize="20dp"
+            android:text="@string/order_usual_receive"/>
+        
+        <Button
+            style="@style/BottomBarButton"
+            android:id="@+id/unusual_receive_btn"
+             android:textSize="20dp"
+            android:text="@string/order_unusual_receive" />
+        <Button
+            style="@style/BottomBarButton"
+           
+            android:id="@+id/next_btn"
+            android:layout_weight="0.5"
+            android:background="@drawable/right"  />
+    </LinearLayout>
+
+</LinearLayout>

@@ -72,7 +72,7 @@ public class SignedLogVO {
 
     // 签收状态标记
     @DatabaseField
-    private String signedState = "";
+    private String signedState = "1";
 
     // 满意度
     @DatabaseField
@@ -100,7 +100,7 @@ public class SignedLogVO {
 
     // 签收状态信息
     @DatabaseField
-    private String signedStateInfo = "";
+    private String signedStateInfo = "正常签收";
 
     // 收派员姓名
     @DatabaseField
@@ -155,6 +155,11 @@ public class SignedLogVO {
 
     public void setSignedState(String signedState) {
         this.signedState = signedState;
+        if (signedState == "1") {
+            this.signedStateInfo = "正常签收";
+        } else {
+            this.signedStateInfo = "异常签收";
+        }
     }
 
     public Satisfaction getSatisfaction() {
@@ -246,6 +251,7 @@ public class SignedLogVO {
     }
 
     public String getSignedStateInfo() {
+
         return signedStateInfo;
     }
 
@@ -403,17 +409,6 @@ public class SignedLogVO {
             return UploadStatus.NEED_UPDATE;
         case 5:
             return UploadStatus.UPDATE_FAILURE;    
-        default:
-            return null;
-        }
-    }
-
-    public static SignedState GetSignedState(int i) {
-        switch (i) {
-        case 1:
-            return SignedState.SIGNED_SUCCESS;
-        case 2:
-            return SignedState.SIGNED_FAILURE;
         default:
             return null;
         }

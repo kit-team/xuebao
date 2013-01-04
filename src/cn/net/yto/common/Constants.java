@@ -1,7 +1,5 @@
 ﻿package cn.net.yto.common;
 
-import java.util.HashMap;
-
 public interface Constants {
 	public static final int DEBUG_LEVEL_RELEASE = 0;//0：release 版本；
 	public static final int DEBUG_LEVEL_DEBUG_LOW = 1;//1 ：带log信息的版本；

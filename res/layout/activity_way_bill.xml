@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        style="@style/TabBarLayout" >
+
+        <TextView
+            android:id="@+id/tab_list"
+            style="@style/TabItemTextView"
+            android:tag="@string/way_bill_list"
+            android:text="@string/way_bill_list" />
+
+        <TextView
+            android:id="@+id/tab_detail"
+            style="@style/TabItemTextView"
+            android:tag="@string/detail_info"
+            android:text="@string/detail_info" />    
+        
+    </LinearLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/order_viewPage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

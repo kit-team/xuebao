@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+  <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/tab_collection" 
+        android:layout_width="fill_parent"  
+        android:layout_height="fill_parent"
+        android:gravity="center_horizontal"  
+        android:orientation="vertical">
+    <LinearLayout
+          android:layout_width="fill_parent"
+          android:layout_height="fill_parent"
+          android:layout_weight="1"
+          android:orientation="vertical" >
+
+      <LinearLayout
+          android:layout_width="fill_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal" >
+
+          <CheckBox
+              android:id="@+id/to_pay_cbox"
+              android:layout_width="60dp"
+              android:layout_height="wrap_content"
+              android:layout_weight="0.33"
+              android:textSize="20sp"
+              android:text="@string/to_pay_text" />
+
+          <CheckBox
+              android:id="@+id/col_payment_cbox"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_weight="0.33"
+              android:textSize="20sp"
+              android:text="@string/col_pay_text" />
+      </LinearLayout>
+       <LinearLayout
+          android:layout_width="fill_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal" >
+
+           <TextView
+               style="@style/CommonText"
+               android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+               android:text="@string/cus_name_text" />
+            <EditText 
+                style="@style/CommonTextEdit"
+                android:id="@+id/cus_name_edt" 
+                android:layout_width="fill_parent"  
+                android:layout_height="wrap_content"
+                android:singleLine="true" >  
+       </EditText>  
+      </LinearLayout>
+      
+       <RelativeLayout
+           android:layout_width="fill_parent"
+           android:layout_height="wrap_content"
+           android:focusable="true" 
+           android:layout_marginBottom="10dp">
+
+               <Button
+                   android:id="@+id/select_btn"
+                   android:layout_width="100dp"
+                   android:layout_height="wrap_content"
+                   android:layout_alignParentRight="true"
+                   android:layout_alignParentTop="true"
+                   android:textSize="20sp"
+                   android:text="@string/select_text" 
+                   />
+
+       </RelativeLayout>
+       <LinearLayout
+          android:layout_width="fill_parent"
+          android:layout_height="100dp"
+          android:orientation="horizontal" >
+
+           <TextView
+               style="@style/CommonText"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="@string/goods_val_text" />
+            <EditText 
+                style="@style/CommonTextEdit"
+                android:id="@+id/goods_val_edt" 
+                android:layout_width="fill_parent"  
+                android:layout_height="wrap_content"
+                android:singleLine="true" 
+                android:textSize="18sp">  
+       </EditText>  
+      </LinearLayout>
+    </LinearLayout>
+    
+     <LinearLayout
+          android:layout_width="fill_parent"
+          android:layout_height="fill_parent"
+          android:layout_weight="7"
+          android:orientation="vertical" >
+    
+       <View  
+           android:layout_height="1px"
+           android:background="#FFFFFF"    
+           android:layout_width="fill_parent"></View>
+
+
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <Button
+            style="@style/BottomBarButton"
+            android:id="@+id/rec_back_btn"
+            android:text="@string/back_text" />
+
+        <Button
+            style="@style/BottomBarButton"
+            android:id="@+id/rec_save_btn"
+            android:text="@string/save_text" />
+        </LinearLayout>
+      </LinearLayout>
+     
+    </LinearLayout>  

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tab_ticketpieces"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="62dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                style="@style/CommonText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/mainform_num_text" />
+
+            <EditText
+                style="@style/CommonTextEdit"
+                android:id="@+id/mform_num_show_edt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:singleLine="true" >
+            </EditText>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                style="@style/CommonText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/otform_num_text" />
+
+            <Button
+                android:id="@+id/delfrom_num_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/delform_num_text"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="125dp"
+            android:orientation="horizontal" >
+
+            <EditText
+                style="@style/CommonTextEdit"
+                android:id="@+id/otform_num_show_edt"
+                android:layout_width="match_parent"
+                android:layout_height="110dp" >
+            </EditText>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="61dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                style="@style/CommonText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/otform_num_text"/>
+
+            <EditText
+                style="@style/CommonTextEdit"
+                android:id="@+id/otform_num_edt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:singleLine="true" >
+            </EditText>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="188dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                style="@style/CommonText"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:text="@string/total_text" />
+
+            <TextView
+                style="@style/CommonText"
+                android:id="@+id/toform_num_textv"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:text="@string/zero_text"
+                android:textColor="#FF0000" />
+
+            <TextView
+                style="@style/CommonText"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:text="@string/piece_text" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="7"
+        android:orientation="vertical" >
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1px"
+            android:background="#FFFFFF" >
+        </View>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/rec_back_btn"
+                style="@style/BottomBarButton"
+                android:layout_weight="1"
+                android:text="@string/back_text" />
+
+            <Button
+                android:id="@+id/rec_save_btn"
+                style="@style/BottomBarButton"
+                android:text="@string/save_text" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
