@@ -158,7 +158,25 @@ public class SignBatchActivity extends Activity implements OnItemClickListener {
 
         signedLog.setWaybillNo(waybillno);
         final int typeIdx = mSignTypeSpinner.getSelectedItemPosition();
-        signedLog.setSignOffTypeCode(mSignTypeString[typeIdx]);
+        signedLog.setRecieverSignOff(mSignTypeString[typeIdx]);
+        signedLog.setSignOffTypeCode(SignedLogVO.SIGNOFFMAP.get(signedLog.getRecieverSignOff()));        
+        if (TextUtils.isEmpty(mReceipient.getText().toString())) {
+			final String signOffType = mSignTypeSpinner.getSelectedItem().toString();
+			final String post = getResources().getString(R.string.sign_typ_post);
+			final String gateKeeper = getResources().getString(R.string.sign_type_gate_keeper);
+			if (signOffType.equals(post)) {
+				signedLog.setRecieverSignOff(post);
+			} else if (signOffType.equals(gateKeeper)) {
+				signedLog.setRecieverSignOff(gateKeeper);
+			} else {
+				signedLog.setRecieverSignOff(getResources().getString(R.string.text_sign_off));
+				signedLog.setSignOffTypeCode(SignedLogVO.SIGNOFF_TYPE_SELF);
+			}
+        } else {
+        	signedLog.setRecieverSignOff(mReceipient.getText().toString());
+			signedLog.setSignOffTypeCode(SignedLogVO.SIGNOFF_TYPE_SELF);
+        }
+
         switch (mSatisfactory.getCheckedRadioButtonId()) {
         case R.id.very_satisfactory:
             signedLog.setSatisfaction(Satisfaction.VERY_SATISFIED);

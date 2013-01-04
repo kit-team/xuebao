@@ -1,7 +1,10 @@
 package cn.net.yto.vo;
 
 import java.text.SimpleDateFormat;
+import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 import cn.net.yto.vo.message.SubmitSignedLogRequestMsgVO;
@@ -20,6 +23,18 @@ public class SignedLogVO {
     public static final String WAYBILLNO_FIELD_NAME = "waybillNo"; 
     public static final String UPLOADSTATUS_FIELD_NAME = "uploadStatus"; 
     public static final String SIGNED_TIME_FIELD_NAME = "signedTime";
+    public static final String SIGNOFF_TYPE_SELF	  = "SELF";
+    
+    public static final Map<String, String> SIGNOFFMAP;
+    static {
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("门卫", "GATEKEEPER");
+        map.put("邮件收发章", "POST");
+        map.put("他人代收", "BYOTHER");
+        map.put("本人签收", "SELF");
+        map.put("已签收", "SELF");
+        SIGNOFFMAP = Collections.unmodifiableMap(map);
+    }
     
     // 派件 id
 	@DatabaseField
