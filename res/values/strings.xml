@@ -275,10 +275,6 @@
         <item>正常签收</item>
         <item>异常签收</item>
     </string-array>
-    <string-array name="exception_reason">
-        <item>拒签</item>
-        <item>无人签收</item>
-    </string-array>
     <string-array name="sign_type">
         <item>门卫</item>
         <item>本人签收</item>
@@ -322,5 +318,53 @@
     <string name="list_head_comment">备注</string>
 
     <string name="title_scan_sign">签收扫描</string>
+    
+    <!-- exception codes -->
+    <string-array name="exception_codes">
+        <item>"72"</item>
+        <item>"76"</item>
+        <item>"77"</item>
+        <item>"78"</item>
+        <item>"79"</item>
+        <item>"82"</item>
+        <item>"83"</item>
+        <item>"84"</item>
+        <item>"85"</item>
+        <item>"88"</item>
+        <item>"71"</item>
+        <item>"67"</item>
+        <item>"66"</item>
+        <item>"65"</item>
+        <item>"64"</item>
+        <item>"55"</item>
+        <item>"19"</item>
+        <item>"17"</item>
+        <item>"90"</item>
+        <item>"91"</item>
+    </string-array>
+
+    <!-- exception names -->
+    <string-array name="exception_reason">
+        <item>错分件（分点部错分或中转场错分）</item>
+        <item>贴错单</item>
+        <item>收方地址偏远，需加工作日</item>
+        <item>快件到达营业部时间过晚，需加工作日派送</item>
+        <item>收方客户拒收</item>
+        <item>作废件</item>
+        <item>客户要求自取</item>
+        <item>等通知派送</item>
+        <item>自取件，已通知客户，但未来领取</item>
+        <item>计错重量或价格，客户拒付</item>
+        <item>快件的件数未全部到齐，无法派送</item>
+        <item>收方客户要求转寄其他地址</item>
+        <item>收件客户已经离职</item>
+        <item>客户放假或周末休息</item>
+        <item>收方地址错误（包括地址搬迁）</item>
+        <item>快件退回</item>
+        <item>交通原因延误收派件（修路、交通意外、交通堵塞、交通工具故障）</item>
+        <item>天气原因延误收派件</item>
+        <item>客户无法提供有效身份证明文件</item>
+        <item>收方客户拒付代收货款</item>
+    </string-array>
 
 </resources>

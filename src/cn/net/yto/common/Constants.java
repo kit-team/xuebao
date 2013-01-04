@@ -1,5 +1,7 @@
 ﻿package cn.net.yto.common;
 
+import java.util.HashMap;
+
 public interface Constants {
 	public static final int DEBUG_LEVEL_RELEASE = 0;//0：release 版本；
 	public static final int DEBUG_LEVEL_DEBUG_LOW = 1;//1 ：带log信息的版本；
@@ -47,5 +49,4 @@ public interface Constants {
 	
 	public static String ACTION_RECEIVER_DOWNLOAD_ORDER = "cn.net.yto.ACTION_RECEIVER_DOWNLOAD_ORDER";
 	public static String ACTION_RECEIVER_BACKGROUND_NET = "cn.net.yto.ACTION_RECEIVER_BACKGROUND_NET";
-
 }

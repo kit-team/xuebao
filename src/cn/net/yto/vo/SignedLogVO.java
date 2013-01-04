@@ -96,7 +96,7 @@ public class SignedLogVO {
 
     // 签收状态标记
     @DatabaseField
-    private SignedState signedState = SignedState.SIGNED_SUCCESS;
+    private String signedState = "1";
 
     // 满意度
     @DatabaseField
@@ -173,11 +173,11 @@ public class SignedLogVO {
         this.pictureData = pictureData;
     }
 
-    public SignedState getSignedState() {
+    public String getSignedState() {
         return signedState;
     }
 
-    public void setSignedState(SignedState signedState) {
+    public void setSignedState(String signedState) {
         this.signedState = signedState;
     }
 
@@ -385,20 +385,6 @@ public class SignedLogVO {
         return result.toString();
     }
 
-    public enum SignedState {
-        SIGNED_SUCCESS(1), SIGNED_FAILURE(2);
-
-        private int signedState;
-
-        SignedState(int state) {
-            signedState = state;
-        }
-
-        int getSignedState() {
-            return signedState;
-        }
-    };
-
     public enum Satisfaction {
         SATISFIED(0), VERY_SATISFIED(1), DISSATISFIED(2);
 
@@ -412,17 +398,6 @@ public class SignedLogVO {
             return satisfaction;
         }
 
-    }
-
-    public static SignedState GetSignedState(int i) {
-        switch (i) {
-        case 1:
-            return SignedState.SIGNED_SUCCESS;
-        case 2:
-            return SignedState.SIGNED_FAILURE;
-        default:
-            return null;
-        }
     }
 
     public static String GetSatisfaction(Satisfaction statis) {

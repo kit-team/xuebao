@@ -8,7 +8,6 @@ import java.util.List;
 import cn.net.yto.application.AppContext;
 import cn.net.yto.vo.SignedLogVO;
 import cn.net.yto.vo.SignedLogVO.Satisfaction;
-import cn.net.yto.vo.SignedLogVO.SignedState;
 import android.test.ApplicationTestCase;
 
 public class SignedLogManagerTest extends ApplicationTestCase<AppContext>{
@@ -54,7 +53,7 @@ public class SignedLogManagerTest extends ApplicationTestCase<AppContext>{
     	assertEquals(signlog1.getAmountAgency(), 60);
     	assertEquals(signlog1.getEmpCode(), "id123");    	
     	assertEquals(signlog1.getWaybillNo(), "123");    	
-    	assertEquals(signlog1.getSignedState(), SignedState.SIGNED_SUCCESS);    	
+    	assertEquals(signlog1.getSignedState(), "1");    	
     	assertEquals(signlog1.getSatisfaction(), Satisfaction.SATISFIED);    	
     	assertEquals(signlog1.getExpSignedDescription(), "");    	
     	assertEquals(signlog1.getUploadStatus(), SignedLogVO.UPLOAD_STAUTS_WAITFORSEND);    	

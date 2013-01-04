@@ -354,11 +354,13 @@ public class SignScanActivity extends Activity {
         private Spinner mExceptionReasonSpinner = null;
         private EditText mExceptionDescription = null;
 
-        private String[] mExceptionReasons;
+        private String[] mExceptionNames;
+        private String[] mExceptionCodes;
 
         public SignFailedView(View view) {
             initView(view);
-            mExceptionReasons = getResources().getStringArray(R.array.exception_reason);
+            mExceptionNames = getResources().getStringArray(R.array.exception_reason);
+            mExceptionCodes = getResources().getStringArray(R.array.exception_codes);
         }
 
         private void initView(View view) {
@@ -394,8 +396,8 @@ public class SignScanActivity extends Activity {
 
             signedLog.setWaybillNo(mWaybillNo.getText().toString());
             final int exceptIdx = mExceptionReasonSpinner.getSelectedItemPosition();
-            signedLog.setSignedStateInfo(mExceptionReasons[exceptIdx]);
-            signedLog.setExpSignedDescription(mExceptionDescription.getText().toString());
+            signedLog.setExpSignedDescription(mExceptionNames[exceptIdx]);
+            signedLog.setSignedState(mExceptionCodes[exceptIdx]);
             return signedLog;
         }
     }
