@@ -1,7 +1,6 @@
 package cn.net.yto.ui;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -317,17 +316,18 @@ public class SignScanActivity extends Activity {
             signedLog.setSignOffTypeCode(mSignTypeString[typeIdx]);
             
             if (TextUtils.isEmpty(mReceipient.getText().toString())) {
-            	final String signOffDoorkeeper = mSignTypeString[0];
-            	final String signOffOneself = mSignTypeString[1];
-            	if (signOffOneself.equals(mSignTypeSpinner.getSelectedItem().toString())) {
-            		signedLog.setRecieverSignOff(getResources().getString(R.string.text_sign_off));
-            	} else {
-            		signedLog.setRecieverSignOff(signOffDoorkeeper);
-            	}
-            	signedLog.setRecipient("");
+				final String signOffType = mSignTypeSpinner.getSelectedItem().toString();
+				final String post = getResources().getString(R.string.sign_typ_post);
+				final String gateKeeper = getResources().getString(R.string.sign_type_gate_keeper);
+				if (signOffType.equals(post)) {
+					signedLog.setRecieverSignOff(post);
+				} else if (signOffType.equals(gateKeeper)) {
+					signedLog.setRecieverSignOff(gateKeeper);
+				} else {
+					signedLog.setRecieverSignOff(getResources().getString(R.string.text_sign_off));
+				}
             } else {
             	signedLog.setRecieverSignOff(mReceipient.getText().toString());
-            	signedLog.setRecipient(mReceipient.getText().toString());
             }
            
             switch (mSatisfactory.getCheckedRadioButtonId()) {

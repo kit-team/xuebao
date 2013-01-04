@@ -50,7 +50,13 @@
     <string name="text_delete">删除</string>
     <string name="text_save">保存</string>
     <string name="text_upload">上传</string>
+    
     <string name="text_sign_off">已签收</string>
+    <!-- sign type string definition -->
+    <string name="sign_type_gate_keeper">门卫</string>
+    <string name="sign_type_self">本人签收</string>
+    <string name="sign_typ_post">邮件收发章</string>
+    <string name="sign_typ_by_other">他人代收</string>
 
     <!-- Tab string text definition -->
     <string name="tab_sign_success">正常签收</string>
@@ -86,10 +92,10 @@
         <item>无人签收</item>
     </string-array>
     <string-array name="sign_type">
-        <item>门卫</item>
-        <item>本人签收</item>
-        <item>邮件收发章</item>
-        <item>他人代收</item>
+        <item>@string/sign_type_gate_keeper</item>
+        <item>@string/sign_type_self</item>
+        <item>@string/sign_typ_post</item>
+        <item>@string/sign_typ_by_other</item>
     </string-array>
     <string-array name="fake_date">
         <item>2012年12月27号</item>
