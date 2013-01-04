@@ -278,6 +278,31 @@ public class SignedLogVO {
         this.mIsPicture = isPicture;
     }
 
+    public static SubmitSignedLogRequestMsgVO getFakeRequestMsgVO() {
+    	final SubmitSignedLogRequestMsgVO requestMsgVO = new SubmitSignedLogRequestMsgVO();
+    	requestMsgVO.setAmountAgency("");
+    	requestMsgVO.setAmountCollected("");
+    	requestMsgVO.setEmpCode("00003523");
+    	requestMsgVO.setEmpName("手持终端收派培训");
+    	requestMsgVO.setExpSignedDescription("");
+    	requestMsgVO.setStatus("发送中");
+    	requestMsgVO.setId("b2cd08d9-5eae-4c83-996f-f6b51c6accfb");
+    	requestMsgVO.setIsPicture("0");
+    	requestMsgVO.setIsReceiverSignOff("0");
+    	requestMsgVO.setWaybillNo("2473718025");
+    	requestMsgVO.setPdaNumber("63101128211487");
+    	requestMsgVO.setPictureData("U3lzdGVtLkJ5dGVbXQ\u003d\u003d");
+    	requestMsgVO.setRecieverSignOff("已签收");
+    	requestMsgVO.setSatisfaction("不满意");
+    	requestMsgVO.setSignOffTypeCode("SELF");
+    	requestMsgVO.setSignedState("1");
+    	requestMsgVO.setSignedStateInfo("正常签收");
+    	requestMsgVO.setSignedTime("2012-12-29 21:30:25");
+    	requestMsgVO.setUploadStatus("WaitForSend");
+    	requestMsgVO.setScan(0);
+    	return requestMsgVO;
+    }
+    
     public SubmitSignedLogRequestMsgVO toVO() {
         SubmitSignedLogRequestMsgVO submitSignedLogRequest = new SubmitSignedLogRequestMsgVO();
         submitSignedLogRequest.setId(setRand());
@@ -291,18 +316,18 @@ public class SignedLogVO {
         submitSignedLogRequest.setEmpCode(empCode);
         submitSignedLogRequest.setEmpName(empName);
         submitSignedLogRequest.setSignedTime(String.valueOf(signedTime));
-        submitSignedLogRequest.setSatisfaction(String.valueOf(satisfaction));
+        submitSignedLogRequest.setSatisfaction(SignedLogVO.GetSatisfaction(satisfaction));
         submitSignedLogRequest.setIsReceiverSignOff(String.valueOf(isReceiverSignOff));
         submitSignedLogRequest.setIsPicture(String.valueOf(mIsPicture));
         submitSignedLogRequest.setScan(1);
         submitSignedLogRequest.setExpSignedDescription(expSignedDescription);
         submitSignedLogRequest.setPdaNumber(pdaNumber);
-        // FIXME, from the server, now we just use ""
-        submitSignedLogRequest.setUploadStatus("");
        // submitSignedLogRequest.setStatus("");
         // FIXME, must use the base64 encoding the picture 
         // now we just use ""
         submitSignedLogRequest.setPictureData("");
+        submitSignedLogRequest.setUploadStatus("WaitForSend");
+        submitSignedLogRequest.setStatus("发送中");
         
         return submitSignedLogRequest;
     }
@@ -311,7 +336,7 @@ public class SignedLogVO {
     	UpdateSignedLogRequestMsgVO updateSignedLogRequest = new UpdateSignedLogRequestMsgVO();
     	updateSignedLogRequest.setSignOffTypeCode(signOffTypeCode);
     	updateSignedLogRequest.setWaybillNo(waybillNo);
-    	updateSignedLogRequest.setSatisfaction(String.valueOf(satisfaction));
+    	updateSignedLogRequest.setSatisfaction(SignedLogVO.GetSatisfaction(satisfaction));
     	updateSignedLogRequest.setSignedTime(String.valueOf(signedTime));
     	updateSignedLogRequest.setRecieverSignOff(recieverSignOff);
     	updateSignedLogRequest.setIsReceiverSignOff(String.valueOf(isReceiverSignOff));
@@ -409,14 +434,14 @@ public class SignedLogVO {
         }
     }
 
-    public static Satisfaction GetSatisfaction(int i) {
-        switch (i) {
-        case 0:
-            return Satisfaction.SATISFIED;
-        case 1:
-            return Satisfaction.VERY_SATISFIED;
-        case 2:
-            return Satisfaction.DISSATISFIED;
+    public static String GetSatisfaction(Satisfaction statis) {
+        switch (statis) {
+        case SATISFIED:
+            return "满意";
+        case VERY_SATISFIED:
+            return "很满意";
+        case DISSATISFIED:
+            return "不满意";
         default:
             return null;
         }
