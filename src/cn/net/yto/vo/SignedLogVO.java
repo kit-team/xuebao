@@ -124,7 +124,7 @@ public class SignedLogVO {
 
     // 签收状态信息
     @DatabaseField
-    private String signedStateInfo = "";
+    private String signedStateInfo = "正常签收";
 
     // 收派员姓名
     @DatabaseField
