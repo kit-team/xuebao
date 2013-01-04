@@ -1,5 +1,6 @@
 package cn.net.yto.vo;
 
+import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -24,6 +25,17 @@ public class SignedLogVO {
     public static final String SIGNED_TIME_FIELD_NAME = "signedTime";
     public static final String SIGNOFF_TYPE_SELF	  = "SELF";
     
+    public static final String UPLOAD_STAUTS_SUCCESS  		= "Success";
+    public static final String UPLOAD_STAUTS_WAITFORSEND  	= "WaitForSend";
+    public static final String UPLOAD_STAUTS_FAILED  		= "Failed";
+    public static final String UPLOAD_STAUTS_RESENDING  	= "ReSending";
+    public static final String UPLOAD_STAUTS_RESENDFAILED  	= "ReSendFailed";
+    
+    // FIXME use the upload status file indicate the update status
+    public static final String UPLOAD_STAUTS_NEED_UPDATE  	= "NeedUpdate";
+    public static final String UPLOAD_STAUTS_UPDATE_FAILED  = "UpdateFailed";
+    
+    
     public static final Map<String, String> SIGNOFFMAP;
     static {
         Map<String, String> map = new HashMap<String, String>();
@@ -34,6 +46,18 @@ public class SignedLogVO {
         map.put("已签收", "SELF");
         SIGNOFFMAP = Collections.unmodifiableMap(map);
     }
+    
+    public static final Map<String, String> UPLOADSTATUSMAP;
+    static {
+        Map<String, String> uploadMap = new HashMap<String, String>();
+        uploadMap.put(UPLOAD_STAUTS_SUCCESS, "成功");
+        uploadMap.put(UPLOAD_STAUTS_WAITFORSEND, "发送中");
+        uploadMap.put(UPLOAD_STAUTS_FAILED, "发送失败");
+        uploadMap.put(UPLOAD_STAUTS_RESENDING, "重复发送中");
+        uploadMap.put(UPLOAD_STAUTS_RESENDFAILED, "重复发送失败");
+        UPLOADSTATUSMAP = Collections.unmodifiableMap(uploadMap);
+    }
+    
     
     // 派件 id
 	@DatabaseField
@@ -92,7 +116,7 @@ public class SignedLogVO {
 
     // 上传状态
     @DatabaseField(columnName = UPLOADSTATUS_FIELD_NAME)
-    private UploadStatus uploadStatus = UploadStatus.NOT_UPLOAD;
+    private String uploadStatus = UPLOAD_STAUTS_WAITFORSEND;
 
     // 收件人
     @DatabaseField
@@ -178,11 +202,11 @@ public class SignedLogVO {
         this.expSignedDescription = expSignedDescription;
     }
 
-    public UploadStatus getUploadStatus() {
+    public String getUploadStatus() {
         return uploadStatus;
     }
 
-    public void setUploadStatus(UploadStatus status) {
+    public void setUploadStatus(String status) {
         this.uploadStatus = status;
     }
 
@@ -313,26 +337,34 @@ public class SignedLogVO {
         submitSignedLogRequest.setId(setRand());
         submitSignedLogRequest.setSignOffTypeCode(signOffTypeCode);
         submitSignedLogRequest.setRecieverSignOff(recieverSignOff);
-        submitSignedLogRequest.setAmountCollected(String.valueOf(amountCollected));
-        submitSignedLogRequest.setAmountAgency(String.valueOf(amountAgency));
+        
         submitSignedLogRequest.setWaybillNo(waybillNo);
         submitSignedLogRequest.setSignedState(String.valueOf(signedState));
         submitSignedLogRequest.setSignedStateInfo(signedStateInfo);        
-        submitSignedLogRequest.setEmpCode(empCode);
-        submitSignedLogRequest.setEmpName(empName);
-        submitSignedLogRequest.setSignedTime(String.valueOf(signedTime));
+//      submitSignedLogRequest.setEmpCode(empCode);
+//      submitSignedLogRequest.setEmpName(empName);
+//      submitSignedLogRequest.setAmountCollected(String.valueOf(amountCollected));
+//      submitSignedLogRequest.setAmountAgency(String.valueOf(amountAgency));
+        // hardcode
+        submitSignedLogRequest.setEmpCode("00003523");
+        submitSignedLogRequest.setEmpName("手持终端收派培训");
+        submitSignedLogRequest.setPdaNumber("63101128211487");
+        submitSignedLogRequest.setAmountCollected("");
+        submitSignedLogRequest.setAmountAgency("");
+        submitSignedLogRequest.setScan(0);
+        
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        submitSignedLogRequest.setSignedTime( dateFormat.format(signedTime));       
         submitSignedLogRequest.setSatisfaction(SignedLogVO.GetSatisfaction(satisfaction));
         submitSignedLogRequest.setIsReceiverSignOff(String.valueOf(isReceiverSignOff));
         submitSignedLogRequest.setIsPicture(String.valueOf(mIsPicture));
-        submitSignedLogRequest.setScan(1);
         submitSignedLogRequest.setExpSignedDescription(expSignedDescription);
-        submitSignedLogRequest.setPdaNumber(pdaNumber);
        // submitSignedLogRequest.setStatus("");
         // FIXME, must use the base64 encoding the picture 
         // now we just use ""
         submitSignedLogRequest.setPictureData("");
-        submitSignedLogRequest.setUploadStatus("WaitForSend");
-        submitSignedLogRequest.setStatus("发送中");
+        submitSignedLogRequest.setUploadStatus(uploadStatus);
+        submitSignedLogRequest.setStatus(UPLOADSTATUSMAP.get(uploadStatus));
         
         return submitSignedLogRequest;
     }
@@ -342,7 +374,8 @@ public class SignedLogVO {
     	updateSignedLogRequest.setSignOffTypeCode(signOffTypeCode);
     	updateSignedLogRequest.setWaybillNo(waybillNo);
     	updateSignedLogRequest.setSatisfaction(SignedLogVO.GetSatisfaction(satisfaction));
-    	updateSignedLogRequest.setSignedTime(String.valueOf(signedTime));
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        updateSignedLogRequest.setSignedTime( dateFormat.format(signedTime));       
     	updateSignedLogRequest.setRecieverSignOff(recieverSignOff);
     	updateSignedLogRequest.setIsReceiverSignOff(String.valueOf(isReceiverSignOff));
     	updateSignedLogRequest.setIsPicture(String.valueOf(mIsPicture));
@@ -365,21 +398,6 @@ public class SignedLogVO {
         return result.toString();
     }
 
-    public enum UploadStatus {
-        NOT_UPLOAD(0), UPLOAD_SUCCESS(1), UPLOAD_FAILURE(2), UPLOADING(3), NEED_UPDATE(4), UPDATE_FAILURE(5);
-
-        private int uploadStatus;
-
-        UploadStatus(int status) {
-            uploadStatus = status;
-        }
-
-        int getUploadStatus() {
-            return uploadStatus;
-        }
-
-    }
-
     public enum Satisfaction {
         SATISFIED(0), VERY_SATISFIED(1), DISSATISFIED(2);
 
@@ -393,25 +411,6 @@ public class SignedLogVO {
             return satisfaction;
         }
 
-    }
-
-    public static UploadStatus GetUploadStatus(int i) {
-        switch (i) {
-        case 0:
-            return UploadStatus.NOT_UPLOAD;
-        case 1:
-            return UploadStatus.UPLOAD_SUCCESS;
-        case 2:
-            return UploadStatus.UPLOAD_FAILURE;
-        case 3:
-            return UploadStatus.UPLOADING;
-        case 4:
-            return UploadStatus.NEED_UPDATE;
-        case 5:
-            return UploadStatus.UPDATE_FAILURE;    
-        default:
-            return null;
-        }
     }
 
     public static String GetSatisfaction(Satisfaction statis) {

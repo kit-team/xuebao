@@ -16,7 +16,6 @@ import cn.net.yto.ui.menu.SignListItemClickListener;
 import cn.net.yto.ui.menu.SignListNotUploadAdapter;
 import cn.net.yto.utils.ToastUtils;
 import cn.net.yto.vo.SignedLogVO;
-import cn.net.yto.vo.SignedLogVO.UploadStatus;
 
 public class ExceptionalRecordUpload extends Activity {
 
@@ -49,7 +48,7 @@ public class ExceptionalRecordUpload extends Activity {
         // mAdapter = new SignListAdapter(getApplicationContext());
         mAdapter = new SignListNotUploadAdapter(getApplicationContext());
         mAdapter.setSingleSelection(true);
-        mAdapter.setData(mSignedLogMgr.queryByUploadSataus(UploadStatus.NOT_UPLOAD));
+        mAdapter.setData(mSignedLogMgr.queryByUploadSataus(SignedLogVO.UPLOAD_STAUTS_WAITFORSEND));
         mListView.setAdapter(mAdapter);
         mListView.setOnItemClickListener(new SignListItemClickListener(mAdapter, true));
 
@@ -62,13 +61,13 @@ public class ExceptionalRecordUpload extends Activity {
                 final int index = mUploadStateSpinner.getSelectedItemPosition();
                 String state = mUploadState[index];
                 if (index == 0) {
-                    mAdapter.setData(mSignedLogMgr.queryByUploadSataus(UploadStatus.UPLOADING));
+                    mAdapter.setData(mSignedLogMgr.queryByUploadSataus(SignedLogVO.UPLOAD_STAUTS_WAITFORSEND));
                 } else if (index == 1) {
-                    mAdapter.setData(mSignedLogMgr.queryByUploadSataus(UploadStatus.UPLOAD_FAILURE));
+                    mAdapter.setData(mSignedLogMgr.queryByUploadSataus(SignedLogVO.UPLOAD_STAUTS_FAILED));
                 } else if (index == 2) {
-                    mAdapter.setData(mSignedLogMgr.queryByUploadSataus(UploadStatus.UPLOAD_SUCCESS));
+                    mAdapter.setData(mSignedLogMgr.queryByUploadSataus(SignedLogVO.UPLOAD_STAUTS_SUCCESS));
                 }  else {
-                    mAdapter.setData(mSignedLogMgr.queryByUploadSataus(UploadStatus.NOT_UPLOAD));
+                    mAdapter.setData(mSignedLogMgr.queryByUploadSataus(SignedLogVO.UPLOAD_STAUTS_WAITFORSEND));
                 }
             }
         });
