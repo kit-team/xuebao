@@ -28,15 +28,16 @@ public class SubmitSignedLogRequestMsgVO extends BaseRequestMsgVO {
 	  /**
 	   * 
 	   */
-	  private String uploadStatus;
-	  /**
-	   * 
-	   */
 	  private String pdaNumber;
 	  /**
 	   * 
 	   */
-	  //private String getStatus;
+	  private String getStatus;
+	  
+	  /**
+	   * 
+	   */
+	  private String uploadStatu;
 	  /**
 	   * 用户签名图片
 	   */
@@ -130,11 +131,11 @@ public class SubmitSignedLogRequestMsgVO extends BaseRequestMsgVO {
 	  }
 	  
 	  public String getUploadStatus() {
-		  return uploadStatus;
+		  return uploadStatu;
 	  }
 	  
 	  public void setUploadStatus(String uploadStatus) {
-		  this.uploadStatus = uploadStatus;
+		  this.uploadStatu = uploadStatus;
 	  }
 	  
 	  public String getPdaNumber() {
@@ -147,13 +148,13 @@ public class SubmitSignedLogRequestMsgVO extends BaseRequestMsgVO {
 	  
 	  
 	  
-//	  public String getStatus() {
-//		  return getStatus;
-//	  }
-//	  
-//	  public void setStatus(String status) {
-//		  this.getStatus = status;
-//	  }
+	  public String getStatus() {
+		  return getStatus;
+	  }
+	  
+	  public void setStatus(String status) {
+		  this.getStatus = status;
+	  }
 	  
 	  public String getPictureData() {
 		  return pictureData;
