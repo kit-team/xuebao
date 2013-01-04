@@ -1,6 +1,5 @@
 package cn.net.yto.ui;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -16,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import cn.net.yto.R;
+import cn.net.yto.utils.CommonUtils;
 
 public class EmergencyDeliveryListActivity extends ListActivity{
 
@@ -72,8 +72,9 @@ public class EmergencyDeliveryListActivity extends ListActivity{
 			}
 			
 			TextView deadTimeView = (TextView)emergencyDeliveryView.findViewById(R.id.emergency_delivery_deadtime);
-			SimpleDateFormat sdFormat = new SimpleDateFormat("hh/dd/MM/yy");
-			deadTimeView.setText(sdFormat.format(delivery.getDeadTime()));
+            String deadTime = CommonUtils.getFormatedDateTime(CommonUtils.FORMAT_DATE, delivery
+                    .getDeadTime().getTime());
+            deadTimeView.setText(deadTime);
 			TextView orderIdView = (TextView)emergencyDeliveryView.findViewById(R.id.emergency_delivery_id);
 			orderIdView.setText(delivery.mOrderId);
 			TextView messageContentView = (TextView)emergencyDeliveryView.findViewById(R.id.emergency_delivery_message_content);
