@@ -33,6 +33,10 @@ import com.google.gson.Gson;
 
 public class CommonUtils {
 	private static final String TAG = "CommonUtils";
+	
+    public static final String FORMAT_TIME = "yyyy-MM-dd HH:mm:ss";
+    public static final String FORMAT_DATE = "yyyy-MM-dd";
+
 	public static final Pattern sDateTimePattern = Pattern
 			.compile("(\\d4)(\\d{2})(\\d{2})(\\d{2})(\\d{2})(\\d{2})");
 	public static long timeInterval = 0;
