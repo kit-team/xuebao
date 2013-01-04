@@ -331,21 +331,28 @@ public class SignedLogVO {
         submitSignedLogRequest.setId(setRand());
         submitSignedLogRequest.setSignOffTypeCode(signOffTypeCode);
         submitSignedLogRequest.setRecieverSignOff(recieverSignOff);
-        submitSignedLogRequest.setAmountCollected(String.valueOf(amountCollected));
-        submitSignedLogRequest.setAmountAgency(String.valueOf(amountAgency));
+        
         submitSignedLogRequest.setWaybillNo(waybillNo);
         submitSignedLogRequest.setSignedState(String.valueOf(signedState));
         submitSignedLogRequest.setSignedStateInfo(signedStateInfo);        
-        submitSignedLogRequest.setEmpCode(empCode);
-        submitSignedLogRequest.setEmpName(empName);
+//      submitSignedLogRequest.setEmpCode(empCode);
+//      submitSignedLogRequest.setEmpName(empName);
+//      submitSignedLogRequest.setAmountCollected(String.valueOf(amountCollected));
+//      submitSignedLogRequest.setAmountAgency(String.valueOf(amountAgency));
+        // hardcode
+        submitSignedLogRequest.setEmpCode("00003523");
+        submitSignedLogRequest.setEmpName("手持终端收派培训");
+        submitSignedLogRequest.setPdaNumber("63101128211487");
+        submitSignedLogRequest.setAmountCollected("");
+        submitSignedLogRequest.setAmountAgency("");
+        submitSignedLogRequest.setScan(0);
+        
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         submitSignedLogRequest.setSignedTime( dateFormat.format(signedTime));       
         submitSignedLogRequest.setSatisfaction(SignedLogVO.GetSatisfaction(satisfaction));
         submitSignedLogRequest.setIsReceiverSignOff(String.valueOf(isReceiverSignOff));
         submitSignedLogRequest.setIsPicture(String.valueOf(mIsPicture));
-        submitSignedLogRequest.setScan(1);
         submitSignedLogRequest.setExpSignedDescription(expSignedDescription);
-        submitSignedLogRequest.setPdaNumber(pdaNumber);
        // submitSignedLogRequest.setStatus("");
         // FIXME, must use the base64 encoding the picture 
         // now we just use ""
