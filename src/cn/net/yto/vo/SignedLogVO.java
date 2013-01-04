@@ -72,7 +72,7 @@ public class SignedLogVO {
 
     // 签收状态标记
     @DatabaseField
-    private SignedState signedState = SignedState.SIGNED_SUCCESS;
+    private String signedState = "";
 
     // 满意度
     @DatabaseField
@@ -149,11 +149,11 @@ public class SignedLogVO {
         this.pictureData = pictureData;
     }
 
-    public SignedState getSignedState() {
+    public String getSignedState() {
         return signedState;
     }
 
-    public void setSignedState(SignedState signedState) {
+    public void setSignedState(String signedState) {
         this.signedState = signedState;
     }
 
@@ -333,20 +333,6 @@ public class SignedLogVO {
         }
         return result.toString();
     }
-
-    public enum SignedState {
-        SIGNED_SUCCESS(1), SIGNED_FAILURE(2);
-
-        private int signedState;
-
-        SignedState(int state) {
-            signedState = state;
-        }
-
-        int getSignedState() {
-            return signedState;
-        }
-    };
 
     public enum UploadStatus {
         NOT_UPLOAD(0), UPLOAD_SUCCESS(1), UPLOAD_FAILURE(2), UPLOADING(3), NEED_UPDATE(4), UPDATE_FAILURE(5);
