@@ -110,7 +110,7 @@ public class CommonUtils {
 				LogUtils.i(TAG,
 						"changeWifiState wifi is already WIFI_STATE_DISABLED");
 			} else if (wm.getWifiState() == WifiManager.WIFI_STATE_DISABLING) {
-				Log.i(TAG, "changeWifiState wifi is  WIFI_STATE_DISABLING");
+				LogUtils.i(TAG, "changeWifiState wifi is  WIFI_STATE_DISABLING");
 			} else {
 				wm.setWifiEnabled(enable);
 				LogUtils.i(TAG, "changeWifiState to enable = " + enable);

@@ -39,21 +39,22 @@ import com.j256.ormlite.table.TableUtils;
 public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     private static final String TAG = "DatabaseHelper";
 	private Dao<UserVO, Integer> mUserDao = null;
-	private Dao<CityVO, Integer> mCityDao = null;
+	private Dao<CityVO, String> mCityDao = null;
 	private Dao<ScanruleVO, Integer> mScanruleDao = null;
-	private Dao<EffectiveTypeVO, Integer> mEffectiveTypeDao = null;
+	private Dao<EffectiveTypeVO, String> mEffectiveTypeDao = null;
 	private Dao<OrderChannelVO, Integer> mOrderChannelDao = null;
 	private Dao<BlackListVO, Integer> mBlackListDao = null;
 	private Dao<DictionaryVO, Integer> mDictionaryDao = null;
 	private Dao<FreqVO, Integer> mFreqDao = null;
 	private Dao<InsteadPayCustomerVO, Integer> mInsteadPayCustomerDao = null;
 	private Dao<NoticeVO, Integer> mNoticeDao = null;
-	private Dao<RecvexpVO, Integer> mRecvexpDao = null;
+	private Dao<RecvexpVO, String> mRecvexpDao = null;
 	private Dao<ScopeVO, Integer> mScopeDao = null;
 	/**
 	 * 收件
 	 */
 	private Dao<ReceiveVO, String> mReceiveDao = null;
+	
 	
 	private Dao<OrderVO, String> mOrderDao = null;
 	
@@ -159,7 +160,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
      * @return
      * @throws SQLException
      */
-    public Dao<CityVO, Integer> getCityDao() throws SQLException {
+    public Dao<CityVO, String> getCityDao() throws SQLException {
         if (mCityDao == null) {
         	mCityDao = getDao(CityVO.class);
         }
@@ -173,7 +174,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         return mScanruleDao;
     }
     
-    public Dao<EffectiveTypeVO, Integer> getEffectiveTypeDao() throws SQLException {
+    public Dao<EffectiveTypeVO, String> getEffectiveTypeDao() throws SQLException {
         if (mEffectiveTypeDao == null) {
         	mEffectiveTypeDao = getDao(EffectiveTypeVO.class);
         }
@@ -222,7 +223,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         return mNoticeDao;
     }
     
-    public Dao<RecvexpVO, Integer> getRecvexpDao() throws SQLException {
+    public Dao<RecvexpVO, String> getRecvexpDao() throws SQLException {
         if (mRecvexpDao == null) {
         	mRecvexpDao = getDao(RecvexpVO.class);
         }

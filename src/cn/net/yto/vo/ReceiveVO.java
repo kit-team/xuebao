@@ -1,44 +1,100 @@
 package cn.net.yto.vo;
 
+import cn.net.yto.utils.CommonUtils;
+
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 @DatabaseTable
 public class ReceiveVO {
+	public static final String SEND_STATUS_WAITING = "waiting";
+	public static final String SEND_STATUS_UPLOADING = "uploading";
+	public static final String SEND_STATUS_UPLOADED = "uploaded";
 	@DatabaseField
 	private String id = "";
+	/**
+	 * 员工号
+	 */
 	@DatabaseField
 	private String empName = "";
+	/**
+	 * 目的网点对应中心
+	 */
 	@DatabaseField
 	private String desOrgCode = "";
+	/**
+	 * 收件状态描述 ，和currentState的相互对应关系,为failureReason
+	 */
 	@DatabaseField
 	private String getCurrentState = "";
+	/**
+	 * 收件人电话
+	 */
 	@DatabaseField
 	private String receiverPhone = "";
+	/**
+	 * 收件人姓名
+	 */
 	@DatabaseField
 	private String receiverName = "";
+	/**
+	 * 代收货款    寄件人编号
+	 */
 	@DatabaseField
 	private String contactCode = "";
+	/**
+	 * 代收货款    寄件人姓名
+	 */
 	@DatabaseField
 	private String contactName = "";
+	/**
+	 * 返回错误信息
+	 */
 	@DatabaseField
 	private String failMessage = "";
+	/**
+	 * 子母键标记
+	 */
 	@DatabaseField
 	private String parentchildFlag = "";
+	/**
+	 * 发送状态
+	 */
 	@DatabaseField
 	private String uploadStatu = "";
+	/**
+	 * //设备号
+	 */
 	@DatabaseField
 	private String pdaNumber = "";
+	/**
+	 * 发送状态,都是赋值为“N”，暂没有发现其它处理情况
+	 */
 	@DatabaseField
 	private String sendStatus = "";
+	/**
+	 * 收件扫描时间
+	 */
 	@DatabaseField
 	private String salesmanTime = "";
+	/**
+	 * 目的网点，暂时没用
+	 */
 	@DatabaseField
 	private String salesmanStation = "";
+	/**
+	 * 备注
+	 */
 	@DatabaseField
 	private String remarks = "";
+	/**
+	 * 是否作废 1：定单已作废，不能修改，0：不作废
+	 */
 	@DatabaseField
 	private String isInvalid = "";
+	/**
+	 * 有订单时订单编号
+	 */
 	@DatabaseField
 	private String orderId = "";
 	@DatabaseField
@@ -101,10 +157,10 @@ public class ReceiveVO {
 	@DatabaseField
 	private String parentWaybillNo = "";
 	/**
-	 * 当前状态
+	 * 当前状态-1：正常收件；或者是 异常编码，为failCode
 	 */
 	@DatabaseField
-	private String currentState = "";// -1：正常收件；或者是 异常编码
+	private String currentState = "";
 	/**
 	 * 收派员工号
 	 */
@@ -503,5 +559,29 @@ public class ReceiveVO {
 
 	public void setGetStatus(String getStatus) {
 		this.getStatus = getStatus;
+	}
+	
+	@Override
+	public boolean equals(Object anObject) {
+		if(anObject == null){
+			return false;
+		}
+		
+		if (this == anObject) {
+			return true;
+		}
+		if (anObject instanceof ReceiveVO) {
+			ReceiveVO receive1 = (ReceiveVO) anObject;
+			if(!CommonUtils.isEmpty(waybillNo) && waybillNo.equals(receive1.getWaybillNo())){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	@Override
+	public int hashCode() {
+		String s = "" + waybillNo;
+		return s.hashCode();
 	}
 }

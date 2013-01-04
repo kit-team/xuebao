@@ -3,6 +3,7 @@ package cn.net.yto.net;
 import java.util.ArrayList;
 
 import cn.net.yto.application.AppContext;
+import cn.net.yto.common.NetworkUnavailableException;
 import cn.net.yto.net.ZltdHttpClient.Listener;
 import cn.net.yto.vo.SignedLogVO;
 import cn.net.yto.vo.message.SubmitSignedLogResponseMsgVO;
@@ -55,7 +56,12 @@ public class UserService {
         ZltdHttpClient client = new ZltdHttpClient(UrlType.SUBMIT_SIGNEDLOG, signedLog.toVO(),
                 listener, SubmitSignedLogResponseMsgVO.class);
 
-        return client.submit(AppContext.getAppContext());
+        try {
+            return client.submit(AppContext.getAppContext());
+        } catch (NetworkUnavailableException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     private long parseRights(ArrayList<String> rights) {

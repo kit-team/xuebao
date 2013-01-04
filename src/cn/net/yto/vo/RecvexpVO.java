@@ -16,6 +16,11 @@ public class RecvexpVO {
 	@DatabaseField
 	private String failureReason;// 上门后用户不接受价格,
 	@DatabaseField
+	/**
+	 * failure_type = 1 代表 接单异常（核心系统订单子系统用）
+	 * failure_type = 2 代表 揽收异常（PDA收派件子系统用）
+	 * failure_code  = 0 的错误，在收派件系统不需要使用。
+	 */
 	private String failureType;// 2,
 	@DatabaseField(id = true)
 	private String id;// 132,
@@ -24,10 +29,10 @@ public class RecvexpVO {
 	@DatabaseField
 	private Long versionNo;// 1
 
-	public RecvexpVO(){
-		
+	public RecvexpVO() {
+
 	}
-	
+
 	public RecvexpVO(String failureCode, String failureReason,
 			String failureType, String id, String status, Long versionNo) {
 		super();
@@ -87,4 +92,8 @@ public class RecvexpVO {
 		this.versionNo = versionNo;
 	}
 
+	@Override
+	public String toString() {
+		return ""+failureReason;
+	}
 }

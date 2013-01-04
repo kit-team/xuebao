@@ -18,6 +18,18 @@
  */
 -->
 <resources>
+
+    <color name="red">#FF0000</color>
+    <color name="azure">#BFC9EB</color>
+    <color name="black">#000000</color>
+    <color name="blue">#4141C8</color>
+    <color name="white">#FFFFFF</color>
+    <color name="gray">#C8C8C8</color>
+    <color name="key">#000000</color>
+    <color name="second_level_title">#000000</color>
+	<color name="value">#666666</color>
+	
+	
     <color name="title_background">#ff33B5E5</color>
     <drawable name="tranparent_blue">#880000aa</drawable>
     <drawable name="white">#ffffff</drawable>

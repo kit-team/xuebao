@@ -5,14 +5,17 @@ import com.j256.ormlite.table.DatabaseTable;
 
 @DatabaseTable
 public class EffectiveTypeVO {
-	@DatabaseField
-	private String code;
 	@DatabaseField(id = true)
+	private String code;
+	@DatabaseField
 	private String id;
 	@DatabaseField
 	private String name;
 	@DatabaseField
 	private String parentEffectiveType;
+	/**
+	 * 是否有效状态	VALID:有效；INVALID:无效
+	 */
 	@DatabaseField
 	private String status;
 	@DatabaseField

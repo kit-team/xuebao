@@ -6,6 +6,7 @@ import java.util.List;
 
 import android.content.Context;
 import cn.net.yto.application.AppContext;
+import cn.net.yto.common.NetworkUnavailableException;
 import cn.net.yto.net.UrlType;
 import cn.net.yto.net.ZltdHttpClient;
 import cn.net.yto.net.ZltdHttpClient.Listener;
@@ -65,8 +66,9 @@ public class UserManager {
 	private LoginRequestMsgVO mLoginVO;
 	private UserVO mUserVO;
 	private Dao<UserVO, Integer> mUserDao;
+	private static UserManager sInstance;
 
-	public UserManager() {
+	private UserManager() {
 		mAppContext = AppContext.getAppContext();
 		mLoginVO = new LoginRequestMsgVO();
 		mUserVO = new UserVO();
@@ -77,13 +79,20 @@ public class UserManager {
 		}
 	}
 	
-	public boolean loginOut(Context context, Listener listener){
+	public static UserManager getInstance(){
+		if(sInstance == null){
+			sInstance = new UserManager();
+		}
+		return sInstance;
+	}
+	
+	public boolean loginOut(Context context, Listener listener) throws NetworkUnavailableException{
 		ZltdHttpClient client = new ZltdHttpClient(UrlType.LOGOUT, null,
 				listener, null);
 		return client.submit(context);
 	}
 	
-	public boolean checkUpdate(Context context, Listener listener){
+	public boolean checkUpdate(Context context, Listener listener) throws NetworkUnavailableException{
 		AppUpgradeRequestMsgVO vo = new AppUpgradeRequestMsgVO();
 	//	vo.setPdaNo(mAppContext.getPdaType());
 		vo.setPdaDriveType("I3");
@@ -103,7 +112,7 @@ public class UserManager {
 		return client.submit(context);
 	}
 	
-	public boolean login(Context context, Listener listener) {
+	public boolean login(Context context, Listener listener) throws NetworkUnavailableException {
 		ZltdHttpClient client = new ZltdHttpClient(UrlType.LOGIN, mLoginVO,
 				listener, LoginResponseMsgVO.class);
 		return client.submit(context);
@@ -271,6 +280,11 @@ public class UserManager {
 //				listener, WSSignedLogReturnVO.class);
 		
 		ZltdHttpClient client = new ZltdHttpClient(UrlType.SUBMIT_SIGNEDLOG, signedLogVo.toVO(), listener, WSSignedLogReturnVO.class);
-		return client.submit(null);
+		try {
+			return client.submit(null);
+		} catch (NetworkUnavailableException e) {
+			LogUtils.e(TAG, e);
+			return false;
+		}
 	}
 }
