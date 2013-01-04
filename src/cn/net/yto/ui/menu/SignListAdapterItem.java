@@ -3,7 +3,6 @@ package cn.net.yto.ui.menu;
 import android.text.TextUtils;
 import cn.net.yto.utils.CommonUtils;
 import cn.net.yto.vo.SignedLogVO;
-import cn.net.yto.vo.SignedLogVO.UploadStatus;
 
 public class SignListAdapterItem {
     private SignedLogVO mSignedLog = null;
@@ -53,15 +52,15 @@ public class SignListAdapterItem {
     
     public String getUploadStatus(){
         String status = "";
-        if (mSignedLog.getUploadStatus() == UploadStatus.NOT_UPLOAD) {
+        if (mSignedLog.getUploadStatus() == SignedLogVO.UPLOAD_STAUTS_WAITFORSEND) {
             status = "未上传";
-        } else if (mSignedLog.getUploadStatus() == UploadStatus.UPLOAD_SUCCESS) {
+        } else if (mSignedLog.getUploadStatus() == SignedLogVO.UPLOAD_STAUTS_SUCCESS) {
             status = "上传成功";
-        } else if (mSignedLog.getUploadStatus() == UploadStatus.UPLOAD_FAILURE) {
+        } else if (mSignedLog.getUploadStatus() == SignedLogVO.UPLOAD_STAUTS_FAILED) {
             status = "上传失败";
-        } else if (mSignedLog.getUploadStatus() == UploadStatus.NEED_UPDATE) {
+        } else if (mSignedLog.getUploadStatus() == SignedLogVO.UPLOAD_STAUTS_NEED_UPDATE) {
             status = "数据过期";
-        } else if (mSignedLog.getUploadStatus() == UploadStatus.UPDATE_FAILURE) {
+        } else if (mSignedLog.getUploadStatus() == SignedLogVO.UPLOAD_STAUTS_UPDATE_FAILED) {
             status = "更新失败";
         } else {
             status = "状态错误";

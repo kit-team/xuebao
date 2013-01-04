@@ -18,7 +18,6 @@ import cn.net.yto.utils.LogUtils;
 import cn.net.yto.utils.ToastUtils;
 import cn.net.yto.utils.ToastUtils.Operation;
 import cn.net.yto.vo.SignedLogVO;
-import cn.net.yto.vo.SignedLogVO.UploadStatus;
 import cn.net.yto.vo.message.SubmitSignedLogResponseMsgVO;
 import cn.net.yto.vo.message.UpdateSignedLogResponseMsgVO;
 
@@ -61,14 +60,14 @@ public class SignedLogManager {
         try {
         	SignedLogVO existedLogVO = querySignedLog(signedLogVO.getWaybillNo());
         	boolean needUpdate = false;
-        	if (existedLogVO != null && existedLogVO.getUploadStatus() == UploadStatus.UPLOAD_SUCCESS) {
+        	if (existedLogVO != null && existedLogVO.getUploadStatus() == SignedLogVO.UPLOAD_STAUTS_SUCCESS) {
         		needUpdate = true;
 			}
             CreateOrUpdateStatus status = mSignedLogDao.createOrUpdate(signedLogVO);
             LogUtils.e(TAG, "status.isCreated() = "+status.isCreated());
             LogUtils.e(TAG, "status.isUpdated() = "+status.isUpdated());
             if (status.isUpdated() && needUpdate) {
-            	signedLogVO.setUploadStatus(UploadStatus.NEED_UPDATE);
+            	signedLogVO.setUploadStatus(SignedLogVO.UPLOAD_STAUTS_NEED_UPDATE);
             	status = mSignedLogDao.createOrUpdate(signedLogVO);
 			}
             return status.isCreated() || status.isUpdated();
@@ -113,14 +112,21 @@ public class SignedLogManager {
                 SignedLogVO vo = querySignedLog(wayBillNo);
             	SubmitSignedLogResponseMsgVO responseVo = (SubmitSignedLogResponseMsgVO) response;
                 if (response != null) {
-                    if (vo != null && responseVo.getRetVal() == SubmitSignedLogResponseMsgVO.RESPONSE_SUCCESS) {
-                        vo.setUploadStatus(UploadStatus.UPLOAD_SUCCESS);
+                    if (responseVo.getRetVal() == SubmitSignedLogResponseMsgVO.RESPONSE_SUCCESS ||
+                    		responseVo.getRetVal() == SubmitSignedLogResponseMsgVO.RESPONSE_FAILURE) {
+                    	vo.setUploadStatus(SignedLogVO.UPLOAD_STAUTS_SUCCESS);
                         saveSignedLog(vo);
                         ToastUtils.showOperationToast(Operation.UPLOAD, true);
-                    } else {
+                    } else if(responseVo.getRetVal() == -103){
+                        Log.w(TAG, "repeat upload! mWayBillNo = " + wayBillNo);
+                        if (vo != null) {
+                            vo.setUploadStatus(SignedLogVO.UPLOAD_STAUTS_RESENDFAILED);
+                            saveSignedLog(vo);
+                        } 
+                    }else {
                         Log.w(TAG, "upload failed! mWayBillNo = " + wayBillNo);
                         if (vo != null) {
-                            vo.setUploadStatus(UploadStatus.UPLOAD_FAILURE);
+                            vo.setUploadStatus(SignedLogVO.UPLOAD_STAUTS_FAILED);
                             saveSignedLog(vo);
                         } 
                         ToastUtils.showOperationToast(Operation.UPLOAD, false);                    	
@@ -128,7 +134,7 @@ public class SignedLogManager {
                 } else {
                     Log.w(TAG, "upload failed! mWayBillNo = " + wayBillNo);
                     if (vo != null) {
-                        vo.setUploadStatus(UploadStatus.UPLOAD_FAILURE);
+                        vo.setUploadStatus(SignedLogVO.UPLOAD_STAUTS_FAILED);
                         saveSignedLog(vo);
                     } 
                     ToastUtils.showOperationToast(Operation.UPLOAD, false);
@@ -160,18 +166,18 @@ public class SignedLogManager {
                 if (response != null) {
                 	UpdateSignedLogResponseMsgVO responseVo = (UpdateSignedLogResponseMsgVO) response;
                     if (signedLogVO != null && responseVo.getRetVal() == SubmitSignedLogResponseMsgVO.RESPONSE_SUCCESS) {
-                    	signedLogVO.setUploadStatus(UploadStatus.UPLOAD_SUCCESS);
+                    	signedLogVO.setUploadStatus(SignedLogVO.UPLOAD_STAUTS_SUCCESS);
                         saveSignedLog(signedLogVO);
                         ToastUtils.showOperationToast(Operation.MODIFY, true);
                     } else {
                         Log.w(TAG, "update failed! mWayBillNo = " + wayBillNo);
-                    	signedLogVO.setUploadStatus(UploadStatus.UPDATE_FAILURE);
+                        signedLogVO.setUploadStatus(SignedLogVO.UPLOAD_STAUTS_UPDATE_FAILED);
                         saveSignedLog(signedLogVO);
                         ToastUtils.showOperationToast(Operation.MODIFY, false);                    	
                     }
                 } else {
                     Log.w(TAG, "update failed! mWayBillNo = " + wayBillNo);
-                	signedLogVO.setUploadStatus(UploadStatus.UPDATE_FAILURE);
+                    signedLogVO.setUploadStatus(SignedLogVO.UPLOAD_STAUTS_UPDATE_FAILED);
                     saveSignedLog(signedLogVO);
                     ToastUtils.showOperationToast(Operation.MODIFY, false);
                 }
@@ -210,7 +216,7 @@ public class SignedLogManager {
         return list;
     }
     
-    public List<SignedLogVO> queryByUploadSataus(UploadStatus status) {
+    public List<SignedLogVO> queryByUploadSataus(String status) {
         List<SignedLogVO> list = null;
         try {
             list = mSignedLogDao.queryBuilder().where()
@@ -264,9 +270,9 @@ public class SignedLogManager {
         try {
             list = mSignedLogDao.queryBuilder().
             		where().
-            		eq(SignedLogVO.UPLOADSTATUS_FIELD_NAME, UploadStatus.NOT_UPLOAD).
+            		eq(SignedLogVO.UPLOADSTATUS_FIELD_NAME, SignedLogVO.UPLOAD_STAUTS_WAITFORSEND).
             		or().
-            		eq(SignedLogVO.UPLOADSTATUS_FIELD_NAME, UploadStatus.UPLOAD_FAILURE).
+            		eq(SignedLogVO.UPLOADSTATUS_FIELD_NAME, SignedLogVO.UPLOAD_STAUTS_FAILED).
             		query();
         } catch (SQLException e) {
             list = new ArrayList<SignedLogVO>();
@@ -280,7 +286,7 @@ public class SignedLogManager {
         try {
             list = mSignedLogDao.queryBuilder().
             		where().
-            		eq(SignedLogVO.UPLOADSTATUS_FIELD_NAME, UploadStatus.NEED_UPDATE).
+            		eq(SignedLogVO.UPLOADSTATUS_FIELD_NAME, SignedLogVO.UPLOAD_STAUTS_NEED_UPDATE).
             		query();
         } catch (SQLException e) {
             list = new ArrayList<SignedLogVO>();

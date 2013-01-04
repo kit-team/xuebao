@@ -1,5 +1,6 @@
 package cn.net.yto.test;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -8,7 +9,6 @@ import cn.net.yto.application.AppContext;
 import cn.net.yto.vo.SignedLogVO;
 import cn.net.yto.vo.SignedLogVO.Satisfaction;
 import cn.net.yto.vo.SignedLogVO.SignedState;
-import cn.net.yto.vo.SignedLogVO.UploadStatus;
 import android.test.ApplicationTestCase;
 
 public class SignedLogManagerTest extends ApplicationTestCase<AppContext>{
@@ -57,7 +57,7 @@ public class SignedLogManagerTest extends ApplicationTestCase<AppContext>{
     	assertEquals(signlog1.getSignedState(), SignedState.SIGNED_SUCCESS);    	
     	assertEquals(signlog1.getSatisfaction(), Satisfaction.SATISFIED);    	
     	assertEquals(signlog1.getExpSignedDescription(), "");    	
-    	assertEquals(signlog1.getUploadStatus(), UploadStatus.NOT_UPLOAD);    	
+    	assertEquals(signlog1.getUploadStatus(), SignedLogVO.UPLOAD_STAUTS_WAITFORSEND);    	
     	assertEquals(signlog1.getRecipient(), "张三");    	
     	assertEquals(signlog1.getSignedLogId(), "id12345");    	
     	assertEquals(signlog1.isScan(), 0);    	
@@ -149,17 +149,17 @@ public class SignedLogManagerTest extends ApplicationTestCase<AppContext>{
 	public void test_query_need_update_signedlog() {
 		SignedLogVO signedLogVO1 = new SignedLogVO();
 		signedLogVO1.setWaybillNo("777");
-		signedLogVO1.setUploadStatus(UploadStatus.NEED_UPDATE);
+		signedLogVO1.setUploadStatus(SignedLogVO.UPLOAD_STAUTS_NEED_UPDATE);
     	app.getSignedLogManager().saveSignedLog(signedLogVO1);
 
 		SignedLogVO signedLogVO2 = new SignedLogVO();
 		signedLogVO2.setWaybillNo("888");
-		signedLogVO2.setUploadStatus(UploadStatus.NEED_UPDATE);
+		signedLogVO2.setUploadStatus(SignedLogVO.UPLOAD_STAUTS_NEED_UPDATE);
     	app.getSignedLogManager().saveSignedLog(signedLogVO2);
 
 		SignedLogVO signedLogVO3 = new SignedLogVO();
 		signedLogVO3.setWaybillNo("999");
-		signedLogVO3.setUploadStatus(UploadStatus.NEED_UPDATE);
+		signedLogVO3.setUploadStatus(SignedLogVO.UPLOAD_STAUTS_NEED_UPDATE);
     	app.getSignedLogManager().saveSignedLog(signedLogVO3);
 
 		SignedLogVO signedLogVO4 = new SignedLogVO();
@@ -176,17 +176,17 @@ public class SignedLogManagerTest extends ApplicationTestCase<AppContext>{
 
 		SignedLogVO signedLogVO2 = new SignedLogVO();
 		signedLogVO2.setWaybillNo("8888");
-		signedLogVO2.setUploadStatus(UploadStatus.UPLOAD_FAILURE);
+		signedLogVO2.setUploadStatus(SignedLogVO.UPLOAD_STAUTS_FAILED);
     	app.getSignedLogManager().saveSignedLog(signedLogVO2);
 
 		SignedLogVO signedLogVO3 = new SignedLogVO();
 		signedLogVO3.setWaybillNo("9999");
-		signedLogVO3.setUploadStatus(UploadStatus.NEED_UPDATE);
+		signedLogVO3.setUploadStatus(SignedLogVO.UPLOAD_STAUTS_NEED_UPDATE);
     	app.getSignedLogManager().saveSignedLog(signedLogVO3);
 
 		SignedLogVO signedLogVO4 = new SignedLogVO();
 		signedLogVO4.setWaybillNo("6666");
-		signedLogVO4.setUploadStatus(UploadStatus.UPLOAD_SUCCESS);
+		signedLogVO4.setUploadStatus(SignedLogVO.UPLOAD_STAUTS_SUCCESS);
     	app.getSignedLogManager().saveSignedLog(signedLogVO4);
     	
     	assertEquals(2, app.getSignedLogManager().queryNeedUploadSignedLog().size());

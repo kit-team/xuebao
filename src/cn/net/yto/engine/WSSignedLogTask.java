@@ -6,7 +6,6 @@ import android.content.Context;
 import cn.net.yto.biz.SignedLogManager;
 import cn.net.yto.utils.LogUtils;
 import cn.net.yto.vo.SignedLogVO;
-import cn.net.yto.vo.SignedLogVO.UploadStatus;
 
 public class WSSignedLogTask extends BaseTask {
     private Context mContext;
@@ -26,8 +25,6 @@ public class WSSignedLogTask extends BaseTask {
         LogUtils.logD("queryNeedUploadSignedLog : " + logs.size());
         for (SignedLogVO log : logs) {
         	mSignedLogMgr.submitSignedLog(log, mContext);
-        	log.setUploadStatus(UploadStatus.UPLOADING);
-        	mSignedLogMgr.saveSignedLog(log);
         }
         logs = mSignedLogMgr.queryNeedUpdateSignedLog();
         LogUtils.logD("queryNeedUpdateSignedLog : " + logs.size());
