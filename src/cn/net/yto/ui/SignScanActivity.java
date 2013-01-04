@@ -313,7 +313,8 @@ public class SignScanActivity extends Activity {
             }
 
             final int typeIdx = mSignTypeSpinner.getSelectedItemPosition();
-            signedLog.setSignOffTypeCode(mSignTypeString[typeIdx]);
+            signedLog.setRecieverSignOff(mSignTypeString[typeIdx]);
+            signedLog.setSignOffTypeCode(SignedLogVO.SIGNOFFMAP.get(signedLog.getRecieverSignOff()));
             
             if (TextUtils.isEmpty(mReceipient.getText().toString())) {
 				final String signOffType = mSignTypeSpinner.getSelectedItem().toString();
@@ -325,9 +326,11 @@ public class SignScanActivity extends Activity {
 					signedLog.setRecieverSignOff(gateKeeper);
 				} else {
 					signedLog.setRecieverSignOff(getResources().getString(R.string.text_sign_off));
+					signedLog.setSignOffTypeCode(SignedLogVO.SIGNOFF_TYPE_SELF);
 				}
             } else {
             	signedLog.setRecieverSignOff(mReceipient.getText().toString());
+				signedLog.setSignOffTypeCode(SignedLogVO.SIGNOFF_TYPE_SELF);
             }
            
             switch (mSatisfactory.getCheckedRadioButtonId()) {
