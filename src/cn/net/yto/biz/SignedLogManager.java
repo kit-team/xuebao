@@ -8,6 +8,7 @@ import java.util.List;
 import android.content.Context;
 import android.util.Log;
 import cn.net.yto.application.AppContext;
+import cn.net.yto.common.NetworkUnavailableException;
 import cn.net.yto.dao.DatabaseHelper;
 import cn.net.yto.net.HttpTaskManager;
 import cn.net.yto.net.UrlType;
@@ -136,7 +137,12 @@ public class SignedLogManager {
         };
         ZltdHttpClient client = new ZltdHttpClient(UrlType.SUBMIT_SIGNEDLOG,
                 signedLogVO.toVO(), listener, SubmitSignedLogResponseMsgVO.class);
+        try {
         return client.submit(context);
+		} catch (NetworkUnavailableException e) {
+			LogUtils.e(TAG, e);
+			return false;
+		}
     }
 
     public boolean updateSignedLog(final SignedLogVO signedLogVO, Context context) {
@@ -173,7 +179,12 @@ public class SignedLogManager {
         };
         ZltdHttpClient client = new ZltdHttpClient(UrlType.UPDATE_SIGNEDLOG,
                 signedLogVO.toUpdateVO(), listener, UpdateSignedLogResponseMsgVO.class);
+        try {
         return client.submit(context);
+		} catch (NetworkUnavailableException e) {
+			LogUtils.e(TAG, e);
+			return false;
+		}
     }
 
     

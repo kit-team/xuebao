@@ -14,23 +14,26 @@ public class UrlManager {
 		sUrlTailMap.put(UrlType.LOGIN, "m_login!PDAlogin.action");
 		sUrlTailMap.put(UrlType.LOGOUT, "m_login!PDAlogout.action");
 		sUrlTailMap.put(UrlType.MODIFY_PSW, "m_login!+.action");
-		sUrlTailMap.put(UrlType.SUBMIT_SIGNEDLOG, "m_delivery!SubmitSignedLog.action");		
+		sUrlTailMap.put(UrlType.VERSION_CHECK, "m_login!SoftwareVerSyn.action");
+		sUrlTailMap.put(UrlType.BASIC_DATA, "m_basic_data!DownloadBasicDataByVersion.action");
+		sUrlTailMap.put(UrlType.DOWNLOAD_ORDER, "m_receive!DownloadOrder.action");
+		sUrlTailMap.put(UrlType.MODIFY_ORDER_STATUS, "m_receive!ModifyOrderStatus.action");
+		sUrlTailMap.put(UrlType.SUBMIT_RECEIVE, "m_receive!SubmitReceive.action");
+		sUrlTailMap.put(UrlType.UPDATE_RECEIVE, "m_receive!UpdateReceive.action");
+		sUrlTailMap.put(UrlType.SUBMIT_SIGNEDLOG, "m_delivery!SubmitSignedLog.action");	
 		sUrlTailMap.put(UrlType.UPDATE_SIGNEDLOG, "m_delivery!updateSignedLog.action");		
+		sUrlTailMap.put(UrlType.CANCEL_RECEIVE, "m_receive!CancelReceive.action");		
+		sUrlTailMap.put(UrlType.REPLACE_RECEIVE, "m_receive!ReplaceReceive.action");		
 		
-		sRequestParamNameMap = new HashMap<UrlType, String>();
-		sRequestParamNameMap.put(UrlType.LOGIN, "WSLoginParam");
-		sRequestParamNameMap.put(UrlType.LOGOUT, "WSParam");
-		sRequestParamNameMap.put(UrlType.MODIFY_PSW, "WSModifyUserPasswordParam");
-		sRequestParamNameMap.put(UrlType.SUBMIT_SIGNEDLOG, "WSSignedLogParam");		
-		sRequestParamNameMap.put(UrlType.UPDATE_SIGNEDLOG, "WSSignedLogParam");		
-		
-		sResponseParamNameMap = new HashMap<UrlType, String>();
-		sResponseParamNameMap.put(UrlType.LOGIN, "WSLoginReturn");
-		sResponseParamNameMap.put(UrlType.LOGOUT, "WSLogoutReturn");
-		sResponseParamNameMap.put(UrlType.MODIFY_PSW, "WSModifyUserPasswordReturn");
-		sResponseParamNameMap.put(UrlType.SUBMIT_SIGNEDLOG, "WSSignedLogReturn");
-		sResponseParamNameMap.put(UrlType.SUBMIT_SIGNEDLOG, "WSSignedLogReturn");
-		
+//		sRequestParamNameMap = new HashMap<UrlType, String>();
+//		sRequestParamNameMap.put(UrlType.LOGIN, "WSLoginParam");
+//		sRequestParamNameMap.put(UrlType.LOGOUT, "WSParam");
+//		sRequestParamNameMap.put(UrlType.MODIFY_PSW, "WSModifyUserPasswordParam");
+//		
+//		sResponseParamNameMap = new HashMap<UrlType, String>();
+//		sResponseParamNameMap.put(UrlType.LOGIN, "WSLoginReturn");
+//		sResponseParamNameMap.put(UrlType.LOGOUT, "WSLogoutReturn");
+//		sResponseParamNameMap.put(UrlType.MODIFY_PSW, "WSModifyUserPasswordReturn");
 	}
 
 	public static void setServerUrl(String serverUrl){

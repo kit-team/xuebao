@@ -1,7 +1,7 @@
 package cn.net.yto.vo.message;
 
 public class CancelReceiveRequestMsgVO extends BaseRequestMsgVO {
-	//��Ҫ���ϵ��˵���
+	//需要作废的运单号
 	private String wayBillNo;
 
 	public String getWayBillNo() {

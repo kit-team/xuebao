@@ -11,12 +11,10 @@ import org.apache.http.util.EntityUtils;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import cn.net.yto.net.ZltdHttpClient.Listener;
+import cn.net.yto.common.NetworkUnavailableException;
 import cn.net.yto.utils.CommonUtils;
 import cn.net.yto.utils.LogUtils;
 import cn.net.yto.vo.message.BaseResponseMsgVO;
-import cn.net.yto.vo.message.SubmitSignedLogRequestMsgVO;
-import cn.net.yto.vo.message.SubmitSignedLogResponseMsgVO;
 
 public class ZltdHttpClient {
 	public static final String TAG = "HttpClient";
@@ -117,7 +115,7 @@ public class ZltdHttpClient {
 		setListener(listener, responseClzz);
 	}
 
-    public void setUrlType(UrlType mUrlType) {
+	public void setUrlType(UrlType mUrlType) {
 		this.mUrlType = mUrlType;
 	}
 
@@ -132,11 +130,18 @@ public class ZltdHttpClient {
 		mResponseCls = responseClzz;
 	}
 
-	public boolean submit(Context context) {
+	/**
+	 * 
+	 * @param context
+	 * @return false if no network
+	 * @throws NetworkUnavailableException if no network
+	 */
+	public boolean submit(Context context) throws NetworkUnavailableException {
 		if (!CommonUtils.hasActiveNetwork(context)) {
 			LogUtils.i(TAG, "no active network");
-			return false;
+			throw new NetworkUnavailableException();
 		}
+		
 		asyncTask = new HttpAsyncTask();
 		asyncTask.execute();
 		return true;
@@ -231,7 +236,7 @@ public class ZltdHttpClient {
 
 		@Override
 		protected void onPostExecute(String result) {
-			mState = STATE_UPLOADING;
+			mState = STATE_UPLOADED;
 			if (mListener != null) {
 				if (!CommonUtils.isEmpty(result)
 						&& mNetworkResultType == TYPE_SUCCESS) {
@@ -248,14 +253,16 @@ public class ZltdHttpClient {
 					mListener.onPostSubmit(null, mNetworkResultType);
 				}
 			}
+			LogUtils.i(TAG, "onPostExecute");
 		}
 
 		@Override
 		protected void onPreExecute() {
+			LogUtils.i(TAG, "onPreExecute");
 			if (mListener != null) {
 				mListener.onPreSubmit();
 			}
-			mState = STATE_UPLOADED;
+			mState = STATE_UPLOADING;
 		}
 	}
 }

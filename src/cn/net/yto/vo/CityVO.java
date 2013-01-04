@@ -1,5 +1,7 @@
 package cn.net.yto.vo;
 
+import cn.net.yto.utils.CommonUtils;
+
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
@@ -15,12 +17,18 @@ public class CityVO {
 	private String cityPinYin;
 	@DatabaseField
 	private String parentCityCode;
+	/**
+	 * 是否有效状态	VALID:有效；INVALID:无效
+	 */
 	@DatabaseField
 	private String status;
 	@DatabaseField
 	private String centerCode;
 	@DatabaseField
 	private long versionNo;
+	@DatabaseField
+	private int cityLevel;
+	
 
 	public CityVO() {
 
@@ -103,10 +111,41 @@ public class CityVO {
 	public void setVersionNo(long versionNo) {
 		this.versionNo = versionNo;
 	}
+	
+	public int getCityLevel() {
+		return cityLevel;
+	}
+
+	public void setCityLevel(int cityLevel) {
+		this.cityLevel = cityLevel;
+	}
 
 	@Override
 	public String toString() {
 		return "" + cityName;
 	}
+	
+	@Override
+	public boolean equals(Object anObject) {
+		if(anObject == null){
+			return false;
+		}
+		
+		if (this == anObject) {
+			return true;
+		}
+		if (anObject instanceof CityVO) {
+			CityVO city1 = (CityVO) anObject;
+			if(!CommonUtils.isEmpty(id) && id.equals(city1.getId())){
+				return true;
+			}
+		}
+		return false;
+	}
 
+	@Override
+	public int hashCode() {
+		String s = "" + id;
+		return s.hashCode();
+	}
 }

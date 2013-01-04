@@ -1,5 +1,7 @@
 package cn.net.yto.ui.menu;
 
+
+
 public class MenuItem {
     public int mDrawableResId;
     public int mTextResId = -1;
@@ -18,9 +20,9 @@ public class MenuItem {
         this.mAction = action;
     }
 
-    public void doAction() {
-        if (mAction != null) {
-            mAction.action();
-        }
-    }
+	public void doAction() {
+		if (mAction != null) {
+			mAction.action();
+		}
+	}
 }

@@ -3,14 +3,19 @@ package cn.net.yto.application;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Build;
 import android.preference.PreferenceManager;
+import android.telephony.TelephonyManager;
 import cn.net.yto.R;
+import cn.net.yto.biz.BasicDataManager;
+import cn.net.yto.biz.OrderManager;
+import cn.net.yto.biz.ReceiveManager;
 import cn.net.yto.biz.SignedLogManager;
+import cn.net.yto.biz.UserManager;
 import cn.net.yto.common.Constants;
 import cn.net.yto.dao.DatabaseHelper;
 import cn.net.yto.engine.SignedLogReportTaskManager;
-//import cn.net.yto.engine.SignedLogReportTaskManager;
 import cn.net.yto.net.UrlManager;
 import cn.net.yto.utils.LogUtils;
 import cn.net.yto.utils.ToastUtils;
@@ -29,25 +34,26 @@ public class AppContext extends Application {
 	private int mVersionCode;
 	private String mVersionName;
 	private String mImei;
+	private OrderManager mOrderService;
 	private SignedLogManager mSignedLogManager;
-	
+
 	@Override
 	public void onCreate() {
 		super.onCreate();
 
 		sAppContext = this;
 		mDatabaseHelper = new DatabaseHelper(getApplicationContext());
-//
-//		try {
-//			mVersionName = getPackageManager().getPackageInfo(getPackageName(),
-//					0).versionName;
-//			mVersionCode = getPackageManager().getPackageInfo(getPackageName(),
-//					0).versionCode;
-//			mImei = ((TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE))
-//					.getDeviceId();
-//		} catch (NameNotFoundException e) {
-//			e.printStackTrace();
-//		}
+
+		try {
+			mVersionName = getPackageManager().getPackageInfo(getPackageName(),
+					0).versionName;
+			mVersionCode = getPackageManager().getPackageInfo(getPackageName(),
+					0).versionCode;
+			mImei = ((TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE))
+					.getDeviceId();
+		} catch (NameNotFoundException e) {
+			e.printStackTrace();
+		}
 
 		SignedLogReportTaskManager.getInstance(this).run();
 		ToastUtils.getInstance().init(this);
@@ -124,7 +130,24 @@ public class AppContext extends Application {
 		return sAppContext;
 	}
 
+	public UserManager getUserService() {
+		return UserManager.getInstance();
+	}
 
+	public OrderManager getOrderService() {
+		if (mOrderService == null) {
+			mOrderService = new OrderManager();
+		}
+		return mOrderService;
+	}
+
+	public BasicDataManager getBasicDataManager() {
+		return BasicDataManager.getInstance();
+	}
+
+	public ReceiveManager getReceiveManager() {
+		return ReceiveManager.getInstance();
+	}
 
 	public DatabaseHelper getDatabaseHelper() {
 		return mDatabaseHelper;

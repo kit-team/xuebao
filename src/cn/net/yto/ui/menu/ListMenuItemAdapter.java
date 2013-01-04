@@ -33,7 +33,7 @@ public class ListMenuItemAdapter extends ArrayAdapter<MenuItem> {
 			convertView = inflater.inflate(R.layout.list_main_menu_item,
 					parent, false);
 			
-			tag.img = (ImageView) convertView.findViewById(R.id.img);
+			tag.img = (ImageView) convertView.findViewById(R.id.icon);
 			tag.text = (TextView) convertView.findViewById(R.id.text);
 			
 		} else {

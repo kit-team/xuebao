@@ -36,5 +36,4 @@ public class DispatchOrderList extends ListActivity {
         mScannedCount.setText("15");
         mScannedCount.setVisibility(View.VISIBLE);
     }
-
 }
