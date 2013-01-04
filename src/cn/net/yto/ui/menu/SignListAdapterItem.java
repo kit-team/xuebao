@@ -3,6 +3,7 @@ package cn.net.yto.ui.menu;
 import java.text.SimpleDateFormat;
 
 import android.text.TextUtils;
+import cn.net.yto.utils.CommonUtils;
 import cn.net.yto.vo.SignedLogVO;
 import cn.net.yto.vo.SignedLogVO.UploadStatus;
 
@@ -38,8 +39,8 @@ public class SignListAdapterItem {
 
     public String getSignTime() {
         if (mSignTime == null) {
-        	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        	mSignTime = dateFormat.format(mSignedLog.getSignedTime());
+            mSignTime = CommonUtils.getFormatedDateTime("yyyy-MM-dd HH:mm:ss", mSignedLog
+                    .getSignedTime().getTime());
         }
         return mSignTime;
     }
