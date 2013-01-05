@@ -43,12 +43,12 @@ public class SignedLogManager {
         this.mDatabaseHelper = mAppContext.getDatabaseHelper();
         this.mHttpTaskManager = HttpTaskManager.getInstance();
         
-        for(int i = 0; i < 20; i++){
-            SignedLogVO vo = new SignedLogVO();
-            vo.setWaybillNo("233003" + i);
-            ZltdHttpClient c = new ZltdHttpClient(UrlType.SUBMIT_SIGNEDLOG, vo);
-            mHttpTaskManager.addTask(c);
-        }
+//        for(int i = 0; i < 20; i++){
+//            SignedLogVO vo = new SignedLogVO();
+//            vo.setWaybillNo("233003" + i);
+//            ZltdHttpClient c = new ZltdHttpClient(UrlType.SUBMIT_SIGNEDLOG, vo);
+//            mHttpTaskManager.addTask(c);
+//        }
         try {
             mSignedLogDao = mDatabaseHelper.getSignedLogDao();
         } catch (SQLException e) {
