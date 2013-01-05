@@ -18,6 +18,7 @@ import cn.net.yto.utils.LogUtils;
 import cn.net.yto.utils.ToastUtils;
 import cn.net.yto.utils.ToastUtils.Operation;
 import cn.net.yto.vo.SignedLogVO;
+import cn.net.yto.vo.message.DeleteSignedLogResponseMsgVO;
 import cn.net.yto.vo.message.SubmitSignedLogResponseMsgVO;
 import cn.net.yto.vo.message.UpdateSignedLogResponseMsgVO;
 
@@ -121,12 +122,14 @@ public class SignedLogManager {
                         Log.w(TAG, "repeat upload! mWayBillNo = " + wayBillNo);
                         if (vo != null) {
                             vo.setUploadStatus(SignedLogVO.UPLOAD_STAUTS_RESENDFAILED);
+                            vo.setSignedLogId("");
                             saveSignedLog(vo);
                         } 
                     }else {
                         Log.w(TAG, "upload failed! mWayBillNo = " + wayBillNo);
                         if (vo != null) {
                             vo.setUploadStatus(SignedLogVO.UPLOAD_STAUTS_FAILED);
+                            vo.setSignedLogId("");
                             saveSignedLog(vo);
                         } 
                         ToastUtils.showOperationToast(Operation.UPLOAD, false);                    	
@@ -135,6 +138,7 @@ public class SignedLogManager {
                     Log.w(TAG, "upload failed! mWayBillNo = " + wayBillNo);
                     if (vo != null) {
                         vo.setUploadStatus(SignedLogVO.UPLOAD_STAUTS_FAILED);
+                        vo.setSignedLogId("");
                         saveSignedLog(vo);
                     } 
                     ToastUtils.showOperationToast(Operation.UPLOAD, false);
@@ -185,6 +189,43 @@ public class SignedLogManager {
         };
         ZltdHttpClient client = new ZltdHttpClient(UrlType.UPDATE_SIGNEDLOG,
                 signedLogVO.toUpdateVO(), listener, UpdateSignedLogResponseMsgVO.class);
+        try {
+        return client.submit(context);
+		} catch (NetworkUnavailableException e) {
+			LogUtils.e(TAG, e);
+			return false;
+		}
+    }
+
+    public boolean deleteSignedLog(final SignedLogVO signedLogVO, Context context) {
+
+        Listener listener = new Listener() {
+            String wayBillNo = signedLogVO.getWaybillNo();
+
+            @Override
+            public void onPreSubmit() {
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void onPostSubmit(Object response, Integer responseType) {
+                if (response != null) {
+                	DeleteSignedLogResponseMsgVO responseVo = (DeleteSignedLogResponseMsgVO) response;
+                    if (signedLogVO != null && responseVo.getRetVal() == SubmitSignedLogResponseMsgVO.RESPONSE_SUCCESS) {
+                    	removeSignedLog(signedLogVO);
+                        ToastUtils.showOperationToast(Operation.DELETE, true);
+                    } else {
+                        Log.w(TAG, "delete signedlog failed! mWayBillNo = " + wayBillNo);
+                        ToastUtils.showOperationToast(Operation.DELETE, false);                    	
+                    }
+                } else {
+                    Log.w(TAG, "delete signedlog failed! mWayBillNo = " + wayBillNo);
+                    ToastUtils.showOperationToast(Operation.DELETE, false);            	
+                }
+            }
+        };
+        ZltdHttpClient client = new ZltdHttpClient(UrlType.DELETE_SIGNEDLOG,
+                signedLogVO.toDeleteVO(), listener, DeleteSignedLogResponseMsgVO.class);
         try {
         return client.submit(context);
 		} catch (NetworkUnavailableException e) {

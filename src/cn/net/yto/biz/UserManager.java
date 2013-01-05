@@ -274,17 +274,4 @@ public class UserManager {
 		}
 		return right;
 	}
-	
-	public static boolean submitSignedLog(SignedLogVO signedLogVo, Listener listener) {
-//		ZltdHttpClient client = new ZltdHttpClient(UrlType.SUBMIT_SIGNEDLOG, signedLog.toVO(),
-//				listener, WSSignedLogReturnVO.class);
-		
-		ZltdHttpClient client = new ZltdHttpClient(UrlType.SUBMIT_SIGNEDLOG, signedLogVo.toVO(), listener, WSSignedLogReturnVO.class);
-		try {
-			return client.submit(null);
-		} catch (NetworkUnavailableException e) {
-			LogUtils.e(TAG, e);
-			return false;
-		}
-	}
 }

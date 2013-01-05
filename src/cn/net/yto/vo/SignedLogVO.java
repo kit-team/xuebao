@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+import cn.net.yto.vo.message.DeleteSignedLogRequestMsgVO;
 import cn.net.yto.vo.message.SubmitSignedLogRequestMsgVO;
 import cn.net.yto.vo.message.UpdateSignedLogRequestMsgVO;
 
@@ -139,6 +140,7 @@ public class SignedLogVO {
     private long mIsPicture = 0;
 
     public SignedLogVO() {
+    	signedLogId = setRand();
     }
 
     public String getEmpCode() {
@@ -334,7 +336,11 @@ public class SignedLogVO {
     
     public SubmitSignedLogRequestMsgVO toVO() {
         SubmitSignedLogRequestMsgVO submitSignedLogRequest = new SubmitSignedLogRequestMsgVO();
-        submitSignedLogRequest.setId(setRand());
+        if (signedLogId == "") {
+            submitSignedLogRequest.setId(setRand());
+		} else {
+			submitSignedLogRequest.setId(signedLogId);
+		}
         submitSignedLogRequest.setSignOffTypeCode(signOffTypeCode);
         submitSignedLogRequest.setRecieverSignOff(recieverSignOff);
         
@@ -385,6 +391,14 @@ public class SignedLogVO {
         
         return updateSignedLogRequest;
     }
+    
+    public DeleteSignedLogRequestMsgVO toDeleteVO() {
+    	DeleteSignedLogRequestMsgVO updateSignedLogRequest = new DeleteSignedLogRequestMsgVO();
+    	updateSignedLogRequest.setWaybillNo(waybillNo);
+    	updateSignedLogRequest.setId(signedLogId);
+        return updateSignedLogRequest;
+    }
+
     
     public static String setRand() {
         String rad = "0123456789";

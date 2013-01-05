@@ -52,18 +52,6 @@ public class UserService {
     public UserService() {
     }
 
-    public static boolean submitSignedLog(SignedLogVO signedLog, Listener listener) {
-        ZltdHttpClient client = new ZltdHttpClient(UrlType.SUBMIT_SIGNEDLOG, signedLog.toVO(),
-                listener, SubmitSignedLogResponseMsgVO.class);
-
-        try {
-            return client.submit(AppContext.getAppContext());
-        } catch (NetworkUnavailableException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
     private long parseRights(ArrayList<String> rights) {
         long right = 0;
 
