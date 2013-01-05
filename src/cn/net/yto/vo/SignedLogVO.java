@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+import java.util.UUID;
 
 import cn.net.yto.vo.message.DeleteSignedLogRequestMsgVO;
 import cn.net.yto.vo.message.SubmitSignedLogRequestMsgVO;
@@ -400,18 +401,23 @@ public class SignedLogVO {
     }
 
     
+//    public static String setRand() {
+//        String rad = "0123456789";
+//        StringBuffer result = new StringBuffer();
+//        Random rand = new Random();
+//        int length = 32;
+//        for (int i = 0; i < length; i++) {
+//            int randNum = rand.nextInt(10);
+//            result.append(rad.substring(randNum, randNum + 1));
+//        }
+//        return result.toString();
+//    }
+    
+    // UUID
     public static String setRand() {
-        String rad = "0123456789";
-        StringBuffer result = new StringBuffer();
-        Random rand = new Random();
-        int length = 32;
-        for (int i = 0; i < length; i++) {
-            int randNum = rand.nextInt(10);
-            result.append(rad.substring(randNum, randNum + 1));
-        }
-        return result.toString();
+    	return UUID.randomUUID().toString();
     }
-
+    
     public enum Satisfaction {
         SATISFIED(0), VERY_SATISFIED(1), DISSATISFIED(2);
 
