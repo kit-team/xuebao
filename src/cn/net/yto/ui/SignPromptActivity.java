@@ -29,6 +29,8 @@ public class SignPromptActivity extends Activity {
         getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.sign_prompt_title);
 
         mSignedLogMgr = new SignedLogManager(this);
+        mSignedLogMgr.downloadOrderCancel("222", getApplicationContext());
+        mSignedLogMgr.updatePushCancelState("454", getApplicationContext());
         initViews();
     }
 

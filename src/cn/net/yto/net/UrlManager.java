@@ -24,7 +24,9 @@ public class UrlManager {
 		sUrlTailMap.put(UrlType.UPDATE_SIGNEDLOG, "m_delivery!updateSignedLog.action");		
 		sUrlTailMap.put(UrlType.CANCEL_RECEIVE, "m_receive!CancelReceive.action");		
 		sUrlTailMap.put(UrlType.REPLACE_RECEIVE, "m_receive!ReplaceReceive.action");		
-		sUrlTailMap.put(UrlType.DELETE_SIGNEDLOG, "m_delivery!DeleteSignedLog.action");		
+		sUrlTailMap.put(UrlType.DELETE_SIGNEDLOG, "m_delivery!DeleteSignedLog.action");	
+		sUrlTailMap.put(UrlType.DOWNLOAD_ORDER_CANCEL, "m_receive!DownloadOrderCancel.action");
+		sUrlTailMap.put(UrlType.UPDATE_ORDER_CANCEL, "m_receive!updatePushCancelState.action");
 		
 //		sRequestParamNameMap = new HashMap<UrlType, String>();
 //		sRequestParamNameMap.put(UrlType.LOGIN, "WSLoginParam");

@@ -19,7 +19,11 @@ import cn.net.yto.utils.ToastUtils;
 import cn.net.yto.utils.ToastUtils.Operation;
 import cn.net.yto.vo.SignedLogVO;
 import cn.net.yto.vo.message.DeleteSignedLogResponseMsgVO;
+import cn.net.yto.vo.message.DownloadOrderCancelRequestMsgVO;
+import cn.net.yto.vo.message.DownloadOrderCancelResponseMsgVO;
 import cn.net.yto.vo.message.SubmitSignedLogResponseMsgVO;
+import cn.net.yto.vo.message.UpdatePushCancelStateRequestMsgVO;
+import cn.net.yto.vo.message.UpdatePushCancelStateResponseMsgVO;
 import cn.net.yto.vo.message.UpdateSignedLogResponseMsgVO;
 
 import com.j256.ormlite.dao.Dao;
@@ -196,6 +200,79 @@ public class SignedLogManager {
 			return false;
 		}
     }
+    
+	public boolean downloadOrderCancel(String deliveryEmpCode, Context context) {
+		Listener listener = new Listener() {
+			@Override
+			public void onPreSubmit() {
+				// TODO Auto-generated method stub
+			}
+
+			@Override
+			public void onPostSubmit(Object response, Integer responseType) {
+				if (response != null) {
+					DownloadOrderCancelResponseMsgVO responseVo = (DownloadOrderCancelResponseMsgVO) response;
+					if (responseVo.getRetVal() == SubmitSignedLogResponseMsgVO.RESPONSE_SUCCESS) {
+						Log.i(TAG, "Download order cancel success: " + responseVo.getFailMessage());
+					} else {
+						Log.w(TAG, "Download order cancel failed: " + responseVo.getFailMessage());
+
+					}
+				} else {
+					Log.w(TAG, "Download order cancel failed: response is null.");
+				}
+			}
+		};
+
+		final DownloadOrderCancelRequestMsgVO requestMsgVO = new DownloadOrderCancelRequestMsgVO();
+		requestMsgVO.setDeliveryEmpCode(deliveryEmpCode);
+		ZltdHttpClient client = new ZltdHttpClient(
+				UrlType.DOWNLOAD_ORDER_CANCEL, requestMsgVO, listener,
+				DownloadOrderCancelResponseMsgVO.class);
+		try {
+			return client.submit(context);
+		} catch (NetworkUnavailableException e) {
+			LogUtils.e(TAG, e);
+			return false;
+		}
+	}
+    
+	public boolean updatePushCancelState(String msgId, Context context) {
+		Listener listener = new Listener() {
+			@Override
+			public void onPreSubmit() {
+				// TODO Auto-generated method stub
+			}
+
+			@Override
+			public void onPostSubmit(Object response, Integer responseType) {
+				if (response != null) {
+					UpdatePushCancelStateResponseMsgVO responseVo = (UpdatePushCancelStateResponseMsgVO) response;
+					if (responseVo.getRetVal() == SubmitSignedLogResponseMsgVO.RESPONSE_SUCCESS) {
+						Log.i(TAG, "Update push cancel state success: " + responseVo.getFailMessage());
+
+					} else {
+						Log.w(TAG, "Update push cancel state failed: " + responseVo.getFailMessage());
+					}
+				} else {
+					Log.w(TAG, "Update push cancel state failed: response is null.");
+				}
+			}
+		};
+
+		final UpdatePushCancelStateRequestMsgVO requestMsgVO = new UpdatePushCancelStateRequestMsgVO();
+		requestMsgVO.setMsgId(msgId);
+		ZltdHttpClient client = new ZltdHttpClient(UrlType.UPDATE_ORDER_CANCEL,
+				requestMsgVO, listener,
+				UpdatePushCancelStateResponseMsgVO.class);
+		try {
+			return client.submit(context);
+		} catch (NetworkUnavailableException e) {
+			LogUtils.e(TAG, e);
+			return false;
+		}
+		
+	}
 
     public boolean deleteSignedLog(final SignedLogVO signedLogVO, Context context) {
 
