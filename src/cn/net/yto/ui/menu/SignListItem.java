@@ -35,13 +35,11 @@ public class SignListItem {
     }
     
     public String getEmpCode() {
-        return"test123";
-//        return mSignedLog.getEmpCode();
+        return mSignedLog.getEmpCode();
     }
     
     public String getEmpName() {
-        return"tester";
-//        return mSignedLog.getEmpName();
+        return mSignedLog.getEmpName();
     }
 
     public String getSignTime() {
