@@ -311,6 +311,7 @@
     <string name="title_exceptional_record_upload">异常签收数据上传</string>
     <string name="title_sign_out">派件出库</string>
     <string name="title_sign_prompt">催办派件消息</string>
+    <string name="title_sign_track">派件跟踪</string>
     <string name="upload_state">上传状态</string>
     <string name="title_additional_sign_person_info">补录签收人信息</string>
     <string name="list_head_tracking_number">运单号</string>
@@ -320,12 +321,14 @@
     <string name="list_head_upload_status">上传状态</string>
     <string name="list_head_comment">备注</string>
     <string name="list_head_signout_number">扫描面单号</string>
-    <string name="list_head_prompt_time">催办时间</string>
-    <string name="list_head_prompt_waybillno">催办订单号</string>
-    <string name="list_head_prompt_comment">消息内容</string>
-    <string name="list_head_prompt_empname">接收人姓名</string>
-    <string name="list_head_prompt_empcode">接收人工号</string>
-
+    <string name="list_head_emergency_time">催办时间</string>
+    <string name="list_head_emergency_waybillno">催办订单号</string>
+    <string name="list_head_emergency_comment">消息内容</string>
+    <string name="list_head_emergency_empname">接收人姓名</string>
+    <string name="list_head_emergency_empcode">接收人工号</string>
+    <string name="list_head_time">时间</string>
+    <string name="list_head_branch">网点</string>
+    <string name="list_head_operation">操作</string>
     <string name="title_scan_sign">签收扫描</string>
     
     <!-- exception codes -->

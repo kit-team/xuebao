@@ -26,14 +26,14 @@ import cn.net.yto.ui.menu.MenuItem;
 
 public class DispatchMain extends Activity {
     private static final int ITEM_SIGN_SCAN = 0;
-    private static final int ITEM_SIGN_BATCH = 1;
-    private static final int ITEM_UNUPLOAD_RECORD = 2;
-    private static final int ITEM_ADDITIONAL_RECORD = 3;
-    private static final int ITEM_DELETE_RECORD = 4;
-    private static final int ITEM_PROMPT = 5;
-    private static final int ITEM_ESC = 6;
+    private static final int ITEM_SIGN_BATCH = ITEM_SIGN_SCAN + 1;
+    private static final int ITEM_UNUPLOAD_RECORD = ITEM_SIGN_BATCH + 1;
+    private static final int ITEM_ADDITIONAL_RECORD = ITEM_UNUPLOAD_RECORD + 1;
+    private static final int ITEM_DELETE_RECORD = ITEM_ADDITIONAL_RECORD + 1;
+    private static final int ITEM_EMERGENCY = ITEM_DELETE_RECORD + 1;
+    private static final int ITEM_ESC = ITEM_EMERGENCY + 1;
     private static final int[] MENU_IDS = { ITEM_SIGN_SCAN, ITEM_SIGN_BATCH, ITEM_UNUPLOAD_RECORD,
-            ITEM_ADDITIONAL_RECORD, ITEM_DELETE_RECORD, ITEM_PROMPT, ITEM_ESC, };
+            ITEM_ADDITIONAL_RECORD, ITEM_DELETE_RECORD, ITEM_EMERGENCY, ITEM_ESC, };
 
     private final static int[] ICONS = { R.drawable.sign_scan, R.drawable.additional_sign_record,
             R.drawable.unupload_record, R.drawable.sign_batch, R.drawable.delete_sign_record,
@@ -113,8 +113,18 @@ public class DispatchMain extends Activity {
         startActivity(intent);
     }
 
-    private void launchSignPrompt() {
-        final Intent intent = new Intent(this, SignPromptActivity.class);
+    private void launchSignEmergency() {
+        final Intent intent = new Intent(this, SignEmergencyActivity.class);
+        startActivity(intent);
+    }
+
+    private void launchSignTrack() {
+        final Intent intent = new Intent(this, ExpressTrackActivity.class);
+        startActivity(intent);
+    }
+
+    private void launchSignStatistical() {
+        final Intent intent = new Intent(this, ExpressStatisticalActivity.class);
         startActivity(intent);
     }
 
@@ -151,8 +161,8 @@ public class DispatchMain extends Activity {
             case ITEM_UNUPLOAD_RECORD:
                 launchExceptionalRecordUpload();
                 return;
-            case ITEM_PROMPT:
-                launchSignPrompt();
+            case ITEM_EMERGENCY:
+                launchSignEmergency();
                 return;
             case ITEM_ESC:
                 finish();
