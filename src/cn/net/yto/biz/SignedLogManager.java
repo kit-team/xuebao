@@ -47,13 +47,6 @@ public class SignedLogManager {
         this.mAppContext = AppContext.getAppContext();
         this.mDatabaseHelper = mAppContext.getDatabaseHelper();
         this.mHttpTaskManager = HttpTaskManager.getInstance();
-        
-//        for(int i = 0; i < 20; i++){
-//            SignedLogVO vo = new SignedLogVO();
-//            vo.setWaybillNo("233003" + i);
-//            ZltdHttpClient c = new ZltdHttpClient(UrlType.SUBMIT_SIGNEDLOG, vo);
-//            mHttpTaskManager.addTask(c);
-//        }
         try {
             mSignedLogDao = mDatabaseHelper.getSignedLogDao();
         } catch (SQLException e) {
@@ -82,7 +75,7 @@ public class SignedLogManager {
         return false;
     }
 
-    public int removeSignedLog(SignedLogVO signedLogVO) {
+    public int deleteSignedLogLocal(SignedLogVO signedLogVO) {
         int result = 0; 
         try {
             result = mSignedLogDao.delete(signedLogVO);
@@ -91,6 +84,22 @@ public class SignedLogManager {
         }
         return result;
     }
+    
+    public int deleteSignedLog(SignedLogVO signedLogVO, Context context) {
+    	int ret = 1;
+    	SignedLogVO updatedSignedLogVO = querySignedLog(signedLogVO.getWaybillNo());
+    	LogUtils.d(TAG, "delete signedlog --> " + signedLogVO.getUploadStatus());
+		if (updatedSignedLogVO.getUploadStatus().equalsIgnoreCase(SignedLogVO.UPLOAD_STAUTS_SUCCESS)) {
+	    	LogUtils.d(TAG, "delete SignedLog Online");
+			deleteSignedLogOnline(signedLogVO, context);
+			// always return success.
+			return ret;
+		} else {
+	    	LogUtils.d(TAG, "delete SignedLog Local");			
+			ret = deleteSignedLogLocal(signedLogVO);
+		}
+		return ret;
+	}
     
     public int removeSignedLog(List<SignedLogVO> signedLogs) {
         int result = 0;
@@ -274,7 +283,7 @@ public class SignedLogManager {
 		
 	}
 
-    public boolean deleteSignedLog(final SignedLogVO signedLogVO, Context context) {
+    public boolean deleteSignedLogOnline(final SignedLogVO signedLogVO, Context context) {
 
         Listener listener = new Listener() {
             String wayBillNo = signedLogVO.getWaybillNo();
@@ -289,7 +298,7 @@ public class SignedLogManager {
                 if (response != null) {
                 	DeleteSignedLogResponseMsgVO responseVo = (DeleteSignedLogResponseMsgVO) response;
                     if (signedLogVO != null && responseVo.getRetVal() == SubmitSignedLogResponseMsgVO.RESPONSE_SUCCESS) {
-                    	removeSignedLog(signedLogVO);
+                    	deleteSignedLogLocal(signedLogVO);
                         ToastUtils.showOperationToast(Operation.DELETE, true);
                     } else {
                         Log.w(TAG, "delete signedlog failed! mWayBillNo = " + wayBillNo);

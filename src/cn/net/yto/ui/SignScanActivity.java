@@ -336,6 +336,7 @@ public class SignScanActivity extends Activity {
             } else {
                 signedLog.setRecieverSignOff(mReceipient.getText().toString());
                 signedLog.setSignOffTypeCode(SignedLogVO.SIGNOFF_TYPE_SELF);
+                signedLog.setRecipient(mReceipient.getText().toString());
             }
 
             switch (mSatisfactory.getCheckedRadioButtonId()) {
