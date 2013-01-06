@@ -16,20 +16,20 @@ import cn.net.yto.utils.ToastUtils;
 import cn.net.yto.utils.ToastUtils.Operation;
 import cn.net.yto.vo.SignedLogVO;
 
-public class SignListAdapter extends BaseAdapter {
+public abstract class SignListBasicAdapter extends BaseAdapter {
 
     protected final static int COLOR_DEFAULT = Color.WHITE;
     protected final static int COLOR_SELECTED = Color.YELLOW;
 
     protected LayoutInflater mInflater;
 
-    protected ArrayList<SignListAdapterItem> mData = new ArrayList<SignListAdapterItem>();
+    protected ArrayList<SignListItem> mData = new ArrayList<SignListItem>();
 
     // if true, only one item could be selected; else support multi-selection
     protected boolean mIsSingleSelection = false;
     protected int mSelectedPosition = -1;
 
-    public SignListAdapter(Context context) {
+    public SignListBasicAdapter(Context context) {
         mInflater = LayoutInflater.from(context);
     }
 
@@ -53,7 +53,7 @@ public class SignListAdapter extends BaseAdapter {
     }
 
     @Override
-    public SignListAdapterItem getItem(int position) {
+    public SignListItem getItem(int position) {
         return mData.get(position);
     }
 
@@ -63,7 +63,7 @@ public class SignListAdapter extends BaseAdapter {
             selectedVOs.add(mData.get(mSelectedPosition).getSignedLogVO());
         } else {
             for (int i = mData.size() - 1; i >= 0; i--) {
-                SignListAdapterItem item = mData.get(i);
+                SignListItem item = mData.get(i);
                 if (item.isSelected()) {
                     selectedVOs.add(item.getSignedLogVO());
                 }
@@ -83,10 +83,10 @@ public class SignListAdapter extends BaseAdapter {
                 mSelectedPosition = -1;
             }
         } else {
-            ArrayList<SignListAdapterItem> selectedItem = new ArrayList<SignListAdapterItem>();
+            ArrayList<SignListItem> selectedItem = new ArrayList<SignListItem>();
             ArrayList<SignedLogVO> selectedVOs = new ArrayList<SignedLogVO>();
             for (int i = mData.size() - 1; i >= 0; i--) {
-                SignListAdapterItem item = mData.get(i);
+                SignListItem item = mData.get(i);
                 if (item.isSelected()) {
                     selectedItem.add(item);
                     selectedVOs.add(item.getSignedLogVO());
@@ -110,7 +110,7 @@ public class SignListAdapter extends BaseAdapter {
     }
 
     public void onItemClick(int position) {
-        SignListAdapterItem item = getItem(position);
+        SignListItem item = getItem(position);
         if (mIsSingleSelection) {
             if (mSelectedPosition == position) {
                 mSelectedPosition = -1;
@@ -125,22 +125,18 @@ public class SignListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ItemHolder itemHolder = null;
         if (convertView == null) {
-            convertView = mInflater.inflate(R.layout.list_detail_item, parent, false);
-            itemHolder = new ItemHolder();
-            itemHolder.tranckingNumberView = (TextView) convertView
-                    .findViewById(R.id.item_tracking_number);
-            itemHolder.receipientView = (TextView) convertView.findViewById(R.id.item_receipient);
-            itemHolder.signTimeView = (TextView) convertView.findViewById(R.id.item_sign_time);
+            convertView = mInflater.inflate(R.layout.list_sign_item, parent, false);
+            ItemHolder itemHolder = new ItemHolder();
+            itemHolder.view1 = (TextView) convertView.findViewById(R.id.item1);
+            itemHolder.view2 = (TextView) convertView.findViewById(R.id.item2);
+            itemHolder.view3 = (TextView) convertView.findViewById(R.id.item3);
+            itemHolder.view4 = (TextView) convertView.findViewById(R.id.item4);
+            itemHolder.viewSecond1 = (TextView) convertView.findViewById(R.id.item_second1);
+            itemHolder.viewSecond2 = (TextView) convertView.findViewById(R.id.item_second2);
             convertView.setTag(itemHolder);
-        } else {
-            itemHolder = (ItemHolder) convertView.getTag();
         }
-        final SignListAdapterItem item = mData.get(position);
-        itemHolder.tranckingNumberView.setText(item.getWaybillNo());
-        itemHolder.receipientView.setText(item.getRecipient());
-        itemHolder.signTimeView.setText(item.getSignTime());
+
         if (mIsSingleSelection) {
             if (mSelectedPosition == position) {
                 convertView.setBackgroundColor(COLOR_SELECTED);
@@ -148,6 +144,7 @@ public class SignListAdapter extends BaseAdapter {
                 convertView.setBackgroundColor(COLOR_DEFAULT);
             }
         } else {
+            final SignListItem item = mData.get(position);
             if (item.isSelected()) {
                 convertView.setBackgroundColor(COLOR_SELECTED);
             } else {
@@ -159,16 +156,18 @@ public class SignListAdapter extends BaseAdapter {
     }
 
     public class ItemHolder {
-        TextView tranckingNumberView = null;
-        TextView signTypeView = null;
-        TextView receipientView = null;
-        TextView signTimeView = null;
+        public TextView view1 = null;
+        public TextView view2 = null;
+        public TextView view3 = null;
+        public TextView view4 = null;
+        public TextView viewSecond1 = null;
+        public TextView viewSecond2 = null;
     }
 
-    public static List<SignListAdapterItem> buildSignListAdapterItem(List<SignedLogVO> signedLogs) {
-        List<SignListAdapterItem> items = new ArrayList<SignListAdapterItem>();
+    public static List<SignListItem> buildSignListAdapterItem(List<SignedLogVO> signedLogs) {
+        List<SignListItem> items = new ArrayList<SignListItem>();
         for (SignedLogVO vo : signedLogs) {
-            items.add(new SignListAdapterItem(vo));
+            items.add(new SignListItem(vo));
         }
         return items;
     }

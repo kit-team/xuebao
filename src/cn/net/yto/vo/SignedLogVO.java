@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.UUID;
 
+import android.text.TextUtils;
 import cn.net.yto.vo.message.DeleteSignedLogRequestMsgVO;
 import cn.net.yto.vo.message.SubmitSignedLogRequestMsgVO;
 import cn.net.yto.vo.message.UpdateSignedLogRequestMsgVO;
@@ -207,6 +208,17 @@ public class SignedLogVO {
 
     public String getUploadStatus() {
         return uploadStatus;
+    }
+    
+    /**
+     * @return the uploadStatus string for display in UI.
+     */
+    public String getUploadStatusForUI() {
+        String uiUploadStatus = UPLOADSTATUSMAP.get(uploadStatus);
+        if (TextUtils.isEmpty(uiUploadStatus)) {
+            return "未知状态";
+        }
+        return uiUploadStatus;
     }
 
     public void setUploadStatus(String status) {

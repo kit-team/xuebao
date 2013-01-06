@@ -150,6 +150,14 @@
          <activity android:name=".ui.SignBatchActivity"
             android:label="@string/title_batch_sign" >
         </activity>
+        <!--
+        <activity android:name=".ui.SignOutActivity"
+            android:label="@string/title_sign_out" >
+        </activity>        -->
+
+        <activity android:name=".ui.SignPromptActivity"
+            android:label="@string/title_sign_prompt" >
+        </activity>
 
          <activity android:name=".ui.DispatchMain"
             android:label="@string/title_dispatch_main">

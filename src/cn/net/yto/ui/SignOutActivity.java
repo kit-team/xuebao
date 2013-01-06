@@ -1,0 +1,92 @@
+package cn.net.yto.ui;
+
+import android.app.Activity;
+import android.content.Context;
+import android.os.Bundle;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.ListView;
+import android.widget.TextView;
+import cn.net.yto.R;
+import cn.net.yto.ui.menu.SignListBasicAdapter;
+import cn.net.yto.ui.menu.SignListItem;
+
+/**
+ * 派件出库
+ * 
+ * @author Administrator
+ * 
+ */
+public class SignOutActivity extends Activity {
+
+    private TextView mEmpName = null;
+    private TextView mEmpNo = null;
+    private ListView mListSignout = null;
+    private TextView mScannedCount = null;
+
+    private SignOutAdapter mAdpater = null;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
+        setContentView(R.layout.sign_out);
+        getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.sign_delete_title);
+
+        initViews();
+    }
+
+    private void initViews() {
+        mEmpName = (TextView) findViewById(R.id.emp_name);
+        mEmpNo = (TextView) findViewById(R.id.emp_no);
+        mListSignout = (ListView) findViewById(R.id.list_sign_out);
+        mScannedCount = (TextView) findViewById(R.id.scanned_count);
+
+        findViewById(R.id.btn_back).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SignOutActivity.this.finish();
+            }
+        });
+
+        // init data
+        mEmpName.setText("张三");
+        mEmpNo.setText("emp123456789");
+        mAdpater = new SignOutAdapter(this);
+        mListSignout.addHeaderView(getListHeadView());
+        mListSignout.setAdapter(mAdpater);
+
+        updateScannedCount();
+    }
+
+    private View getListHeadView() {
+        View headView = getLayoutInflater().inflate(R.layout.list_sign_head, null);
+        TextView head1 = (TextView) headView.findViewById(R.id.head1);
+        head1.setText(R.string.list_head_signout_number);
+        head1.setVisibility(View.VISIBLE);
+        return headView;
+    }
+
+    private void updateScannedCount() {
+        mScannedCount.setText(String.valueOf(mAdpater.getCount()));
+    }
+
+    private class SignOutAdapter extends SignListBasicAdapter {
+
+        public SignOutAdapter(Context context) {
+            super(context);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            convertView = super.getView(position, convertView, parent);
+
+            ItemHolder itemHolder = (ItemHolder) convertView.getTag();
+            final SignListItem item = mData.get(position);
+            itemHolder.view1.setText(item.getWaybillNo()); // 账单号
+            itemHolder.view1.setVisibility(View.VISIBLE);
+            return convertView;
+        }
+    }
+}

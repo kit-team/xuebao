@@ -297,6 +297,7 @@
         <item>未上传数据</item>
         <item>补录签收人</item>
         <item>删除签收</item>
+        <item>催办派件</item>
         <item>@string/text_esc_back</item>
     </string-array>
     <string-array name="array_upload_state">
@@ -308,6 +309,8 @@
 
     <string name="title_dispatch_main">派件操作，派遣员：手持终端收派</string>
     <string name="title_exceptional_record_upload">异常签收数据上传</string>
+    <string name="title_sign_out">派件出库</string>
+    <string name="title_sign_prompt">催办派件消息</string>
     <string name="upload_state">上传状态</string>
     <string name="title_additional_sign_person_info">补录签收人信息</string>
     <string name="list_head_tracking_number">运单号</string>
@@ -316,6 +319,12 @@
     <string name="list_head_sign_time">签收时间</string>
     <string name="list_head_upload_status">上传状态</string>
     <string name="list_head_comment">备注</string>
+    <string name="list_head_signout_number">扫描面单号</string>
+    <string name="list_head_prompt_time">催办时间</string>
+    <string name="list_head_prompt_waybillno">催办订单号</string>
+    <string name="list_head_prompt_comment">消息内容</string>
+    <string name="list_head_prompt_empname">接收人姓名</string>
+    <string name="list_head_prompt_empcode">接收人工号</string>
 
     <string name="title_scan_sign">签收扫描</string>
     

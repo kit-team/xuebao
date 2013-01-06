@@ -5,10 +5,10 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
 public class SignListItemClickListener implements OnItemClickListener {
-    private SignListAdapter mAdapter = null;
+    private SignListBasicAdapter mAdapter = null;
     private boolean mHasHeadView = false;
 
-    public SignListItemClickListener(SignListAdapter adapter, boolean hasHeadView) {
+    public SignListItemClickListener(SignListBasicAdapter adapter, boolean hasHeadView) {
         mAdapter = adapter;
         mHasHeadView = hasHeadView;
     }
