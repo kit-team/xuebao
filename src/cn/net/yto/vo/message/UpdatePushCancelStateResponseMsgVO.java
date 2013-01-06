@@ -1,6 +1,6 @@
 package cn.net.yto.vo.message;
 
-public class UpdatePushCancelStateResponseMsgVO {
+public class UpdatePushCancelStateResponseMsgVO extends BaseResponseMsgVO {
 	/**
 	 * 返回值
 	 */
