@@ -87,7 +87,7 @@ public abstract class SignListBasicAdapter extends BaseAdapter {
         int result = 0;
         if (mIsSingleSelection) {
             SignedLogVO selectVO = mData.get(mSelectedPosition).getSignedLogVO();
-            result = signedLogMgr.removeSignedLog(selectVO);
+            result = signedLogMgr.deleteSignedLog(selectVO, context);
             if (result > 0) {
                 mData.remove(mSelectedPosition);
                 mSelectedPosition = -1;
