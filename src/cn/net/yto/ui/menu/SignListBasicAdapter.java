@@ -47,6 +47,16 @@ public abstract class SignListBasicAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
+    public void addData(List<SignedLogVO> signedLogs) {
+        mData.addAll(buildSignListAdapterItem(signedLogs));
+        notifyDataSetChanged();
+    }
+    
+    public void addData(SignedLogVO vo) {
+        mData.add(new SignListItem(vo));
+        notifyDataSetChanged();
+    }
+    
     @Override
     public int getCount() {
         return mData.size();

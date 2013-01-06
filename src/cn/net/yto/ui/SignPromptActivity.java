@@ -89,7 +89,7 @@ public class SignPromptActivity extends Activity {
             convertView = super.getView(position, convertView, parent);
 
             ItemHolder itemHolder = (ItemHolder) convertView.getTag();
-            final SignListItem item = mData.get(position);
+            final SignListItem item = getItem(position);
             itemHolder.view1.setText(item.getWaybillNo()); // 账单号
             itemHolder.view1.setVisibility(View.VISIBLE);
             itemHolder.view2.setText(item.getEmpCode()); // 接收人工号
