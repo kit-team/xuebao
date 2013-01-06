@@ -26,7 +26,7 @@ public class SignPromptActivity extends Activity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
         setContentView(R.layout.sign_prompt);
-        getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.sign_delete_title);
+        getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.sign_prompt_title);
 
         mSignedLogMgr = new SignedLogManager(this);
         initViews();
