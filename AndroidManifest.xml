@@ -182,6 +182,11 @@
         </activity>
         <activity android:name=".ui.ReceiveReplaceActivity"
             android:theme="@android:style/Theme.Dialog" />"
+
+        <activity android:name=".ui.MessageQueryMainActivity"
+            android:label="@string/title_message_query" />"
+
+            
     </application>
 
 </manifest>

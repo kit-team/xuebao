@@ -309,6 +309,7 @@
 
     <string name="title_dispatch_main">派件操作，派遣员：手持终端收派</string>
     <string name="title_exceptional_record_upload">异常签收数据上传</string>
+    <string name="title_message_query">信息查询</string>
     <string name="title_sign_out">派件出库</string>
     <string name="title_sign_prompt">催办派件消息</string>
     <string name="title_sign_track">派件跟踪</string>
@@ -379,4 +380,16 @@
         <item>收方客户拒付代收货款</item>
     </string-array>
 
+    <string-array name="message_query_main">
+        <item>查看服务手册</item>
+        <item>派送范围查询</item>
+        <item>查看违禁品</item>
+        <item>标准运价查询</item>
+        <item>客户验证</item>
+        <item>快件跟踪</item>
+        <item>公告信息查询</item>
+        <item>收派件统计</item>
+        <item>客户黑名单</item>
+        <item>ESC返回</item>
+    </string-array>
 </resources>

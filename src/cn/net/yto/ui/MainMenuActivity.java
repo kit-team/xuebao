@@ -126,7 +126,7 @@ public class MainMenuActivity extends BaseActivity {
 		addMenuItem(R.drawable.mainmenu_order, R.string.order_manage, /*OrderListActivity.class*/OrderTabActivity.class);
 		addMenuItem(R.drawable.mainmenu_receive, R.string.receive, ReceiveMenuActivity.class);
 		addMenuItem(R.drawable.mainmenu_deliver, R.string.deliver, DispatchMain.class);
-		addMenuItem(R.drawable.mainmenu_query, R.string.msg_query, null);
+		addMenuItem(R.drawable.mainmenu_query, R.string.msg_query, MessageQueryMainActivity.class);
 		addLogoutMenuItem(R.drawable.mainmenu_exit, R.string.back);
 	}
 
