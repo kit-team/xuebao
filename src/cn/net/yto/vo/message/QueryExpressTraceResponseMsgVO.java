@@ -41,7 +41,7 @@ public class QueryExpressTraceResponseMsgVO extends BaseResponseMsgVO {
 	}
 	
 	public void setTrackInfos(List<ExpressTraceVO> trackInfos) {
-		this.trackInfos = trackInfos;
+		this.trackInfos = trackInfos; 
 	}
 
 }

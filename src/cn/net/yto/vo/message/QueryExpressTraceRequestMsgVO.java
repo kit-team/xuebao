@@ -10,7 +10,7 @@ public class QueryExpressTraceRequestMsgVO extends BaseRequestMsgVO {
 		return wayBillNo;
 	}
 	
-	public void setwayBillNo(String wayBillNo) {
+	public void setWayBillNo(String wayBillNo) {
 		this.wayBillNo = wayBillNo;
 	}
 
