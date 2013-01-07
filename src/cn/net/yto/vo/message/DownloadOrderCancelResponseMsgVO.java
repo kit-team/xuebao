@@ -1,11 +1,14 @@
 package cn.net.yto.vo.message;
 
+import java.util.List;
+
+import cn.net.yto.vo.CancelMessageVO;
 
 public class DownloadOrderCancelResponseMsgVO extends BaseResponseMsgVO {
 	/**
 	 * 消息列表
 	 */
-	private CancelMessage[] cancelMsg;
+	private List<CancelMessageVO> cancelMsg;
 	
 	/**
 	 * 收派员工号
@@ -32,11 +35,11 @@ public class DownloadOrderCancelResponseMsgVO extends BaseResponseMsgVO {
 	 */
 	private String tableName;
 	
-	public CancelMessage[] getCancelMsg() {
+	public List<CancelMessageVO> getCancelMsg() {
 		return cancelMsg;
 	}
 	
-	public void setCancelMsg(CancelMessage[] cancelMsg) {
+	public void setCancelMsg(List<CancelMessageVO> cancelMsg) {
 		this.cancelMsg = cancelMsg;
 	}
 	
@@ -80,81 +83,4 @@ public class DownloadOrderCancelResponseMsgVO extends BaseResponseMsgVO {
 		this.tableName = tableName;
 	}
 	
-	public enum MessageType {
-		 
-		ORDER_PUSH(1), ORDER_CANCEL(2), DELIVERY_PUSH(3);
-		
-		private int code;
-
-		MessageType(int code) {
-			this.code = code;
-		}
-		
-		public static MessageType valueOf(int code) {
-			MessageType result = null;
-			for(MessageType type : MessageType.values()) {
-				if (type.code == code) {
-					result = type;
-					break;
-				}
-			}
-			return result;
-		}
-	}
-	
-	class CancelMessage {
-		/**
-		 * 消息ID
-		 */
-		private String msgId;
-		
-		/**
-		 * 消息类型
-		 */
-		private int msgType;
-		
-		/**
-		 * 订单渠道编码
-		 */
-		private String orderChannelCode;
-		
-		/**
-		 * 订单号（或  派件的运单号）
-		 */
-		private String orderId;
-		
-		public String getMsgId() {
-			return msgId;
-		}
-		
-		public void setMsgId(String msgId) {
-			this.msgId = msgId;
-		}
-		
-		public int getMsgType() {
-			return msgType;
-		}
-		
-		public void setMsgType(int msgType) {
-			this.msgType = msgType;
-		}
-		
-		public String getOrderChannelCode() {
-			return orderChannelCode;
-		}
-		
-		public void setOrderChannelCode(String orderChannelCode) {
-			this.orderChannelCode = orderChannelCode;
-		}
-		
-		public String getOrderId() {
-			return orderId;
-		}
-		
-		public void setOrderId(String orderId) {
-			this.orderId = orderId;
-		}
-		
-	}
-
 }
