@@ -8,6 +8,7 @@ import com.zltd.android.scan.impl.OneDimensionalSanManager;
 
 import android.app.Activity;
 import android.content.Context;
+import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.Vibrator;
@@ -75,7 +76,11 @@ public class SignBatchActivity extends Activity implements OnItemClickListener {
         mSignedLogMgr = ((AppContext) getApplication()).getSignedLogManager();
         mSignTypeString = getResources().getStringArray(R.array.sign_type);
 
-        initViews();
+        initViews();        
+        mVibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        mSoundPool = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
+		mSoundSuccessId = mSoundPool.load(this, R.raw.success, 1);
+
     }
 
 	@Override

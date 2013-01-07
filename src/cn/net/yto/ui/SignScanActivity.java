@@ -78,7 +78,11 @@ public class SignScanActivity extends Activity {
 	private ScanResultListener mScanResultListener = new ScanResultListener() {
 		@Override
 		public void onScan(ScanManager arg0, byte[] scanResultDate) {
-			mSignSuccessView.setWabillNoEditText(new String(scanResultDate));
+			if (viewPager.getCurrentItem() == 0) {
+				mSignSuccessView.setWabillNoEditText(new String(scanResultDate));
+			} else if (viewPager.getCurrentItem() == 1) {
+				mSignFailedView.setWabillNoEditText(new String(scanResultDate));
+			}
 			mVibrator.vibrate(50);
 			mSoundPool.play(mSoundSuccessId, 0.9f, 0.9f, 1, 0, 1f);
 		}
@@ -415,6 +419,10 @@ public class SignScanActivity extends Activity {
             initView(view);
             mExceptionNames = getResources().getStringArray(R.array.exception_reason);
             mExceptionCodes = getResources().getStringArray(R.array.exception_codes);
+        }
+
+        public void setWabillNoEditText(String str) {
+        	mWaybillNo.setText(str);
         }
 
         private void initView(View view) {
