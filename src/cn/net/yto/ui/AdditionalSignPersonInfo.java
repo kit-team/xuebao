@@ -2,9 +2,15 @@ package cn.net.yto.ui;
 
 import java.util.List;
 
+import com.zltd.android.scan.ScanManager;
+import com.zltd.android.scan.ScanResultListener;
+import com.zltd.android.scan.impl.OneDimensionalSanManager;
+
 import android.app.Activity;
 import android.content.Context;
+import android.media.SoundPool;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +40,20 @@ public class AdditionalSignPersonInfo extends Activity implements OnItemClickLis
 
     private SignedLogVO mSelectedSignedLog = null;
 
+	private int mSoundSuccessId;
+	private ScanManager mScanManager;
+	private Vibrator mVibrator;
+	
+	private ScanResultListener mScanResultListener = new ScanResultListener() {
+		@Override
+		public void onScan(ScanManager arg0, byte[] scanResultDate) {
+			mWaybillNo.setText(new String(scanResultDate));
+			mVibrator.vibrate(50);
+			mSoundPool.play(mSoundSuccessId, 0.9f, 0.9f, 1, 0, 1f);
+		}
+	};
+	private SoundPool mSoundPool;;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +65,24 @@ public class AdditionalSignPersonInfo extends Activity implements OnItemClickLis
 
         initViews();
     }
+    
+	@Override
+	protected void onPause() {
+    	mScanManager.unregisterResultListener();
+        mScanManager.setEnable(false);
+        mSoundPool.release();
+		super.onPause();
+	}
+
+
+	@Override
+	protected void onResume() {
+        // register the scan listener.
+        mScanManager = new OneDimensionalSanManager(this);
+        mScanManager.setEnable(true);
+        mScanManager.registerResultListener(mScanResultListener);
+		super.onResume();
+	}
     
     private View getListHeadView() {
         View headView = getLayoutInflater().inflate(R.layout.list_sign_head, null);

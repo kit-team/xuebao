@@ -145,7 +145,6 @@ public class SignScanActivity extends Activity {
         mScanManager = new OneDimensionalSanManager(this);
         mScanManager.setEnable(true);
         mScanManager.registerResultListener(mScanResultListener);
-		
 		super.onResume();
 	}
     
