@@ -9,6 +9,7 @@ import cn.net.yto.vo.BlackListVO;
 import cn.net.yto.vo.CityVO;
 import cn.net.yto.vo.DictionaryVO;
 import cn.net.yto.vo.EffectiveTypeVO;
+import cn.net.yto.vo.ExpressTraceVO;
 import cn.net.yto.vo.FreqVO;
 import cn.net.yto.vo.InsteadPayCustomerVO;
 import cn.net.yto.vo.NoticeVO;
@@ -63,6 +64,12 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 	 */
 	private Dao<SignedLogVO, String> mSignedLogDao = null;
 
+	/**
+	 * 快件跟踪
+	 */
+	private Dao<ExpressTraceVO, String> mExpressTraceDao = null;
+	
+	
     public DatabaseHelper(Context context) {
         super(context, DbConst.DB_NAME, null, DbConst.DB_VERSION);
     }
@@ -90,6 +97,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             TableUtils.createTable(connectionSource, OrderVO.class);
             TableUtils.createTable(connectionSource, ReceiveVO.class);
             TableUtils.createTable(connectionSource, SignedLogVO.class);
+            TableUtils.createTable(connectionSource, ExpressTraceVO.class);            
         } catch (SQLException e) {
         	LogUtils.e(TAG, "Can't create database e = " + e);
             throw new RuntimeException(e);
@@ -120,6 +128,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             
             TableUtils.dropTable(connectionSource, ReceiveVO.class, true);
             TableUtils.dropTable(connectionSource, SignedLogVO.class, true);
+            TableUtils.dropTable(connectionSource, ExpressTraceVO.class, true);
             
             onCreate(db, connectionSource); 
         } catch (SQLException e) { 
@@ -250,6 +259,14 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         }
         return mSignedLogDao;
     }
+    
+    public Dao<ExpressTraceVO, String> getExpressTraceDao() throws SQLException {
+        if (mExpressTraceDao == null) {
+        	mExpressTraceDao = getDao(ExpressTraceVO.class);
+        }
+        return mExpressTraceDao;
+    }
+
     /**
      * Close the database connections and clear any cached DAOs.
      */
@@ -271,5 +288,6 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         mOrderDao = null;
         mReceiveDao = null;
         mSignedLogDao = null;
+        mExpressTraceDao = null;
     }
 }

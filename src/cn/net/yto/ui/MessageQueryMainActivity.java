@@ -86,8 +86,8 @@ public class MessageQueryMainActivity extends Activity {
     }
 
     private void launchSignPrompt() {
-        final Intent intent = new Intent(this, SignPromptActivity.class);
-        startActivity(intent);
+//        final Intent intent = new Intent(this, SignPromptActivity.class);
+//        startActivity(intent);
     }
 
     private final OnItemClickListener mOnItemClickListener = new OnItemClickListener() {

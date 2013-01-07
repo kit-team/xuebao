@@ -9,6 +9,7 @@ import android.preference.PreferenceManager;
 import android.telephony.TelephonyManager;
 import cn.net.yto.R;
 import cn.net.yto.biz.BasicDataManager;
+import cn.net.yto.biz.ExpressTraceManager;
 import cn.net.yto.biz.OrderManager;
 import cn.net.yto.biz.ReceiveManager;
 import cn.net.yto.biz.SignedLogManager;
@@ -36,6 +37,7 @@ public class AppContext extends Application {
 	private String mImei;
 	private OrderManager mOrderService;
 	private SignedLogManager mSignedLogManager;
+	private ExpressTraceManager mExpressTraceManager;
 
 	@Override
 	public void onCreate() {
@@ -178,6 +180,13 @@ public class AppContext extends Application {
 			mSignedLogManager = new SignedLogManager(mContext);
 		}
 		return mSignedLogManager;
+	}
+
+	public ExpressTraceManager getExpressTraceManager() {
+		if (mExpressTraceManager == null) {
+			mExpressTraceManager = new ExpressTraceManager(mContext);
+		}
+		return mExpressTraceManager;
 	}
 	
     public void startReportTask() {

@@ -1,33 +1,44 @@
 package cn.net.yto.vo;
 
+import com.j256.ormlite.field.DatabaseField;
+
 public class ExpressTraceVO {
+	
 	/**
 	 * 操作名称 
 	 */
+	@DatabaseField
 	private String opName;
+	
+	
 	/**
 	 * 操作时间
 	 */
+	@DatabaseField
 	private String opTime;
 	
 	/**
-	 * 
+	 * 操作编码
 	 */
+	@DatabaseField
 	private String orgCode;
 	
 	/**
 	 * 所在网点 
 	 */
+	@DatabaseField
 	private String orgName;
 	
 	/**
 	 * 
 	 */
+	@DatabaseField
 	private String revName;
 	
 	/**
 	 * 运单号
 	 */
+	@DatabaseField(id = true)
 	private String waybillNo;
 	
 	public String getOpName() {
