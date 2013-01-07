@@ -153,9 +153,13 @@ public class SignScanActivity extends Activity {
 	}
     
     private void updateSignedLog(SignedLogVO data) {
-        if (mSignSuccessView != null) {
+        final String state = data.getSignedState();
+        if (state.equals("1")) {
             switchPage(getResources().getString(R.string.tab_sign_success));
             mSignSuccessView.updateViews(data);
+        } else {
+            switchPage(getResources().getString(R.string.tab_sign_failed));
+            mSignFailedView.updateViews(data);
         }
     }
 
@@ -443,6 +447,24 @@ public class SignScanActivity extends Activity {
                     }
                 }
             });
+        }
+
+        public void updateViews(SignedLogVO data) {
+            mWaybillNo.setText(data.getWaybillNo());
+            mExceptionReasonSpinner.setSelection(getSelectedId(data.getExpSignedDescription()));
+            
+        }
+
+        private int getSelectedId(String content) {
+            if (content != null) {
+                for (int i = 0; i < mExceptionNames.length; i++) {
+                    if (content.equals(mExceptionNames[i])) {
+                        return i;
+                    }
+                }
+            }
+
+            return -1;
         }
 
         private boolean checkInputVaules() {
