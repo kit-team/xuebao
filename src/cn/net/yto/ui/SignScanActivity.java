@@ -32,6 +32,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import cn.net.yto.R;
 import cn.net.yto.application.AppContext;
+import cn.net.yto.biz.ExpressTraceManager;
 import cn.net.yto.biz.SignedLogManager;
 import cn.net.yto.ui.menu.SignListBasicAdapter;
 import cn.net.yto.ui.menu.SignListItem;

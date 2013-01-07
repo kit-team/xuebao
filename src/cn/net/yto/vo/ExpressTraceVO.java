@@ -89,4 +89,14 @@ public class ExpressTraceVO {
 		this.waybillNo = waybillNo;
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("opName:" + opName + ", ")
+		       .append("opTime:" + opTime + ", ")
+		       .append("orgCode:" + orgCode + ", ")
+		       .append("orgName:" + orgName + ", ")
+		       .append("revName:" + revName + ", ");
+		return builder.toString();
+	}
 }

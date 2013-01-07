@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="default_server_url">120.195.213.100:8099/pda</string>
+    <!--  
+    <string name="default_server_url">120.195.213.100:8099/pda</string> -->
+    <string name="default_server_url">171.217.164.186:8081/pda</string>
     <string name="app_name">圆通速递</string>
     <string name="settings">设置</string>
     <string name="network_error">暂时没有可用的网络，请稍后再试</string>
