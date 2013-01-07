@@ -84,10 +84,15 @@ public class MessageQueryMainActivity extends Activity {
         mListView.setAdapter(mAdapter);
         mListView.setOnItemClickListener(mOnItemClickListener);
     }
+    
+    private void launchExpressTrack() {
+        final Intent intent = new Intent(this, ExpressTrackActivity.class);
+        startActivity(intent);
+    }
 
-    private void launchSignPrompt() {
-//        final Intent intent = new Intent(this, SignPromptActivity.class);
-//        startActivity(intent);
+    private void launchExpressStatistical() {
+        final Intent intent = new Intent(this, ExpressStatisticalActivity.class);
+        startActivity(intent);
     }
 
     private final OnItemClickListener mOnItemClickListener = new OnItemClickListener() {
@@ -109,10 +114,12 @@ public class MessageQueryMainActivity extends Activity {
         public void action() {
             switch (mMenuId) {
             case ITEM_EXPRESS_TRACK:
+                launchExpressTrack();
                 return;
             case ITEM_BULLETIN_INFO_SEARCH:
                 return;
             case ITEM_RECEIVE_DELIVER_STATISTIC:
+                launchExpressStatistical();
                 return;
             case ITEM_ESC:
                 finish();

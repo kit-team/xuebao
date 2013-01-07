@@ -118,16 +118,6 @@ public class DispatchMain extends Activity {
         startActivity(intent);
     }
 
-    private void launchSignTrack() {
-        final Intent intent = new Intent(this, ExpressTrackActivity.class);
-        startActivity(intent);
-    }
-
-    private void launchSignStatistical() {
-        final Intent intent = new Intent(this, ExpressStatisticalActivity.class);
-        startActivity(intent);
-    }
-
     private final OnItemClickListener mOnItemClickListener = new OnItemClickListener() {
 
         @Override
