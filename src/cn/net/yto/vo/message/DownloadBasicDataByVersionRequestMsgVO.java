@@ -1,14 +1,13 @@
 package cn.net.yto.vo.message;
 
-
-/**
- * 城市区号表下载VO
- * 收派员在揽件时根据客户需要寄送的地址，输入目标城市的区号，可以下拉出对应的一级城市和二级城市，以便选择
- * @author HurryJiang
- *
- */
 public class DownloadBasicDataByVersionRequestMsgVO extends BaseRequestMsgVO {
+	/**
+	 * 模块名称
+	 */
 	private String moduleName;
+	/**
+	 * PDA 端记录中最大的version No值 
+	 */
 	private long version;
 
 	public String getModuleName() {
@@ -26,6 +25,5 @@ public class DownloadBasicDataByVersionRequestMsgVO extends BaseRequestMsgVO {
 	public void setVersion(long version) {
 		this.version = version;
 	}
-
 	
 }
