@@ -78,9 +78,7 @@ public class SignScanActivity extends Activity {
 	private ScanResultListener mScanResultListener = new ScanResultListener() {
 		@Override
 		public void onScan(ScanManager arg0, byte[] scanResultDate) {
-			if (viewPager.getCurrentItem() == 0) {
-				mSignSuccessView.setWabillNoEditText(new String(scanResultDate));
-			}
+			mSignSuccessView.setWabillNoEditText(new String(scanResultDate));
 			mVibrator.vibrate(50);
 			mSoundPool.play(mSoundSuccessId, 0.9f, 0.9f, 1, 0, 1f);
 		}
@@ -125,24 +123,31 @@ public class SignScanActivity extends Activity {
         viewPager = (ViewPager) findViewById(R.id.slideMenu);
         viewPager.setAdapter(new SlideMenuAdapter());
         viewPager.setOnPageChangeListener(new SlideMenuChangeListener());
-        
+
+        mVibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        mSoundPool = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
+		mSoundSuccessId = mSoundPool.load(this, R.raw.success, 1);
+    }
+
+    
+	@Override
+	protected void onPause() {
+    	mScanManager.unregisterResultListener();
+        mScanManager.setEnable(false);
+        mSoundPool.release();
+		super.onPause();
+	}
+
+
+	@Override
+	protected void onResume() {
         // register the scan listener.
         mScanManager = new OneDimensionalSanManager(this);
         mScanManager.setEnable(true);
         mScanManager.registerResultListener(mScanResultListener);
-        mVibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        mSoundPool = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
-		mSoundSuccessId = mSoundPool.load(this, R.raw.success, 1);
 		
-    }
-
-	@Override
-    protected void onDestroy() {
-    	mScanManager.unregisterResultListener();
-        mScanManager.setEnable(false);
-        mSoundPool.release();
-    	super.onDestroy();
-    }
+		super.onResume();
+	}
     
     private void updateSignedLog(SignedLogVO data) {
         if (mSignSuccessView != null) {
