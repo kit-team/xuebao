@@ -2,10 +2,6 @@ package cn.net.yto.ui;
 
 import java.util.List;
 
-import com.zltd.android.scan.ScanManager;
-import com.zltd.android.scan.ScanResultListener;
-import com.zltd.android.scan.impl.OneDimensionalSanManager;
-
 import android.app.Activity;
 import android.content.Context;
 import android.media.AudioManager;
@@ -17,24 +13,26 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.AdapterView.OnItemClickListener;
 import cn.net.yto.R;
 import cn.net.yto.application.AppContext;
 import cn.net.yto.biz.SignedLogManager;
 import cn.net.yto.ui.menu.SignListBasicAdapter;
 import cn.net.yto.ui.menu.SignListItem;
-import cn.net.yto.ui.menu.SignListItemClickListener;
-import cn.net.yto.ui.menu.SignListBasicAdapter.ItemHolder;
 import cn.net.yto.utils.ToastUtils;
 import cn.net.yto.utils.ToastUtils.Operation;
 import cn.net.yto.vo.SignedLogVO;
 import cn.net.yto.vo.SignedLogVO.Satisfaction;
+
+import com.zltd.android.scan.ScanManager;
+import com.zltd.android.scan.ScanResultListener;
+import com.zltd.android.scan.impl.OneDimensionalSanManager;
 
 public class SignBatchActivity extends Activity implements OnItemClickListener {
 
@@ -121,7 +119,6 @@ public class SignBatchActivity extends Activity implements OnItemClickListener {
         mListView.addHeaderView(getListHeadView());
         mAdapter = new SignListBatchAdapter(getApplicationContext());
         mAdapter.setSingleSelection(true);
-        mAdapter.setData(mSignedLogMgr.queryAllSignedLog());
         mListView.setAdapter(mAdapter);
         mListView.setOnItemClickListener(this);
 
@@ -147,11 +144,14 @@ public class SignBatchActivity extends Activity implements OnItemClickListener {
             @Override
             public void onClick(View v) {
                 if (checkInputVaules()) {
-                    boolean result = mSignedLogMgr.saveSignedLog(getSignedLogForSave());
+                    SignedLogVO vo = getSignedLogForSave();
+                    boolean result = mSignedLogMgr.saveSignedLog(vo);
                     if (result) {
                         mWaybillNo.setText("");
                         mSelectedSignedLog = null;
-                        mAdapter.setData(mSignedLogMgr.queryAllSignedLog());
+
+                        SignedLogVO signedLogVO = mSignedLogMgr.querySignedLog(vo.getWaybillNo());
+                        mAdapter.addData(signedLogVO);
                     }
                     ToastUtils.showOperationToast(Operation.SAVE, result);
                 }
