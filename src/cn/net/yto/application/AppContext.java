@@ -11,7 +11,6 @@ import cn.net.yto.R;
 import cn.net.yto.biz.BasicDataManager;
 import cn.net.yto.biz.OrderManager;
 import cn.net.yto.biz.ReceiveManager;
-import cn.net.yto.biz.SignedLogManager;
 import cn.net.yto.biz.UserManager;
 import cn.net.yto.common.Constants;
 import cn.net.yto.dao.DatabaseHelper;
@@ -35,7 +34,6 @@ public class AppContext extends Application {
 	private String mVersionName;
 	private String mImei;
 	private OrderManager mOrderService;
-	private SignedLogManager mSignedLogManager;
 
 	@Override
 	public void onCreate() {
@@ -171,13 +169,6 @@ public class AppContext extends Application {
 		SharedPreferences.Editor editor = sp.edit();
 		editor.putInt(key, value);
 		editor.commit();
-	}
-
-	public SignedLogManager getSignedLogManager() {
-		if (mSignedLogManager == null) {
-			mSignedLogManager = new SignedLogManager(mContext);
-		}
-		return mSignedLogManager;
 	}
 
     public void startReportTask() {

@@ -19,7 +19,7 @@ import cn.net.yto.ui.menu.SignListItem;
 public class SignEmergencyActivity extends Activity {
     private ListView mListView = null;
     private SignEmergencyAdapter mAdapter = null;
-    private SignedLogManager mSignedLogMgr = null;
+    private SignedLogManager mSignedLogMgr = SignedLogManager.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +28,6 @@ public class SignEmergencyActivity extends Activity {
         setContentView(R.layout.sign_emergency);
         getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.sign_emergency_title);
 
-        mSignedLogMgr = new SignedLogManager(this);
         mSignedLogMgr.downloadOrderCancel("222", getApplicationContext());
         mSignedLogMgr.updatePushCancelState("454", getApplicationContext());
         initViews();
@@ -63,7 +62,8 @@ public class SignEmergencyActivity extends Activity {
         TextView head3 = (TextView) headView.findViewById(R.id.head3);
         head3.setText(R.string.list_head_emergency_empname);
         head3.setVisibility(View.VISIBLE);
-        headView.findViewById(R.id.layout_second).setVisibility(View.VISIBLE);;
+        headView.findViewById(R.id.layout_second).setVisibility(View.VISIBLE);
+        ;
         TextView secondhead1 = (TextView) headView.findViewById(R.id.head_second1);
         secondhead1.setText(R.string.list_head_emergency_comment);
         secondhead1.setVisibility(View.VISIBLE);

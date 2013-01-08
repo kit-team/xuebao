@@ -35,15 +35,15 @@ import com.j256.ormlite.dao.Dao.CreateOrUpdateStatus;
  */
 public class SignedLogManager {
     private static final String TAG = "SignedManager";
-    private Context mContext;
+    
+    private static SignedLogManager sInstance = null;
     private AppContext mAppContext;
     private DatabaseHelper mDatabaseHelper;
     private Dao<SignedLogVO, String> mSignedLogDao = null;
     private HttpTaskManager mHttpTaskManager;
     private List<SignedLogVO> mSignedLogList;
 
-    public SignedLogManager(Context context) {
-        this.mContext = context;
+    private SignedLogManager() {
         this.mAppContext = AppContext.getAppContext();
         this.mDatabaseHelper = mAppContext.getDatabaseHelper();
         this.mHttpTaskManager = HttpTaskManager.getInstance();
@@ -54,16 +54,24 @@ public class SignedLogManager {
         }
     }
     
+    public static SignedLogManager getInstance() {
+        if (sInstance == null) {
+            sInstance = new SignedLogManager();
+        }
+        return sInstance;
+    }
+    
+    
     public boolean saveSignedLog(SignedLogVO signedLogVO) {
         try {
         	SignedLogVO existedLogVO = querySignedLog(signedLogVO.getWaybillNo());
         	boolean needUpdate = false;
         	if (existedLogVO != null && existedLogVO.getUploadStatus() == SignedLogVO.UPLOAD_STAUTS_SUCCESS) {
         		needUpdate = true;
+			} else {
+			    signedLogVO.setUploadStatus(SignedLogVO.UPLOAD_STAUTS_WAITFORSEND);
 			}
             CreateOrUpdateStatus status = mSignedLogDao.createOrUpdate(signedLogVO);
-            LogUtils.e(TAG, "status.isCreated() = "+status.isCreated());
-            LogUtils.e(TAG, "status.isUpdated() = "+status.isUpdated());
             if (status.isUpdated() && needUpdate) {
             	signedLogVO.setUploadStatus(SignedLogVO.UPLOAD_STAUTS_NEED_UPDATE);
             	status = mSignedLogDao.createOrUpdate(signedLogVO);

@@ -15,6 +15,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import cn.net.yto.R;
 import cn.net.yto.biz.ExpressTraceManager;
+import cn.net.yto.vo.ExpressTraceVO;
 
 /**
  * 快件跟踪
@@ -24,7 +25,8 @@ public class ExpressTrackActivity extends Activity {
     private EditText mEditWaybillNo = null;
     private ListView mListView = null;
     private SignTrackAdapter mAdapter = null;
-    private ExpressTraceManager mExpressTraceManager;
+    
+    private ExpressTraceManager mExpressTraceMgr = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +34,8 @@ public class ExpressTrackActivity extends Activity {
         requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
         setContentView(R.layout.express_track);
         getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.express_track_title);
-        mExpressTraceManager = ExpressTraceManager.getInstance(getApplicationContext());
+
+        mExpressTraceMgr = ExpressTraceManager.getInstance(getApplicationContext());
         initViews();
     }
 
@@ -77,13 +80,13 @@ public class ExpressTrackActivity extends Activity {
 
     private class SignTrackAdapter extends BaseAdapter {
         protected LayoutInflater mInflater;
-        private ArrayList<TrackItem> mItems = new ArrayList<TrackItem>();
+        private ArrayList<ExpressTraceVO> mItems = new ArrayList<ExpressTraceVO>();
 
         private SignTrackAdapter() {
             mInflater = LayoutInflater.from(ExpressTrackActivity.this);
         }
 
-        public void addItem(TrackItem item) {
+        public void addItem(ExpressTraceVO item) {
             mItems.add(item);
             notifyDataSetChanged();
         }
@@ -94,7 +97,7 @@ public class ExpressTrackActivity extends Activity {
         }
 
         @Override
-        public TrackItem getItem(int position) {
+        public ExpressTraceVO getItem(int position) {
             return mItems.get(position);
         }
 
@@ -116,12 +119,12 @@ public class ExpressTrackActivity extends Activity {
             } else {
                 itemHolder = (ItemHolder) convertView.getTag();
             }
-            TrackItem item = getItem(position);
-            itemHolder.time.setText(item.mTime);
+            ExpressTraceVO item = getItem(position);
+            itemHolder.time.setText(item.getOpTime());
             itemHolder.time.setVisibility(View.VISIBLE);
-            itemHolder.branch.setText(item.mBrancn);
+            itemHolder.branch.setText(item.getOpName());
             itemHolder.branch.setVisibility(View.VISIBLE);
-            itemHolder.operation.setText(item.mOperation);
+            itemHolder.operation.setText(item.getOrgCode());
             itemHolder.operation.setVisibility(View.VISIBLE);
             return convertView;
         }
@@ -131,12 +134,5 @@ public class ExpressTrackActivity extends Activity {
             TextView branch = null;
             TextView operation = null;
         }
-    }
-
-    private class TrackItem {
-        private String mWaybillno = null;
-        private String mTime = null; // 时间
-        private String mBrancn = null;// 网点
-        private String mOperation = null;// 操作类型
     }
 }

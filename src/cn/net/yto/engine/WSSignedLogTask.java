@@ -13,7 +13,7 @@ public class WSSignedLogTask extends BaseTask {
 
     WSSignedLogTask(Context context) {
         mContext = context;
-        mSignedLogMgr = new SignedLogManager(mContext.getApplicationContext());
+        mSignedLogMgr = SignedLogManager.getInstance();
         setTaskName(WSSignedLogTask.class.getName());
     }
 

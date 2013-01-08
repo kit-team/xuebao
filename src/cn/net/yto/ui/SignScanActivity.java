@@ -5,10 +5,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-import com.zltd.android.scan.ScanManager;
-import com.zltd.android.scan.ScanResultListener;
-import com.zltd.android.scan.impl.OneDimensionalSanManager;
-
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -31,6 +27,8 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -38,8 +36,6 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import cn.net.yto.R;
-import cn.net.yto.application.AppContext;
-import cn.net.yto.biz.ExpressTraceManager;
 import cn.net.yto.biz.SignedLogManager;
 import cn.net.yto.ui.menu.SignListBasicAdapter;
 import cn.net.yto.ui.menu.SignListItem;
@@ -48,6 +44,10 @@ import cn.net.yto.utils.ToastUtils;
 import cn.net.yto.utils.ToastUtils.Operation;
 import cn.net.yto.vo.SignedLogVO;
 import cn.net.yto.vo.SignedLogVO.Satisfaction;
+
+import com.zltd.android.scan.ScanManager;
+import com.zltd.android.scan.ScanResultListener;
+import com.zltd.android.scan.impl.OneDimensionalSanManager;
 
 public class SignScanActivity extends Activity {
     private static final String TAG = "ViewPagerTest";
@@ -60,9 +60,9 @@ public class SignScanActivity extends Activity {
     private SignSuccessView mSignSuccessView = null;
     private SignFailedView mSignFailedView = null;
     private OrderQueryView mOrderQueryView = null;
-    
-    private SignedLogManager mSignedLogMgr = null;
-    
+
+    private SignedLogManager mSignedLogMgr = SignedLogManager.getInstance();
+
     private OnClickListener mTabItemClickListener = new OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -71,25 +71,24 @@ public class SignScanActivity extends Activity {
         }
     };
 
-	private int mSoundSuccessId;
-	private ScanManager mScanManager;
-	private Vibrator mVibrator;
-	
-	private ScanResultListener mScanResultListener = new ScanResultListener() {
-		@Override
-		public void onScan(ScanManager arg0, byte[] scanResultDate) {
-			if (viewPager.getCurrentItem() == 0) {
-				mSignSuccessView.setWabillNoEditText(new String(scanResultDate));
-			} else if (viewPager.getCurrentItem() == 1) {
-				mSignFailedView.setWabillNoEditText(new String(scanResultDate));
-			}
-			mVibrator.vibrate(50);
-			mSoundPool.play(mSoundSuccessId, 0.9f, 0.9f, 1, 0, 1f);
-		}
-	};
-	private SoundPool mSoundPool;;
+    private int mSoundSuccessId;
+    private ScanManager mScanManager;
+    private Vibrator mVibrator;
 
-    
+    private ScanResultListener mScanResultListener = new ScanResultListener() {
+        @Override
+        public void onScan(ScanManager arg0, byte[] scanResultDate) {
+            if (viewPager.getCurrentItem() == 0) {
+                mSignSuccessView.setWabillNoEditText(new String(scanResultDate));
+            } else if (viewPager.getCurrentItem() == 1) {
+                mSignFailedView.setWabillNoEditText(new String(scanResultDate));
+            }
+            mVibrator.vibrate(50);
+            mSoundPool.play(mSoundSuccessId, 0.9f, 0.9f, 1, 0, 1f);
+        }
+    };
+    private SoundPool mSoundPool;;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,7 +97,6 @@ public class SignScanActivity extends Activity {
         getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.sign_scan_title);
 
         mInflater = getLayoutInflater();
-        mSignedLogMgr = ((AppContext) getApplication()).getSignedLogManager();
 
         mPageViews = new ArrayList<View>();
         mTabViews = new ArrayList<View>();
@@ -135,28 +133,26 @@ public class SignScanActivity extends Activity {
 
         mVibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         mSoundPool = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
-		mSoundSuccessId = mSoundPool.load(this, R.raw.success, 1);
+        mSoundSuccessId = mSoundPool.load(this, R.raw.success, 1);
     }
 
-    
-	@Override
-	protected void onPause() {
-    	mScanManager.unregisterResultListener();
+    @Override
+    protected void onPause() {
+        mScanManager.unregisterResultListener();
         mScanManager.setEnable(false);
         mSoundPool.release();
-		super.onPause();
-	}
+        super.onPause();
+    }
 
-
-	@Override
-	protected void onResume() {
+    @Override
+    protected void onResume() {
         // register the scan listener.
         mScanManager = new OneDimensionalSanManager(this);
         mScanManager.setEnable(true);
         mScanManager.registerResultListener(mScanResultListener);
-		super.onResume();
-	}
-    
+        super.onResume();
+    }
+
     private void updateSignedLog(SignedLogVO data) {
         final String state = data.getSignedState();
         if (state.equals("1")) {
@@ -265,8 +261,10 @@ public class SignScanActivity extends Activity {
         private EditText mAmountCollected; // 到付金额
         private EditText mAmountAgency; // 代收金额
         private Spinner mSignTypeSpinner; // 签收类型
+        private CheckBox mSignTypeCheck; // 签收类型check
         private RadioGroup mSatisfactory; // 满意度
         private EditText mReceipient; // 签收人
+        private CheckBox mReceipientCheck; // 签收人check
 
         private String[] mSignTypeString = null;
 
@@ -276,9 +274,9 @@ public class SignScanActivity extends Activity {
         }
 
         public void setWabillNoEditText(String str) {
-        	mWaybillNo.setText(str);
+            mWaybillNo.setText(str);
         }
-        
+
         public void updateViews(SignedLogVO data) {
             mWaybillNo.setText(data.getWaybillNo());
             mWaybillNo.setEnabled(false);
@@ -327,8 +325,10 @@ public class SignScanActivity extends Activity {
             mAmountCollected = (EditText) view.findViewById(R.id.edit_amount_collected);
             mAmountAgency = (EditText) view.findViewById(R.id.edit_amount_agency);
             mSignTypeSpinner = (Spinner) view.findViewById(R.id.spinner_sign_type);
+            mSignTypeCheck = (CheckBox) view.findViewById(R.id.sign_type_lock);
             mSatisfactory = (RadioGroup) view.findViewById(R.id.satisfactory_score);
             mReceipient = (EditText) view.findViewById(R.id.edit_receipient);
+            mReceipientCheck = (CheckBox) view.findViewById(R.id.receipient_input);
             updateAmountViews();
 
             view.findViewById(R.id.btn_save).setOnClickListener(new View.OnClickListener() {
@@ -348,6 +348,22 @@ public class SignScanActivity extends Activity {
                     }
                 }
             });
+            view.findViewById(R.id.btn_back).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    SignScanActivity.this.finish();
+                }
+            });
+
+            mSignTypeCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if (isChecked) {
+                        mSignTypeSpinner.setEnabled(false);
+                    } else {
+                        mSignTypeSpinner.setEnabled(true);
+                    }
+                }
+            });
         }
 
         private boolean checkInputVaules() {
@@ -355,14 +371,10 @@ public class SignScanActivity extends Activity {
                 ToastUtils.showToast(R.string.toast_waybillno_notify);
                 return false;
             }
-            // if (TextUtils.isEmpty(mAmountCollected.getText().toString())) {
-            // ToastUtils.showToast(R.string.toast_amount_collected_notify);
-            // return false;
-            // }
-            // if(TextUtils.isEmpty(mAmountAgency.getText().toString())) {
-            // ToastUtils.showToast(R.string.toast_amount_agency_notify);
-            // return false;
-            // }
+            if (mReceipientCheck.isChecked() && TextUtils.isEmpty(mReceipient.getText().toString())) {
+                ToastUtils.showToast(R.string.toast_receipient_notify);
+                return false;
+            }
             return true;
         }
 
@@ -431,7 +443,7 @@ public class SignScanActivity extends Activity {
         }
 
         public void setWabillNoEditText(String str) {
-        	mWaybillNo.setText(str);
+            mWaybillNo.setText(str);
         }
 
         private void initView(View view) {
@@ -457,7 +469,7 @@ public class SignScanActivity extends Activity {
         public void updateViews(SignedLogVO data) {
             mWaybillNo.setText(data.getWaybillNo());
             mExceptionReasonSpinner.setSelection(getSelectedId(data.getExpSignedDescription()));
-            
+
         }
 
         private int getSelectedId(String content) {

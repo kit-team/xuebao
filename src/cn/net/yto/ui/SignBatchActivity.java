@@ -21,7 +21,6 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import cn.net.yto.R;
-import cn.net.yto.application.AppContext;
 import cn.net.yto.biz.SignedLogManager;
 import cn.net.yto.ui.menu.SignListBasicAdapter;
 import cn.net.yto.ui.menu.SignListItem;
@@ -46,7 +45,7 @@ public class SignBatchActivity extends Activity implements OnItemClickListener {
 
     private String[] mSignTypeString;
 
-    private SignedLogManager mSignedLogMgr = null;
+    private SignedLogManager mSignedLogMgr = SignedLogManager.getInstance();
 
     private SignedLogVO mSelectedSignedLog = null;
 
@@ -71,7 +70,6 @@ public class SignBatchActivity extends Activity implements OnItemClickListener {
         setContentView(R.layout.sign_batch);
         getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.sign_batch_title);
 
-        mSignedLogMgr = ((AppContext) getApplication()).getSignedLogManager();
         mSignTypeString = getResources().getStringArray(R.array.sign_type);
 
         initViews();        

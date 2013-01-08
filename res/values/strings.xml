@@ -218,6 +218,7 @@
     <string name="label_sign_type">签收类型:</string>
     <string name="label_receipient">签收人:</string>
     <string name="label_receipient_must_fill">签收人必填</string>
+    <string name="label_sign_type_lock">类型锁定</string>
     <string name="label_save">保存</string>
     <string name="label_reason_description">原因描述:</string>
     <string name="label_is_freight_collect">是否到付:</string>
@@ -394,4 +395,12 @@
         <item>客户黑名单</item>
         <item>ESC返回</item>
     </string-array>
+    
+    <string name="text_signed_number">已取订单数：</string>
+    <string name="text_receive_number">已收件数：</string>
+    <string name="text_sign_number">待收订单数：</string>
+    <string name="text_receive_failed_number">收件失败数：</string>
+    <string name="text_ecc_number">待派件数：</string>
+    <string name="text_ecc_done_number">已派件数：</string>
+    <string name="text_ecc_exp_number">异常派件数：</string>
 </resources>

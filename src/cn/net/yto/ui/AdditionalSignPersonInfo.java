@@ -37,7 +37,7 @@ public class AdditionalSignPersonInfo extends Activity implements OnItemClickLis
     private EditText mWaybillNo = null;
     private EditText mReceipient = null;
 
-    private SignedLogManager mSignedLogMgr = null;
+    private SignedLogManager mSignedLogMgr = SignedLogManager.getInstance();
 
     private SignedLogVO mSelectedSignedLog = null;
 
@@ -62,7 +62,6 @@ public class AdditionalSignPersonInfo extends Activity implements OnItemClickLis
         setContentView(R.layout.additional_sign_person_info);
         getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE,
                 R.layout.additional_sign_person_title);
-        mSignedLogMgr = new SignedLogManager(this);
 
         initViews();
         mVibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
