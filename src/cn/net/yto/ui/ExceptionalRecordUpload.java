@@ -103,7 +103,7 @@ public class ExceptionalRecordUpload extends Activity {
             public void onClick(View v) {
             	List<SignedLogVO> signedLogs = mAdapter.getSelectedSignedLog();
                 if (signedLogs.isEmpty()) {
-                    ToastUtils.showToast("请选择要上传的运单");
+                    ToastUtils.showToast("请选择要删除的运单");
                     return;
                 }
                 
