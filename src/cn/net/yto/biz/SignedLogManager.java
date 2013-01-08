@@ -137,33 +137,28 @@ public class SignedLogManager {
                     if (responseVo.getRetVal() == SubmitSignedLogResponseMsgVO.RESPONSE_SUCCESS ||
                     		responseVo.getRetVal() == SubmitSignedLogResponseMsgVO.RESPONSE_FAILURE) {
                     	vo.setUploadStatus(SignedLogVO.UPLOAD_STAUTS_SUCCESS);
-                        saveSignedLog(vo);
                         ToastUtils.showOperationToast(Operation.UPLOAD, true);
-                    } else if(responseVo.getRetVal() == -103){
-                        Log.w(TAG, "repeat upload! mWayBillNo = " + wayBillNo);
-                        if (vo != null) {
-                            vo.setUploadStatus(SignedLogVO.UPLOAD_STAUTS_RESENDFAILED);
-                            vo.setSignedLogId("");
-                            saveSignedLog(vo);
-                        } 
-                    }else {
+                    } else {
                         Log.w(TAG, "upload failed! mWayBillNo = " + wayBillNo);
-                        if (vo != null) {
-                            vo.setUploadStatus(SignedLogVO.UPLOAD_STAUTS_FAILED);
-                            vo.setSignedLogId("");
-                            saveSignedLog(vo);
-                        } 
-                        ToastUtils.showOperationToast(Operation.UPLOAD, false);                    	
+                        vo.setSignedLogId("");
+                        if (vo.getUploadStatus().equals(SignedLogVO.UPLOAD_STAUTS_WAITFORSEND)) {
+                        	vo.setUploadStatus(SignedLogVO.UPLOAD_STAUTS_FAILED);
+						} else if (vo.getUploadStatus().equals(SignedLogVO.UPLOAD_STAUTS_RESENDING)) {
+                        	vo.setUploadStatus(SignedLogVO.UPLOAD_STAUTS_RESENDFAILED);
+						}
+                        ToastUtils.showOperationToast(Operation.UPLOAD, false);
                     }
                 } else {
                     Log.w(TAG, "upload failed! mWayBillNo = " + wayBillNo);
-                    if (vo != null) {
-                        vo.setUploadStatus(SignedLogVO.UPLOAD_STAUTS_FAILED);
-                        vo.setSignedLogId("");
-                        saveSignedLog(vo);
-                    } 
+                    vo.setSignedLogId("");
+                    if (vo.getUploadStatus().equals(SignedLogVO.UPLOAD_STAUTS_WAITFORSEND)) {
+                    	vo.setUploadStatus(SignedLogVO.UPLOAD_STAUTS_FAILED);
+					} else if (vo.getUploadStatus().equals(SignedLogVO.UPLOAD_STAUTS_RESENDING)) {
+                    	vo.setUploadStatus(SignedLogVO.UPLOAD_STAUTS_RESENDFAILED);
+					}
                     ToastUtils.showOperationToast(Operation.UPLOAD, false);
                 }
+                saveSignedLog(vo);
             }
         };
         ZltdHttpClient client = new ZltdHttpClient(UrlType.SUBMIT_SIGNEDLOG,
@@ -408,6 +403,8 @@ public class SignedLogManager {
             		eq(SignedLogVO.UPLOADSTATUS_FIELD_NAME, SignedLogVO.UPLOAD_STAUTS_WAITFORSEND).
             		or().
             		eq(SignedLogVO.UPLOADSTATUS_FIELD_NAME, SignedLogVO.UPLOAD_STAUTS_FAILED).
+            		or().
+            		eq(SignedLogVO.UPLOADSTATUS_FIELD_NAME, SignedLogVO.UPLOAD_STAUTS_RESENDFAILED).            		
             		query();
         } catch (SQLException e) {
             list = new ArrayList<SignedLogVO>();
