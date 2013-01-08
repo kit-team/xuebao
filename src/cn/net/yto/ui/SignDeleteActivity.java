@@ -1,5 +1,9 @@
 package cn.net.yto.ui;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
 import com.zltd.android.scan.ScanManager;
 import com.zltd.android.scan.ScanResultListener;
 import com.zltd.android.scan.impl.OneDimensionalSanManager;
@@ -22,6 +26,8 @@ import cn.net.yto.biz.SignedLogManager;
 import cn.net.yto.ui.menu.SignListBasicAdapter;
 import cn.net.yto.ui.menu.SignListItem;
 import cn.net.yto.ui.menu.SignListItemClickListener;
+import cn.net.yto.utils.ToastUtils;
+import cn.net.yto.vo.SignedLogVO;
 
 public class SignDeleteActivity extends Activity {
 
@@ -72,6 +78,15 @@ public class SignDeleteActivity extends Activity {
 
 	@Override
 	protected void onResume() {
+		Calendar cal=Calendar.getInstance();
+		cal.set(Calendar.HOUR_OF_DAY, 0);
+		cal.set(Calendar.MINUTE, 0);
+		Date fromDate = cal.getTime();
+		
+		cal.add(Calendar.DATE, 1);
+		Date toDate = cal.getTime();
+		
+		mAdapter.setData(mSignedLogMgr.querySignedLogByTime(fromDate, toDate));
         // register the scan listener.
         mScanManager = new OneDimensionalSanManager(this);
         mScanManager.setEnable(true);
@@ -100,20 +115,10 @@ public class SignDeleteActivity extends Activity {
         mListView = (ListView) findViewById(R.id.list_details);
         mListView.addHeaderView(getListHeadView());
         mAdapter = new SignListDeleteAdapter(getApplicationContext());
+        mAdapter.setSingleSelection(true);
         mListView.setAdapter(mAdapter);
         mListView.setOnItemClickListener(new SignListItemClickListener(mAdapter, true));
-
-        findViewById(R.id.btn_query).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final String wayBillNo = mTrackingNumber.getText().toString();
-                if (TextUtils.isEmpty(wayBillNo)) {
-                    return;
-                }
-                mAdapter.setData(mSignedLogMgr.queryByWaybillno(wayBillNo));
-            }
-        });
-
+        
         findViewById(R.id.btn_back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -124,7 +129,16 @@ public class SignDeleteActivity extends Activity {
         findViewById(R.id.btn_delete).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mAdapter.deleteSelectedItem(SignDeleteActivity.this, mSignedLogMgr);
+                if (TextUtils.isEmpty(mTrackingNumber.getText().toString())) {
+                    ToastUtils.showToast(R.string.toast_not_exist_waybillno_notify);
+                 } else {
+                	 SignedLogVO signedLogVO = mSignedLogMgr.querySignedLog(mTrackingNumber.getText().toString());
+                	 if (signedLogVO == null) {
+                         ToastUtils.showToast(R.string.toast_not_exist_waybillno_notify); 
+                	 } else {
+                         mAdapter.deleteSignedLoged(SignDeleteActivity.this, mSignedLogMgr, signedLogVO);                		 
+                	 }
+                 }
             }
         });
 

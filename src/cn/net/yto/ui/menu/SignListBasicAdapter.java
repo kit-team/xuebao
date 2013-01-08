@@ -83,6 +83,40 @@ public abstract class SignListBasicAdapter extends BaseAdapter {
         return selectedVOs;
     }
 
+    public void deleteSignedLoged(Context context, SignedLogManager signedLogMgr, SignedLogVO signedLogVO) {
+        int result = 1;
+        if (mIsSingleSelection) {
+            if (mSelectedPosition >= 0) {
+                SignedLogVO selectVO = mData.get(mSelectedPosition).getSignedLogVO();
+                result &= signedLogMgr.deleteSignedLog(selectVO, context);
+                if (result > 0) {
+                    mData.remove(mSelectedPosition);
+                    mSelectedPosition = -1;
+                }
+            }
+            if (signedLogVO != null) {
+            	SignedLogVO signedlog = signedLogMgr.querySignedLog(signedLogVO.getWaybillNo()); 
+            	if (signedlog != null) {
+                    result &= signedLogMgr.deleteSignedLog(signedLogVO, context);
+                    if (result > 0) {
+                    	for (int i = 0; i < mData.size(); i++) {
+    						if (signedLogVO.getWaybillNo().equals(mData.get(i).getSignedLogVO().getWaybillNo())) {
+    							mData.remove(i);
+    	                        mSelectedPosition = -1;
+    							break;
+    						}
+    					}
+                    }
+				}
+			}
+            
+            ToastUtils.showOperationToast(Operation.DELETE, result > 0);
+            if (result > 0) {
+                notifyDataSetChanged();
+            }
+        }
+    }
+    
     public void deleteSelectedItem(Context context, SignedLogManager signedLogMgr) {
         int result = 0;
         if (mIsSingleSelection) {
