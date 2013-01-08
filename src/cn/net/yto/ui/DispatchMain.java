@@ -30,14 +30,14 @@ public class DispatchMain extends Activity {
     private static final int ITEM_UNUPLOAD_RECORD = ITEM_SIGN_BATCH + 1;
     private static final int ITEM_ADDITIONAL_RECORD = ITEM_UNUPLOAD_RECORD + 1;
     private static final int ITEM_DELETE_RECORD = ITEM_ADDITIONAL_RECORD + 1;
-    private static final int ITEM_EMERGENCY = ITEM_DELETE_RECORD + 1;
-    private static final int ITEM_ESC = ITEM_EMERGENCY + 1;
+//    private static final int ITEM_EMERGENCY = ITEM_DELETE_RECORD + 1;
+    private static final int ITEM_ESC = ITEM_DELETE_RECORD + 1;
     private static final int[] MENU_IDS = { ITEM_SIGN_SCAN, ITEM_SIGN_BATCH, ITEM_UNUPLOAD_RECORD,
-            ITEM_ADDITIONAL_RECORD, ITEM_DELETE_RECORD, ITEM_EMERGENCY, ITEM_ESC, };
+            ITEM_ADDITIONAL_RECORD, ITEM_DELETE_RECORD, /*ITEM_EMERGENCY,*/ ITEM_ESC, };
 
     private final static int[] ICONS = { R.drawable.sign_scan, R.drawable.additional_sign_record,
             R.drawable.unupload_record, R.drawable.sign_batch, R.drawable.delete_sign_record,
-            R.drawable.delete_sign_record/* 催辦派件 */, R.drawable.back };
+            /*R.drawable.delete_sign_record 催辦派件 */ R.drawable.back };
     private String[] mTaskLabels;
 
     // private GridView mGrid;
@@ -151,9 +151,9 @@ public class DispatchMain extends Activity {
             case ITEM_UNUPLOAD_RECORD:
                 launchExceptionalRecordUpload();
                 return;
-            case ITEM_EMERGENCY:
-                launchSignEmergency();
-                return;
+//            case ITEM_EMERGENCY:
+//                launchSignEmergency();
+//                return;
             case ITEM_ESC:
                 finish();
                 return;

@@ -368,7 +368,6 @@
         <item>未上传数据</item>
         <item>补录签收人</item>
         <item>删除签收</item>
-        <item>催办派件</item>
         <item>@string/text_esc_back</item>
     </string-array>
     <string-array name="array_upload_state">
