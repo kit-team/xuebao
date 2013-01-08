@@ -377,16 +377,21 @@ public class SignedLogVO {
         submitSignedLogRequest.setIsReceiverSignOff(String.valueOf(isReceiverSignOff));
         submitSignedLogRequest.setIsPicture(String.valueOf(mIsPicture));
         submitSignedLogRequest.setExpSignedDescription(expSignedDescription);
-       // submitSignedLogRequest.setStatus("");
+        // submitSignedLogRequest.setStatus("");
         // FIXME, must use the base64 encoding the picture 
         // now we just use ""
         submitSignedLogRequest.setPictureData("");
-        submitSignedLogRequest.setUploadStatus(uploadStatus);
-        submitSignedLogRequest.setStatus(UPLOADSTATUSMAP.get(uploadStatus));
+        // set Upload Status
+    	if (uploadStatus == SignedLogVO.UPLOAD_STAUTS_FAILED || uploadStatus == SignedLogVO.UPLOAD_STAUTS_RESENDFAILED ) {
+            submitSignedLogRequest.setUploadStatus(SignedLogVO.UPLOAD_STAUTS_RESENDING);
+            submitSignedLogRequest.setStatus(UPLOADSTATUSMAP.get(SignedLogVO.UPLOAD_STAUTS_RESENDING));
+		} else {
+	        submitSignedLogRequest.setUploadStatus(uploadStatus);
+	        submitSignedLogRequest.setStatus(UPLOADSTATUSMAP.get(uploadStatus));
+		}
         
         return submitSignedLogRequest;
-    }
-
+    }    
     public UpdateSignedLogRequestMsgVO toUpdateVO() {
     	UpdateSignedLogRequestMsgVO updateSignedLogRequest = new UpdateSignedLogRequestMsgVO();
     	updateSignedLogRequest.setSignOffTypeCode(signOffTypeCode);
