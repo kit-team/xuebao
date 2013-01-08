@@ -276,6 +276,7 @@ public class SignScanActivity extends Activity {
         private CheckBox mReceipientCheck; // 签收人check
 
         private String[] mSignTypeString = null;
+        private boolean mModifySign = false;
 
         SignSuccessView(View view) {
             initView(view);
@@ -287,6 +288,7 @@ public class SignScanActivity extends Activity {
         }
 
         public void updateViews(SignedLogVO data) {
+            mModifySign = true;
             mWaybillNo.setText(data.getWaybillNo());
             mWaybillNo.setEnabled(false);
             mAmountCollected.setText(String.valueOf(data.getAmountCollected()));
@@ -361,8 +363,15 @@ public class SignScanActivity extends Activity {
                 @Override
                 public void onClick(View v) {
                     if (checkInputVaules()) {
-                        // save to DB
                         final SignedLogVO signedLogInfo = getSignedLogForSave();
+                        if (!mModifySign) { // not modify
+                            final SignedLogVO dbVO = mSignedLogMgr.querySignedLog(signedLogInfo.getWaybillNo());
+                            if (dbVO != null) {
+                                ToastUtils.showToast(R.string.toast_repeat_data);
+                                return;
+                            }
+                        }
+                        // save to DB
                         boolean result = mSignedLogMgr.saveSignedLog(signedLogInfo);
                         if (result) {
                             mWaybillNo.setText("");
@@ -371,6 +380,8 @@ public class SignScanActivity extends Activity {
                             mReceipient.setText("");
                         }
                         ToastUtils.showOperationToast(Operation.SAVE, result);
+                        mModifySign = false;
+                        mWaybillNo.setEnabled(true);
                     }
                 }
             });
@@ -470,6 +481,8 @@ public class SignScanActivity extends Activity {
 
         private String[] mExceptionNames;
         private String[] mExceptionCodes;
+        
+        private boolean mModifySign = false;
 
         public SignFailedView(View view) {
             initView(view);
@@ -489,6 +502,14 @@ public class SignScanActivity extends Activity {
                 @Override
                 public void onClick(View v) {
                     if (checkInputVaules()) {
+                        final SignedLogVO signedLogInfo = getSignedLogForSave();
+                        if (!mModifySign) { // not modify
+                            final SignedLogVO dbVO = mSignedLogMgr.querySignedLog(signedLogInfo.getWaybillNo());
+                            if (dbVO != null) {
+                                ToastUtils.showToast(R.string.toast_repeat_data);
+                                return;
+                            }
+                        }
                         // save to DB
                         boolean result = mSignedLogMgr.saveSignedLog(getSignedLogForSave());
                         if (result) {
@@ -496,12 +517,15 @@ public class SignScanActivity extends Activity {
                             mExceptionDescription.setText("");
                         }
                         ToastUtils.showOperationToast(Operation.EXP_SAVE, result);
+                        mModifySign = false;
+                        mWaybillNo.setEnabled(true);
                     }
                 }
             });
         }
 
         public void updateViews(SignedLogVO data) {
+            mModifySign = true;
             mWaybillNo.setText(data.getWaybillNo());
             mWaybillNo.setEnabled(false);
             mExceptionReasonSpinner.setSelection(getSelectedId(data.getExpSignedDescription()));
