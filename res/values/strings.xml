@@ -277,6 +277,7 @@
     <string name="toast_invalid_waybillno">运单号不符合条码规则</string>
     <string name="toast_select_exp_reason">请选择异常原因</string>
     <string name="toast_sign_again">重复签收</string>
+    <string name="toast_not_exist_waybillno_notify">无此运单要提示</string>
 
     <string-array name="sign_result">
         <item>正常签收</item>

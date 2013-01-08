@@ -36,6 +36,7 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import cn.net.yto.R;
+import cn.net.yto.biz.BarcodeManager;
 import cn.net.yto.biz.SignedLogManager;
 import cn.net.yto.ui.menu.SignListBasicAdapter;
 import cn.net.yto.ui.menu.SignListItem;
@@ -385,13 +386,13 @@ public class SignScanActivity extends Activity {
         }
 
         private boolean checkInputVaules() {
-            String waybillno = mWaybillNo.getText().toString();
-            if (TextUtils.isEmpty(waybillno)) {
+        	final String wayBillNo = mWaybillNo.getText().toString();
+            if (TextUtils.isEmpty(wayBillNo)) {
                 ToastUtils.showToast(R.string.toast_waybillno_notify);
                 return false;
             }
-            if (!CommonUtils.isValidWaybillno(waybillno)) {
-                ToastUtils.showToast(R.string.toast_invalid_waybillno);
+            if(!BarcodeManager.getInstance().isWayBillNoValid(wayBillNo)) {
+            	ToastUtils.showToast(R.string.toast_invalid_waybillno);
                 return false;
             }
             if (mReceipientCheck.isChecked() && TextUtils.isEmpty(mReceipient.getText().toString())) {
