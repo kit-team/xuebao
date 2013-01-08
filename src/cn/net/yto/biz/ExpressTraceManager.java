@@ -49,7 +49,13 @@ public class ExpressTraceManager {
     	return mInstance;
     }
     
-    public boolean retrieveExpressTrace(String wayBillNo) {
+    public abstract interface ExpressTraceListener {
+    	
+    	public void done(List<ExpressTraceVO> traces, String error);
+    	
+    }
+    
+    public boolean retrieveExpressTrace(String wayBillNo, final ExpressTraceListener traceListener) {
     	Listener listener = new Listener() {
 			@Override
 			public void onPreSubmit() {
@@ -67,10 +73,14 @@ public class ExpressTraceManager {
 						Log.i(TAG, "Query express trace success: " + responseVo.getFailMessage());
 					} else {
 						Log.w(TAG, "Query express trace failed: " + responseVo.getFailMessage());
-
+						if (traceListener != null) {
+							traceListener.done(null, "Query express trace failed: response is null.");
+						}
 					}
 				} else {
-					Log.w(TAG, "Query express trace failed: response is null.");
+					if (traceListener != null) {
+						traceListener.done(null, "Query express trace failed: response is null.");
+					}
 				}
 			}
 		};
