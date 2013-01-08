@@ -6,36 +6,11 @@
     tools:context=".SignBatchActivity" >
 
     <LinearLayout
-        android:id="@+id/layout_tracking_number"
+        android:id="@+id/layout_sign_type"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true" >
-
-        <TextView
-            android:layout_width="@dimen/label_size"
-            android:layout_height="wrap_content"
-            android:gravity="right|center_vertical"
-            android:text="@string/label_tracking_number" />
-
-        <EditText
-            android:id="@+id/edit_tracking_number"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
-        <TextView
-            android:id="@+id/tracking_number_ndicator"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/layout_sign_type"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/layout_tracking_number" >
 
         <TextView
             android:id="@+id/textSignType"
@@ -110,14 +85,52 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:inputType="text" />
+        
+        <CheckBox
+            android:id="@+id/checkPerson"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:enabled="false"
+            android:text="@string/label_receipient_must_fill" />
 
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/layout_tracking_number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layout_receipient">
+
+        <TextView
+            android:layout_width="@dimen/label_size"
+            android:layout_height="wrap_content"
+            android:gravity="right|center_vertical"
+            android:text="@string/label_tracking_number" />
+
+        <EditText
+            android:id="@+id/edit_tracking_number"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3" />
+
+        <TextView
+            android:id="@+id/tracking_number_ndicator"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/red"
+            android:textSize="18sp"
+            android:paddingLeft="5dip"
+            android:text="0" />        
+    </LinearLayout>
+    
     <include
         android:id="@+id/buttons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/layout_receipient"
+        android:layout_below="@id/layout_tracking_number"
         layout="@layout/buttons" />
 
     <ListView
