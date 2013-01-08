@@ -24,7 +24,8 @@ public class ExceptionalRecordUpload extends Activity {
 
     private ListView mListView;
     private SignListBasicAdapter mAdapter = null;
-
+    private TextView mWayBillNumber;
+    
     private Spinner mUploadStateSpinner = null;
     private String[] mUploadState = null;
 
@@ -37,7 +38,7 @@ public class ExceptionalRecordUpload extends Activity {
         setContentView(R.layout.exceptional_record_upload);
         getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE,
                 R.layout.exceptional_record_upload_title);
-
+        
         initViews();
     }
     
@@ -82,6 +83,7 @@ public class ExceptionalRecordUpload extends Activity {
                 }  else {
                     mAdapter.setData(mSignedLogMgr.queryByUploadSataus(SignedLogVO.UPLOAD_STAUTS_WAITFORSEND));
                 }
+                updateWayBillNumber();
             }
         });
 
@@ -112,6 +114,18 @@ public class ExceptionalRecordUpload extends Activity {
                 mSignedLogMgr.submitSignedLog(signedLog, AppContext.getAppContext().getDefaultContext());
             }
         });
+        
+        mWayBillNumber = (TextView) findViewById(R.id.right_count);
+        
+        updateWayBillNumber();
+    }
+    
+    private void updateWayBillNumber() {
+    	if(mAdapter != null) {
+    		mAdapter.getCount();
+    		mWayBillNumber.setText(String.valueOf(mAdapter.getCount()));
+    		mWayBillNumber.postInvalidate();
+    	}
     }
     
     private class SignListNotUploadAdapter extends SignListBasicAdapter {
