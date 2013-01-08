@@ -278,6 +278,8 @@
     <string name="toast_select_exp_reason">请选择异常原因</string>
     <string name="toast_sign_again">重复签收</string>
     <string name="toast_not_exist_waybillno_notify">无此运单要提示</string>
+    <string name="toast_modify_not_upload">数据未上传，请等数据上传成功后再修改</string>
+
 
     <string-array name="sign_result">
         <item>正常签收</item>
@@ -338,7 +340,7 @@
     <string name="list_head_time">时间</string>
     <string name="list_head_branch">网点</string>
     <string name="list_head_operation">操作</string>
-    <string name="title_scan_sign">签收扫描:</string>
+    <string name="title_scan_sign">签收扫描,取派员:</string>
     
     <!-- exception codes -->
     <string-array name="exception_codes">

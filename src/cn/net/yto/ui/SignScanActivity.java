@@ -38,6 +38,7 @@ import android.widget.TextView;
 import cn.net.yto.R;
 import cn.net.yto.biz.BarcodeManager;
 import cn.net.yto.biz.SignedLogManager;
+import cn.net.yto.biz.UserManager;
 import cn.net.yto.ui.menu.SignListBasicAdapter;
 import cn.net.yto.ui.menu.SignListItem;
 import cn.net.yto.ui.menu.SignListItemClickListener;
@@ -97,7 +98,12 @@ public class SignScanActivity extends Activity {
         requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
         setContentView(R.layout.sign_scan_view);
         getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.sign_scan_title);
-//        UserManager.getInstance().getUserVO().getRealName()
+        TextView tv = (TextView) findViewById(R.id.left_text);
+        String userName = UserManager.getInstance().getUserVO().getRealName();
+        if (!TextUtils.isEmpty(userName)) {
+            tv.append(userName);
+        }
+
         mInflater = getLayoutInflater();
 
         mPageViews = new ArrayList<View>();
@@ -108,21 +114,22 @@ public class SignScanActivity extends Activity {
         TextView tabSignFailed = (TextView) findViewById(R.id.tab_sign_failed);
         TextView tabWaybillDetail = (TextView) findViewById(R.id.tab_way_detail);
         tabWaybillDetail.setOnClickListener(mTabItemClickListener);
+        tabWaybillDetail.setVisibility(View.GONE);
         tabSignFailed.setOnClickListener(mTabItemClickListener);
         TextView tabOrderQuery = (TextView) findViewById(R.id.tab_order_query);
         tabOrderQuery.setOnClickListener(mTabItemClickListener);
         mTabViews.add(tabSignSuccess);
         mTabViews.add(tabSignFailed);
-        mTabViews.add(tabWaybillDetail);
+//        mTabViews.add(tabWaybillDetail);
         mTabViews.add(tabOrderQuery);
 
         View signedSuccessView = mInflater.inflate(R.layout.signed_success_view, null);
         View signedFailedView = mInflater.inflate(R.layout.signed_failed_view, null);
-        View waybillDetailView = mInflater.inflate(R.layout.waybill_detail_view, null);
+//        View waybillDetailView = mInflater.inflate(R.layout.waybill_detail_view, null);
         View orderQueryView = mInflater.inflate(R.layout.order_query_view, null);
         mPageViews.add(signedSuccessView);
         mPageViews.add(signedFailedView);
-        mPageViews.add(waybillDetailView);
+//        mPageViews.add(waybillDetailView);
         mPageViews.add(orderQueryView);
 
         mSignSuccessView = new SignSuccessView(signedSuccessView);
@@ -386,13 +393,13 @@ public class SignScanActivity extends Activity {
         }
 
         private boolean checkInputVaules() {
-        	final String wayBillNo = mWaybillNo.getText().toString();
+            final String wayBillNo = mWaybillNo.getText().toString();
             if (TextUtils.isEmpty(wayBillNo)) {
                 ToastUtils.showToast(R.string.toast_waybillno_notify);
                 return false;
             }
-            if(!BarcodeManager.getInstance().isWayBillNoValid(wayBillNo)) {
-            	ToastUtils.showToast(R.string.toast_invalid_waybillno);
+            if (!BarcodeManager.getInstance().isWayBillNoValid(wayBillNo)) {
+                ToastUtils.showToast(R.string.toast_invalid_waybillno);
                 return false;
             }
             if (mReceipientCheck.isChecked() && TextUtils.isEmpty(mReceipient.getText().toString())) {
@@ -496,8 +503,8 @@ public class SignScanActivity extends Activity {
 
         public void updateViews(SignedLogVO data) {
             mWaybillNo.setText(data.getWaybillNo());
+            mWaybillNo.setEnabled(false);
             mExceptionReasonSpinner.setSelection(getSelectedId(data.getExpSignedDescription()));
-
         }
 
         private int getSelectedId(String content) {
@@ -518,7 +525,7 @@ public class SignScanActivity extends Activity {
                 ToastUtils.showToast(R.string.toast_waybillno_notify);
                 return false;
             }
-            if (!CommonUtils.isValidWaybillno(waybillno)) {
+            if (!BarcodeManager.getInstance().isWayBillNoValid(waybillno)) {
                 ToastUtils.showToast(R.string.toast_invalid_waybillno);
                 return false;
             }
@@ -616,8 +623,13 @@ public class SignScanActivity extends Activity {
                 @Override
                 public void onClick(View v) {
                     ArrayList<SignedLogVO> signedLogs = mAdapter.getSelectedSignedLog();
-                    if (signedLogs.size() > 0) {
-                        updateSignedLog(mAdapter.getSelectedSignedLog().get(0));
+                    if (!signedLogs.isEmpty()) {
+                        SignedLogVO vo = mAdapter.getSelectedSignedLog().get(0);
+                        if (SignedLogVO.UPLOAD_STAUTS_SUCCESS.equals(vo.getUploadStatus())) {
+                            updateSignedLog(mAdapter.getSelectedSignedLog().get(0));
+                        } else {
+                            ToastUtils.showToast(R.string.toast_modify_not_upload);
+                        }
                     }
                 }
             });
@@ -656,7 +668,7 @@ public class SignScanActivity extends Activity {
             TextView secondHead1 = (TextView) headView.findViewById(R.id.head_second1); // 备注
             secondHead1.setText(R.string.list_head_comment);
             secondHead1.setVisibility(View.VISIBLE);
-            TextView secondHead2 = (TextView) headView.findViewById(R.id.head_second2);  // 上传状态
+            TextView secondHead2 = (TextView) headView.findViewById(R.id.head_second2); // 上传状态
             secondHead2.setText(R.string.list_head_upload_status);
             secondHead2.setVisibility(View.VISIBLE);
             return headView;

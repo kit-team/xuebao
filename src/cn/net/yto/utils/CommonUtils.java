@@ -388,12 +388,4 @@ public class CommonUtils {
 		}
 	}
 
-	/**
-	 * 
-	 * @param waybillno
-	 * @return
-	 */
-    public static boolean isValidWaybillno(String waybillno) {
-        return waybillno.matches("^[A-Za-z0-9]+$");
-    }
 }
