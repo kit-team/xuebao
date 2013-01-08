@@ -15,11 +15,10 @@ public class SignListItemClickListener implements OnItemClickListener {
 
     @Override
     public void onItemClick(AdapterView<?> parten, View v, int position, long id) {
-        if (mHasHeadView && position > 0) { // position is head view
-            mAdapter.onItemClick(position - 1);
-        } else {
-            mAdapter.onItemClick(position);
-        }
+    	if (id == -1) {
+    		return; // headerView or footerView is clicked.  
+    	}
+    	mAdapter.onItemClick((int)id);
     }
 
 }
