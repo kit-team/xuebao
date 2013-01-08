@@ -8,6 +8,7 @@ import com.zltd.android.scan.ScanResultListener;
 import com.zltd.android.scan.impl.OneDimensionalSanManager;
 
 import android.app.Activity;
+import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.Vibrator;
@@ -45,6 +46,9 @@ public class ExpressTrackActivity extends Activity {
 
         mExpressTraceMgr = ExpressTraceManager.getInstance(getApplicationContext());
         initViews();
+        
+        mSoundPool = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
+        mSoundSuccessId = mSoundPool.load(this, R.raw.success, 1);
     }
 
     private int mSoundSuccessId;
