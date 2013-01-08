@@ -274,7 +274,9 @@
     <string name="toast_receipient_notify">请输入签收人</string>
     <string name="toast_amount_collected_notify">请输入到付金额</string>
     <string name="toast_amount_agency_notify">请输入代收金额</string>
-
+    <string name="toast_not_exist_waybillno_notify">无此运单要提示</string>
+    
+    
     <string-array name="sign_result">
         <item>正常签收</item>
         <item>异常签收</item>
