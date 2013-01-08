@@ -106,18 +106,23 @@ public class SignScanActivity extends Activity {
         TextView tabSignSuccess = (TextView) findViewById(R.id.tab_sign_success);
         tabSignSuccess.setOnClickListener(mTabItemClickListener);
         TextView tabSignFailed = (TextView) findViewById(R.id.tab_sign_failed);
+        TextView tabWaybillDetail = (TextView) findViewById(R.id.tab_way_detail);
+        tabWaybillDetail.setOnClickListener(mTabItemClickListener);
         tabSignFailed.setOnClickListener(mTabItemClickListener);
         TextView tabOrderQuery = (TextView) findViewById(R.id.tab_order_query);
         tabOrderQuery.setOnClickListener(mTabItemClickListener);
         mTabViews.add(tabSignSuccess);
         mTabViews.add(tabSignFailed);
+        mTabViews.add(tabWaybillDetail);
         mTabViews.add(tabOrderQuery);
 
         View signedSuccessView = mInflater.inflate(R.layout.signed_success_view, null);
         View signedFailedView = mInflater.inflate(R.layout.signed_failed_view, null);
+        View waybillDetailView = mInflater.inflate(R.layout.waybill_detail_view, null);
         View orderQueryView = mInflater.inflate(R.layout.order_query_view, null);
         mPageViews.add(signedSuccessView);
         mPageViews.add(signedFailedView);
+        mPageViews.add(waybillDetailView);
         mPageViews.add(orderQueryView);
 
         mSignSuccessView = new SignSuccessView(signedSuccessView);
