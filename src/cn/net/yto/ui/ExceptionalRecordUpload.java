@@ -1,9 +1,13 @@
 package cn.net.yto.ui;
 
+import java.net.NetPermission;
 import java.util.List;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -97,7 +101,19 @@ public class ExceptionalRecordUpload extends Activity {
         findViewById(R.id.btn_delete).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mAdapter.deleteSelectedItem(ExceptionalRecordUpload.this, mSignedLogMgr);
+				new AlertDialog.Builder(ExceptionalRecordUpload.this).setTitle("删除签收数据")
+						.setMessage("是否删除该数据：" + mAdapter.getSelectedItemWayBillNo())
+						.setPositiveButton("是", new OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								 mAdapter.deleteSelectedItem(ExceptionalRecordUpload.this, mSignedLogMgr);
+							}
+							}).setNegativeButton("否", new OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+									// todo 
+								}
+							}).show();
             }
         });
 

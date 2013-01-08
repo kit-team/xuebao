@@ -391,10 +391,10 @@ public class SignScanActivity extends Activity {
                 ToastUtils.showToast(R.string.toast_waybillno_notify);
                 return false;
             }
-            if(!BarcodeManager.getInstance().isWayBillNoValid(wayBillNo)) {
-            	ToastUtils.showToast(R.string.toast_invalid_waybillno);
-                return false;
-            }
+//            if(!BarcodeManager.getInstance().isWayBillNoValid(wayBillNo)) {
+//            	ToastUtils.showToast(R.string.toast_invalid_waybillno);
+//                return false;
+//            }
             if (mReceipientCheck.isChecked() && TextUtils.isEmpty(mReceipient.getText().toString())) {
                 ToastUtils.showToast(R.string.toast_receipient_notify);
                 return false;

@@ -117,6 +117,17 @@ public abstract class SignListBasicAdapter extends BaseAdapter {
         }
     }
     
+    public String getSelectedItemWayBillNo() {
+    	String wayBillNo = "";
+		if (mIsSingleSelection) {
+			if (mSelectedPosition >= 0) {
+				SignedLogVO selectVO = mData.get(mSelectedPosition).getSignedLogVO();
+				wayBillNo = selectVO.getWaybillNo();
+			}
+		}
+		return wayBillNo;
+    }
+    
     public void deleteSelectedItem(Context context, SignedLogManager signedLogMgr) {
         int result = 0;
         if (mIsSingleSelection) {
