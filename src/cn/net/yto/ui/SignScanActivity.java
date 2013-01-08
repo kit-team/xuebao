@@ -293,7 +293,7 @@ public class SignScanActivity extends Activity {
             mWaybillNo.setEnabled(false);
             mAmountCollected.setText(String.valueOf(data.getAmountCollected()));
             mAmountAgency.setText(String.valueOf(data.getAmountAgency()));
-            updateAmountViews();
+            updateAmountViews(data.getWaybillNo());
 
             int signOffTypePos = 0;
             for (int i = 0; i < mSignTypeString.length; i++) {
@@ -320,9 +320,8 @@ public class SignScanActivity extends Activity {
             mReceipient.setText(data.getRecipient());
         }
 
-        private void updateAmountViews() {
-            boolean flag = false; // TODO 根据运单类型判断是否可以输入
-            if (flag) {
+        private void updateAmountViews(String waybillno) {
+            if (waybillno != null && BarcodeManager.getInstance().isReturnBillNoValid(waybillno)) {
                 mAmountCollected.setEnabled(true);
                 mAmountAgency.setEnabled(true);
             } else {
@@ -357,7 +356,7 @@ public class SignScanActivity extends Activity {
             mSatisfactory = (RadioGroup) view.findViewById(R.id.satisfactory_score);
             mReceipient = (EditText) view.findViewById(R.id.edit_receipient);
             mReceipientCheck = (CheckBox) view.findViewById(R.id.receipient_input);
-            updateAmountViews();
+            updateAmountViews(null);
 
             view.findViewById(R.id.btn_save).setOnClickListener(new View.OnClickListener() {
                 @Override
