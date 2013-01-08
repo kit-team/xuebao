@@ -1,6 +1,7 @@
 package cn.net.yto.ui;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import cn.net.yto.R;
 import cn.net.yto.biz.ExpressTraceManager;
+import cn.net.yto.utils.ToastUtils;
 import cn.net.yto.vo.ExpressTraceVO;
 
 /**
@@ -22,10 +24,10 @@ import cn.net.yto.vo.ExpressTraceVO;
  */
 public class ExpressTrackActivity extends Activity {
 
-    private EditText mEditWaybillNo = null;
+    private EditText mEditSignoutNumber = null;
     private ListView mListView = null;
     private SignTrackAdapter mAdapter = null;
-    
+
     private ExpressTraceManager mExpressTraceMgr = null;
 
     @Override
@@ -54,7 +56,7 @@ public class ExpressTrackActivity extends Activity {
     }
 
     private void initViews() {
-        mEditWaybillNo = (EditText) findViewById(R.id.edit_waybillno);
+        mEditSignoutNumber = (EditText) findViewById(R.id.edit_signout_number);
         mListView = (ListView) findViewById(R.id.list_express_track);
         mListView.addHeaderView(getListHeadView());
         mAdapter = new SignTrackAdapter();
@@ -63,10 +65,26 @@ public class ExpressTrackActivity extends Activity {
         findViewById(R.id.btn_query_express).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            	final String wayBillNo = mEditWaybillNo.toString();
-            	if (!TextUtils.isEmpty(wayBillNo)) {
-            		//mExpressTraceManager.retrieveExpressTrace(wayBillNo);
-            	}
+                final String signoutNumber = mEditSignoutNumber.toString();
+                if (!TextUtils.isEmpty(signoutNumber)) {
+                    mExpressTraceMgr.retrieveExpressTrace(signoutNumber,
+                            new ExpressTraceManager.ExpressTraceListener() {
+                                public void done(List<ExpressTraceVO> traces, String error) {
+                                    if (traces == null) {
+                                        mAdapter.addItem(traces);
+                                    } else {
+                                        ExpressTraceVO vo = mExpressTraceMgr
+                                                .queryExpressTrace(signoutNumber);
+                                        if (vo == null) {
+                                            ToastUtils.showToast(R.string.toast_express_query_failed);
+                                        } else {
+                                            mAdapter.addItem(vo);
+                                        }
+
+                                    }
+                                }
+                            });
+                }
             }
         });
 
@@ -84,6 +102,12 @@ public class ExpressTrackActivity extends Activity {
 
         private SignTrackAdapter() {
             mInflater = LayoutInflater.from(ExpressTrackActivity.this);
+        }
+
+        public void addItem(List<ExpressTraceVO> traces) {
+            mItems.clear();
+            mItems.addAll(traces);
+            notifyDataSetChanged();
         }
 
         public void addItem(ExpressTraceVO item) {

@@ -49,7 +49,7 @@ public class ExpressTraceManager {
     	return mInstance;
     }
     
-    public abstract interface ExpressTraceListener {
+    public static interface ExpressTraceListener {
     	
     	public void done(List<ExpressTraceVO> traces, String error);
     	

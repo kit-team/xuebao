@@ -15,10 +15,10 @@
             android:layout_width="@dimen/label_size"
             android:layout_height="wrap_content"
             android:gravity="right|center_vertical"
-            android:text="@string/label_dispatcher" />
+            android:text="@string/label_signout_number" />
         
         <EditText
-            android:id="@+id/edit_waybillno"
+            android:id="@+id/edit_signout_number"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

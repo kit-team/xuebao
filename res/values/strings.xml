@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!--  
-    <string name="default_server_url">120.195.213.100:8099/pda</string> -->
+<!--     <string name="default_server_url">120.195.213.100:8099/pda</string> -->
     <string name="default_server_url">171.217.164.186:8081/pda</string>
     <string name="app_name">圆通速递</string>
     <string name="settings">设置</string>
@@ -172,7 +171,6 @@
     <string name="state_normal">正常</string>
     <string name="state_uploading">正在上传</string>
     <string name="state_waiting">等待中</string>
-    
     <string name="time_effe_type_text">时效类型</string>
     <string name="receive_create_time">操作时间</string>
     <string name="receive_list">取件列表</string>
@@ -228,6 +226,7 @@
     <string name="label_date_from">从</string>
     <string name="label_date_to">到</string>
     <string name="label_record_id">运单号:</string>
+    <string name="label_signout_number">面单号:</string>
 
     <!-- text string definition -->
     <string name="tab_order_list">订单列表</string>
@@ -241,7 +240,6 @@
     <string name="text_delete">删除</string>
     <string name="text_save">保存</string>
     <string name="text_upload">上传</string>
-    
     <string name="text_sign_off">已签收</string>
     <!-- sign type string definition -->
     <string name="sign_type_gate_keeper">门卫</string>
@@ -259,7 +257,7 @@
     <string name="launch_emergency_delivery">催派单</string>
     <string name="title_delete_sign">删除签收，删除人:</string>
     <string name="title_batch_sign">批量签收，取派员:</string>
-    
+
     <!-- Toast strings -->
     <string name="toast_save_success">正常签收数据保存本地</string>
     <string name="toast_exp_save_success">异常签收数据保存本地</string>
@@ -280,6 +278,7 @@
     <string name="toast_not_exist_waybillno_notify">无此运单要提示</string>
     <string name="toast_modify_not_upload">数据未上传，请等数据上传成功后再修改</string>
     <string name="toast_repeat_data">重复签收</string>
+    <string name="toast_express_query_failed">查询快件失败</string>
 
     <string-array name="sign_result">
         <item>正常签收</item>
@@ -341,7 +340,7 @@
     <string name="list_head_branch">网点</string>
     <string name="list_head_operation">操作</string>
     <string name="title_scan_sign">签收扫描,取派员:</string>
-    
+
     <!-- exception codes -->
     <string-array name="exception_codes">
         <item>"72"</item>
@@ -390,7 +389,6 @@
         <item>客户无法提供有效身份证明文件</item>
         <item>收方客户拒付代收货款</item>
     </string-array>
-
     <string-array name="message_query_main">
         <item>查看服务手册</item>
         <item>派送范围查询</item>
@@ -403,7 +401,7 @@
         <item>客户黑名单</item>
         <item>ESC返回</item>
     </string-array>
-    
+
     <string name="text_signed_number">已取订单数：</string>
     <string name="text_receive_number">已收件数：</string>
     <string name="text_sign_number">待收订单数：</string>
@@ -411,4 +409,5 @@
     <string name="text_ecc_number">待派件数：</string>
     <string name="text_ecc_done_number">已派件数：</string>
     <string name="text_ecc_exp_number">异常派件数：</string>
+
 </resources>
