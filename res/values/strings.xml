@@ -270,6 +270,7 @@
     <string name="toast_delete_failed">删除失败</string>
     <string name="toast_modify_failed">编辑失败</string>
     <string name="toast_waybillno_notify">请输入运单号</string>
+    <string name="toast_invalid_waybillno">运单号不符合条码规则</string>
     <string name="toast_receipient_notify">请输入签收人</string>
     <string name="toast_amount_collected_notify">请输入到付金额</string>
     <string name="toast_amount_agency_notify">请输入代收金额</string>
