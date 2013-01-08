@@ -28,6 +28,7 @@ import cn.net.yto.vo.message.UpdateSignedLogResponseMsgVO;
 
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.Dao.CreateOrUpdateStatus;
+import com.j256.ormlite.stmt.Where;
 
 /**
  * 
@@ -425,5 +426,35 @@ public class SignedLogManager {
             LogUtils.e(TAG, e);
         }
         return list;    	
-    }    
+    }
+
+    public List<SignedLogVO> queryAllSignedLogWithNullRecipient() {
+        List<SignedLogVO> list = null;
+        try {
+            list = mSignedLogDao.queryBuilder().
+                    where().
+                    isNull(SignedLogVO.FIELD_NAME_RECIPIENT).
+                    or().
+                    eq(SignedLogVO.FIELD_NAME_RECIPIENT, "").
+                    query();
+        } catch (SQLException e) {
+            list = new ArrayList<SignedLogVO>();
+            LogUtils.e(TAG, e);
+        }
+        return list;
+    }
+
+    public List<SignedLogVO> queryByWaybillnoWithNullRecipient(String wayBillNo) {
+        List<SignedLogVO> list = null;
+        try {
+            final Where<SignedLogVO, String> where = mSignedLogDao.queryBuilder().where();
+
+            list = where.and(where.like(SignedLogVO.WAYBILLNO_FIELD_NAME, "%"+wayBillNo+"%"),
+                    where.isNull(SignedLogVO.FIELD_NAME_RECIPIENT).or().eq(SignedLogVO.FIELD_NAME_RECIPIENT, "")).query();
+        } catch (SQLException e) {
+            list = new ArrayList<SignedLogVO>();
+            LogUtils.e(TAG, e);
+        }
+        return list;
+    }
 }
