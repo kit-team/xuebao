@@ -262,6 +262,7 @@
     
     <!-- Toast strings -->
     <string name="toast_save_success">正常签收数据保存本地</string>
+    <string name="toast_exp_save_success">异常签收数据保存本地</string>
     <string name="toast_upload_success">已上传</string>
     <string name="toast_delete_success">已删除</string>
     <string name="toast_modify_success">已编辑</string>
@@ -273,6 +274,9 @@
     <string name="toast_receipient_notify">请输入签收人</string>
     <string name="toast_amount_collected_notify">请输入到付金额</string>
     <string name="toast_amount_agency_notify">请输入代收金额</string>
+    <string name="toast_invalid_waybillno">运单号不符合条码规则</string>
+    <string name="toast_select_exp_reason">请选择异常原因</string>
+    <string name="toast_sign_again">重复签收</string>
 
     <string-array name="sign_result">
         <item>正常签收</item>
@@ -333,7 +337,7 @@
     <string name="list_head_time">时间</string>
     <string name="list_head_branch">网点</string>
     <string name="list_head_operation">操作</string>
-    <string name="title_scan_sign">签收扫描</string>
+    <string name="title_scan_sign">签收扫描:</string>
     
     <!-- exception codes -->
     <string-array name="exception_codes">
@@ -361,6 +365,7 @@
 
     <!-- exception names -->
     <string-array name="exception_reason">
+        <item>""</item>
         <item>错分件（分点部错分或中转场错分）</item>
         <item>贴错单</item>
         <item>收方地址偏远，需加工作日</item>

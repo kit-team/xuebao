@@ -40,6 +40,7 @@ import cn.net.yto.biz.SignedLogManager;
 import cn.net.yto.ui.menu.SignListBasicAdapter;
 import cn.net.yto.ui.menu.SignListItem;
 import cn.net.yto.ui.menu.SignListItemClickListener;
+import cn.net.yto.utils.CommonUtils;
 import cn.net.yto.utils.ToastUtils;
 import cn.net.yto.utils.ToastUtils.Operation;
 import cn.net.yto.vo.SignedLogVO;
@@ -79,9 +80,9 @@ public class SignScanActivity extends Activity {
         @Override
         public void onScan(ScanManager arg0, byte[] scanResultDate) {
             if (viewPager.getCurrentItem() == 0) {
-                mSignSuccessView.setWabillNoEditText(new String(scanResultDate));
+                mSignSuccessView.onScan(arg0, scanResultDate);
             } else if (viewPager.getCurrentItem() == 1) {
-                mSignFailedView.setWabillNoEditText(new String(scanResultDate));
+                mSignFailedView.onScan(arg0, scanResultDate);
             }
             mVibrator.vibrate(50);
             mSoundPool.play(mSoundSuccessId, 0.9f, 0.9f, 1, 0, 1f);
@@ -95,7 +96,7 @@ public class SignScanActivity extends Activity {
         requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
         setContentView(R.layout.sign_scan_view);
         getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.sign_scan_title);
-
+//        UserManager.getInstance().getUserVO().getRealName()
         mInflater = getLayoutInflater();
 
         mPageViews = new ArrayList<View>();
@@ -320,6 +321,23 @@ public class SignScanActivity extends Activity {
             }
         }
 
+        public void onScan(ScanManager arg0, byte[] scanResultDate) {
+            // save to DB
+            final SignedLogVO signedLogInfo = getSignedLogForSave();
+            if (signedLogInfo != null) {
+                boolean result = mSignedLogMgr.saveSignedLog(signedLogInfo);
+                if (result) {
+                    mWaybillNo.setText("");
+                    mAmountCollected.setText("");
+                    mAmountAgency.setText("");
+                    mReceipient.setText("");
+                }
+                ToastUtils.showOperationToast(Operation.SAVE, result);
+            }
+
+            setWabillNoEditText(new String(scanResultDate));
+        }
+
         private void initView(View view) {
             mWaybillNo = (EditText) view.findViewById(R.id.edit_tracking_number);
             mAmountCollected = (EditText) view.findViewById(R.id.edit_amount_collected);
@@ -367,8 +385,13 @@ public class SignScanActivity extends Activity {
         }
 
         private boolean checkInputVaules() {
-            if (TextUtils.isEmpty(mWaybillNo.getText().toString())) {
+            String waybillno = mWaybillNo.getText().toString();
+            if (TextUtils.isEmpty(waybillno)) {
                 ToastUtils.showToast(R.string.toast_waybillno_notify);
+                return false;
+            }
+            if (!CommonUtils.isValidWaybillno(waybillno)) {
+                ToastUtils.showToast(R.string.toast_invalid_waybillno);
                 return false;
             }
             if (mReceipientCheck.isChecked() && TextUtils.isEmpty(mReceipient.getText().toString())) {
@@ -379,6 +402,10 @@ public class SignScanActivity extends Activity {
         }
 
         private SignedLogVO getSignedLogForSave() {
+            if (TextUtils.isEmpty(mWaybillNo.getText().toString())) {
+                ToastUtils.showToast(R.string.toast_waybillno_notify);
+                return null;
+            }
             SignedLogVO signedLog = new SignedLogVO();
             signedLog.setEmpCode("");
             signedLog.setWaybillNo(mWaybillNo.getText().toString());
@@ -460,7 +487,7 @@ public class SignScanActivity extends Activity {
                             mWaybillNo.setText("");
                             mExceptionDescription.setText("");
                         }
-                        ToastUtils.showOperationToast(Operation.SAVE, result);
+                        ToastUtils.showOperationToast(Operation.EXP_SAVE, result);
                     }
                 }
             });
@@ -485,8 +512,18 @@ public class SignScanActivity extends Activity {
         }
 
         private boolean checkInputVaules() {
-            if (TextUtils.isEmpty(mWaybillNo.getText().toString())) {
+            String waybillno = mWaybillNo.getText().toString();
+            if (TextUtils.isEmpty(waybillno)) {
                 ToastUtils.showToast(R.string.toast_waybillno_notify);
+                return false;
+            }
+            if (!CommonUtils.isValidWaybillno(waybillno)) {
+                ToastUtils.showToast(R.string.toast_invalid_waybillno);
+                return false;
+            }
+            final int exceptIdx = mExceptionReasonSpinner.getSelectedItemPosition();
+            if (TextUtils.isEmpty(mExceptionNames[exceptIdx].trim())) {
+                ToastUtils.showToast(R.string.toast_select_exp_reason);
                 return false;
             }
             return true;
@@ -494,12 +531,15 @@ public class SignScanActivity extends Activity {
 
         private SignedLogVO getSignedLogForSave() {
             SignedLogVO signedLog = new SignedLogVO();
-
             signedLog.setWaybillNo(mWaybillNo.getText().toString());
             final int exceptIdx = mExceptionReasonSpinner.getSelectedItemPosition();
             signedLog.setExpSignedDescription(mExceptionNames[exceptIdx]);
             signedLog.setSignedState(mExceptionCodes[exceptIdx]);
             return signedLog;
+        }
+
+        public void onScan(ScanManager arg0, byte[] scanResultDate) {
+            mSignFailedView.setWabillNoEditText(new String(scanResultDate));
         }
     }
 
@@ -585,7 +625,6 @@ public class SignScanActivity extends Activity {
             mSignedLogList.addHeaderView(getListHeadView());
             mAdapter = new SignListDetailAdapter(getApplicationContext());
             mAdapter.setSingleSelection(true);
-            mAdapter.setData(mSignedLogMgr.queryAllSignedLog());
             mSignedLogList.setAdapter(mAdapter);
             mSignedLogList.setOnItemClickListener(new SignListItemClickListener(mAdapter, true));
             final Calendar c = Calendar.getInstance();
@@ -601,15 +640,24 @@ public class SignScanActivity extends Activity {
 
         private View getListHeadView() {
             View headView = getLayoutInflater().inflate(R.layout.list_sign_head, null);
-            TextView head1 = (TextView) headView.findViewById(R.id.head1);
+            TextView head1 = (TextView) headView.findViewById(R.id.head1); // 运单号
             head1.setText(R.string.list_head_tracking_number);
             head1.setVisibility(View.VISIBLE);
-            TextView head2 = (TextView) headView.findViewById(R.id.head2);
+            TextView head2 = (TextView) headView.findViewById(R.id.head2); // 签收人
             head2.setText(R.string.list_head_receipient);
             head2.setVisibility(View.VISIBLE);
-            TextView head3 = (TextView) headView.findViewById(R.id.head3);
+            TextView head3 = (TextView) headView.findViewById(R.id.head3); // 签收时间
             head3.setText(R.string.list_head_sign_time);
             head3.setVisibility(View.VISIBLE);
+            TextView head4 = (TextView) headView.findViewById(R.id.head4); // 签收状态
+            head4.setText(R.string.list_head_sign_type);
+            head4.setVisibility(View.VISIBLE);
+            TextView secondHead1 = (TextView) headView.findViewById(R.id.head_second1); // 备注
+            secondHead1.setText(R.string.list_head_comment);
+            secondHead1.setVisibility(View.VISIBLE);
+            TextView secondHead2 = (TextView) headView.findViewById(R.id.head_second2);  // 上传状态
+            secondHead2.setText(R.string.list_head_upload_status);
+            secondHead2.setVisibility(View.VISIBLE);
             return headView;
         }
 
@@ -659,12 +707,19 @@ public class SignScanActivity extends Activity {
                 ItemHolder itemHolder = (ItemHolder) convertView.getTag();
 
                 final SignListItem item = mData.get(position);
-                itemHolder.view1.setText(item.getWaybillNo()); // 账单号
+                itemHolder.view1.setText(item.getWaybillNo()); // 运单号
                 itemHolder.view1.setVisibility(View.VISIBLE);
                 itemHolder.view2.setText(item.getRecipient()); // 签收人
                 itemHolder.view2.setVisibility(View.VISIBLE);
                 itemHolder.view3.setText(item.getSignTime()); // 签收时间
                 itemHolder.view3.setVisibility(View.VISIBLE);
+                itemHolder.view4.setText(item.getSignedState()); // 签收状态
+                itemHolder.view4.setVisibility(View.VISIBLE);
+
+                itemHolder.viewSecond1.setText(item.getComment()); // 备注
+                itemHolder.viewSecond1.setVisibility(View.VISIBLE);
+                itemHolder.viewSecond2.setText(item.getUploadStatus()); // 上传状态
+                itemHolder.viewSecond2.setVisibility(View.VISIBLE);
 
                 return convertView;
             }

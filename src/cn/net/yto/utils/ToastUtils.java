@@ -51,7 +51,7 @@ public class ToastUtils {
     }
 
     public enum Operation {
-        SAVE, MODIFY, DELETE, UPLOAD,
+        SAVE, MODIFY, DELETE, UPLOAD, EXP_SAVE
     };
 
     public static void showOperationToast(Operation opt, boolean result) {
@@ -82,6 +82,13 @@ public class ToastUtils {
                 ToastUtils.showToast(R.string.toast_upload_success);
             } else {
                 ToastUtils.showToast(R.string.toast_upload_failed);
+            }
+            break;
+        case EXP_SAVE:
+            if (result) {
+                ToastUtils.showToast(R.string.toast_exp_save_success);
+            } else {
+                ToastUtils.showToast(R.string.toast_save_failed);
             }
             break;
         default:
