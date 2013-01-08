@@ -3,8 +3,14 @@ package cn.net.yto.ui;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.zltd.android.scan.ScanManager;
+import com.zltd.android.scan.ScanResultListener;
+import com.zltd.android.scan.impl.OneDimensionalSanManager;
+
 import android.app.Activity;
+import android.media.SoundPool;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,6 +45,37 @@ public class ExpressTrackActivity extends Activity {
 
         mExpressTraceMgr = ExpressTraceManager.getInstance(getApplicationContext());
         initViews();
+    }
+
+    private int mSoundSuccessId;
+    private ScanManager mScanManager;
+    private Vibrator mVibrator;
+
+    private ScanResultListener mScanResultListener = new ScanResultListener() {
+        @Override
+        public void onScan(ScanManager arg0, byte[] scanResultDate) {
+            mEditSignoutNumber.setText(new String(scanResultDate));
+            mVibrator.vibrate(50);
+            mSoundPool.play(mSoundSuccessId, 0.9f, 0.9f, 1, 0, 1f);
+        }
+    };
+    private SoundPool mSoundPool;;
+
+    @Override
+    protected void onResume() {
+        // register the scan listener.
+        mScanManager = new OneDimensionalSanManager(this);
+        mScanManager.setEnable(true);
+        mScanManager.registerResultListener(mScanResultListener);
+        super.onResume();
+    }
+    
+    @Override
+    protected void onPause() {
+        mScanManager.unregisterResultListener();
+        mScanManager.setEnable(false);
+        mSoundPool.release();
+        super.onPause();
     }
 
     private View getListHeadView() {
@@ -76,7 +113,8 @@ public class ExpressTrackActivity extends Activity {
                                         ExpressTraceVO vo = mExpressTraceMgr
                                                 .queryExpressTrace(signoutNumber);
                                         if (vo == null) {
-                                            ToastUtils.showToast(R.string.toast_express_query_failed);
+                                            ToastUtils
+                                                    .showToast(R.string.toast_express_query_failed);
                                         } else {
                                             mAdapter.addItem(vo);
                                         }

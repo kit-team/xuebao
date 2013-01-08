@@ -6,10 +6,6 @@ import java.util.List;
 
 import android.content.Context;
 import android.util.Log;
-
-import com.j256.ormlite.dao.Dao;
-import com.j256.ormlite.dao.Dao.CreateOrUpdateStatus;
-
 import cn.net.yto.application.AppContext;
 import cn.net.yto.common.NetworkUnavailableException;
 import cn.net.yto.dao.DatabaseHelper;
@@ -18,11 +14,12 @@ import cn.net.yto.net.ZltdHttpClient;
 import cn.net.yto.net.ZltdHttpClient.Listener;
 import cn.net.yto.utils.LogUtils;
 import cn.net.yto.vo.ExpressTraceVO;
-import cn.net.yto.vo.message.DownloadOrderCancelRequestMsgVO;
-import cn.net.yto.vo.message.DownloadOrderCancelResponseMsgVO;
 import cn.net.yto.vo.message.QueryExpressTraceRequestMsgVO;
 import cn.net.yto.vo.message.QueryExpressTraceResponseMsgVO;
 import cn.net.yto.vo.message.SubmitSignedLogResponseMsgVO;
+
+import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.dao.Dao.CreateOrUpdateStatus;
 
 public class ExpressTraceManager {
     private static final String TAG = "ExpressTraceManager";
