@@ -218,6 +218,7 @@
     <string name="label_sign_type">签收类型:</string>
     <string name="label_receipient">签收人:</string>
     <string name="label_receipient_must_fill">签收人必填</string>
+    <string name="label_sign_type_lock">类型锁定</string>
     <string name="label_save">保存</string>
     <string name="label_reason_description">原因描述:</string>
     <string name="label_is_freight_collect">是否到付:</string>
