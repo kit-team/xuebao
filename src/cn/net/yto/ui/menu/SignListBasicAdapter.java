@@ -83,6 +83,15 @@ public abstract class SignListBasicAdapter extends BaseAdapter {
         return selectedVOs;
     }
 
+    public void saveAllSignedLoged(SignedLogManager signedLogMgr) {
+    	for (int i = 0; i < mData.size(); i++) {
+    		signedLogMgr.saveSignedLog(mData.get(i).getSignedLogVO());
+    	}
+		mData.clear();
+        notifyDataSetChanged();
+		mSelectedPosition = -1;
+    }
+    
     public void deleteSignedLoged(Context context, SignedLogManager signedLogMgr, SignedLogVO signedLogVO) {
         int result = 1;
         if (mIsSingleSelection) {
@@ -114,6 +123,17 @@ public abstract class SignListBasicAdapter extends BaseAdapter {
             if (result > 0) {
                 notifyDataSetChanged();
             }
+        }
+    }
+    
+    public void deleteSelectedItem() {
+        if (mIsSingleSelection) {
+            if (mSelectedPosition < 0) {
+                return;
+            }
+            mData.remove(mSelectedPosition);
+            mSelectedPosition = -1;
+            notifyDataSetChanged();
         }
     }
     

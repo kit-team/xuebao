@@ -2,10 +2,6 @@ package cn.net.yto.ui;
 
 import java.util.List;
 
-import com.zltd.android.scan.ScanManager;
-import com.zltd.android.scan.ScanResultListener;
-import com.zltd.android.scan.impl.OneDimensionalSanManager;
-
 import android.app.Activity;
 import android.content.Context;
 import android.media.AudioManager;
@@ -29,13 +25,18 @@ import cn.net.yto.utils.ToastUtils;
 import cn.net.yto.utils.ToastUtils.Operation;
 import cn.net.yto.vo.SignedLogVO;
 
+import com.zltd.android.scan.ScanManager;
+import com.zltd.android.scan.ScanResultListener;
+import com.zltd.android.scan.impl.OneDimensionalSanManager;
+
 public class AdditionalSignPersonInfo extends Activity implements OnItemClickListener {
 
     private ListView mListView;
     private SignListBasicAdapter mAdapter = null;
 
     private EditText mWaybillNo = null;
-    private EditText mReceipient = null;
+    private EditText mRecipient = null;
+    private TextView mQueryCount;
 
     private SignedLogManager mSignedLogMgr = SignedLogManager.getInstance();
 
@@ -62,6 +63,8 @@ public class AdditionalSignPersonInfo extends Activity implements OnItemClickLis
         setContentView(R.layout.additional_sign_person_info);
         getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE,
                 R.layout.additional_sign_person_title);
+
+        mQueryCount = (TextView) findViewById(R.id.query_count);
 
         initViews();
         mVibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
@@ -95,7 +98,17 @@ public class AdditionalSignPersonInfo extends Activity implements OnItemClickLis
         TextView head2 = (TextView) headView.findViewById(R.id.head2);
         head2.setText(R.string.list_head_receipient);
         head2.setVisibility(View.VISIBLE);
+        
         return headView;
+    }
+
+    private void setQueryCount(List<SignedLogVO> list) {
+        String size = "0";
+        if (list != null) {
+            size = String.valueOf(list.size());
+        }
+
+        mQueryCount.setText(size);
     }
 
     private void initViews() {
@@ -103,55 +116,72 @@ public class AdditionalSignPersonInfo extends Activity implements OnItemClickLis
         mListView.addHeaderView(getListHeadView());
         mAdapter = new SignListAdditionalAdapter(getApplicationContext());
         mAdapter.setSingleSelection(true);
-        mAdapter.setData(mSignedLogMgr.queryAllSignedLog());
+        final List<SignedLogVO> list = mSignedLogMgr.queryAllSignedLogWithNullRecipient();
+        mAdapter.setData(list);
         mListView.setAdapter(mAdapter);
         mListView.setOnItemClickListener(this);
+        setQueryCount(list);
 
         mWaybillNo = (EditText) findViewById(R.id.edit_tracking_number);
-        mReceipient = (EditText) findViewById(R.id.edit_receipient);
+        mRecipient = (EditText) findViewById(R.id.edit_receipient);
 
         findViewById(R.id.btn_query_additional).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String waybillNo = mWaybillNo.getText().toString();
+                final String waybillNo = mWaybillNo.getText().toString().trim();
+                List<SignedLogVO> list;
+
                 if (TextUtils.isEmpty(waybillNo)) {
-                    ToastUtils.showToast(R.string.toast_waybillno_notify);
-                    return;
+                    list = mSignedLogMgr.queryAllSignedLogWithNullRecipient();
+                } else {
+                    list = mSignedLogMgr.queryByWaybillnoWithNullRecipient(waybillNo);
                 }
-                mAdapter.setData(mSignedLogMgr.queryByWaybillno(waybillNo));
+
+                mAdapter.setData(list);
+                setQueryCount(list);
                 mSelectedSignedLog = null;
             }
         });
         findViewById(R.id.btn_modify).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mSelectedSignedLog != null) {
-                    final String receipient = mReceipient.getText().toString();
-                    if (TextUtils.isEmpty(receipient)) {
-                        ToastUtils.showToast(R.string.toast_receipient_notify);
-                        return;
-                    }
-                    String oldReceipient = mSelectedSignedLog.getRecipient();
-                    mSelectedSignedLog.setRecipient(receipient);
+                mRecipient.requestFocus();
+            }
+        });
 
-                    boolean result = mSignedLogMgr.saveSignedLog(mSelectedSignedLog);
-                    ToastUtils.showOperationToast(Operation.SAVE, result);
-                    if (result) {
-                        mAdapter.notifyDataSetChanged();
-                    } else {
-                        mSelectedSignedLog.setRecipient(oldReceipient);
-                    }
+        findViewById(R.id.btn_save).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final String recipient = mRecipient.getText().toString();
+                final String id = mWaybillNo.getText().toString();
+
+                if (TextUtils.isEmpty(id)) {
+                    ToastUtils.showToast("请选择一条记录");
+                    return;
+                }
+
+                if (TextUtils.isEmpty(recipient)) {
+                    ToastUtils.showToast(R.string.toast_receipient_notify);
+                    return;
+                }
+
+                final SignedLogVO sign = mSignedLogMgr.querySignedLog(id);
+                if (sign == null || !TextUtils.isEmpty(sign.getRecipient())) {
+                    ToastUtils.showToast("未找到该运单的相关签收记录！");
+                    return;
+                }
+
+                final SignedLogVO log = new SignedLogVO();
+                log.setRecipient(recipient);
+                log.setWaybillNo(id);
+                boolean result = mSignedLogMgr.saveSignedLog(log);
+                ToastUtils.showOperationToast(Operation.SAVE, result);
+                if (result) {
+                    mAdapter.notifyDataSetChanged();
                 }
             }
         });
-        // TODO check
-        findViewById(R.id.btn_save).setVisibility(View.GONE);
-        // .setOnClickListener(new View.OnClickListener() {
-        // @Override
-        // public void onClick(View v) {
-        //
-        // }
-        // });
+
         findViewById(R.id.btn_back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -177,7 +207,7 @@ public class AdditionalSignPersonInfo extends Activity implements OnItemClickLis
 
         if (mSelectedSignedLog != null) {
             mWaybillNo.setText(mSelectedSignedLog.getWaybillNo());
-            mReceipient.setText(mSelectedSignedLog.getRecipient());
+            mRecipient.setText(mSelectedSignedLog.getRecipient());
         }
     }
 

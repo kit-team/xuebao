@@ -22,7 +22,8 @@ import com.j256.ormlite.field.DatabaseField;
  * 
  */
 public class SignedLogVO {
-    public static final String WAYBILLNO_FIELD_NAME = "waybillNo"; 
+    public static final String WAYBILLNO_FIELD_NAME = "waybillNo";
+    public static final String FIELD_NAME_RECIPIENT = "recipient";
     public static final String UPLOADSTATUS_FIELD_NAME = "uploadStatus"; 
     public static final String SIGNED_TIME_FIELD_NAME = "signedTime";
     public static final String SIGNOFF_TYPE_SELF	  = "SELF";
@@ -121,7 +122,7 @@ public class SignedLogVO {
     private String uploadStatus = UPLOAD_STAUTS_WAITFORSEND;
 
     // 收件人
-    @DatabaseField
+    @DatabaseField(columnName = FIELD_NAME_RECIPIENT)
     private String recipient = "";
 
     // 签收状态信息

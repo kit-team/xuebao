@@ -128,7 +128,8 @@ public class SignBatchActivity extends Activity implements OnItemClickListener {
         mLastSignedLog = null; 
 		mScanListData = new ArrayList<SignedLogVO>();
 		mAdapter.setData(mScanListData);
-		
+        mTrackingNumber.setText(String.valueOf(mAdapter.getCount()));
+
 		super.onResume();
 	}
 
@@ -170,25 +171,23 @@ public class SignBatchActivity extends Activity implements OnItemClickListener {
         findViewById(R.id.btn_delete).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mAdapter.deleteSelectedItem(SignBatchActivity.this, mSignedLogMgr);
+                mAdapter.deleteSelectedItem();
+                mTrackingNumber.setText(String.valueOf(mAdapter.getCount()));
+                mReceipient.setText("");
+                mWaybillNo.setText("");
             }
         });
 
         findViewById(R.id.btn_save).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (checkInputVaules()) {
-                    SignedLogVO vo = getSignedLogForSave();
-                    boolean result = mSignedLogMgr.saveSignedLog(vo);
-                    if (result) {
-                        mWaybillNo.setText("");
-                        mSelectedSignedLog = null;
-
-                        SignedLogVO signedLogVO = mSignedLogMgr.querySignedLog(vo.getWaybillNo());
-                        mAdapter.addData(signedLogVO);
-                    }
-                    ToastUtils.showOperationToast(Operation.SAVE, result);
-                }
+            	if (mAdapter.getCount() > 0) {
+            		mAdapter.saveAllSignedLoged(mSignedLogMgr);
+            		ToastUtils.showOperationToast(Operation.SAVE, true);
+				}
+                mReceipient.setText("");
+                mWaybillNo.setText("");
+                mTrackingNumber.setText(String.valueOf(0));
             }
         });
     }
