@@ -1,5 +1,6 @@
 package cn.net.yto.ui;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
@@ -9,6 +10,8 @@ import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.text.TextUtils;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -35,6 +38,8 @@ import com.zltd.android.scan.impl.OneDimensionalSanManager;
 
 public class SignBatchActivity extends Activity implements OnItemClickListener {
 
+    private static final String TAG = "SignBatchActivity";
+
     private ListView mListView = null;
     private SignListBasicAdapter mAdapter = null;
 
@@ -42,13 +47,16 @@ public class SignBatchActivity extends Activity implements OnItemClickListener {
     private Spinner mSignTypeSpinner; // 签收类型
     private RadioGroup mSatisfactory; // 满意度
     private EditText mReceipient; // 签收人
-
+    private TextView mTrackingNumber;
+    
     private String[] mSignTypeString;
 
     private SignedLogManager mSignedLogMgr = SignedLogManager.getInstance();
-
+    private SignedLogVO mLastSignedLog = null;
+    
     private SignedLogVO mSelectedSignedLog = null;
-
+    private List<SignedLogVO> mScanListData = null;
+    
 	private int mSoundSuccessId;
 	private ScanManager mScanManager;
 	private Vibrator mVibrator;
@@ -56,13 +64,37 @@ public class SignBatchActivity extends Activity implements OnItemClickListener {
 	private ScanResultListener mScanResultListener = new ScanResultListener() {
 		@Override
 		public void onScan(ScanManager arg0, byte[] scanResultDate) {
+			if (mLastSignedLog == null) {
+				mLastSignedLog = new SignedLogVO();
+			} else {
+				mLastSignedLog = getSignedLogForSave();
+				mAdapter.addData(mLastSignedLog);
+                mTrackingNumber.setText(String.valueOf(mAdapter.getCount()));
+			}
+			
 			mWaybillNo.setText(new String(scanResultDate));
+			mLastSignedLog.setWaybillNo(new String(scanResultDate));
 			mVibrator.vibrate(50);
 			mSoundPool.play(mSoundSuccessId, 0.9f, 0.9f, 1, 0, 1f);
 		}
 	};
 	private SoundPool mSoundPool;;
-
+	
+	@Override
+	public boolean dispatchKeyEvent(KeyEvent event) {
+        if (event.getAction()!=KeyEvent.ACTION_DOWN)
+            return true;
+        
+		if(event.getKeyCode() == KeyEvent.KEYCODE_DPAD_CENTER) {
+			if (!TextUtils.isEmpty(mWaybillNo.getText().toString())) {
+				mLastSignedLog = getSignedLogForSave();
+				mAdapter.addData(mLastSignedLog);
+                mTrackingNumber.setText(String.valueOf(mAdapter.getCount()));
+		        return true;
+			}
+	    }
+		return super.dispatchKeyEvent(event);
+	}
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,8 +107,7 @@ public class SignBatchActivity extends Activity implements OnItemClickListener {
         initViews();        
         mVibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         mSoundPool = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
-		mSoundSuccessId = mSoundPool.load(this, R.raw.success, 1);
-
+		mSoundSuccessId = mSoundPool.load(this, R.raw.success, 1);		
     }
 
 	@Override
@@ -87,13 +118,17 @@ public class SignBatchActivity extends Activity implements OnItemClickListener {
 		super.onPause();
 	}
 
-
 	@Override
 	protected void onResume() {
         // register the scan listener.
         mScanManager = new OneDimensionalSanManager(this);
         mScanManager.setEnable(true);
         mScanManager.registerResultListener(mScanResultListener);
+        
+        mLastSignedLog = null; 
+		mScanListData = new ArrayList<SignedLogVO>();
+		mAdapter.setData(mScanListData);
+		
 		super.onResume();
 	}
 
@@ -124,6 +159,7 @@ public class SignBatchActivity extends Activity implements OnItemClickListener {
         mSignTypeSpinner = (Spinner) findViewById(R.id.sign_type);
         mSatisfactory = (RadioGroup) findViewById(R.id.group_satisfactory);
         mReceipient = (EditText) findViewById(R.id.edit_receipient);
+        mTrackingNumber = (TextView)findViewById(R.id.tracking_number_ndicator);
 
         findViewById(R.id.btn_back).setOnClickListener(new View.OnClickListener() {
             @Override
