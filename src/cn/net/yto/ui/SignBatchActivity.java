@@ -88,10 +88,9 @@ public class SignBatchActivity extends Activity implements OnItemClickListener {
 	
 	@Override
 	public boolean dispatchKeyEvent(KeyEvent event) {
-        if (event.getAction()!=KeyEvent.ACTION_DOWN)
-            return true;
-        
 		if(event.getKeyCode() == KeyEvent.KEYCODE_DPAD_CENTER) {
+	        if (event.getAction()!=KeyEvent.ACTION_DOWN)
+	            return true;
 			if (!TextUtils.isEmpty(mWaybillNo.getText().toString())) {
 				mLastSignedLog = getSignedLogForSave();
 				mAdapter.addData(mLastSignedLog);
