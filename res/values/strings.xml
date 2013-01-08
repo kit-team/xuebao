@@ -260,7 +260,7 @@
     <string name="title_batch_sign">批量签收，取派员:</string>
     
     <!-- Toast strings -->
-    <string name="toast_save_success">已保存</string>
+    <string name="toast_save_success">正常签收数据保存本地</string>
     <string name="toast_upload_success">已上传</string>
     <string name="toast_delete_success">已删除</string>
     <string name="toast_modify_success">已编辑</string>
