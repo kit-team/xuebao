@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import cn.net.yto.R;
+import cn.net.yto.biz.ExpressTraceManager;
 
 /**
  * 快件跟踪
@@ -22,6 +24,7 @@ public class ExpressTrackActivity extends Activity {
     private EditText mEditWaybillNo = null;
     private ListView mListView = null;
     private SignTrackAdapter mAdapter = null;
+    private ExpressTraceManager mExpressTraceManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +32,7 @@ public class ExpressTrackActivity extends Activity {
         requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
         setContentView(R.layout.express_track);
         getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.express_track_title);
-
+        mExpressTraceManager = ExpressTraceManager.getInstance(getApplicationContext());
         initViews();
     }
 
@@ -57,7 +60,10 @@ public class ExpressTrackActivity extends Activity {
         findViewById(R.id.btn_query_express).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+            	final String wayBillNo = mEditWaybillNo.toString();
+            	if (!TextUtils.isEmpty(wayBillNo)) {
+            		//mExpressTraceManager.retrieveExpressTrace(wayBillNo);
+            	}
             }
         });
 
