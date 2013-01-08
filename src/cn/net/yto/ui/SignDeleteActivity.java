@@ -91,7 +91,7 @@ public class SignDeleteActivity extends Activity {
         head2.setText(R.string.list_head_sign_type);
         head2.setVisibility(View.VISIBLE);
         TextView head3 = (TextView) headView.findViewById(R.id.head3);
-        head3.setText(R.string.list_head_receipient);
+        head3.setText(R.string.list_head_sign_time);
         head3.setVisibility(View.VISIBLE);
         return headView;
     }
