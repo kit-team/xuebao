@@ -4,7 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Bundle;
@@ -165,7 +169,11 @@ public class SignBatchActivity extends Activity implements OnItemClickListener {
         findViewById(R.id.btn_back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SignBatchActivity.this.finish();
+            	if (mAdapter.getCount() > 0) {
+            		dialog();
+            	} else {
+                    SignBatchActivity.this.finish();
+            	}
             }
         });
         findViewById(R.id.btn_delete).setOnClickListener(new View.OnClickListener() {
@@ -309,5 +317,27 @@ public class SignBatchActivity extends Activity implements OnItemClickListener {
             return convertView;
         }
     }
+    
+    protected void dialog() {
+    	AlertDialog.Builder builder = new Builder(SignBatchActivity.this);
+    	builder.setTitle("提示");
+    	builder.setMessage("您还有签收数据未保存，确定要离开该界面吗？强制离开讲自动保存数据！");
+    	builder.setPositiveButton("是", new OnClickListener() {
+    		@Override
+    		public void onClick(DialogInterface dialog, int which) {
+        		mAdapter.saveAllSignedLoged(mSignedLogMgr);
+    			dialog.dismiss();
+                SignBatchActivity.this.finish();
 
+    			}
+    	});
+    	builder.setNegativeButton("否", new OnClickListener() {
+    		@Override
+    		public void onClick(DialogInterface dialog, int which) {
+    			dialog.dismiss();
+    		}
+    	});
+    	builder.create().show();
+
+    }
 }
