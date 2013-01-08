@@ -3,7 +3,7 @@ package cn.net.yto.vo.message;
 public class DeleteSignedLogRequestMsgVO extends BaseRequestMsgVO {
 	private String waybillNo;
 	
-	private String Id;
+	private String id;
 	
 	public String getWaybillNo() {
 		return waybillNo;
@@ -12,10 +12,10 @@ public class DeleteSignedLogRequestMsgVO extends BaseRequestMsgVO {
 		this.waybillNo = waybillNo;
 	}
 	public String getId() {
-		return Id;
+		return id;
 	}
 	public void setId(String id) {
-		Id = id;
+		this.id = id;
 	}
 
 }

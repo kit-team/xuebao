@@ -289,7 +289,6 @@ public class SignedLogVO {
     }
 
     public String getSignedStateInfo() {
-
         return signedStateInfo;
     }
 

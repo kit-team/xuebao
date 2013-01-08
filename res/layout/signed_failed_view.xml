@@ -16,7 +16,8 @@
             android:layout_width="@dimen/label_size"
             android:layout_height="wrap_content"
             android:gravity="right|center_vertical"
-            android:text="@string/label_tracking_number" />
+            android:text="@string/label_tracking_number"
+            android:textColor="@color/red" />
 
         <EditText
             android:id="@+id/edit_tracking_number"
@@ -36,7 +37,8 @@
             android:layout_width="@dimen/label_size"
             android:layout_height="wrap_content"
             android:gravity="right|center_vertical"
-            android:text="@string/label_exception_reason" />
+            android:text="@string/label_exception_reason"
+            android:textColor="@color/red" />
 
         <Spinner
             android:id="@+id/spinner_exception_reason"

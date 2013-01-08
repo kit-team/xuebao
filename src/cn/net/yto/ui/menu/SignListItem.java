@@ -49,6 +49,10 @@ public class SignListItem {
         }
         return mSignTime;
     }
+    
+    public String getSignedState() {
+        return mSignedLog.getSignedStateInfo();
+    }
 
     public boolean isSelected() {
         return mSelected;
