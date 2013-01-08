@@ -101,19 +101,30 @@ public class ExceptionalRecordUpload extends Activity {
         findViewById(R.id.btn_delete).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-				new AlertDialog.Builder(ExceptionalRecordUpload.this).setTitle("删除签收数据")
-						.setMessage("是否删除该数据：" + mAdapter.getSelectedItemWayBillNo())
-						.setPositiveButton("是", new OnClickListener() {
-							@Override
-							public void onClick(DialogInterface dialog, int which) {
-								 mAdapter.deleteSelectedItem(ExceptionalRecordUpload.this, mSignedLogMgr);
-							}
-							}).setNegativeButton("否", new OnClickListener() {
+            	List<SignedLogVO> signedLogs = mAdapter.getSelectedSignedLog();
+                if (signedLogs.isEmpty()) {
+                    ToastUtils.showToast("请选择要上传的运单");
+                    return;
+                }
+                
+                final SignedLogVO signedLog = signedLogs.get(0);
+            	if(signedLog.getUploadStatus() == SignedLogVO.UPLOAD_STAUTS_FAILED) {
+					new AlertDialog.Builder(ExceptionalRecordUpload.this).setTitle("删除签收数据")
+							.setMessage("是否删除该数据：" + signedLog.getWaybillNo())
+							.setPositiveButton("是", new OnClickListener() {
 								@Override
 								public void onClick(DialogInterface dialog, int which) {
-									// todo 
+									 mAdapter.deleteSelectedItem(ExceptionalRecordUpload.this, mSignedLogMgr);
 								}
-							}).show();
+								}).setNegativeButton("否", new OnClickListener() {
+									@Override
+									public void onClick(DialogInterface dialog, int which) {
+										// todo 
+									}
+								}).show();
+            	} else {
+            		mAdapter.deleteSelectedItem(ExceptionalRecordUpload.this, mSignedLogMgr);
+            	}
             }
         });
 
@@ -125,9 +136,25 @@ public class ExceptionalRecordUpload extends Activity {
                     ToastUtils.showToast("请选择要上传的运单");
                     return;
                 }
-                SignedLogVO signedLog = signedLogs.get(0);
-
-                mSignedLogMgr.submitSignedLog(signedLog, AppContext.getAppContext().getDefaultContext());
+                final SignedLogVO signedLog = signedLogs.get(0);
+                
+                if(signedLog.getUploadStatus() == SignedLogVO.UPLOAD_STAUTS_FAILED) {
+	                new AlertDialog.Builder(ExceptionalRecordUpload.this).setTitle("上传签收数据")
+					.setMessage("上传数据耗时较长，你确定还要上传吗?")
+					.setPositiveButton("是", new OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							mSignedLogMgr.submitSignedLog(signedLog, AppContext.getAppContext().getDefaultContext());
+						}
+						}).setNegativeButton("否", new OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								// todo 
+							}
+						}).show();
+                } else {
+                	mSignedLogMgr.submitSignedLog(signedLog, AppContext.getAppContext().getDefaultContext());
+                }
             }
         });
         
