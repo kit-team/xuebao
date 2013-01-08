@@ -21,6 +21,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RadioButton;
@@ -52,6 +53,7 @@ public class SignBatchActivity extends Activity implements OnItemClickListener {
     private RadioGroup mSatisfactory; // 满意度
     private EditText mReceipient; // 签收人
     private TextView mTrackingNumber;
+    private CheckBox mReceipientCheck; // 签收人check
     
     private String[] mSignTypeString;
 
@@ -165,6 +167,7 @@ public class SignBatchActivity extends Activity implements OnItemClickListener {
         mSatisfactory = (RadioGroup) findViewById(R.id.group_satisfactory);
         mReceipient = (EditText) findViewById(R.id.edit_receipient);
         mTrackingNumber = (TextView)findViewById(R.id.tracking_number_ndicator);
+        mReceipientCheck = (CheckBox)findViewById(R.id.checkPerson);
 
         findViewById(R.id.btn_back).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -189,13 +192,17 @@ public class SignBatchActivity extends Activity implements OnItemClickListener {
         findViewById(R.id.btn_save).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            	if (mAdapter.getCount() > 0) {
-            		mAdapter.saveAllSignedLoged(mSignedLogMgr);
-            		ToastUtils.showOperationToast(Operation.SAVE, true);
+            	if (checkInputVaules()) {
+                	if (mAdapter.getCount() > 0) {
+                		mAdapter.saveAllSignedLoged(mSignedLogMgr);
+                		ToastUtils.showOperationToast(Operation.SAVE, true);
+    				}
+                    mReceipient.setText("");
+                    mWaybillNo.setText("");
+                    mTrackingNumber.setText(String.valueOf(0));
+				} else {
+					
 				}
-                mReceipient.setText("");
-                mWaybillNo.setText("");
-                mTrackingNumber.setText(String.valueOf(0));
             }
         });
     }
@@ -242,10 +249,11 @@ public class SignBatchActivity extends Activity implements OnItemClickListener {
             ToastUtils.showToast(R.string.toast_waybillno_notify);
             return false;
         }
-        // if (TextUtils.isEmpty(mReceipient.getText().toString())) {
-        // ToastUtils.showToast(R.string.toast_receipient_notify);
-        // return false;
-        // }
+        
+        if (mReceipientCheck.isChecked() && TextUtils.isEmpty(mReceipient.getText().toString())) {
+            ToastUtils.showToast(R.string.toast_receipient_notify);
+            return false;
+        }
 
         return true;
     }
