@@ -28,7 +28,7 @@ public class ExceptionalRecordUpload extends Activity {
     private Spinner mUploadStateSpinner = null;
     private String[] mUploadState = null;
 
-    private SignedLogManager mSignedLogMgr = null;
+    private SignedLogManager mSignedLogMgr = SignedLogManager.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +37,6 @@ public class ExceptionalRecordUpload extends Activity {
         setContentView(R.layout.exceptional_record_upload);
         getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE,
                 R.layout.exceptional_record_upload_title);
-
-        mSignedLogMgr = new SignedLogManager(this);
 
         initViews();
     }

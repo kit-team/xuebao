@@ -5,10 +5,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-import com.zltd.android.scan.ScanManager;
-import com.zltd.android.scan.ScanResultListener;
-import com.zltd.android.scan.impl.OneDimensionalSanManager;
-
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -38,8 +34,6 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import cn.net.yto.R;
-import cn.net.yto.application.AppContext;
-import cn.net.yto.biz.ExpressTraceManager;
 import cn.net.yto.biz.SignedLogManager;
 import cn.net.yto.ui.menu.SignListBasicAdapter;
 import cn.net.yto.ui.menu.SignListItem;
@@ -48,6 +42,10 @@ import cn.net.yto.utils.ToastUtils;
 import cn.net.yto.utils.ToastUtils.Operation;
 import cn.net.yto.vo.SignedLogVO;
 import cn.net.yto.vo.SignedLogVO.Satisfaction;
+
+import com.zltd.android.scan.ScanManager;
+import com.zltd.android.scan.ScanResultListener;
+import com.zltd.android.scan.impl.OneDimensionalSanManager;
 
 public class SignScanActivity extends Activity {
     private static final String TAG = "ViewPagerTest";
@@ -61,7 +59,7 @@ public class SignScanActivity extends Activity {
     private SignFailedView mSignFailedView = null;
     private OrderQueryView mOrderQueryView = null;
     
-    private SignedLogManager mSignedLogMgr = null;
+    private SignedLogManager mSignedLogMgr = SignedLogManager.getInstance();
     
     private OnClickListener mTabItemClickListener = new OnClickListener() {
         @Override
@@ -98,7 +96,6 @@ public class SignScanActivity extends Activity {
         getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.sign_scan_title);
 
         mInflater = getLayoutInflater();
-        mSignedLogMgr = ((AppContext) getApplication()).getSignedLogManager();
 
         mPageViews = new ArrayList<View>();
         mTabViews = new ArrayList<View>();

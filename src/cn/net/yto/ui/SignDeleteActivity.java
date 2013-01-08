@@ -29,8 +29,8 @@ public class SignDeleteActivity extends Activity {
     private SignListBasicAdapter mAdapter = null;
 
     private EditText mTrackingNumber = null;
-
-    private SignedLogManager mSignedLogMgr = null;
+    
+    private SignedLogManager mSignedLogMgr = SignedLogManager.getInstance();
 
 	private int mSoundSuccessId;
 	private ScanManager mScanManager;
@@ -53,8 +53,6 @@ public class SignDeleteActivity extends Activity {
         requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
         setContentView(R.layout.sign_delete);
         getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.sign_delete_title);
-
-        mSignedLogMgr = new SignedLogManager(this);
 
         initViews();
         
