@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/dev/!svn/ver/589/yto/trunk/src/cn/net/yto/common
+END
+Constants.java
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/dev/!svn/ver/556/yto/trunk/src/cn/net/yto/common/Constants.java
+END
+NetworkUnavailableException.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/dev/!svn/ver/454/yto/trunk/src/cn/net/yto/common/NetworkUnavailableException.java
+END

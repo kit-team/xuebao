@@ -1,4 +1,4 @@
-package cn.net.yto.ui;
+﻿package cn.net.yto.ui;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +24,7 @@ import cn.net.yto.ui.menu.ListMenuItemAdapter;
 import cn.net.yto.ui.menu.MenuAction;
 import cn.net.yto.ui.menu.MenuItem;
 
-public class DispatchMain extends Activity {
+public class DispatchMain extends BaseActivity {
     private static final int ITEM_SIGN_SCAN = 0;
     private static final int ITEM_SIGN_BATCH = ITEM_SIGN_SCAN + 1;
     private static final int ITEM_UNUPLOAD_RECORD = ITEM_SIGN_BATCH + 1;

@@ -1,0 +1,305 @@
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/dev/!svn/ver/608/yto/trunk/src/cn/net/yto/ui
+END
+ReceiveNoOrderMoneyActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/dev/!svn/ver/405/yto/trunk/src/cn/net/yto/ui/ReceiveNoOrderMoneyActivity.java
+END
+SignDeleteActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/dev/!svn/ver/598/yto/trunk/src/cn/net/yto/ui/SignDeleteActivity.java
+END
+ExpiredDeleteActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/dev/!svn/ver/561/yto/trunk/src/cn/net/yto/ui/ExpiredDeleteActivity.java
+END
+MainActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/dev/!svn/ver/439/yto/trunk/src/cn/net/yto/ui/MainActivity.java
+END
+ReceiveBatchActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/dev/!svn/ver/572/yto/trunk/src/cn/net/yto/ui/ReceiveBatchActivity.java
+END
+ReceiveViewListViewPagerItem.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/dev/!svn/ver/606/yto/trunk/src/cn/net/yto/ui/ReceiveViewListViewPagerItem.java
+END
+ReceiveNoOrderMultiActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/dev/!svn/ver/405/yto/trunk/src/cn/net/yto/ui/ReceiveNoOrderMultiActivity.java
+END
+DispatchMain.java
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/dev/!svn/ver/600/yto/trunk/src/cn/net/yto/ui/DispatchMain.java
+END
+OrderTabDetailItem.java
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/dev/!svn/ver/601/yto/trunk/src/cn/net/yto/ui/OrderTabDetailItem.java
+END
+ReceiveNoOrderUnusualActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/dev/!svn/ver/566/yto/trunk/src/cn/net/yto/ui/ReceiveNoOrderUnusualActivity.java
+END
+SignOutActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/dev/!svn/ver/598/yto/trunk/src/cn/net/yto/ui/SignOutActivity.java
+END
+TimUtils.java
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/dev/!svn/ver/474/yto/trunk/src/cn/net/yto/ui/TimUtils.java
+END
+ToastUtils.java
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/dev/!svn/ver/439/yto/trunk/src/cn/net/yto/ui/ToastUtils.java
+END
+ViewPageItemAbs.java
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/dev/!svn/ver/577/yto/trunk/src/cn/net/yto/ui/ViewPageItemAbs.java
+END
+ReceiveNoOrderBackBillActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/dev/!svn/ver/538/yto/trunk/src/cn/net/yto/ui/ReceiveNoOrderBackBillActivity.java
+END
+SignListAdapterItem.java
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/dev/!svn/ver/439/yto/trunk/src/cn/net/yto/ui/SignListAdapterItem.java
+END
+SignEmergencyActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/dev/!svn/ver/598/yto/trunk/src/cn/net/yto/ui/SignEmergencyActivity.java
+END
+ReceiveReturnBillViewPagerItem.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/dev/!svn/ver/583/yto/trunk/src/cn/net/yto/ui/ReceiveReturnBillViewPagerItem.java
+END
+OrderTabActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/dev/!svn/ver/561/yto/trunk/src/cn/net/yto/ui/OrderTabActivity.java
+END
+ExceptionalRecordUpload.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/dev/!svn/ver/598/yto/trunk/src/cn/net/yto/ui/ExceptionalRecordUpload.java
+END
+SignBatchActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/dev/!svn/ver/588/yto/trunk/src/cn/net/yto/ui/SignBatchActivity.java
+END
+ReceiveMenuActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/dev/!svn/ver/444/yto/trunk/src/cn/net/yto/ui/ReceiveMenuActivity.java
+END
+ReceiveChildrenViewPagerItem.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/dev/!svn/ver/583/yto/trunk/src/cn/net/yto/ui/ReceiveChildrenViewPagerItem.java
+END
+AssistantActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/dev/!svn/ver/571/yto/trunk/src/cn/net/yto/ui/AssistantActivity.java
+END
+MainMenuActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/dev/!svn/ver/608/yto/trunk/src/cn/net/yto/ui/MainMenuActivity.java
+END
+ViewPageItem.java
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/dev/!svn/ver/577/yto/trunk/src/cn/net/yto/ui/ViewPageItem.java
+END
+BaseActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/dev/!svn/ver/589/yto/trunk/src/cn/net/yto/ui/BaseActivity.java
+END
+SignListItemClickListener.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/dev/!svn/ver/439/yto/trunk/src/cn/net/yto/ui/SignListItemClickListener.java
+END
+ReceiveReplaceActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/dev/!svn/ver/584/yto/trunk/src/cn/net/yto/ui/ReceiveReplaceActivity.java
+END
+ExpressTrackActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/dev/!svn/ver/598/yto/trunk/src/cn/net/yto/ui/ExpressTrackActivity.java
+END
+AdditionalSignPersonInfo.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/dev/!svn/ver/598/yto/trunk/src/cn/net/yto/ui/AdditionalSignPersonInfo.java
+END
+MessageQueryMainActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/dev/!svn/ver/565/yto/trunk/src/cn/net/yto/ui/MessageQueryMainActivity.java
+END
+SignListAdapter.java
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/dev/!svn/ver/471/yto/trunk/src/cn/net/yto/ui/SignListAdapter.java
+END
+MainSettingActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/dev/!svn/ver/558/yto/trunk/src/cn/net/yto/ui/MainSettingActivity.java
+END
+QuickPayActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/dev/!svn/ver/523/yto/trunk/src/cn/net/yto/ui/QuickPayActivity.java
+END
+ReceiveExpressPageActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/dev/!svn/ver/583/yto/trunk/src/cn/net/yto/ui/ReceiveExpressPageActivity.java
+END
+ReceiveWayBillTabActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/dev/!svn/ver/576/yto/trunk/src/cn/net/yto/ui/ReceiveWayBillTabActivity.java
+END
+ExpressStatisticalActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/dev/!svn/ver/598/yto/trunk/src/cn/net/yto/ui/ExpressStatisticalActivity.java
+END
+OrderTabListItem.java
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/dev/!svn/ver/581/yto/trunk/src/cn/net/yto/ui/OrderTabListItem.java
+END
+ReceiveWayBillOperationViewPagerItem.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/dev/!svn/ver/608/yto/trunk/src/cn/net/yto/ui/ReceiveWayBillOperationViewPagerItem.java
+END
+DownloadBasicDataActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/dev/!svn/ver/590/yto/trunk/src/cn/net/yto/ui/DownloadBasicDataActivity.java
+END
+ReceiveViewTabActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/dev/!svn/ver/576/yto/trunk/src/cn/net/yto/ui/ReceiveViewTabActivity.java
+END
+SignScanActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/dev/!svn/ver/598/yto/trunk/src/cn/net/yto/ui/SignScanActivity.java
+END
+ReceiveMoneyViewPagerItem.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/dev/!svn/ver/583/yto/trunk/src/cn/net/yto/ui/ReceiveMoneyViewPagerItem.java
+END
+ReceiveExpressViewPagerItem.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/dev/!svn/ver/577/yto/trunk/src/cn/net/yto/ui/ReceiveExpressViewPagerItem.java
+END
+LoginActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/dev/!svn/ver/607/yto/trunk/src/cn/net/yto/ui/LoginActivity.java
+END
+DispatchOrderList.java
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/dev/!svn/ver/439/yto/trunk/src/cn/net/yto/ui/DispatchOrderList.java
+END
+ReceiveViewDetailViewPagerItem.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/dev/!svn/ver/601/yto/trunk/src/cn/net/yto/ui/ReceiveViewDetailViewPagerItem.java
+END
+ReceiveWayBillListViewPagerItem.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/dev/!svn/ver/606/yto/trunk/src/cn/net/yto/ui/ReceiveWayBillListViewPagerItem.java
+END
+EmergencyDeliveryListActivity.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/dev/!svn/ver/481/yto/trunk/src/cn/net/yto/ui/EmergencyDeliveryListActivity.java
+END

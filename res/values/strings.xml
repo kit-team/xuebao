@@ -1,16 +1,17 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
 <!--     <string name="default_server_url">120.195.213.100:8099/pda</string> -->
-    <string name="default_server_url">171.217.164.186:8081/pda</string>
+    <string name="default_server_url">192.168.4.18/pda</string>
     <string name="app_name">圆通速递</string>
     <string name="settings">设置</string>
+     <string name="network_no">暂时没有可用的网络</string>
     <string name="network_error">暂时没有可用的网络，请稍后再试</string>
     <string name="http_404_tips">您访问的服务不存在，请联系服务器管理员来处理</string>
     <string name="http_no_active_network_tips">当前网络不可用，请稍后再试</string>
+    <string name="password_error">离线登陆失败</string>
     <string name="alert_title">提示</string>
     <string name="exit">退出</string>
-    <string name="ok">是</string>
     <string name="key_f3_ok">F3  是</string>
     <string name="key_f4_cancel">F4  否</string>
     <string name="back">返回</string>
@@ -43,11 +44,11 @@
     <string name="input_password_error">输入密码错误！</string>
     <string name="input_username_tips">请输入用户名！</string>
     <string name="login_waiting">正在登陆中，请稍后</string>
-    <string name="systemtips">系统提示</string>
-    <string name="isforcelogin_intr">你的帐号已在其它地方登陆，是否强制登陆！</string>
+     <string name="systemtips">系统提示</string>
+      <string name="isforcelogin_intr">你的帐号已在其它地方登陆，是否强制登陆！</string>
     <string name="app_exit_message">你确定要注销帐号吗？</string>
-    <string name="cancel_account">帐号注销</string>
-       
+    
+     
      <string name="login_ok">是</string>
      <string name="login_no">否</string>
     <!-- 登陆 end -->
@@ -77,14 +78,16 @@
 
 
     <!-- mainmenu start -->
-    <string name="main_menu">手持终端收派件程序</string>
-    <string name="order_manage">订单管理</string>
-    <string name="receive">收件</string>
-    <string name="deliver">派件签收</string>
-    <string name="msg_query">信息查询</string>
-    <string name="data_download">数据下载</string>
-    <string name="my_assitant">我的助手</string>
-    <string name="quick_pay">快捷支付</string>
+            <string name="main_menu">手持终端收派件程序</string>
+         <string name="order_manage">订单管理</string>
+              <string name="receive">1 收    件</string>
+              <string name="deliver">2 派件签收</string>
+            <string name="msg_query">3 信息查询</string>
+        <string name="data_download">4 数据下载</string>
+          <string name="my_assitant">5 我的助手</string>
+            <string name="quick_pay">6 快捷支付</string>
+         <string name="msg_bigquery">7大头笔查询</string>
+       <string name="cancel_account">8 帐号注销</string>
     <string name="logout">注销</string>
     <!-- mainmenu end -->
 
@@ -101,15 +104,15 @@
     <string name="order_push">催办订单</string>
     <string name="order_number">订单号</string>
     <string name="order_read_state">阅读状态</string>
-    <string name="order_upload_state">上传状态</string>
+    <string name="order_upload_state">取件上传状态</string>
     <string name="order_tips_select_data">请选择一条数据</string>
     <string name="order_usual_receive">正常取件</string>
     <string name="order_unusual_receive">异常取件</string>
-    <string name="employ_code">收派员</string>
+    <string name="employ_code">收派员编号</string>
     <string name="remark">备注</string>
     <string name="goods_content">货物内容</string>
     <string name="order_channel_code">订单类型</string>
-    <string name="order_type_tode">时效要求</string>
+    <string name="order_type_tode">快件时效</string>
     <string name="order_create_time">下单时间</string>
     <string name="sender_id">寄件人编号</string>
     <string name="sender_name">寄件人姓名</string>
@@ -139,6 +142,7 @@
     <!-- receive start -->
     <string name="receive_edit">收件编辑</string>
     <string name="receive_order">有订单收件</string>
+    <string name="receive_order_normal">有单正常收件</string>
     <string name="receive_no_order">无单正常收件</string>
     <string name="receive_batch">批量收件</string>
     <string name="receive_no_order_unusaul">无单异常收件</string>
@@ -149,8 +153,9 @@
     <string name="way_bill_no">运单号</string>
     <string name="des_city_text">目的城市</string>
     <string name="rec_addr_text">收件地址</string>
-    <string name="rec_client_text">收件客户</string>
+    <string name="rec_client_text">收件姓名</string>
     <string name="rec_call_text">收件电话</string>
+    <string name="rec_time_text">收件时间</string>
     <string name="volume_text">体积</string>
     <string name="tran_pri_text">运价</string>
     <string name="weight_text">重量</string>
@@ -185,11 +190,12 @@
     <string name="type_country_wide_morrow">国内次日达</string>
     <string name="type_country_wide_morrow_morning">国内次城达</string>
     <string name="source_org_code">收件组织机构编码</string>
-    <string name="city_id">目的城市编码</string>
-    <string name="dest_address">目的地址</string>
+    <string name="city_id">目的城市</string>
+    <string name="dest_address">收件地址</string>
     <string name="pkg_qty">数量</string>
     <string name="current_state">当前状态</string>
-    <string name="no">不是</string>
+    <string name="ok">是</string>
+    <string name="no">否</string>
     <string name="state_read">已读</string>
     <string name="state_not_read">未读</string>
     <string name="state_upload">已上传</string>
@@ -200,7 +206,9 @@
     <string name="state_waiting">等待中</string>
     <string name="state_upload_waiting">等待上传中</string>
     <string name="state_receive_desc">收件状态</string>
-    <string name="state_receive_replace_success">换单成功</string>
+    <string name="state_upload_desc">上传状态</string>
+    <string name="state_upload_failed_reason">上传失败原因</string>
+    <string name="state_receive_replace_success">已换单</string>
     
     <string name="time_effe_type_text">时效类型</string>
     <string name="receive_create_time">操作时间</string>
@@ -223,8 +231,8 @@
     <string name="way_bill_sender_name_empty_tips">请输入寄件人姓名</string>
     <string name="operate_success">操作成功</string>
     <string name="operate_fail">操作失败</string>
-    <string name="receive_curr_waybillno">当前运单号</string>
-    <string name="receive_replace">替换为</string>
+    <string name="receive_curr_waybillno">原单号</string>
+    <string name="receive_replace">修改后单号</string>
     <string name="receive_cancel_already">此单已作废</string>
     <string name="receive_cancel_sending">数据未上传，请等待数据上传成功后在修改！</string>
     <string name="input_city_search_tips">请输入城市的区号、拼音首字母或者城市的名字</string>
@@ -282,10 +290,11 @@
     <string name="text_back">返回</string>
     <string name="text_sign_scan">签收扫描</string>
     <string name="text_choose_date">选择日期</string>
-    <string name="text_esc_back">ESC返回</string>
+    <string name="text_esc_back">返回</string>
     <string name="text_delete">删除</string>
     <string name="text_save">保存</string>
     <string name="text_upload">上传</string>
+    
     <string name="text_sign_off">已签收</string>
     <!-- sign type string definition -->
     <string name="sign_type_gate_keeper">门卫</string>
@@ -301,8 +310,8 @@
     <string name="input_tracking_no_hint">请填写运单号:</string>
     <string name="title_emergency_delivery">催派单</string>
     <string name="launch_emergency_delivery">催派单</string>
-    <string name="title_delete_sign">删除签收，删除人:</string>
-    <string name="title_batch_sign">批量签收，取派员:</string>
+    <string name="title_delete_sign">删除签收</string>
+    <string name="title_batch_sign">批量签收</string>
     
     <!-- Quick pay text definition -->
     <string name="quick_pay_query_way_bill">查询运单</string>
@@ -320,6 +329,7 @@
     <string name="assistant_delete_expired_days">扫描数据过期天数</string>
     <string name="assistant_delete">删除</string>
     
+    
     <!-- Toast strings -->
     <string name="toast_save_success">正常签收数据保存本地</string>
     <string name="toast_exp_save_success">异常签收数据保存本地</string>
@@ -334,7 +344,8 @@
     <string name="toast_receipient_notify">请输入签收人</string>
     <string name="toast_amount_collected_notify">请输入到付金额</string>
     <string name="toast_amount_agency_notify">请输入代收金额</string>
-    <string name="toast_invalid_waybillno">运单号不符合条码规则</string>
+    <string name="toast_download_basic_fail">下载基础数据失败！</string>
+	<string name="toast_invalid_waybillno">运单号不符合条码规则</string>
     <string name="toast_select_exp_reason">请选择异常原因</string>
     <string name="toast_sign_again">重复签收</string>
     <string name="toast_not_exist_waybillno_notify">无此运单要提示</string>
@@ -407,8 +418,8 @@
     <string name="list_head_time">时间</string>
     <string name="list_head_branch">网点</string>
     <string name="list_head_operation">操作</string>
-    <string name="title_scan_sign">签收扫描,取派员:</string>
-
+    <string name="title_scan_sign">签收扫描</string>
+    
     <!-- exception codes -->
     <string-array name="exception_codes">
         <item>"72"</item>
@@ -457,7 +468,6 @@
         <item>客户无法提供有效身份证明文件</item>
         <item>收方客户拒付代收货款</item>
     </string-array>
-
     <!-- download basic data strings -->
     <string name="data_type">数据类型</string>
     <string name="download_all">下载所有</string>
@@ -490,9 +500,9 @@
         <item>公告信息查询</item>
         <item>收派件统计</item>
         <item>客户黑名单</item>
-        <item>ESC返回</item>
+        <item>返回</item>
     </string-array>
-
+    
     <string name="text_signed_number">已取订单数：</string>
     <string name="text_receive_number">已收件数：</string>
     <string name="text_sign_number">待收订单数：</string>
@@ -500,5 +510,4 @@
     <string name="text_ecc_number">待派件数：</string>
     <string name="text_ecc_done_number">已派件数：</string>
     <string name="text_ecc_exp_number">异常派件数：</string>
-
 </resources>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" 
+        android:background="@drawable/icon_border"
+        android:layout_marginBottom="10dp"
+        android:layout_margin="10dp">
+    </ListView>
+
+    <LinearLayout
+        style="@style/BottomBar" >
+
+        <Button
+            style="@style/BottomBarButton"
+            android:text="@string/quick_pay_query_payment"
+            android:textSize="18sp" />
+
+        <Button
+            style="@style/BottomBarButton"
+            android:text="@string/quick_pay_launch_payment"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+</LinearLayout>

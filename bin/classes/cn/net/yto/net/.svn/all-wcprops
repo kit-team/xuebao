@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/dev/!svn/ver/599/yto/trunk/src/cn/net/yto/net
+END
+UserService.java
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/dev/!svn/ver/538/yto/trunk/src/cn/net/yto/net/UserService.java
+END
+UrlType.java
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/dev/!svn/ver/545/yto/trunk/src/cn/net/yto/net/UrlType.java
+END
+ZltdHttpClient.java
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/dev/!svn/ver/599/yto/trunk/src/cn/net/yto/net/ZltdHttpClient.java
+END
+HttpTaskManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/dev/!svn/ver/490/yto/trunk/src/cn/net/yto/net/HttpTaskManager.java
+END
+UrlManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/dev/!svn/ver/545/yto/trunk/src/cn/net/yto/net/UrlManager.java
+END

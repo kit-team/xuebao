@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/dev/!svn/ver/585/yto/trunk/src/cn/net/yto/engine
+END
+SignedLogReportTaskManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/dev/!svn/ver/471/yto/trunk/src/cn/net/yto/engine/SignedLogReportTaskManager.java
+END
+GeneralTaskEngine.java
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/dev/!svn/ver/471/yto/trunk/src/cn/net/yto/engine/GeneralTaskEngine.java
+END
+WSSignedLogTask.java
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/dev/!svn/ver/585/yto/trunk/src/cn/net/yto/engine/WSSignedLogTask.java
+END
+BaseTask.java
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/dev/!svn/ver/439/yto/trunk/src/cn/net/yto/engine/BaseTask.java
+END

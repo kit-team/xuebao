@@ -1,0 +1,70 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent">
+
+     <LinearLayout
+        android:id="@+id/layout_basicdata_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+       >
+
+        <TextView
+            android:id="@+id/basicdata_type_"
+            android:layout_width="@dimen/label_size"
+            android:layout_height="wrap_content"
+            android:gravity="right|center_vertical"
+            android:text="@string/data_type" />
+
+        <Spinner
+            android:id="@+id/download_type"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:entries="@array/basic_data_type" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_data_download"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layout_basicdata_type" >
+
+        <Button
+            android:id="@+id/download_all_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/download_all"/>
+
+        <Button
+            android:id="@+id/download_one_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/download_one" />
+
+    </LinearLayout>
+        <LinearLayout
+        android:id="@+id/data_delete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layout_data_download" >
+
+        <Button
+            android:id="@+id/delete_all_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/delete_all"/>
+
+        <Button
+            android:id="@+id/delete_one_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/delete_one" />
+
+    </LinearLayout>
+ 
+</RelativeLayout>

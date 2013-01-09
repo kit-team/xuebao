@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/dev/!svn/ver/460/yto/trunk/src/cn/net/yto/receiver
+END
+DownloadOrderReceiver.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/dev/!svn/ver/416/yto/trunk/src/cn/net/yto/receiver/DownloadOrderReceiver.java
+END
+BackgroudNetAlarmReceiver.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/dev/!svn/ver/437/yto/trunk/src/cn/net/yto/receiver/BackgroudNetAlarmReceiver.java
+END

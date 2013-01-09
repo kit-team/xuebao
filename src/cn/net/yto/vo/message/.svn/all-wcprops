@@ -1,0 +1,359 @@
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/dev/!svn/ver/601/yto/trunk/src/cn/net/yto/vo/message
+END
+DownloadScanRuleResponseMsgVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/dev/!svn/ver/408/yto/trunk/src/cn/net/yto/vo/message/DownloadScanRuleResponseMsgVO.java
+END
+BaseRequestMsgVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/dev/!svn/ver/394/yto/trunk/src/cn/net/yto/vo/message/BaseRequestMsgVO.java
+END
+UpdateSignedLogUserRequestMsgVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/dev/!svn/ver/408/yto/trunk/src/cn/net/yto/vo/message/UpdateSignedLogUserRequestMsgVO.java
+END
+UpdateSignedLogRequestMsgVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/dev/!svn/ver/474/yto/trunk/src/cn/net/yto/vo/message/UpdateSignedLogRequestMsgVO.java
+END
+DeliverySignedLogRequestMsgVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/dev/!svn/ver/439/yto/trunk/src/cn/net/yto/vo/message/DeliverySignedLogRequestMsgVO.java
+END
+DownloadOrderCancelResponseMsgVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/dev/!svn/ver/538/yto/trunk/src/cn/net/yto/vo/message/DownloadOrderCancelResponseMsgVO.java
+END
+BaseResponseMsgVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/dev/!svn/ver/394/yto/trunk/src/cn/net/yto/vo/message/BaseResponseMsgVO.java
+END
+WSDeliveryScanReturnVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/dev/!svn/ver/471/yto/trunk/src/cn/net/yto/vo/message/WSDeliveryScanReturnVO.java
+END
+UpdateSignedLogResponseMsgVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/dev/!svn/ver/474/yto/trunk/src/cn/net/yto/vo/message/UpdateSignedLogResponseMsgVO.java
+END
+QueryReceiveInfoRequestMsgVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/dev/!svn/ver/538/yto/trunk/src/cn/net/yto/vo/message/QueryReceiveInfoRequestMsgVO.java
+END
+DeliverySignedLogModifyRequestMsgVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/dev/!svn/ver/439/yto/trunk/src/cn/net/yto/vo/message/DeliverySignedLogModifyRequestMsgVO.java
+END
+ModifyOrderStatusRequestMsgVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/dev/!svn/ver/406/yto/trunk/src/cn/net/yto/vo/message/ModifyOrderStatusRequestMsgVO.java
+END
+QueryReceiveInfoResponseMsgVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/dev/!svn/ver/538/yto/trunk/src/cn/net/yto/vo/message/QueryReceiveInfoResponseMsgVO.java
+END
+DownloadFreqResponseMsgVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/dev/!svn/ver/409/yto/trunk/src/cn/net/yto/vo/message/DownloadFreqResponseMsgVO.java
+END
+AppBaseVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/dev/!svn/ver/408/yto/trunk/src/cn/net/yto/vo/message/AppBaseVO.java
+END
+QueryFeeResponseMsgVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/dev/!svn/ver/538/yto/trunk/src/cn/net/yto/vo/message/QueryFeeResponseMsgVO.java
+END
+DeleteSignedLogRequestMsgVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/dev/!svn/ver/585/yto/trunk/src/cn/net/yto/vo/message/DeleteSignedLogRequestMsgVO.java
+END
+UpdatePushCancelStateResponseMsgVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/dev/!svn/ver/538/yto/trunk/src/cn/net/yto/vo/message/UpdatePushCancelStateResponseMsgVO.java
+END
+DownloadOrderChannelResponseMsgVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/dev/!svn/ver/409/yto/trunk/src/cn/net/yto/vo/message/DownloadOrderChannelResponseMsgVO.java
+END
+DownloadOrderRequestMsgVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/dev/!svn/ver/480/yto/trunk/src/cn/net/yto/vo/message/DownloadOrderRequestMsgVO.java
+END
+DeleteSignedLogResponseMsgVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/dev/!svn/ver/492/yto/trunk/src/cn/net/yto/vo/message/DeleteSignedLogResponseMsgVO.java
+END
+DownloadBasicDataByVersionRequestMsgVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/dev/!svn/ver/408/yto/trunk/src/cn/net/yto/vo/message/DownloadBasicDataByVersionRequestMsgVO.java
+END
+WSSignedLogReturnVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/dev/!svn/ver/439/yto/trunk/src/cn/net/yto/vo/message/WSSignedLogReturnVO.java
+END
+SubmitSignedLogResponseMsgVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/dev/!svn/ver/471/yto/trunk/src/cn/net/yto/vo/message/SubmitSignedLogResponseMsgVO.java
+END
+SubmitReceiveRequestMsgVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/dev/!svn/ver/428/yto/trunk/src/cn/net/yto/vo/message/SubmitReceiveRequestMsgVO.java
+END
+DownloadBlackListResponseMsgVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/dev/!svn/ver/409/yto/trunk/src/cn/net/yto/vo/message/DownloadBlackListResponseMsgVO.java
+END
+DownloadCityResponseMsgVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/dev/!svn/ver/408/yto/trunk/src/cn/net/yto/vo/message/DownloadCityResponseMsgVO.java
+END
+LoginRequestMsgVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/dev/!svn/ver/508/yto/trunk/src/cn/net/yto/vo/message/LoginRequestMsgVO.java
+END
+DownloadOrderCancelRequestMsgVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/dev/!svn/ver/538/yto/trunk/src/cn/net/yto/vo/message/DownloadOrderCancelRequestMsgVO.java
+END
+DownloadBasicDataByVersionResponseMsgVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/dev/!svn/ver/538/yto/trunk/src/cn/net/yto/vo/message/DownloadBasicDataByVersionResponseMsgVO.java
+END
+DownloadRecvexpResponseMsgVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/dev/!svn/ver/409/yto/trunk/src/cn/net/yto/vo/message/DownloadRecvexpResponseMsgVO.java
+END
+LoginResponseMsgVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/dev/!svn/ver/601/yto/trunk/src/cn/net/yto/vo/message/LoginResponseMsgVO.java
+END
+ReplaceReceiveRequestMsgVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/dev/!svn/ver/406/yto/trunk/src/cn/net/yto/vo/message/ReplaceReceiveRequestMsgVO.java
+END
+DownloadNoticeResponseMsgVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/dev/!svn/ver/409/yto/trunk/src/cn/net/yto/vo/message/DownloadNoticeResponseMsgVO.java
+END
+DownloadInsteadPayCustomerResponseMsgVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/dev/!svn/ver/409/yto/trunk/src/cn/net/yto/vo/message/DownloadInsteadPayCustomerResponseMsgVO.java
+END
+LoginCommand.java
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/dev/!svn/ver/408/yto/trunk/src/cn/net/yto/vo/message/LoginCommand.java
+END
+ReceiveRequestMsgVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/dev/!svn/ver/416/yto/trunk/src/cn/net/yto/vo/message/ReceiveRequestMsgVO.java
+END
+CancelReceiveRequestMsg.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/dev/!svn/ver/406/yto/trunk/src/cn/net/yto/vo/message/CancelReceiveRequestMsg.java
+END
+DeliverySignedLogResponseMsgVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/dev/!svn/ver/439/yto/trunk/src/cn/net/yto/vo/message/DeliverySignedLogResponseMsgVO.java
+END
+UpdateReceiveRequestMsgVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/dev/!svn/ver/408/yto/trunk/src/cn/net/yto/vo/message/UpdateReceiveRequestMsgVO.java
+END
+QueryFeeRequestMsgVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/dev/!svn/ver/538/yto/trunk/src/cn/net/yto/vo/message/QueryFeeRequestMsgVO.java
+END
+WSSignedLogParamVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/dev/!svn/ver/439/yto/trunk/src/cn/net/yto/vo/message/WSSignedLogParamVO.java
+END
+AppUpgradeRequestMsgVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/dev/!svn/ver/408/yto/trunk/src/cn/net/yto/vo/message/AppUpgradeRequestMsgVO.java
+END
+CancelReceiveRequestMsgVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/dev/!svn/ver/460/yto/trunk/src/cn/net/yto/vo/message/CancelReceiveRequestMsgVO.java
+END
+DeliveryScanRequestMsgVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/dev/!svn/ver/439/yto/trunk/src/cn/net/yto/vo/message/DeliveryScanRequestMsgVO.java
+END
+ReceiveResponseMsgVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/dev/!svn/ver/416/yto/trunk/src/cn/net/yto/vo/message/ReceiveResponseMsgVO.java
+END
+UpdatePushCancelStateRequestMsgVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/dev/!svn/ver/408/yto/trunk/src/cn/net/yto/vo/message/UpdatePushCancelStateRequestMsgVO.java
+END
+DeliverySignedLogModifyResponseMsgVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/dev/!svn/ver/439/yto/trunk/src/cn/net/yto/vo/message/DeliverySignedLogModifyResponseMsgVO.java
+END
+AppUpgradeResponseMsgVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/dev/!svn/ver/408/yto/trunk/src/cn/net/yto/vo/message/AppUpgradeResponseMsgVO.java
+END
+CommonResponseMsgVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/dev/!svn/ver/406/yto/trunk/src/cn/net/yto/vo/message/CommonResponseMsgVO.java
+END
+DeliveryScanResponseMsgVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/dev/!svn/ver/439/yto/trunk/src/cn/net/yto/vo/message/DeliveryScanResponseMsgVO.java
+END
+QueryExpressTraceRequestMsgVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/dev/!svn/ver/538/yto/trunk/src/cn/net/yto/vo/message/QueryExpressTraceRequestMsgVO.java
+END
+SubmitSignedLogRequestMsgVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/dev/!svn/ver/481/yto/trunk/src/cn/net/yto/vo/message/SubmitSignedLogRequestMsgVO.java
+END
+DownloadEffectiveTypeResponseMsgVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/dev/!svn/ver/409/yto/trunk/src/cn/net/yto/vo/message/DownloadEffectiveTypeResponseMsgVO.java
+END
+DownloadDictionaryResponseMsgVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/dev/!svn/ver/409/yto/trunk/src/cn/net/yto/vo/message/DownloadDictionaryResponseMsgVO.java
+END
+WSDeliveryScanParamVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/dev/!svn/ver/471/yto/trunk/src/cn/net/yto/vo/message/WSDeliveryScanParamVO.java
+END
+QueryExpressTraceResponseMsgVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/dev/!svn/ver/538/yto/trunk/src/cn/net/yto/vo/message/QueryExpressTraceResponseMsgVO.java
+END
+DownloadScopeResponseMsgVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/dev/!svn/ver/409/yto/trunk/src/cn/net/yto/vo/message/DownloadScopeResponseMsgVO.java
+END
+DownloadOrderResponseMsgVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/dev/!svn/ver/416/yto/trunk/src/cn/net/yto/vo/message/DownloadOrderResponseMsgVO.java
+END

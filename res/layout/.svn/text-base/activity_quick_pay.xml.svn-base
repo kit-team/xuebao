@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <LinearLayout
+       style="@style/TabBarLayout">
+
+        <TextView
+            android:id="@+id/query"
+            style="@style/TabItemTextView"
+            android:tag="@string/quick_pay_query_way_bill"
+            android:text="@string/quick_pay_query_way_bill" />
+
+        <TextView
+            android:id="@+id/detail"
+            style="@style/TabItemTextView"
+            android:tag="@string/quick_pay_order_detail"
+            android:text="@string/quick_pay_order_detail" />
+    
+    </LinearLayout>
+    
+	<android.support.v4.view.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>

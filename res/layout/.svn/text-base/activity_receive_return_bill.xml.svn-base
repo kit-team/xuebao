@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/item_bg_above"
+                android:orientation="vertical" >
+
+                <TextView
+                    style="@style/CommonText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingRight="3dip"
+                    android:text="@string/way_bill_no" />
+
+                <EditText
+                    android:id="@+id/way_bill_no_edit"
+                    style="@style/CommonTextEdit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textCapCharacters"
+                    android:singleLine="true" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/item_bg_below"
+                android:orientation="vertical" >
+
+                <TextView
+                    style="@style/CommonText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/backform_num_text" />
+
+                <EditText
+                    android:id="@+id/return_bill_edit"
+                    style="@style/CommonTextEdit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textCapCharacters"
+                    android:singleLine="true" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        style="@style/BottomBar" >
+
+        <Button
+            android:id="@+id/back_btn"
+            style="@style/BottomBarButton"
+            android:text="@string/back"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/save_btn"
+            style="@style/BottomBarButton"
+            android:text="@string/save_text"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/dev/!svn/ver/608/yto/trunk/src/cn/net/yto/biz
+END
+BarcodeType.java
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/dev/!svn/ver/572/yto/trunk/src/cn/net/yto/biz/BarcodeType.java
+END
+ExpressTraceManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/dev/!svn/ver/598/yto/trunk/src/cn/net/yto/biz/ExpressTraceManager.java
+END
+ExpiredDataManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/dev/!svn/ver/598/yto/trunk/src/cn/net/yto/biz/ExpiredDataManager.java
+END
+BasicDataManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/dev/!svn/ver/577/yto/trunk/src/cn/net/yto/biz/BasicDataManager.java
+END
+OrderManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/dev/!svn/ver/608/yto/trunk/src/cn/net/yto/biz/OrderManager.java
+END
+SignedLogManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/dev/!svn/ver/598/yto/trunk/src/cn/net/yto/biz/SignedLogManager.java
+END
+UserManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/dev/!svn/ver/601/yto/trunk/src/cn/net/yto/biz/UserManager.java
+END
+ReceiveInfoManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/dev/!svn/ver/585/yto/trunk/src/cn/net/yto/biz/ReceiveInfoManager.java
+END
+BarcodeManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/dev/!svn/ver/577/yto/trunk/src/cn/net/yto/biz/BarcodeManager.java
+END
+ReceiveManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/dev/!svn/ver/576/yto/trunk/src/cn/net/yto/biz/ReceiveManager.java
+END

@@ -1,0 +1,137 @@
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/dev/!svn/ver/601/yto/trunk/src/cn/net/yto/vo
+END
+CancelMessageVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/dev/!svn/ver/538/yto/trunk/src/cn/net/yto/vo/CancelMessageVO.java
+END
+AnnouncementVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/dev/!svn/ver/538/yto/trunk/src/cn/net/yto/vo/AnnouncementVO.java
+END
+FreqVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/dev/!svn/ver/409/yto/trunk/src/cn/net/yto/vo/FreqVO.java
+END
+ReceiveInfoVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/dev/!svn/ver/585/yto/trunk/src/cn/net/yto/vo/ReceiveInfoVO.java
+END
+WSDeliveryScanReturnVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/dev/!svn/ver/538/yto/trunk/src/cn/net/yto/vo/WSDeliveryScanReturnVO.java
+END
+EffectiveTypeVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/dev/!svn/ver/445/yto/trunk/src/cn/net/yto/vo/EffectiveTypeVO.java
+END
+OrderChannelVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/dev/!svn/ver/408/yto/trunk/src/cn/net/yto/vo/OrderChannelVO.java
+END
+DictionaryVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/dev/!svn/ver/408/yto/trunk/src/cn/net/yto/vo/DictionaryVO.java
+END
+ExpressTraceVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/dev/!svn/ver/538/yto/trunk/src/cn/net/yto/vo/ExpressTraceVO.java
+END
+BlackListVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/dev/!svn/ver/409/yto/trunk/src/cn/net/yto/vo/BlackListVO.java
+END
+CityVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/dev/!svn/ver/479/yto/trunk/src/cn/net/yto/vo/CityVO.java
+END
+ScopeVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/dev/!svn/ver/409/yto/trunk/src/cn/net/yto/vo/ScopeVO.java
+END
+OrderVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/dev/!svn/ver/575/yto/trunk/src/cn/net/yto/vo/OrderVO.java
+END
+SignedLogVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/dev/!svn/ver/598/yto/trunk/src/cn/net/yto/vo/SignedLogVO.java
+END
+ScanruleVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/dev/!svn/ver/408/yto/trunk/src/cn/net/yto/vo/ScanruleVO.java
+END
+RecvexpVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/dev/!svn/ver/451/yto/trunk/src/cn/net/yto/vo/RecvexpVO.java
+END
+UserVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/dev/!svn/ver/601/yto/trunk/src/cn/net/yto/vo/UserVO.java
+END
+NoticeVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/dev/!svn/ver/408/yto/trunk/src/cn/net/yto/vo/NoticeVO.java
+END
+ReceiveVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/dev/!svn/ver/572/yto/trunk/src/cn/net/yto/vo/ReceiveVO.java
+END
+InsteadPayCustomerVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/dev/!svn/ver/598/yto/trunk/src/cn/net/yto/vo/InsteadPayCustomerVO.java
+END
+WSDeliveryScanParamVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/dev/!svn/ver/538/yto/trunk/src/cn/net/yto/vo/WSDeliveryScanParamVO.java
+END
+SecureVO.java
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/dev/!svn/ver/394/yto/trunk/src/cn/net/yto/vo/SecureVO.java
+END
