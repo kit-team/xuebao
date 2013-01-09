@@ -1,6 +1,5 @@
 package cn.net.yto.ui;
 
-import java.net.NetPermission;
 import java.util.List;
 
 import android.app.Activity;
@@ -108,7 +107,7 @@ public class ExceptionalRecordUpload extends Activity {
                 }
                 
                 final SignedLogVO signedLog = signedLogs.get(0);
-            	if(signedLog.getUploadStatus() == SignedLogVO.UPLOAD_STAUTS_FAILED) {
+            	//if(signedLog.getUploadStatus() == SignedLogVO.UPLOAD_STAUTS_FAILED) {
 					new AlertDialog.Builder(ExceptionalRecordUpload.this).setTitle("删除签收数据")
 							.setMessage("是否删除该数据：" + signedLog.getWaybillNo())
 							.setPositiveButton("是", new OnClickListener() {
@@ -122,9 +121,9 @@ public class ExceptionalRecordUpload extends Activity {
 										// todo 
 									}
 								}).show();
-            	} else {
-            		mAdapter.deleteSelectedItem(ExceptionalRecordUpload.this, mSignedLogMgr);
-            	}
+//            	} else {
+//            		mAdapter.deleteSelectedItem(ExceptionalRecordUpload.this, mSignedLogMgr);
+//            	}
             }
         });
 
@@ -138,7 +137,7 @@ public class ExceptionalRecordUpload extends Activity {
                 }
                 final SignedLogVO signedLog = signedLogs.get(0);
                 
-                if(signedLog.getUploadStatus() == SignedLogVO.UPLOAD_STAUTS_FAILED) {
+               // if(signedLog.getUploadStatus() == SignedLogVO.UPLOAD_STAUTS_FAILED) {
 	                new AlertDialog.Builder(ExceptionalRecordUpload.this).setTitle("上传签收数据")
 					.setMessage("上传数据耗时较长，你确定还要上传吗?")
 					.setPositiveButton("是", new OnClickListener() {
@@ -152,9 +151,9 @@ public class ExceptionalRecordUpload extends Activity {
 								// todo 
 							}
 						}).show();
-                } else {
-                	mSignedLogMgr.submitSignedLog(signedLog, AppContext.getAppContext().getDefaultContext());
-                }
+//                } else {
+//                	mSignedLogMgr.submitSignedLog(signedLog, AppContext.getAppContext().getDefaultContext());
+//                }
             }
         });
         
